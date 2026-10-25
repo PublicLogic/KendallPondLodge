@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: check is read-only and all expected baseline hashes match
+ok 1 - check is read-only and all expected baseline hashes match
+  ---
+  duration_ms: 71.756115
+  type: 'test'
+  ...
+# Subtest: apply reproduces every changed file and preserves unrelated environment file
+ok 2 - apply reproduces every changed file and preserves unrelated environment file
+  ---
+  duration_ms: 178.700137
+  type: 'test'
+  ...
+# Subtest: an edited baseline is refused before any write
+ok 3 - an edited baseline is refused before any write
+  ---
+  duration_ms: 66.555639
+  type: 'test'
+  ...
+# Subtest: wrong project is refused
+ok 4 - wrong project is refused
+  ---
+  duration_ms: 73.500621
+  type: 'test'
+  ...
+# Subtest: symlinked target file is refused
+ok 5 - symlinked target file is refused
+  ---
+  duration_ms: 59.361285
+  type: 'test'
+  ...
+# Subtest: tampered payload is refused before target writes
+ok 6 - tampered payload is refused before target writes
+  ---
+  duration_ms: 67.456176
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 575.969813

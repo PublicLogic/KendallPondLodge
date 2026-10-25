@@ -1,0 +1,434 @@
+
+> kpl-stay-control@0.1.0 test:core
+> node scripts/run-core-tests.mjs
+
+TAP version 13
+# Subtest: parses both date-only and date-time DTSTART/DTEND forms
+ok 1 - parses both date-only and date-time DTSTART/DTEND forms
+  ---
+  duration_ms: 2.04946
+  type: 'test'
+  ...
+# Subtest: DTEND is exclusive: the checkout night is not blocked
+ok 2 - DTEND is exclusive: the checkout night is not blocked
+  ---
+  duration_ms: 0.317907
+  type: 'test'
+  ...
+# Subtest: reservedNightsFromIcs only includes SUMMARY:Reserved, not an owner-side manual block
+ok 3 - reservedNightsFromIcs only includes SUMMARY:Reserved, not an owner-side manual block
+  ---
+  duration_ms: 0.26599
+  type: 'test'
+  ...
+# Subtest: an event with no explicit DTEND blocks exactly one night
+ok 4 - an event with no explicit DTEND blocks exactly one night
+  ---
+  duration_ms: 0.182658
+  type: 'test'
+  ...
+# Subtest: fetchAirbnbIcs fails closed when KPL_AIRBNB_ICAL_URL is not configured
+ok 5 - fetchAirbnbIcs fails closed when KPL_AIRBNB_ICAL_URL is not configured
+  ---
+  duration_ms: 0.485393
+  type: 'test'
+  ...
+# Subtest: fetchAirbnbIcs fails closed on a network error and never leaks the URL in the thrown message
+ok 6 - fetchAirbnbIcs fails closed on a network error and never leaks the URL in the thrown message
+  ---
+  duration_ms: 0.239191
+  type: 'test'
+  ...
+# Subtest: fetchAirbnbIcs fails closed on a non-2xx response
+ok 7 - fetchAirbnbIcs fails closed on a non-2xx response
+  ---
+  duration_ms: 16.618803
+  type: 'test'
+  ...
+# Subtest: fetchAirbnbIcs rejects an HTTP 200 body that is not a calendar
+ok 8 - fetchAirbnbIcs rejects an HTTP 200 body that is not a calendar
+  ---
+  duration_ms: 1.154736
+  type: 'test'
+  ...
+# Subtest: fetchAirbnbIcs rejects a calendar with an invalid event date
+ok 9 - fetchAirbnbIcs rejects a calendar with an invalid event date
+  ---
+  duration_ms: 0.598118
+  type: 'test'
+  ...
+# Subtest: fetchAirbnbIcs rejects an invalid checkout date instead of making a one-night event
+ok 10 - fetchAirbnbIcs rejects an invalid checkout date instead of making a one-night event
+  ---
+  duration_ms: 0.587983
+  type: 'test'
+  ...
+# Subtest: fetchAirbnbIcs caches the feed for 5 minutes and refetches after
+ok 11 - fetchAirbnbIcs caches the feed for 5 minutes and refetches after
+  ---
+  duration_ms: 0.652288
+  type: 'test'
+  ...
+# Subtest: a fresh availability check bypasses an earlier cached free feed
+ok 12 - a fresh availability check bypasses an earlier cached free feed
+  ---
+  duration_ms: 0.624006
+  type: 'test'
+  ...
+# Subtest: quote needs free nights and payment needs every night owner-blocked
+ok 13 - quote needs free nights and payment needs every night owner-blocked
+  ---
+  duration_ms: 0.182819
+  type: 'test'
+  ...
+# Subtest: an unknown Airbnb event summary blocks payment instead of looking free
+ok 14 - an unknown Airbnb event summary blocks payment instead of looking free
+  ---
+  duration_ms: 0.12935
+  type: 'test'
+  ...
+# Subtest: generic Unavailable is not accepted as proof of this owner block
+ok 15 - generic Unavailable is not accepted as proof of this owner block
+  ---
+  duration_ms: 0.089151
+  type: 'test'
+  ...
+# Subtest: airbnbBlockedNights and airbnbReservedNights compose fetch + parse correctly
+ok 16 - airbnbBlockedNights and airbnbReservedNights compose fetch + parse correctly
+  ---
+  duration_ms: 1.364884
+  type: 'test'
+  ...
+# Subtest: nightsBetween lists each stayed night, checkout day excluded
+ok 17 - nightsBetween lists each stayed night, checkout day excluded
+  ---
+  duration_ms: 0.291898
+  type: 'test'
+  ...
+# Subtest: dates use exclusive checkout and reject malformed or excessive stays
+ok 18 - dates use exclusive checkout and reject malformed or excessive stays
+  ---
+  duration_ms: 1.070262
+  type: 'test'
+  ...
+# Subtest: arrival dates use Gardner local day across UTC and daylight-saving boundaries
+ok 19 - arrival dates use Gardner local day across UTC and daylight-saving boundaries
+  ---
+  duration_ms: 13.372065
+  type: 'test'
+  ...
+# Subtest: quote includes every item and enforces a bounded deposit
+ok 20 - quote includes every item and enforces a bounded deposit
+  ---
+  duration_ms: 0.700598
+  type: 'test'
+  ...
+# Subtest: owner cannot send a quote when its guest payment window has closed
+ok 21 - owner cannot send a quote when its guest payment window has closed
+  ---
+  duration_ms: 0.204601
+  type: 'test'
+  ...
+# Subtest: Stripe signature checks timestamp and original payload with constant-time comparison
+ok 22 - Stripe signature checks timestamp and original payload with constant-time comparison
+  ---
+  duration_ms: 0.877308
+  type: 'test'
+  ...
+# Subtest: Ask Kendall stays inside the coded Guidebook
+ok 23 - Ask Kendall stays inside the coded Guidebook
+  ---
+  duration_ms: 3.32391
+  type: 'test'
+  ...
+# Subtest: audio command parser keeps the CLI small and predictable
+ok 24 - audio command parser keeps the CLI small and predictable
+  ---
+  duration_ms: 0.768338
+  type: 'test'
+  ...
+# Subtest: Booking, Guidebook, legacy routes, and real property photos exist
+ok 25 - Booking, Guidebook, legacy routes, and real property photos exist
+  ---
+  duration_ms: 0.888614
+  type: 'test'
+  ...
+# Subtest: Approved PJ identity is shared across every footer shell
+ok 26 - Approved PJ identity is shared across every footer shell
+  ---
+  duration_ms: 0.248866
+  type: 'test'
+  ...
+# Subtest: Guidebook access is server-enforced and does not publish the plaintext code
+ok 27 - Guidebook access is server-enforced and does not publish the plaintext code
+  ---
+  duration_ms: 0.248695
+  type: 'test'
+  ...
+# Subtest: Guidebook auth fails closed instead of falling back to a public default in production
+ok 28 - Guidebook auth fails closed instead of falling back to a public default in production
+  ---
+  duration_ms: 0.157
+  type: 'test'
+  ...
+# Subtest: Guidebook auth behaves correctly at runtime for both dev and production
+ok 29 - Guidebook auth behaves correctly at runtime for both dev and production
+  ---
+  duration_ms: 0.936185
+  type: 'test'
+  ...
+# Subtest: Guidebook-facing source has no promotional or obvious private data
+ok 30 - Guidebook-facing source has no promotional or obvious private data
+  ---
+  duration_ms: 2.143027
+  type: 'test'
+  ...
+# Subtest: capability boundary does not claim uninstalled device control
+ok 31 - capability boundary does not claim uninstalled device control
+  ---
+  duration_ms: 0.419637
+  type: 'test'
+  ...
+# Subtest: owner-code UX issues unique signed cookies, not the configured secret
+ok 32 - owner-code UX issues unique signed cookies, not the configured secret
+  ---
+  duration_ms: 2.568782
+  type: 'test'
+  ...
+# Subtest: expiry and key/code rotation revoke a session
+ok 33 - expiry and key/code rotation revoke a session
+  ---
+  duration_ms: 0.850749
+  type: 'test'
+  ...
+# Subtest: owner auth fails closed without secrets in all environments
+ok 34 - owner auth fails closed without secrets in all environments
+  ---
+  duration_ms: 0.647721
+  type: 'test'
+  ...
+# Subtest: durable 200 PJ result acknowledged: {"ok":true}
+ok 35 - durable 200 PJ result acknowledged: {"ok":true}
+  ---
+  duration_ms: 2.405301
+  type: 'test'
+  ...
+# Subtest: durable 200 PJ result acknowledged: {"ok":false,"refund_required":true,"reason":"paid_conflict"}
+ok 36 - durable 200 PJ result acknowledged: {"ok":false,"refund_required":true,"reason":"paid_conflict"}
+  ---
+  duration_ms: 0.288764
+  type: 'test'
+  ...
+# Subtest: durable 200 PJ result acknowledged: {"ok":false,"rejected":"amount_mismatch"}
+ok 37 - durable 200 PJ result acknowledged: {"ok":false,"rejected":"amount_mismatch"}
+  ---
+  duration_ms: 0.227955
+  type: 'test'
+  ...
+# Subtest: durable 200 PJ result acknowledged: {"ok":false}
+ok 38 - durable 200 PJ result acknowledged: {"ok":false}
+  ---
+  duration_ms: 0.146966
+  type: 'test'
+  ...
+# Subtest: PJ throw asks Stripe to retry
+ok 39 - PJ throw asks Stripe to retry
+  ---
+  duration_ms: 0.336133
+  type: 'test'
+  ...
+# Subtest: forged signature fails before any PJ mutation
+ok 40 - forged signature fails before any PJ mutation
+  ---
+  duration_ms: 1.018655
+  type: 'test'
+  ...
+# Subtest: unrelated/unpaid events acknowledged without mutation
+ok 41 - unrelated/unpaid events acknowledged without mutation
+  ---
+  duration_ms: 0.637406
+  type: 'test'
+  ...
+# Subtest: restricted live keys have live mode; mismatched modes rejected
+ok 42 - restricted live keys have live mode; mismatched modes rejected
+  ---
+  duration_ms: 0.40178
+  type: 'test'
+  ...
+# Subtest: inconsistent metadata or invalid amount is not confirmed
+ok 43 - inconsistent metadata or invalid amount is not confirmed
+  ---
+  duration_ms: 0.697474
+  type: 'test'
+  ...
+# Subtest: checkout amount comes from PJ and attachment precedes redirect
+ok 44 - checkout amount comes from PJ and attachment precedes redirect
+  ---
+  duration_ms: 1.00772
+  type: 'test'
+  ...
+# Subtest: retry reuses an attached session instead of charging twice
+ok 45 - retry reuses an attached session instead of charging twice
+  ---
+  duration_ms: 0.260712
+  type: 'test'
+  ...
+# Subtest: complete checkout returns to checking, never declares booked
+ok 46 - complete checkout returns to checking, never declares booked
+  ---
+  duration_ms: 0.174796
+  type: 'test'
+  ...
+# Subtest: explicit attachment rejection expires new session; ambiguous failure does not
+ok 47 - explicit attachment rejection expires new session; ambiguous failure does not
+  ---
+  duration_ms: 0.772755
+  type: 'test'
+  ...
+# Subtest: guest state does not turn redirect, refund, or missing reservation into success
+ok 48 - guest state does not turn redirect, refund, or missing reservation into success
+  ---
+  duration_ms: 0.21076
+  type: 'test'
+  ...
+# Subtest: base URL is the PJ booking API, never arbitrary credentials or Supabase
+ok 49 - base URL is the PJ booking API, never arbitrary credentials or Supabase
+  ---
+  duration_ms: 1.262013
+  type: 'test'
+  ...
+# Subtest: create is a PJ POST and preserves old array shape
+ok 50 - create is a PJ POST and preserves old array shape
+  ---
+  duration_ms: 23.596979
+  type: 'test'
+  ...
+# Subtest: lookup sends quote token in body, not upstream URL
+ok 51 - lookup sends quote token in body, not upstream URL
+  ---
+  duration_ms: 0.795508
+  type: 'test'
+  ...
+# Subtest: owner list maps to scoped PJ list
+ok 52 - owner list maps to scoped PJ list
+  ---
+  duration_ms: 0.901584
+  type: 'test'
+  ...
+# Subtest: owner get maps UUID and retains array result
+ok 53 - owner get maps UUID and retains array result
+  ---
+  duration_ms: 0.543488
+  type: 'test'
+  ...
+# Subtest: quote maps ALL fields and returns token scalar
+ok 54 - quote maps ALL fields and returns token scalar
+  ---
+  duration_ms: 0.468889
+  type: 'test'
+  ...
+# Subtest: begin checkout maps token and keeps array shape
+ok 55 - begin checkout maps token and keeps array shape
+  ---
+  duration_ms: 0.485443
+  type: 'test'
+  ...
+# Subtest: attach_checkout maps old bool to PJ data.ok
+ok 56 - attach_checkout maps old bool to PJ data.ok
+  ---
+  duration_ms: 0.668542
+  type: 'test'
+  ...
+# Subtest: release_quote maps old bool to PJ data.ok
+ok 57 - release_quote maps old bool to PJ data.ok
+  ---
+  duration_ms: 1.359396
+  type: 'test'
+  ...
+# Subtest: payment outcome is structured and never discarded
+ok 58 - payment outcome is structured and never discarded
+  ---
+  duration_ms: 0.82414
+  type: 'test'
+  ...
+# Subtest: attention and resolution use real endpoints
+ok 59 - attention and resolution use real endpoints
+  ---
+  duration_ms: 0.610065
+  type: 'test'
+  ...
+# Subtest: calendar outage is sanitized, not treated as free
+ok 60 - calendar outage is sanitized, not treated as free
+  ---
+  duration_ms: 0.556697
+  type: 'test'
+  ...
+# Subtest: missing quote returns null; network/invalid JSON fail closed
+ok 61 - missing quote returns null; network/invalid JSON fail closed
+  ---
+  duration_ms: 1.004285
+  type: 'test'
+  ...
+# Subtest: unrecognized legacy queries and route escape attempts are refused
+ok 62 - unrecognized legacy queries and route escape attempts are refused
+  ---
+  duration_ms: 0.344435
+  type: 'test'
+  ...
+# Subtest: real HTTP transport keeps the property key server-side and distinguishes calendar failure
+ok 63 - real HTTP transport keeps the property key server-side and distinguishes calendar failure
+  ---
+  duration_ms: 33.771679
+  type: 'test'
+  ...
+# Subtest: public booking never requires owner or PJ sign-in
+ok 64 - public booking never requires owner or PJ sign-in
+  ---
+  duration_ms: 1.093125
+  type: 'test'
+  ...
+# Subtest: owner keeps all exact quote fields and fixed expiry; no percentage deposit
+ok 65 - owner keeps all exact quote fields and fixed expiry; no percentage deposit
+  ---
+  duration_ms: 1.70955
+  type: 'test'
+  ...
+# Subtest: private quote only offers safe payment branches and no redirect-only success
+ok 66 - private quote only offers safe payment branches and no redirect-only success
+  ---
+  duration_ms: 0.402561
+  type: 'test'
+  ...
+# Subtest: owner status is read-only, not invented saved prices or approvals
+ok 67 - owner status is read-only, not invented saved prices or approvals
+  ---
+  duration_ms: 0.21802
+  type: 'test'
+  ...
+# Subtest: no cleaner module in owner dashboard and exact logos included
+ok 68 - no cleaner module in owner dashboard and exact logos included
+  ---
+  duration_ms: 0.247604
+  type: 'test'
+  ...
+# Subtest: no Supabase fallback or REST URL survives in active adapter
+ok 69 - no Supabase fallback or REST URL survives in active adapter
+  ---
+  duration_ms: 0.282746
+  type: 'test'
+  ...
+# Subtest: booking alert and focus/brand foreground colors pass 4.5:1 contrast
+ok 70 - booking alert and focus/brand foreground colors pass 4.5:1 contrast
+  ---
+  duration_ms: 0.406347
+  type: 'test'
+  ...
+1..70
+# tests 70
+# suites 0
+# pass 70
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 250.269505

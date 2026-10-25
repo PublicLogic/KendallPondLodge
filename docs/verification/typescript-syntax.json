@@ -1,0 +1,6 @@
+{
+  "check": "TypeScript/TSX syntax only; NOT a typecheck or production build",
+  "typescript": "5.8.3",
+  "files": 69,
+  "errors": []
+}

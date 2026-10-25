@@ -1,0 +1,54 @@
+{
+  "source": "KPL_Source_Review(1).zip",
+  "source_sha256": "6706cc0d967d015592e05ea7300a1e3decd82fcd7465abfc50e18ca91be8b632",
+  "source_commit": "7316f4121b8f30795cf963c5e94e7b6f271084b9",
+  "source_branch": "main",
+  "source_dirty_paths": [
+    "lib/booking-db.ts",
+    "lib/booking-db.ts.supabase-backup"
+  ],
+  "source_excluded_paths": [
+    ".npmrc",
+    ".openai/hosting.json",
+    "build/sites-vite-plugin.ts"
+  ],
+  "target_repository": "PublicLogic/KendallPondLodge",
+  "target_repository_observation": "Empty when inspected on 2026-10-25",
+  "integration_repository": "PublicLogic/PuddleJumper",
+  "integration_revision": "90042243a1caaec577d1e2882c1bb68d98becdd5",
+  "integration_method": "Server-to-server /api/stayos/booking, with property-bound bearer key",
+  "pj_changes_required": false,
+  "live_actions_performed": false,
+  "runtime_target": "Node 24",
+  "tested_runtime": "Node v22.16.0",
+  "verification": {
+    "core_tests": {
+      "passed": 70,
+      "failed": 0,
+      "skipped": 0
+    },
+    "typescript_syntax_files": 69,
+    "typescript_parser_version": "5.8.3",
+    "next_build": "BLOCKED: next executable not installed in local verification environment",
+    "typecheck": "NOT_RUN",
+    "actual_pj_stripe_rehearsal": "NOT_RUN",
+    "browser_accessibility_audit": "NOT_RUN",
+    "guarded_patch_installer": {
+      "passed": 6,
+      "failed": 0
+    }
+  },
+  "artwork": [
+    {
+      "source_name": "PuddleJumper_STAY(2).png",
+      "release_path": "public/brand/stay/puddlejumper-stay.png",
+      "sha256": "f7a1df46c37a5676ae2435522b3ca8284bcbc83ffb75ba1728f1dcc9e931a43f"
+    },
+    {
+      "source_name": "PuddleJumper_Beta(2).png",
+      "release_path": "public/brand/stay/puddlejumper-beta.png",
+      "sha256": "d2b1644b1b8401839ede7ef471f0e5470caaf7a965d9166c9a9f472af138f286"
+    }
+  ],
+  "note": "Source snapshots and fixture-based tests are not evidence of a live deployment. Guest prices and terms are not selected by this package."
+}
