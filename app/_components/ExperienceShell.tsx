@@ -96,9 +96,12 @@ export function ExperienceShell({
   bookEnabled: boolean;
 }) {
   const pathname = usePathname();
+  const isOwner = pathname === "/owner" || pathname.startsWith("/owner/");
   const isGuidebook =
     pathname.startsWith("/guidebook") || legacyGuidePaths.has(pathname);
   const isAccess = pathname.startsWith("/guidebook/access");
+
+  if (isOwner) return <>{children}</>;
 
   if (isAccess) {
     return (
