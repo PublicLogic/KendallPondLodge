@@ -22,8 +22,8 @@ export default function RatesPage() {
     <main id="main-content">
       <PageHero
         eyebrow="Rates & booking"
-        title="Two ways to book."
-        intro="Request a direct quote from us, or use Airbnb if you prefer its calendar and checkout. Either way, you see the full price before you commit."
+        title="Book it your way."
+        intro="Direct with us, or Airbnb. Full price first either way."
         image="/images/kpl/pond-seating.jpg"
         imageAlt="The Lodge deck overlooking Kendall Pond"
         imagePosition="center"
@@ -38,21 +38,15 @@ export default function RatesPage() {
       <section className="content-section">
         <SectionHeading
           eyebrow="Direct"
-          title="Ask us for the exact stay."
-          intro="Send the dates, guest count, and pets. We check availability and send an itemized quote with the deposit, remaining balance, and cancellation terms before you pay."
+          title="Direct is simple."
+          intro="Send the dates. We check them and send one itemized quote."
         />
         <div className="info-grid info-grid-two">
           <InfoCard icon="house" title="No charge to ask">
-            <p>
-              A request is not a reservation and does not charge a card. It is
-              simply the first step toward a direct stay.
-            </p>
+            <p>Ask first. Nothing is charged.</p>
           </InfoCard>
           <InfoCard icon="help" title="Full price before payment">
-            <p>
-              Your quote shows lodging, cleaning, pets, taxes, any other fee,
-              the deposit due, remaining balance, and cancellation terms.
-            </p>
+            <p>Everything is itemized before you pay.</p>
           </InfoCard>
         </div>
       </section>
@@ -62,10 +56,7 @@ export default function RatesPage() {
           <div>
             <p className="eyebrow">Choose what works for you</p>
             <h2>Book direct or use Airbnb.</h2>
-            <p>
-              Direct keeps the conversation with us. Airbnb gives you its own
-              calendar, payment flow, and booking protections.
-            </p>
+            <p>Same Lodge. Pick the checkout you prefer.</p>
           </div>
           <div>
             {directEnabled && (
