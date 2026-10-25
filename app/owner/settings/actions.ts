@@ -12,22 +12,23 @@ export async function syncAirbnbCalendar(): Promise<void> {
     redirect("/owner/access?next=/owner/settings");
   }
 
+  const url = process.env.KPL_AIRBNB_ICAL_URL?.trim();
+  if (!url) {
+    redirect("/owner/settings?calendar=missing");
+  }
+
+  let outcome = "error";
+  let eventCount = 0;
   try {
-    const url = process.env.KPL_AIRBNB_ICAL_URL?.trim();
-    if (!url) redirect("/owner/settings?calendar=missing");
-
     const ics = await fetchAirbnbIcs({ fresh: true });
-    const events = parseIcsEvents(ics);
-
+    eventCount = parseIcsEvents(ics).length;
     await bookingClient().registerCalendar(url);
     const status = await bookingClient().contentStatus();
-
-    if (!status.calendarConfigured) {
-      redirect("/owner/settings?calendar=unverified");
-    }
-
-    redirect("/owner/settings?calendar=registered&events=" + Math.min(events.length, 9999));
+    outcome = status.calendarConfigured ? "registered" : "unverified";
   } catch {
-    redirect("/owner/settings?calendar=error");
+    outcome = "error";
   }
+
+  const suffix = outcome === "registered" ? "&events=" + Math.min(eventCount, 9999) : "";
+  redirect("/owner/settings?calendar=" + outcome + suffix);
 }
