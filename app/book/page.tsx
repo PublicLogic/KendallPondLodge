@@ -27,8 +27,8 @@ export default async function BookPage({
     <main id="main-content" className="booking-page">
       <PageHero
         eyebrow="Direct with Nate & Allie"
-        title="Send us your dates."
-        intro="Tell us when you want to come, who is coming, and anything we should know. We will check the calendar and send the complete price and terms before you pay."
+        title="Pick your dates."
+        intro="No account. No charge. We’ll check the dates and send the full quote."
         image="/images/kpl/pond-seating.jpg"
         imageAlt="The deck at the Lodge overlooking Kendall Pond"
         imagePosition="center"
@@ -38,22 +38,14 @@ export default async function BookPage({
       <section className="content-section booking-grid">
         <div>
           <p className="eyebrow">How direct booking works</p>
-          <h2>A request first. A quote next.</h2>
-          <p>
-            Sending this form does not reserve the Lodge and does not charge
-            you. We check the Airbnb calendar, confirm that the dates fit, and
-            prepare an itemized private quote.
-          </p>
-          <p>
-            The quote shows the lodging price, cleaning, pets, taxes, any other
-            fee, the deposit due now, the remaining balance, and the exact
-            cancellation terms before you decide.
-          </p>
+          <h2>Simple.</h2>
+          <p>Send the dates. We check them. If they work, you get one itemized quote.</p>
+          <p>Price, fees, deposit, balance, and cancellation terms are all shown before payment.</p>
           <ol className="booking-steps">
             <li>Send your dates and group size.</li>
-            <li>We check availability and prepare the quote.</li>
-            <li>You review the full terms and pay the deposit through Stripe.</li>
-            <li>Your stay is booked only after payment is verified and recorded.</li>
+            <li>We check the calendar and send the quote.</li>
+            <li>You review it and pay the deposit through Stripe.</li>
+            <li>Booked means payment is verified and recorded.</li>
           </ol>
           <p>
             Prefer Airbnb?{" "}
@@ -66,8 +58,8 @@ export default async function BookPage({
         <div className="booking-panel">
           <BookingBrand />
           <p className="eyebrow">Your stay</p>
-          <h2>Ask about these dates.</h2>
-          <p>No account or sign-in needed.</p>
+          <h2>Your stay.</h2>
+          <p>No account. No charge now.</p>
 
           {status === "received" && (
             <p className="booking-alert" role="status">
@@ -148,7 +140,7 @@ export default async function BookPage({
                 <textarea
                   name="note"
                   maxLength={1000}
-                  placeholder="Wedding weekend, ski plans, sleeping setup, a pet, an amenity that matters to the trip..."
+                  placeholder="Wedding, ski trip, sleeping setup, pet, or anything else we should know..."
                 />
               </label>
 
@@ -176,7 +168,7 @@ export default async function BookPage({
               </label>
 
               <button className="button button-primary" type="submit">
-                Send my dates
+                Check my dates
               </button>
 
               <p className="booking-fine">
@@ -189,19 +181,11 @@ export default async function BookPage({
       </section>
 
       <section className="content-section surface-section">
-        <h2>What you are asking about</h2>
-        <p>
-          A whole lakefront home for up to eight with a private shoreline,
-          dock, seasonal kayaks and paddle boat, hot tub, firepit, open kitchen,
-          cathedral-ceiling great room, and three bedrooms.{" "}
-          <Link href="/lodge">Tour the house</Link> or{" "}
-          <Link href="/grounds">see the waterfront</Link>.
-        </p>
-        <p>
-          Check-in is after 3 PM and checkout is by 11 AM. Quiet hours are
-          10 PM–7 AM. No smoking. An exterior Ring doorbell camera faces the
-          entrance.
-        </p>
+        <div className="booking-basics">
+          <strong>8 guests · 3 bedrooms · 2 baths</strong>
+          <span>Private shoreline · dock · hot tub · firepit</span>
+          <Link href="/lodge">See the Lodge →</Link>
+        </div>
       </section>
     </main>
   );
