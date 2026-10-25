@@ -4,7 +4,6 @@ import { redirect } from 'next/navigation';
 import { bookingClient, directBookingEnabled, paymentConfigured, BookingServiceError } from '@/lib/booking-db';
 import { stripeRequest } from '@/lib/booking-stripe';
 import { validateGuestRequest, beginGuestCheckout } from '@/lib/kpl-booking-core.mjs';
-import { dispatchKplMail } from '@/lib/kpl-mail';
 
 /** Guests submit directly to KPL. No owner cookie, Google login or PJ session. */
 export async function requestStay(form: FormData) {
@@ -12,20 +11,6 @@ export async function requestStay(form: FormData) {
   try {
     const input = validateGuestRequest(Object.fromEntries(form.entries()));
     await bookingClient().createRequest(input);
-
-    try {
-      await dispatchKplMail('booking.request_received', {
-        guest_name: input.guest_name,
-        guest_email: input.guest_email,
-        check_in: input.check_in,
-        check_out: input.check_out,
-        guests: input.guests,
-        pets: input.pets,
-      });
-    } catch {
-      // Mail is secondary to the governed booking record. Never lose a request because delivery failed.
-      console.error('KPL mail handoff failed: booking.request_received');
-    }
   } catch (error) {
     const code = error instanceof BookingServiceError ? error.code : 'error';
     console.error('Booking request failed:', code); // Never guest fields, token, key or provider body.
