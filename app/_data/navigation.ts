@@ -20,7 +20,5 @@ export const publicNavigation = [
   { href: "/lodge", label: "The Lodge" },
   { href: "/grounds", label: "Waterfront" },
   { href: "/explore", label: "Explore" },
-  { href: "/events", label: "Events" },
-  { href: "/area", label: "The Area" },
   { href: "/guidebook", label: "Guest Guide" },
 ];
