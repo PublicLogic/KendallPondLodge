@@ -1455,3 +1455,81 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* === KPL PUBLIC EDITORIAL OVERRIDES 2026-10-25 === */
+.experience-header-booking{
+  background:rgba(248,247,243,.97);
+  box-shadow:none;
+}
+.experience-header-booking .experience-book-button{
+  border-radius:6px;
+  box-shadow:none;
+}
+.home-review-strip>a{
+  min-height:62px;
+}
+.home-review-strip strong{
+  font-family:var(--font-sans),sans-serif;
+  font-size:.84rem;
+  font-weight:720;
+}
+.home-simple-copy{
+  max-width:680px;
+}
+.home-simple-copy h2{
+  max-width:13ch;
+}
+.home-final-cta{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:end;
+  gap:3rem;
+  border-top:1px solid var(--line-strong);
+}
+.home-final-cta h2{max-width:8ch}
+.home-final-cta>div:first-child>p:last-child{
+  max-width:50ch;
+  margin-top:.8rem;
+  color:var(--muted);
+}
+.home-host-actions{
+  min-width:210px;
+}
+.explore-arrival-strip{
+  border:0;
+  border-top:1px solid var(--line-strong);
+  border-bottom:1px solid var(--line-strong);
+  border-radius:0;
+  background:transparent;
+}
+.explore-arrival-links a{
+  border:0;
+  border-bottom:1px solid var(--line);
+  border-radius:0;
+  background:transparent;
+  padding:.7rem 0;
+}
+.public-mobile-nav{
+  border-radius:0;
+  border:0;
+  border-top:1px solid var(--line);
+  right:0;
+  bottom:0;
+  left:0;
+  padding:.3rem .5rem calc(.3rem + env(safe-area-inset-bottom));
+  background:rgba(250,249,246,.98);
+  box-shadow:0 -8px 22px rgba(17,34,51,.06);
+}
+.public-mobile-nav a{
+  border-radius:4px;
+}
+.public-mobile-nav .public-mobile-nav-primary{
+  border-radius:4px;
+}
+@media(max-width:760px){
+  .home-final-cta{
+    grid-template-columns:1fr;
+    gap:1.4rem;
+  }
+}
