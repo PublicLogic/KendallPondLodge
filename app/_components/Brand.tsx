@@ -10,7 +10,16 @@ export function Brand() {
         width={1946}
         height={808}
         priority
-        className="kpl-brand-image-art"
+        className="kpl-brand-lockup"
+      />
+      <Image
+        src="/images/kpl/lodge-seal.png"
+        alt=""
+        width={512}
+        height={512}
+        priority
+        className="kpl-brand-seal-mobile"
+        aria-hidden
       />
     </Link>
   );
