@@ -21,13 +21,16 @@ function validEmail(value: string): boolean {
 }
 
 export function kplMailIdentity(): KplMailIdentity {
-  const fromName = process.env.KPL_EMAIL_FROM_NAME?.trim() || DEFAULT_FROM_NAME;
-  const configuredAddress =
-    process.env.KPL_EMAIL_FROM_ADDRESS?.trim() ||
+  const configuredFrom = process.env.KPL_EMAIL_FROM?.trim() || "";
+  const match = configuredFrom.match(/^(.+?)\s*<([^<>]+)>$/);
+
+  const fromName = match?.[1]?.trim() || DEFAULT_FROM_NAME;
+  const candidateAddress =
+    match?.[2]?.trim() ||
     process.env.KPL_BOOKING_CONTACT_EMAIL?.trim() ||
     DEFAULT_FROM_ADDRESS;
-  const fromAddress = validEmail(configuredAddress)
-    ? configuredAddress
+  const fromAddress = validEmail(candidateAddress)
+    ? candidateAddress
     : DEFAULT_FROM_ADDRESS;
 
   const configuredReplyTo = process.env.KPL_EMAIL_REPLY_TO?.trim() || fromAddress;
