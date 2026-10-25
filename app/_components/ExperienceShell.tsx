@@ -31,6 +31,7 @@ function ExperienceHeader({
   bookEnabled: boolean;
 }) {
   const label = mode === "booking" ? "Property" : "Guidebook access";
+  const pathname = usePathname();
 
   return (
     <>
@@ -42,16 +43,27 @@ function ExperienceHeader({
           {mode === "booking" ? (
             <>
               <nav className="experience-nav" aria-label={`${label} navigation`}>
-                {publicNavigation.map((item) => (
-                  <Link href={item.href} key={item.href}>{item.label}</Link>
-                ))}
+                {publicNavigation.map((item) => {
+                  const current =
+                    pathname === item.href ||
+                    (item.href !== "/" && pathname.startsWith(`${item.href}/`));
+                  return (
+                    <Link
+                      href={item.href}
+                      key={item.href}
+                      aria-current={current ? "page" : undefined}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
               </nav>
 
               <Link
                 className="experience-book-button"
                 href={bookEnabled ? "/book" : "/rates"}
               >
-                {bookEnabled ? "Request a stay" : "Check dates"}
+                {bookEnabled ? "Book your stay" : "Check dates"}
               </Link>
             </>
           ) : (
