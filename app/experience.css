@@ -1026,3 +1026,27 @@
     width: min(155px, 100%);
   }
 }
+
+
+/* Mobile refresh: typography-led brand, no old seal or badge chrome. */
+.kpl-wordmark{display:grid;flex:none;min-width:0;text-decoration:none;line-height:1.06}
+.kpl-wordmark-top{color:#37644e;font-family:var(--font-sans),sans-serif;font-size:.61rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.kpl-wordmark-main{margin-top:.1rem;color:#17344a;font-family:var(--font-serif),Georgia,serif;font-size:1.45rem;font-weight:600;letter-spacing:-.035em}
+.experience-header-booking .experience-book-button{border-radius:9px;box-shadow:none}
+.public-mobile-nav a{flex-direction:column;gap:.2rem}
+.public-mobile-nav a svg{flex:none}
+@media(max-width:700px){
+.experience-header-booking .experience-header-inner{min-height:62px;padding:0 .9rem}
+.kpl-wordmark-top{font-size:.49rem}
+.kpl-wordmark-main{font-size:1.08rem}
+.experience-header-booking .experience-book-button{min-height:40px;padding:.55rem .7rem;font-size:.72rem}
+.public-mobile-nav{bottom:calc(.65rem + env(safe-area-inset-bottom));border-radius:16px;background:rgba(255,255,255,.96)}
+.public-mobile-nav a{min-height:48px;font-size:.66rem}
+.public-mobile-nav a svg{width:19px;height:19px}
+.public-mobile-nav .public-mobile-nav-primary{background:#17344a}
+.content-section{padding-inline:1rem}
+.booking-grid,.booking-fields{grid-template-columns:1fr}
+.booking-panel{padding:1.05rem}
+.booking-form input:not([type=checkbox]),.booking-form textarea{font-size:16px;min-height:48px}
+.booking-form button{min-height:48px;width:100%;justify-content:center}
+}
