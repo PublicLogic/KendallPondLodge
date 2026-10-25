@@ -2342,3 +2342,146 @@ p {
 .booking-panel { min-width:0; }
 .booking-panel :is(p,a,dd) { overflow-wrap:anywhere; }
 @media (max-width:600px) { .booking-brand { flex-direction:column; align-items:flex-start; gap:12px; } .booking-page .booking-fields { grid-template-columns:1fr; } }
+
+
+/* === KPL EDITORIAL RESET 2026-10-25 === */
+:root{
+  --radius-xs:3px;
+  --radius-sm:4px;
+  --radius-md:6px;
+  --radius-lg:8px;
+  --radius-pill:8px;
+  --shadow-xs:none;
+  --shadow-sm:none;
+  --shadow-md:none;
+  --shadow-lg:none;
+  --shadow:none;
+}
+body{
+  background:var(--paper);
+}
+body::before{display:none}
+.button{
+  min-height:46px;
+  border-radius:6px;
+  padding:.78rem 1rem;
+  box-shadow:none;
+}
+.button-primary{
+  background:var(--forest-dark);
+  box-shadow:none;
+}
+.button-primary:hover{
+  background:var(--deep);
+  box-shadow:none;
+  transform:none;
+}
+.button-secondary{
+  background:transparent;
+  box-shadow:none;
+}
+.button-secondary:hover{
+  box-shadow:none;
+  transform:none;
+}
+.page-hero-copy{
+  background:var(--paper);
+}
+.page-hero-copy::after{display:none}
+.page-hero-photo img{
+  filter:none;
+  transform:none;
+}
+.page-hero-photo::before,
+.page-hero-photo::after{display:none}
+.page-hero-photo figcaption{
+  right:.75rem;
+  bottom:.75rem;
+  padding:.3rem .45rem;
+  border:0;
+  border-radius:2px;
+  background:rgba(17,34,51,.72);
+}
+.eyebrow{
+  gap:0;
+  margin-bottom:.9rem;
+  font-family:var(--font-sans),sans-serif;
+  font-size:.67rem;
+  letter-spacing:.11em;
+}
+.eyebrow::before{display:none}
+.surface-section::before{
+  background:#efede7;
+  border-color:#d8d6cf;
+}
+.info-grid,
+.step-grid{gap:0}
+.info-card{
+  padding:1.4rem 1.4rem 1.5rem 0;
+  border:0;
+  border-top:1px solid var(--line-strong);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.info-card:nth-child(even){padding-left:1.4rem}
+.info-card:hover{
+  border-color:var(--line-strong);
+  box-shadow:none;
+  transform:none;
+}
+.info-card .icon-chip{display:none}
+.card-copy{
+  margin-top:.55rem;
+  font-size:.88rem;
+  line-height:1.55;
+}
+.photo-grid{gap:.65rem}
+.photo-card{
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.photo-card:hover{
+  border-color:transparent;
+  box-shadow:none;
+  transform:none;
+}
+.photo-card figcaption{
+  padding:.72rem 0 0;
+  background:transparent;
+}
+.photo-card figcaption strong{
+  font-size:.78rem;
+}
+.photo-card figcaption span{
+  font-size:.68rem;
+}
+.notice{
+  border:0;
+  border-left:2px solid var(--gold);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  padding:.75rem 0 .75rem 1rem;
+}
+.stat-band-item{
+  padding:1.2rem 1rem;
+}
+.stat-band-item strong{
+  font-family:var(--font-sans),sans-serif;
+  font-size:1.25rem;
+  font-weight:700;
+}
+.stat-band-item span{
+  font-family:var(--font-sans),sans-serif;
+  font-size:.64rem;
+  letter-spacing:.06em;
+}
+@media(max-width:700px){
+  .info-card,
+  .info-card:nth-child(even){
+    padding:1.1rem 0;
+  }
+}
