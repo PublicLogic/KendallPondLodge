@@ -17,10 +17,10 @@ export const mobileNavigation = [
 ];
 
 export const publicNavigation = [
-  { href: "/book", label: "Book" },
-  { href: "/grounds", label: "The Grounds" },
-  { href: "/rates", label: "Rates" },
+  { href: "/lodge", label: "The Lodge" },
+  { href: "/grounds", label: "Waterfront" },
+  { href: "/explore", label: "Explore" },
   { href: "/events", label: "Events" },
-  { href: "/area", label: "Area" },
-  { href: "/guidebook", label: "House Guide" },
+  { href: "/area", label: "The Area" },
+  { href: "/guidebook", label: "Guest Guide" },
 ];

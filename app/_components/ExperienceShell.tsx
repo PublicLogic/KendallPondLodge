@@ -7,6 +7,7 @@ import { publicNavigation } from "@/app/_data/navigation";
 import { AskKendall } from "./AskKendall";
 import { Brand } from "./Brand";
 import { MobileNav } from "./MobileNav";
+import { PublicMobileNav } from "./PublicMobileNav";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
 import { StayOsFooterMark } from "./StayOsFooterMark";
@@ -22,8 +23,14 @@ const legacyGuidePaths = new Set([
   "/checkout",
 ]);
 
-function ExperienceHeader({ mode, bookEnabled }: { mode: "booking" | "access"; bookEnabled: boolean }) {
-  const label = mode === "booking" ? "Booking" : "Guidebook access";
+function ExperienceHeader({
+  mode,
+  bookEnabled,
+}: {
+  mode: "booking" | "access";
+  bookEnabled: boolean;
+}) {
+  const label = mode === "booking" ? "Property" : "Guidebook access";
 
   return (
     <>
@@ -31,11 +38,27 @@ function ExperienceHeader({ mode, bookEnabled }: { mode: "booking" | "access"; b
       <header className={`experience-header experience-header-${mode}`}>
         <div className="experience-header-inner">
           <Brand />
-          <nav className="experience-nav" aria-label={`${label} navigation`}>
-            {mode === "booking"
-              ? publicNavigation.filter((item) => bookEnabled || item.href !== "/book").map((item) => <Link href={item.href} key={item.href}>{item.label}</Link>)
-              : <Link href="/">Home</Link>}
-          </nav>
+
+          {mode === "booking" ? (
+            <>
+              <nav className="experience-nav" aria-label={`${label} navigation`}>
+                {publicNavigation.map((item) => (
+                  <Link href={item.href} key={item.href}>{item.label}</Link>
+                ))}
+              </nav>
+
+              <Link
+                className="experience-book-button"
+                href={bookEnabled ? "/book" : "/rates"}
+              >
+                {bookEnabled ? "Request a stay" : "Check dates"}
+              </Link>
+            </>
+          ) : (
+            <nav className="experience-nav" aria-label={`${label} navigation`}>
+              <Link href="/">Home</Link>
+            </nav>
+          )}
         </div>
       </header>
     </>
@@ -48,13 +71,14 @@ function ExperienceFooter({ mode }: { mode: "booking" | "access" }) {
       <div className="site-footer-brand">
         <Brand />
         <p>
-          {mode === "booking" && "Waterfront in Gardner, Massachusetts."}
+          {mode === "booking" && "A private waterfront lodge in Gardner, Massachusetts."}
           {mode === "access" && "Reserved for confirmed guests."}
         </p>
       </div>
+
       <div style={{ display: "grid", gap: "0.75rem", justifyItems: "end" }}>
         <div className="footer-links">
-          <Link href="/guidebook">Already booked? Guidebook</Link>
+          <Link href="/guidebook">Already booked? Guest Guide</Link>
           <Link className="footer-owner-link" href="/owner">Owner login</Link>
         </div>
         <p className="site-footer-est">The Lodge at Kendall Pond · Gardner, MA</p>
@@ -64,9 +88,16 @@ function ExperienceFooter({ mode }: { mode: "booking" | "access" }) {
   );
 }
 
-export function ExperienceShell({ children, bookEnabled }: { children: ReactNode; bookEnabled: boolean }) {
+export function ExperienceShell({
+  children,
+  bookEnabled,
+}: {
+  children: ReactNode;
+  bookEnabled: boolean;
+}) {
   const pathname = usePathname();
-  const isGuidebook = pathname.startsWith("/guidebook") || legacyGuidePaths.has(pathname);
+  const isGuidebook =
+    pathname.startsWith("/guidebook") || legacyGuidePaths.has(pathname);
   const isAccess = pathname.startsWith("/guidebook/access");
 
   if (isAccess) {
@@ -96,6 +127,7 @@ export function ExperienceShell({ children, bookEnabled }: { children: ReactNode
       <ExperienceHeader mode="booking" bookEnabled={bookEnabled} />
       {children}
       <ExperienceFooter mode="booking" />
+      <PublicMobileNav bookEnabled={bookEnabled} />
     </>
   );
 }

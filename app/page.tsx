@@ -24,8 +24,14 @@ export default function BookingPage() {
         image="/images/kpl/pond.jpg"
         imageAlt="Kendall Pond at golden hour"
         imagePosition="center 55%"
-        primaryAction={{ href: bookingUrl, label: "Reserve on Airbnb" }}
-        secondaryAction={{ href: directEnabled ? "/book" : "/lodge", label: directEnabled ? "Request direct booking" : "See the house" }}
+        primaryAction={{
+          href: directEnabled ? "/book" : bookingUrl,
+          label: directEnabled ? "Request a direct stay" : "Reserve on Airbnb",
+        }}
+        secondaryAction={{
+          href: directEnabled ? bookingUrl : "/lodge",
+          label: directEnabled ? "Reserve on Airbnb" : "See the house",
+        }}
       />
 
       <StatBand
@@ -97,11 +103,23 @@ export default function BookingPage() {
             <p>Check live dates and reserve on Airbnb, or request a direct quote with every charge and term shown before payment.</p>
           </div>
           <div>
-            <a className="button button-primary" href={bookingUrl} rel="noreferrer" target="_blank">
-              Reserve on Airbnb <Icon name="arrow" size={18} />
-            </a>
-            {directEnabled && <p className="booking-guest-link"><Link href="/book">Request direct booking →</Link></p>}
-            <p className="booking-guest-link"><Link href="/guidebook">Already booked? Open Guidebook</Link></p>
+            {directEnabled ? (
+              <>
+                <Link className="button button-primary" href="/book">
+                  Request a direct stay <Icon name="arrow" size={18} />
+                </Link>
+                <p className="booking-guest-link">
+                  <a href={bookingUrl} rel="noreferrer" target="_blank">
+                    Prefer Airbnb? Reserve there ↗
+                  </a>
+                </p>
+              </>
+            ) : (
+              <a className="button button-primary" href={bookingUrl} rel="noreferrer" target="_blank">
+                Reserve on Airbnb <Icon name="arrow" size={18} />
+              </a>
+            )}
+            <p className="booking-guest-link"><Link href="/guidebook">Already booked? Open Guest Guide</Link></p>
           </div>
         </div>
       </section>
