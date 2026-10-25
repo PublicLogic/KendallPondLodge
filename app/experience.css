@@ -1357,3 +1357,179 @@
     min-height: 230px;
   }
 }
+
+
+/* === SIMPLE HOME + COMPACT EXPLORE 2026-10-25 === */
+.home-simple-story {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.home-simple-copy {
+  max-width: 760px;
+}
+
+.home-simple-copy h2 {
+  max-width: 11ch;
+}
+
+.home-simple-copy > p:last-of-type {
+  max-width: 62ch;
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.home-host-actions {
+  display: grid;
+  gap: .7rem;
+  min-width: 220px;
+}
+
+.home-soft-link {
+  color: var(--forest-dark);
+  font-size: .78rem;
+  font-weight: 740;
+  text-decoration: none;
+}
+
+.home-soft-link:hover {
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+.lodge-overview-grid {
+  margin-top: 1rem;
+}
+
+.explore-arrival-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(1.4rem, 4vw, 2.5rem);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.explore-arrival-strip h2 {
+  max-width: 8ch;
+  font-size: clamp(2rem, 4vw, 3.35rem);
+}
+
+.explore-arrival-strip > div:first-child > p:last-child {
+  max-width: 62ch;
+  margin-top: .8rem;
+  color: var(--muted);
+}
+
+.explore-arrival-links {
+  display: grid;
+  align-content: center;
+  gap: .6rem;
+}
+
+.explore-arrival-links a {
+  padding: .8rem .9rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--forest-dark);
+  font-size: .78rem;
+  font-weight: 740;
+  text-decoration: none;
+}
+
+@media (max-width: 760px) {
+  .home-host-actions {
+    min-width: 0;
+  }
+
+  .home-host-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .explore-arrival-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* === KPL PUBLIC EDITORIAL OVERRIDES 2026-10-25 === */
+.experience-header-booking{
+  background:rgba(248,247,243,.97);
+  box-shadow:none;
+}
+.experience-header-booking .experience-book-button{
+  border-radius:6px;
+  box-shadow:none;
+}
+.home-review-strip>a{
+  min-height:62px;
+}
+.home-review-strip strong{
+  font-family:var(--font-sans),sans-serif;
+  font-size:.84rem;
+  font-weight:720;
+}
+.home-simple-copy{
+  max-width:680px;
+}
+.home-simple-copy h2{
+  max-width:13ch;
+}
+.home-final-cta{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:end;
+  gap:3rem;
+  border-top:1px solid var(--line-strong);
+}
+.home-final-cta h2{max-width:8ch}
+.home-final-cta>div:first-child>p:last-child{
+  max-width:50ch;
+  margin-top:.8rem;
+  color:var(--muted);
+}
+.home-host-actions{
+  min-width:210px;
+}
+.explore-arrival-strip{
+  border:0;
+  border-top:1px solid var(--line-strong);
+  border-bottom:1px solid var(--line-strong);
+  border-radius:0;
+  background:transparent;
+}
+.explore-arrival-links a{
+  border:0;
+  border-bottom:1px solid var(--line);
+  border-radius:0;
+  background:transparent;
+  padding:.7rem 0;
+}
+.public-mobile-nav{
+  border-radius:0;
+  border:0;
+  border-top:1px solid var(--line);
+  right:0;
+  bottom:0;
+  left:0;
+  padding:.3rem .5rem calc(.3rem + env(safe-area-inset-bottom));
+  background:rgba(250,249,246,.98);
+  box-shadow:0 -8px 22px rgba(17,34,51,.06);
+}
+.public-mobile-nav a{
+  border-radius:4px;
+}
+.public-mobile-nav .public-mobile-nav-primary{
+  border-radius:4px;
+}
+@media(max-width:760px){
+  .home-final-cta{
+    grid-template-columns:1fr;
+    gap:1.4rem;
+  }
+}

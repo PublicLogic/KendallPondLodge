@@ -1,79 +1,79 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Notice, SectionHeading } from "@/app/_components/Content";
+import { InfoCard, Notice, SectionHeading } from "@/app/_components/Content";
 import { PageHero } from "@/app/_components/PageHero";
 import { PhotoCard } from "@/app/_components/PhotoCard";
 import { StatBand } from "@/app/_components/StatBand";
 
 export const metadata: Metadata = {
-  title: "The Lodge",
-  description: "A detailed look at the house: bedrooms, the great room, the kitchen, and what it's actually like inside.",
+  title: "Inside the Lodge",
+  description: "Three bedrooms, two full baths, two fireplaces, an open kitchen, and a cathedral-ceiling great room.",
 };
 
 export default function LodgePage() {
   return (
     <main id="main-content">
       <PageHero
-        eyebrow="The house"
-        title="The Lodge."
-        intro="Three bedrooms, a vaulted great room, and a kitchen built for a full house — not a staged rental unit."
-        image="/images/kpl/lodge-exterior.jpg"
-        imageAlt="The Lodge at Kendall Pond from the waterfront lawn"
-        imagePosition="center 56%"
-        primaryAction={{ href: "/rates", label: "Check rates" }}
-        secondaryAction={{ href: "/grounds", label: "See the grounds" }}
+        eyebrow="Inside the Lodge"
+        title="Room for the whole crew."
+        intro="Three bedrooms. Two baths. Two fireplaces. Big kitchen. Bigger great room."
+        image="/images/kpl/great-room.jpg"
+        imageAlt="The great room at the Lodge at Kendall Pond"
+        imagePosition="center"
+        primaryAction={{ href: "/book", label: "Book your stay" }}
+        secondaryAction={{ href: "/grounds", label: "Waterfront" }}
       />
 
       <StatBand
         stats={[
+          { value: "8", label: "Guests" },
           { value: "3", label: "Bedrooms" },
-          { value: "2", label: "Baths" },
-          { value: "8", label: "Max guests" },
-          { value: "~2,240", label: "Sq ft" },
+          { value: "2", label: "Full baths" },
+          { value: "2", label: "Fireplaces" },
         ]}
       />
 
       <section className="content-section">
-        <SectionHeading eyebrow="Shared space" title="Great room & kitchen" />
-        <div className="split-section split-section-photo-first">
-          <PhotoCard
-            src="/images/kpl/great-room.jpg"
-            alt="Vaulted great room with seating and stone fireplace"
-            title="Great room"
-            note="Vaulted ceiling, fireplace, room to spread out"
-            wide
-          />
-          <div>
-            <p>
-              The main room does the heavy lifting: vaulted ceiling, stone fireplace, big seating area, and enough open space that eight people are not stacked on top of each other.
-            </p>
-            <p>
-              The kitchen and dining area are part of the same footprint, which matters if you are actually cooking for a group. This is set up for real meals and long weekends, not takeout for two.
-            </p>
-          </div>
+        <SectionHeading eyebrow="Main level" title="Made for a full house." intro="Kitchen, dining, and the great room share one open space." />
+        <div className="photo-grid photo-grid-two">
+          <PhotoCard src="/images/kpl/great-room.jpg" alt="The Lodge great room" title="Great room" note="Cathedral ceiling · fireplace · big seating area" wide />
+          <PhotoCard src="/images/kpl/kitchen-dining.jpg" alt="The Lodge kitchen and dining area" title="Kitchen & dining" note="Open plan · built for a group" />
         </div>
       </section>
 
       <section className="content-section surface-section">
-        <SectionHeading eyebrow="Accommodations" title="Where you'll sleep" />
+        <SectionHeading eyebrow="Sleeping" title="Three bedrooms. Flexible space." intro="Tell us your group size and we’ll make sure the setup fits." />
         <div className="photo-grid">
-          <PhotoCard src="/images/kpl/king-room.jpg" alt="King bedroom on the upper level" title="King room" note="Main suite, upper level" />
-          <PhotoCard src="/images/kpl/queen-room.jpg" alt="Queen bedroom on the upper level" title="Queen room" note="Guest room, upper level" />
-          <PhotoCard src="/images/kpl/bunk-room.jpg" alt="Bunk bed in the lower-level room" title="Bunk room" note="Bunk bed, lower level" />
-          <PhotoCard
-            src="/images/kpl/kitchen-dining.jpg"
-            alt="Open kitchen and dining area for shared meals"
-            title="Kitchen & dining"
-            note="Open plan, shared meals"
-            wide
-          />
+          <PhotoCard src="/images/kpl/king-room.jpg" alt="King bedroom" title="King room" note="King bed" />
+          <PhotoCard src="/images/kpl/queen-room.jpg" alt="Queen bedroom" title="Queen room" note="Queen bed" />
+          <PhotoCard src="/images/kpl/bunk-room.jpg" alt="Bunk room" title="Bunk room" note="Twin over full" />
+          <PhotoCard src="/images/kpl/great-room.jpg" alt="Shared living space" title="Extra space" note="Queen pull-out + lounge space" wide />
         </div>
       </section>
 
       <section className="content-section">
-        <Notice tone="plain">
-          Check exact dates and pricing on Airbnb, or request an owner-approved direct quote. <Link href="/rates">See rates and booking details.</Link>
-        </Notice>
+        <SectionHeading eyebrow="The setup" title="Everything you need. Nothing precious." />
+        <div className="info-grid info-grid-two">
+          <InfoCard title="Two full baths"><p>Enough for a full group without scheduling showers.</p></InfoCard>
+          <InfoCard title="Two fireplaces"><p>One upstairs. One down.</p></InfoCard>
+          <InfoCard title="Deck + walkout patio"><p>Deck above. Hot tub, lawn, firepit, and water below.</p></InfoCard>
+          <InfoCard title="Real-life basics"><p>Kitchen, laundry, storage, and room to unpack.</p></InfoCard>
+        </div>
+      </section>
+
+      <section className="content-section">
+        <div className="booking-cta-panel">
+          <div>
+            <p className="eyebrow">Come stay</p>
+            <h2>Send us your dates.</h2>
+            <p>We’ll check availability and send the full quote.</p>
+          </div>
+          <Link className="button button-primary" href="/book">Book your stay →</Link>
+        </div>
+      </section>
+
+      <section className="content-section">
+        <Notice tone="plain">Already booked? Open the <Link href="/guidebook">Guest Guide</Link>.</Notice>
       </section>
     </main>
   );

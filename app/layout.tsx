@@ -44,8 +44,28 @@ export const metadata: Metadata = {
   title: { default: "Lodge at Kendall Pond", template: "%s · KPL" },
   description:
     "A private waterfront lodge on Kendall Pond in Gardner, Massachusetts. Explore the property, request a stay, and use the private guest Guidebook after booking.",
-  applicationName: "KPL",
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  applicationName: "The Lodge at Kendall Pond",
+  icons: {
+    icon: [{ url: "/images/kpl/lodge-seal.png", type: "image/png" }],
+    shortcut: ["/images/kpl/lodge-seal.png"],
+    apple: [{ url: "/images/kpl/lodge-seal.png", type: "image/png" }],
+  },
+  openGraph: {
+    title: "The Lodge at Kendall Pond",
+    description:
+      "Lakefront on Kendall Pond in Gardner, Massachusetts — hot tub, firepit, private dock, kayaks, and room for up to eight.",
+    url: "https://kendallpondlodge.com",
+    siteName: "The Lodge at Kendall Pond",
+    images: [
+      {
+        url: "/images/kpl/pond-seating.jpg",
+        width: 1200,
+        height: 900,
+        alt: "The Lodge at Kendall Pond overlooking the water",
+      },
+    ],
+    type: "website",
+  },
 };
 
 export const viewport: Viewport = {

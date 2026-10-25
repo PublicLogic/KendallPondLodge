@@ -5,54 +5,48 @@ import { PageHero } from "@/app/_components/PageHero";
 import { Icon } from "@/app/_components/Icons";
 import { directBookingEnabled } from "@/lib/booking-db";
 
-const bookingUrl =
+const airbnb =
   process.env.NEXT_PUBLIC_KPL_BOOKING_URL?.trim() ||
   "https://www.airbnb.com/rooms/1667597913565948713";
 
 export const metadata: Metadata = {
-  title: "Rates & Availability",
+  title: "Rates & Booking",
   description:
-    "Check current dates and pricing for the Lodge at Kendall Pond on Airbnb.",
+    "Request a direct quote for the Lodge at Kendall Pond or book through Airbnb.",
 };
 
 export default function RatesPage() {
   const directEnabled = directBookingEnabled();
+
   return (
     <main id="main-content">
       <PageHero
-        eyebrow="Dates and pricing"
-        title="Rates & Availability."
-        intro="See current dates and the exact checkout total on Airbnb. You can also request a direct quote when direct bookings are open."
-        image="/images/kpl/pond.jpg"
-        imageAlt="Kendall Pond beside the lodge with shoreline seating and open water"
-        imagePosition="center 55%"
-        secondaryAction={{ href: "/lodge", label: "See the house" }}
+        eyebrow="Rates & booking"
+        title="Book it your way."
+        intro="Direct with us, or Airbnb. Full price first either way."
+        image="/images/kpl/pond-seating.jpg"
+        imageAlt="The Lodge deck overlooking Kendall Pond"
+        imagePosition="center"
+        primaryAction={
+          directEnabled
+            ? { href: "/book", label: "Request a direct quote" }
+            : { href: airbnb, label: "Reserve on Airbnb" }
+        }
+        secondaryAction={{ href: "/lodge", label: "See inside" }}
       />
 
       <section className="content-section">
-        <div className="hero-actions">
-          {directEnabled && <Link className="button button-secondary" href="/book">Request a direct quote</Link>}
-          <a
-            className="button button-primary"
-            href={bookingUrl}
-            rel="noreferrer"
-            target="_blank"
-          >
-            Check dates on Airbnb <Icon name="arrow" size={18} />
-          </a>
-        </div>
-      </section>
-
-      <section className="content-section">
-        <SectionHeading eyebrow="Know the full price" title="Review every charge before booking" />
+        <SectionHeading
+          eyebrow="Direct"
+          title="Direct is simple."
+          intro="Send the dates. We check them and send one itemized quote."
+        />
         <div className="info-grid info-grid-two">
-          <InfoCard icon="house" title="Dates set the lodging total">
-            <p>Rates vary by dates and stay length. Check the exact dates for a current price.</p>
+          <InfoCard icon="house" title="No charge to ask">
+            <p>Ask first. Nothing is charged.</p>
           </InfoCard>
-          <InfoCard icon="help" title="What changes the total">
-            <p>
-              Airbnb presents its checkout total before you pay. A direct quote itemizes lodging, cleaning, pets, taxes, and any other fee.
-            </p>
+          <InfoCard icon="help" title="Full price before payment">
+            <p>Everything is itemized before you pay.</p>
           </InfoCard>
         </div>
       </section>
@@ -60,25 +54,18 @@ export default function RatesPage() {
       <section className="content-section surface-section">
         <div className="booking-cta-panel">
           <div>
-            <p className="eyebrow">Reserve the lodge</p>
-            <h2>Reserve your stay.</h2>
-            <p>
-              Check exact dates and pricing on Airbnb, then confirm your stay
-              in a few clicks.
-            </p>
+            <p className="eyebrow">Choose what works for you</p>
+            <h2>Book direct or use Airbnb.</h2>
+            <p>Same Lodge. Pick the checkout you prefer.</p>
           </div>
           <div>
-            <a
-              className="button button-primary"
-              href={bookingUrl}
-              rel="noreferrer"
-              target="_blank"
-            >
-              Reserve on Airbnb{" "}
-              <span className="cta-subline">Available on Airbnb ↗</span>
-            </a>
+            {directEnabled && (
+              <Link className="button button-primary" href="/book">
+                Request direct <Icon name="arrow" size={18} />
+              </Link>
+            )}
             <p className="booking-guest-link">
-              <Link href="/guidebook">Guest with a code?</Link>
+              <a href={airbnb} target="_blank" rel="noreferrer">Prefer Airbnb? Reserve there ↗</a>
             </p>
           </div>
         </div>

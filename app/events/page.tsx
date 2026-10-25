@@ -1,78 +1,49 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { InfoCard, Notice, SectionHeading } from "@/app/_components/Content";
+import { InfoCard } from "@/app/_components/Content";
 import { PageHero } from "@/app/_components/PageHero";
 import { PhotoCard } from "@/app/_components/PhotoCard";
 
 export const metadata: Metadata = {
-  title: "Events",
-  description: "A relaxed home base for nearby celebrations — three minutes on foot from PACC.",
+  title: "Wedding & Event Stays",
+  description: "A lakefront home base for weddings and gatherings near Kendall Pond.",
 };
 
 export default function EventsPage() {
   return (
     <main id="main-content">
       <PageHero
-        eyebrow="Nearby celebrations"
-        title="Events & PACC."
-        intro="The Polish American Citizens Club is about a three-minute walk from the lodge — an easy, relaxed home base for a wedding block or group weekend."
+        eyebrow="Wedding weekends"
+        title="Stay together."
+        intro="The Polish American Citizens Club is a short walk away. The pond is waiting when you get back."
         image="/images/kpl/kitchen-dining.jpg"
-        imageAlt="The lodge kitchen and dining area set up for a shared meal"
+        imageAlt="The Lodge kitchen and dining area"
         imagePosition="center"
-        primaryAction={{ href: "/rates", label: "Check rates" }}
-        secondaryAction={{ href: "/lodge", label: "See the house" }}
+        primaryAction={{ href: "/book", label: "Ask about your dates" }}
+        secondaryAction={{ href: "/lodge", label: "See inside" }}
       />
 
       <section className="content-section">
-        <SectionHeading
-          eyebrow="An easy walk"
-          title="Stay close, then get quiet."
-        />
         <div className="info-grid info-grid-three">
-          <InfoCard title="An easy walk">
-            <p>PACC is about three minutes from the lodge on foot. No shuttle math, no long drive back at the end of the night.</p>
-          </InfoCard>
-          <InfoCard title="A relaxed home base">
-            <p>Stay close to the celebration, then come back to the pond for a quieter evening. That is the whole advantage.</p>
-          </InfoCard>
-          <InfoCard title="Planning a group stay?">
-            <p>Message the hosts through your booking platform with your dates and guest count. You will get a quick, direct answer.</p>
-          </InfoCard>
+          <InfoCard title="Walkable"><p>Skip the long ride back after the reception.</p></InfoCard>
+          <InfoCard title="Together"><p>Kitchen, great room, deck, and shoreline for the whole weekend.</p></InfoCard>
+          <InfoCard title="Next morning"><p>Coffee by the pond beats a hotel lobby.</p></InfoCard>
         </div>
       </section>
 
       <section className="content-section surface-section">
-        <SectionHeading
-          eyebrow="The house"
-          title="Room enough for the group"
-        />
         <div className="photo-grid">
-          <PhotoCard
-            src="/images/kpl/great-room.jpg"
-            alt="The lodge great room with vaulted ceilings and seating"
-            title="Great room"
-            note="Vaulted ceilings, room to gather"
-            wide
-          />
-          <PhotoCard
-            src="/images/kpl/kitchen-dining.jpg"
-            alt="The lodge kitchen and dining area"
-            title="Kitchen & dining"
-            note="Built for feeding a crowd"
-          />
-          <PhotoCard
-            src="/images/kpl/firepit.jpg"
-            alt="The lodge firepit beside Kendall Pond"
-            title="Firepit"
-            note="Evenings by the water"
-          />
+          <PhotoCard src="/images/kpl/great-room.jpg" alt="The Lodge great room" title="Gather" note="Great room" wide />
+          <PhotoCard src="/images/kpl/kitchen-dining.jpg" alt="Kitchen and dining" title="Eat" note="Open kitchen" />
+          <PhotoCard src="/images/kpl/pond-seating.jpg" alt="Deck overlooking the pond" title="Exhale" note="Deck + pond" />
         </div>
       </section>
 
       <section className="content-section">
-        <Notice tone="plain">
-          Exact dates and booking still happen on <Link href="/rates">Airbnb/direct inquiry</Link>.
-        </Notice>
+        <div className="booking-cta-panel">
+          <div><p className="eyebrow">Coming for an event?</p><h2>Send the dates.</h2></div>
+          <Link className="button button-primary" href="/book">Ask about your stay →</Link>
+        </div>
       </section>
     </main>
   );

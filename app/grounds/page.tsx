@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { InfoCard, Notice, SectionHeading } from "@/app/_components/Content";
 import { PageHero } from "@/app/_components/PageHero";
 import { PhotoCard } from "@/app/_components/PhotoCard";
 
 export const metadata: Metadata = {
-  title: "The Grounds",
-  description: "Private beach, dock, firepit, hot tub, and the deck — the outdoor side of the lodge.",
+  title: "Waterfront",
+  description: "Private shoreline, dock, kayaks, paddle boat, hot tub, firepit, deck, and lawn.",
 };
 
 export default function GroundsPage() {
@@ -13,72 +14,38 @@ export default function GroundsPage() {
     <main id="main-content">
       <PageHero
         eyebrow="Outside"
-        title="The Grounds."
-        intro="Private beach and dock, a firepit at the shoreline, a covered hot tub, and a deck built for lingering."
+        title="Down by the water."
+        intro="Beach. Dock. Boats. Hot tub. Firepit. All right outside."
         image="/images/kpl/pond.jpg"
-        imageAlt="Kendall Pond and the shoreline at the Lodge at Kendall Pond"
+        imageAlt="Kendall Pond from the Lodge"
         imagePosition="center 55%"
-        primaryAction={{ href: "/lodge", label: "See the house" }}
-        secondaryAction={{ href: "/rates", label: "Check rates" }}
+        primaryAction={{ href: "/book", label: "Book your stay" }}
+        secondaryAction={{ href: "/lodge", label: "See inside" }}
       />
 
       <section className="content-section">
-        <SectionHeading
-          eyebrow="Waterfront"
-          title="Private beach & dock"
-          intro="The shoreline is part of the stay, not a public launch down the road. Beach access, dock access, and a place to sit are all right here."
-        />
+        <SectionHeading eyebrow="Shoreline" title="The pond is the backyard." />
         <div className="photo-grid photo-grid-two">
-          <PhotoCard
-            src="/images/kpl/pond.jpg"
-            alt="Kendall Pond at the lodge shoreline"
-            title="Kendall Pond"
-            note="Private shoreline access"
-            wide
-            position="center 55%"
-          />
-          <PhotoCard
-            src="/images/kpl/waterfront-dock.jpg"
-            alt="Private dock, paddleboat, and lounge chair at the Kendall Pond shoreline"
-            title="Dock & shoreline"
-            note="Private dock and paddleboat launch"
-          />
+          <PhotoCard src="/images/kpl/pond.jpg" alt="Kendall Pond" title="Kendall Pond" note="Private beach · dock" wide position="center 55%" />
+          <PhotoCard src="/images/kpl/waterfront-dock.jpg" alt="The private dock" title="On the water" note="Kayaks · paddle boat" />
         </div>
       </section>
 
       <section className="content-section surface-section">
-        <SectionHeading
-          eyebrow="After dark"
-          title="Firepit & hot tub"
-          intro="The best parts of the property keep working after sunset: shoreline fire, covered soak, and a deck that actually gets used."
-        />
-        <div className="split-section split-section-photo-first">
-          <PhotoCard
-            src="/images/kpl/firepit.jpg"
-            alt="Stone firepit near the Kendall Pond shoreline"
-            title="Shoreline firepit"
-            note="Stone firepit set near the water"
-            wide
-            position="center"
-          />
-          <div className="info-grid info-grid-two">
-            <InfoCard title="Firepit">
-              <p>The stone firepit sits at the shoreline, close enough to the water to feel separate from the house without being remote.</p>
-            </InfoCard>
-            <InfoCard title="Hot tub">
-              <p>The hot tub is covered and set on the lower patio, giving it some shelter while keeping the pond in view.</p>
-            </InfoCard>
-            <InfoCard title="Deck">
-              <p>The wraparound deck handles the in-between hours: coffee in the morning, dinner outside, and a place to land while keeping an eye on the water.</p>
-            </InfoCard>
-          </div>
+        <SectionHeading eyebrow="After dark" title="Stay outside." />
+        <div className="photo-grid photo-grid-two">
+          <PhotoCard src="/images/kpl/hot-tub.jpg" alt="Hot tub overlooking Kendall Pond" title="Hot tub" note="Covered patio · pond view" wide />
+          <PhotoCard src="/images/kpl/firepit.jpg" alt="Firepit by Kendall Pond" title="Firepit" note="A few steps from the water" />
+        </div>
+        <div className="info-grid info-grid-three">
+          <InfoCard title="Deck"><p>Coffee. Dinner. Pond view.</p></InfoCard>
+          <InfoCard title="Lawn"><p>Room to spread out.</p></InfoCard>
+          <InfoCard title="Seasonal gear"><p>If a boat or amenity matters, ask before booking.</p></InfoCard>
         </div>
       </section>
 
       <section className="content-section">
-        <Notice tone="plain">
-          <strong>Guest details:</strong> Full safety guidance for the waterfront, hot tub, and firepit lives in the private Guidebook after booking.
-        </Notice>
+        <Notice tone="plain">Already booked? Open the <Link href="/guidebook">Guest Guide</Link>.</Notice>
       </section>
     </main>
   );
