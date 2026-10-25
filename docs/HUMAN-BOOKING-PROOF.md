@@ -82,7 +82,7 @@ Then block every quoted night in Airbnb. Wait until the export/PJ check shows th
 
 Expected:
 - booking status is `quoted`
-- guest receives **Your The Lodge at Kendall Pond quote is ready**
+- guest receives **Your stay at The Lodge at Kendall Pond is ready**
 - email contains the private KPL `/book/quote/<token>` link
 - the token is not displayed in the owner UI as an email-delivery secret and is not stored in the PJ message body
 
