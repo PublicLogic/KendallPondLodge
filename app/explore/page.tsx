@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BookingCtaBand } from "@/app/_components/BookingCtaBand";
 import { InfoCard } from "@/app/_components/Content";
 import { PageHero } from "@/app/_components/PageHero";
 import { PhotoCard } from "@/app/_components/PhotoCard";
@@ -56,6 +57,8 @@ export default function ExplorePage() {
           <PhotoCard src="/images/kpl/fall-firepit.webp" alt="The shoreline firepit in fall" title="Later" note="Firepit · cooler nights" />
         </div>
       </section>
+
+      <BookingCtaBand />
     </main>
   );
 }
