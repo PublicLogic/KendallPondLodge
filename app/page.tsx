@@ -24,7 +24,7 @@ export default function HomePage() {
       <PageHero
         eyebrow="Gardner, Massachusetts"
         title="Your place by the pond."
-        intro="A whole lakefront home for up to eight, with a hot tub, private dock, and room to settle in. Bring the dog. Make a weekend of it."
+        intro="Lakefront on Kendall Pond with a hot tub, firepit, private dock, kayaks, paddle boat, and a whole house that works just as well for doing nothing as it does for a full weekend."
         image="/images/kpl/pond-seating.jpg"
         imageAlt="Furnished deck at the Lodge overlooking Kendall Pond"
         imagePosition="center"
@@ -57,8 +57,8 @@ export default function HomePage() {
       <section className="content-section">
         <SectionHeading
           eyebrow="The house and the water"
-          title="Everything points back to the pond."
-          intro="The Lodge gives a group room to spread out inside, then pulls everyone back outside to the deck, hot tub, lawn, firepit, and private shoreline."
+          title="The house opens right onto the water."
+          intro="Walk out from the lower level to the patio, hot tub, firepit, lawn, dock, kayaks, and paddle boat. Upstairs, the deck keeps the pond in view while everyone spreads out inside."
         />
 
         <div className="photo-grid">
@@ -66,20 +66,20 @@ export default function HomePage() {
             src="/images/kpl/fall-lodge.webp"
             alt="The Lodge at Kendall Pond from the lawn"
             title="The Lodge"
-            note="A whole home by the water"
+            note="Lakefront home, deck, patio, and lawn"
             wide
           />
           <PhotoCard
             src="/images/kpl/great-room.jpg"
             alt="The vaulted great room with fireplace"
             title="The great room"
-            note="Where everyone ends up"
+            note="Cathedral ceiling, fireplace, room to gather"
           />
           <PhotoCard
             src="/images/kpl/hot-tub.jpg"
             alt="The covered hot tub overlooking Kendall Pond"
             title="The hot tub"
-            note="Pond view from the lower patio"
+            note="Covered soak with the pond straight ahead"
           />
         </div>
 
@@ -92,21 +92,21 @@ export default function HomePage() {
       <section className="content-section surface-section">
         <SectionHeading
           eyebrow="What's here"
-          title="Enough to make staying in the plan."
+          title="You do not need much of an itinerary."
         />
 
         <div className="info-grid info-grid-two">
           <InfoCard title="Beach & dock">
-            <p>Private beach and dock, with kayaks and seasonal water equipment.</p>
+            <p>Private shoreline and dock with kayaks and a paddle boat in season. Swim, launch, float, or sit by the water.</p>
           </InfoCard>
           <InfoCard title="Hot tub & firepit">
-            <p>A covered hot tub on the patio and a firepit down by the shore.</p>
+            <p>The covered hot tub looks out toward the pond, and the firepit sits closer to the shoreline for later nights outside.</p>
           </InfoCard>
           <InfoCard title="Sleeps up to eight">
-            <p>Three bedrooms, multiple gathering spaces, and two full baths.</p>
+            <p>Three bedrooms, two full baths, a queen pull-out, a large sectional, and enough shared space that a full group still has room.</p>
           </InfoCard>
           <InfoCard title="Dogs welcome">
-            <p>Up to two pets are welcome. Include them when you request your stay.</p>
+            <p>Up to two dogs are welcome. Add them to your request so we can quote the stay correctly and have the house ready.</p>
           </InfoCard>
         </div>
 
@@ -118,19 +118,34 @@ export default function HomePage() {
       <section className="content-section">
         <SectionHeading
           eyebrow="Make a weekend of it"
-          title="One home. A few good reasons to come."
+          title="Come for the pond. Build the rest around it."
         />
 
         <div className="info-grid info-grid-three">
           <InfoCard title="A weekend by the water" href="/grounds" linkLabel="See the waterfront">
-            <p>Coffee on the deck, time by the pond, a soak in the hot tub, and nowhere you need to be.</p>
+            <p>Morning coffee on the deck, an afternoon on the water, dinner outside, then the hot tub or firepit when the light goes down.</p>
           </InfoCard>
           <InfoCard title="A wedding close by" href="/events" linkLabel="Visiting for an event">
-            <p>The Polish American Citizens Club is about a three-minute walk away, making the Lodge an easy wedding-weekend home base.</p>
+            <p>The Polish American Citizens Club is only a short walk away, so wedding groups can stay together without making the ride home part of the plan.</p>
           </InfoCard>
           <InfoCard title="A Wachusett getaway" href="/area" linkLabel="Explore the area">
-            <p>Wachusett Mountain is close enough for skiing, hiking, and seasonal events, with the pond waiting when you get back.</p>
+            <p>Wachusett Mountain makes an easy ski, hike, or festival day; the Lodge gives you somewhere better to come back to afterward.</p>
           </InfoCard>
+        </div>
+      </section>
+
+      <section className="content-section">
+        <div className="home-arrival-panel">
+          <div>
+            <p className="eyebrow">Getting here</p>
+            <h2>Easy by car. Possible by train.</h2>
+            <p>Gardner sits right off Route 2. If someone in your group is coming from Boston by commuter rail, Wachusett Station on the Fitchburg Line is the useful stop; plan the last leg to the Lodge separately.</p>
+          </div>
+          <div className="home-arrival-links">
+            <Link href="/events"><strong>Visiting for an event?</strong><span>PACC and nearby celebrations →</span></Link>
+            <Link href="/area"><strong>Making a Wachusett weekend?</strong><span>Mountain, Gardner, and seasonal ideas →</span></Link>
+            <Link href="/explore"><strong>Just looking around?</strong><span>Food, local stops, and things to do →</span></Link>
+          </div>
         </div>
       </section>
 
@@ -162,7 +177,7 @@ export default function HomePage() {
           <div>
             <p className="eyebrow">Your hosts</p>
             <h2>Hi, we're Nate & Allie.</h2>
-            <p>We host the Lodge ourselves. Questions about the house, the pond, or whether your dates are a good fit? Send the request and one of us will get back to you.</p>
+            <p>We host the Lodge ourselves and know the house well. If you are trying to figure out sleeping arrangements, pets, a wedding weekend, ski plans, or whether a certain amenity will be available for your dates, ask us.</p>
           </div>
           <a className="button button-secondary" href={airbnb} target="_blank" rel="noreferrer">
             Read guest reviews ↗
