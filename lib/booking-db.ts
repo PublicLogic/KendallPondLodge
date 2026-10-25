@@ -1,5 +1,6 @@
 import 'server-only';
 import { PjBookingClient, legacyBookingCall } from './pj-booking-client.mjs';
+import { kplMailIdentity } from './kpl-mail';
 export { BookingServiceError, publicError } from './pj-booking-client.mjs';
 export type Booking = {
  id:string; quote_token:string; created_at:string; check_in:string; check_out:string;
@@ -20,7 +21,7 @@ export function directBookingEnabled(){return process.env.KPL_DIRECT_BOOKING_ENA
 export function paymentConfigured(){return bookingConfigured()&&/^(sk|rk)_(test|live)_/.test(process.env.STRIPE_SECRET_KEY??'')&&!!process.env.STRIPE_WEBHOOK_SECRET&&/^https:\/\/[^/?#]+$/.test(process.env.KPL_BOOKING_ORIGIN??'')}
 export async function findQuote(token:string):Promise<Booking|null>{return bookingClient().findQuote(token) as Promise<Booking|null>}
 export function usd(cents:number){return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(cents/100)}
-export function hostContactHref(){const email=process.env.KPL_BOOKING_CONTACT_EMAIL??'';return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)?`mailto:${encodeURIComponent(email)}`:'https://www.airbnb.com/rooms/1667597913565948713'}
+export function hostContactHref(){return `mailto:${encodeURIComponent(kplMailIdentity().replyTo)}`}
 
 /** Existing KPL calls use a closed compatibility map; no Supabase requests. */
 export async function bookingDb<T>(path: string, init: {method?: string; body?: unknown; returnRows?: boolean} = {}): Promise<T> {
