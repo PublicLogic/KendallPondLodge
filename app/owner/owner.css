@@ -30,3 +30,21 @@
 .kpl-owner-content .booking-form button{min-height:48px}
 }
 @media(max-width:400px){.kpl-owner-top{min-height:62px;padding:0 .85rem}.kpl-owner-name{font-size:.95rem}.kpl-owner-preview{font-size:.72rem}.kpl-owner-content{padding-inline:.75rem}.kpl-owner-content .booking-panel{padding:1rem}}
+
+.kpl-owner-logo{display:flex;width:min(250px,28vw);align-items:center;text-decoration:none}
+.kpl-owner-logo img{width:100%;height:auto}
+.kpl-owner-property{display:flex;align-items:center;gap:.6rem;margin-left:1rem;color:#19364a;font-size:.8rem;font-weight:700}
+.kpl-owner-property img{width:42px;height:42px;object-fit:contain}
+.kpl-owner-credit img{width:92px;height:auto;margin-top:.85rem}
+.kpl-owner-credit span{display:block;margin-top:.35rem}
+@media(max-width:800px){
+.kpl-owner-logo{width:175px}
+.kpl-owner-property{margin-left:0}
+.kpl-owner-property span{display:none}
+.kpl-owner-property img{width:38px;height:38px}
+.kpl-owner-preview{font-size:.72rem}
+}
+@media(max-width:480px){
+.kpl-owner-logo{width:145px}
+.kpl-owner-property{display:none}
+}
