@@ -928,19 +928,6 @@
     padding-inline: 0.9rem;
   }
 
-  .experience-header-booking .brand-seal {
-    width: 46px;
-    height: 46px;
-  }
-
-  .experience-header-booking .brand strong {
-    font-size: 1.15rem;
-  }
-
-  .experience-header-booking .brand small {
-    font-size: 0.5rem;
-  }
-
   .experience-header-booking .experience-nav {
     display: none;
   }
@@ -997,5 +984,45 @@
   .public-mobile-nav .public-mobile-nav-primary[aria-current="page"] {
     background: var(--deep);
     color: #fff;
+  }
+}
+
+/* KPL production-brand lockup, refined for the modern shell */
+.brand-kpl-lockup {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  min-width: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+.brand-kpl-logo {
+  display: block;
+  width: clamp(178px, 15vw, 238px);
+  height: auto;
+  object-fit: contain;
+}
+
+.experience-header-booking .brand-kpl-logo {
+  filter: none;
+}
+
+.experience-footer .brand-kpl-logo,
+.site-footer .brand-kpl-logo {
+  width: clamp(185px, 16vw, 245px);
+}
+
+@media (max-width: 700px) {
+  .brand-kpl-logo {
+    width: 155px;
+  }
+
+  .experience-header-booking .brand-kpl-lockup {
+    max-width: calc(100vw - 140px);
+  }
+
+  .experience-header-booking .brand-kpl-logo {
+    width: min(155px, 100%);
   }
 }
