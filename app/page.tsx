@@ -7,8 +7,7 @@ import { StatBand } from "@/app/_components/StatBand";
 import { directBookingEnabled } from "@/lib/booking-db";
 
 export const metadata: Metadata = {
-  description:
-    "The Lodge at Kendall Pond: a private lakefront home in Gardner, Massachusetts with a hot tub, firepit, private dock, and room for up to eight guests.",
+  description: "Lakefront on Kendall Pond in Gardner, Massachusetts. Hot tub, firepit, private dock, and room for eight.",
 };
 
 const airbnb =
@@ -21,11 +20,11 @@ export default function HomePage() {
   return (
     <main id="main-content">
       <PageHero
-        eyebrow="Gardner, Massachusetts"
+        eyebrow="Kendall Pond · Gardner, Massachusetts"
         title="Your place by the pond."
-        intro="A whole lakefront home on Kendall Pond, with the deck, hot tub, firepit, dock, kayaks, and paddle boat right outside."
+        intro="Private shoreline. Hot tub. Firepit. Dock. Room for eight."
         image="/images/kpl/pond-seating.jpg"
-        imageAlt="Furnished deck at the Lodge overlooking Kendall Pond"
+        imageAlt="The Lodge overlooking Kendall Pond"
         imagePosition="center"
         primaryAction={{
           href: directEnabled ? "/book" : airbnb,
@@ -39,88 +38,69 @@ export default function HomePage() {
           { value: "8", label: "Guests" },
           { value: "3", label: "Bedrooms" },
           { value: "2", label: "Full baths" },
-          { value: "Pondside", label: "Private beach & dock" },
+          { value: "Private", label: "Beach & dock" },
         ]}
       />
 
       <section className="home-review-strip">
         <a href={`${airbnb}#reviews`} target="_blank" rel="noreferrer">
-          <span>
-            <strong>Guest Favorite on Airbnb</strong>
-            <small>See current verified guest reviews</small>
-          </span>
-          <span className="home-review-arrow">Reviews ↗</span>
+          <strong>Guest Favorite on Airbnb</strong>
+          <span className="home-review-arrow">Read reviews ↗</span>
         </a>
       </section>
 
       <section className="content-section home-simple-story">
         <div className="home-simple-copy">
-          <p className="eyebrow">Come for the water</p>
-          <h2>Stay because it is easy to settle in.</h2>
-          <p>
-            Coffee on the deck. A swim or paddle from your own shoreline.
-            Dinner with everyone around the kitchen. Then the hot tub or a fire
-            by the pond when the day winds down.
-          </p>
+          <p className="eyebrow">The good stuff</p>
+          <h2>Swim. Paddle. Cook. Soak. Sit by the fire.</h2>
+          <p>The house opens to the deck, patio, lawn, dock, and pond. Everything you came for is right there.</p>
           <div className="home-inline-links">
-            <Link href="/lodge">Tour the house →</Link>
-            <Link href="/grounds">See the waterfront →</Link>
+            <Link href="/lodge">Inside the Lodge →</Link>
+            <Link href="/grounds">Waterfront →</Link>
           </div>
         </div>
 
         <div className="photo-grid">
           <PhotoCard
             src="/images/kpl/great-room.jpg"
-            alt="The cathedral-ceiling great room at the Lodge"
-            title="Room to gather"
-            note="Cathedral ceiling, fireplace, and space for the group"
+            alt="The great room at the Lodge"
+            title="Great room"
+            note="Cathedral ceiling · fireplace · room to gather"
             wide
           />
           <PhotoCard
             src="/images/kpl/hot-tub.jpg"
-            alt="The covered hot tub looking toward Kendall Pond"
-            title="Hot tub by the water"
-            note="Covered patio, pond straight ahead"
+            alt="The hot tub overlooking Kendall Pond"
+            title="Hot tub"
+            note="Covered patio · pond view"
           />
           <PhotoCard
             src="/images/kpl/pond.jpg"
-            alt="Kendall Pond from the Lodge shoreline"
+            alt="Kendall Pond from the Lodge"
             title="Your shoreline"
-            note="Private beach, dock, kayaks, and paddle boat"
+            note="Beach · dock · kayaks · paddle boat"
           />
         </div>
       </section>
 
-      <section className="content-section surface-section">
-        <div className="home-host-panel">
-          <div>
-            <p className="eyebrow">Hosted by Nate & Allie</p>
-            <h2>Come make a weekend of it.</h2>
-            <p>
-              We host the Lodge ourselves. Send us your dates and group size;
-              we will check availability and send a complete direct quote
-              before you pay anything.
-            </p>
-          </div>
-
-          <div className="home-host-actions">
-            {directEnabled ? (
-              <Link className="button button-primary" href="/book">
-                Book your stay <Icon name="arrow" size={18} />
-              </Link>
-            ) : (
-              <a
-                className="button button-primary"
-                href={airbnb}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Reserve on Airbnb <Icon name="arrow" size={18} />
-              </a>
-            )}
-            <Link className="home-soft-link" href="/explore">Explore nearby →</Link>
-            <Link className="home-soft-link" href="/guidebook">Already booked? Guest Guide →</Link>
-          </div>
+      <section className="content-section home-final-cta">
+        <div>
+          <p className="eyebrow">Hosted by Nate & Allie</p>
+          <h2>Come stay.</h2>
+          <p>Send your dates. We’ll check them and send the full price before you pay.</p>
+        </div>
+        <div className="home-host-actions">
+          {directEnabled ? (
+            <Link className="button button-primary" href="/book">
+              Book your stay <Icon name="arrow" size={18} />
+            </Link>
+          ) : (
+            <a className="button button-primary" href={airbnb} target="_blank" rel="noreferrer">
+              Reserve on Airbnb <Icon name="arrow" size={18} />
+            </a>
+          )}
+          <Link className="home-soft-link" href="/explore">Explore nearby →</Link>
+          <Link className="home-soft-link" href="/guidebook">Guest Guide →</Link>
         </div>
       </section>
     </main>
