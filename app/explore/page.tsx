@@ -14,8 +14,8 @@ export default function ExplorePage() {
     <main id="main-content">
       <PageHero
         eyebrow="Around Gardner"
-        title="Gardner and Wachusett."
-        intro="Find local restaurants, spend a day at Wachusett, or stay nearby for a wedding."
+        title="If you feel like leaving."
+        intro="There’s plenty close by: Gardner restaurants, Wachusett trails and slopes, and wedding venues around town."
         image="/images/kpl/website-top-50/09-Waterfront-and-Grounds/46-kendall-pond-lodge-autumn-pond-and-dock.jpg"
         imageAlt="Kendall Pond in fall"
         imagePosition="center 58%"
