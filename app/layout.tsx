@@ -6,6 +6,7 @@ import "./globals.css";
 import "./experience.css";
 import "./booking.css";
 import "./a-plus.css";
+import "./showcase.css";
 
 const plexSans = localFont({
   variable: "--font-sans",
