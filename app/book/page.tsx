@@ -97,11 +97,12 @@ export default async function BookPage({
           <div className="booking-intro-copy">
             <p className="eyebrow">Direct with Nate & Allie</p>
 
-            <h1>Pick your dates.</h1>
+            <h1>{enabled ? "Request a stay." : "Check available dates."}</h1>
 
             <p>
-              See unavailable nights, choose your stay, and send it
-              directly to us. No account. No charge.
+              {enabled
+                ? "Choose your dates and tell us how many guests are coming. We’ll check availability and send you a full quote. There’s no charge for asking."
+                : "Direct booking requests are closed for now. You can check dates and book through Airbnb."}
             </p>
 
             <div className="booking-intro-facts">
@@ -188,9 +189,11 @@ export default async function BookPage({
       </section>
 
       <section className="booking-direct-foot">
-        <span>Live dates checked before request.</span>
-        <span>Full quote before payment.</span>
-        <span>Booked only after payment is verified.</span>
+        <p>
+          {enabled
+            ? "Sending a request does not hold your dates or charge you. We’ll confirm availability and price before asking for payment."
+            : "Direct requests are paused; visit Airbnb for current availability."}
+        </p>
       </section>
     </main>
   );
