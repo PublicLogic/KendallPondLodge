@@ -15,8 +15,8 @@ export default function LodgePage() {
     <main id="main-content">
       <PageHero
         eyebrow="Inside the Lodge"
-        title="Room for the whole crew."
-        intro="Three bedrooms. Two baths. Two fireplaces. Big kitchen. Bigger great room."
+        title="Room for eight, with space to spread out."
+        intro="Three bedrooms, two full bathrooms, a kitchen and dining area, and a great room with a fireplace."
         image="/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg"
         imageAlt="The great room at the Lodge at Kendall Pond"
         imagePosition="center"
@@ -34,41 +34,41 @@ export default function LodgePage() {
       />
 
       <section className="content-section">
-        <SectionHeading eyebrow="Main level" title="Made for a full house." intro="Kitchen, dining, and the great room share one open space." />
+        <SectionHeading eyebrow="Main level" title="The main living space." intro="The kitchen, dining area, and great room connect on the main level." />
         <div className="photo-grid photo-grid-two">
-          <PhotoCard src="/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg" alt="The Lodge great room" title="Great room" note="Cathedral ceiling · fireplace · big seating area" wide />
-          <PhotoCard src="/images/kpl/website-top-50/04-Kitchen-and-Dining/17-kendall-pond-lodge-kitchen-and-breakfast-bar.jpg" alt="The Lodge kitchen and dining area" title="Kitchen & dining" note="Open plan · built for a group" />
+          <PhotoCard src="/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg" alt="The Lodge great room" title="Great room" note="Cathedral ceiling · fireplace · group seating" wide />
+          <PhotoCard src="/images/kpl/website-top-50/04-Kitchen-and-Dining/17-kendall-pond-lodge-kitchen-and-breakfast-bar.jpg" alt="The Lodge kitchen and dining area" title="Kitchen & dining" note="Open kitchen and dining area" />
         </div>
       </section>
 
       <section className="content-section surface-section">
-        <SectionHeading eyebrow="Sleeping" title="Three bedrooms. Flexible space." intro="Tell us your group size and we’ll make sure the setup fits." />
+        <SectionHeading eyebrow="Sleeping" title="The bedrooms." intro="There’s a king room, queen room, and bunk room. We can confirm the pull-out sleeping setup if your group needs it." />
         <div className="photo-grid">
           <PhotoCard src="/images/kpl/king-room.jpg" alt="King bedroom" title="King room" note="King bed" />
           <PhotoCard src="/images/kpl/queen-room.jpg" alt="Queen bedroom" title="Queen room" note="Queen bed" />
           <PhotoCard src="/images/kpl/website-top-50/05-Bedrooms/26-kendall-pond-lodge-bunk-room-wide.jpg" alt="Bunk room" title="Bunk room" note="Twin over full" />
-          <PhotoCard src="/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg" alt="Shared living space" title="Extra space" note="Queen pull-out + lounge space" wide />
+          <PhotoCard src="/images/kpl/website-top-50/03-Living-Spaces/13-kendall-pond-lodge-lower-lounge-seating.jpg" alt="Lower-level lounge at the Lodge" title="Lower-level lounge" note="An additional place to sit and relax" wide />
         </div>
       </section>
 
       <section className="content-section">
-        <SectionHeading eyebrow="The setup" title="Everything you need. Nothing precious." />
+        <SectionHeading eyebrow="Around the house" title="More about the house." />
         <div className="info-grid info-grid-two">
-          <InfoCard title="Two full baths"><p>Enough for a full group without scheduling showers.</p></InfoCard>
-          <InfoCard title="Two fireplaces"><p>One upstairs. One down.</p></InfoCard>
-          <InfoCard title="Deck + walkout patio"><p>Deck above. Hot tub, lawn, firepit, and water below.</p></InfoCard>
-          <InfoCard title="Real-life basics"><p>Kitchen, laundry, storage, and room to unpack.</p></InfoCard>
+          <InfoCard title="Two full baths"><p>Two full bathrooms for your group.</p></InfoCard>
+          <InfoCard title="Two fireplaces"><p>One fireplace upstairs and one downstairs.</p></InfoCard>
+          <InfoCard title="Deck + walkout patio"><p>Outdoor dining on the upper deck and a covered patio near the hot tub.</p></InfoCard>
+          <InfoCard title="Real-life basics"><p>A full kitchen, laundry, and space to settle in.</p></InfoCard>
         </div>
       </section>
 
       <section className="content-section">
         <div className="booking-cta-panel">
           <div>
-            <p className="eyebrow">Come stay</p>
-            <h2>Send us your dates.</h2>
-            <p>We’ll check availability and send the full quote.</p>
+            <p className="eyebrow">Booking</p>
+            <h2>Have dates in mind?</h2>
+            <p>We’ll check the calendar and send a full quote before payment.</p>
           </div>
-          <Link className="button button-primary" href="/book">Book your stay →</Link>
+          <Link className="button button-primary" href="/book">Check dates →</Link>
         </div>
       </section>
 
