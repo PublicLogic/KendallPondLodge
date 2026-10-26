@@ -22,7 +22,6 @@ export default async function GuidebookAccessPage({ searchParams }: AccessPagePr
   return (
     <main id="main-content" className="guide-access-page">
       <section className="guide-access-card" aria-labelledby="guide-access-title">
-        <span className="guide-access-mark icon-chip"><Icon name="shield" size={24} /></span>
         <p className="eyebrow">Private guest experience</p>
         <h1 id="guide-access-title">Open the Guidebook.</h1>
         <p>Enter the guest code from your reservation to open the house guide.</p>

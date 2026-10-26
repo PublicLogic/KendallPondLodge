@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BookingCtaBand } from "@/app/_components/BookingCtaBand";
 import { InfoCard, Notice, SectionHeading } from "@/app/_components/Content";
 import { PageHero } from "@/app/_components/PageHero";
 import { PhotoCard } from "@/app/_components/PhotoCard";
@@ -47,6 +48,8 @@ export default function GroundsPage() {
       <section className="content-section">
         <Notice tone="plain">Already booked? Open the <Link href="/guidebook">Guest Guide</Link>.</Notice>
       </section>
+
+      <BookingCtaBand />
     </main>
   );
 }
