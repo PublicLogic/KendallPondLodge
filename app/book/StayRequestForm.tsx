@@ -185,6 +185,8 @@ function DateMonth({
 
           const selectedStart = iso === start;
           const selectedEnd = iso === end;
+          const previewCheckout =
+            !end && previewEnd === iso;
 
           const inRange =
             Boolean(start && rangeEnd) &&
@@ -210,6 +212,7 @@ function DateMonth({
 
           return (
             <button
+              aria-current={iso === today ? 'date' : undefined}
               aria-label={label}
               aria-pressed={selectedStart || selectedEnd}
               className={[
@@ -219,6 +222,9 @@ function DateMonth({
                 checkoutOnly ? 'is-checkout-only' : '',
                 selectedStart ? 'is-selected is-start' : '',
                 selectedEnd ? 'is-selected is-end' : '',
+                selectedStart && Boolean(rangeEnd) ? 'is-range-start' : '',
+                (selectedEnd || previewCheckout) && Boolean(start) ? 'is-range-end' : '',
+                previewCheckout ? 'is-preview-end' : '',
                 inRange ? 'is-range' : '',
               ]
                 .filter(Boolean)
@@ -230,7 +236,7 @@ function DateMonth({
               onMouseLeave={() => onHover(null)}
               type="button"
             >
-              {day}
+              <span className="stay-calendar-day-number">{day}</span>
             </button>
           );
         })}
@@ -377,7 +383,7 @@ export function StayRequestForm({
             ←
           </button>
 
-          <p>
+          <p aria-live="polite">
             {selectingCheckout
               ? 'Choose your checkout date'
               : checkIn && checkOut
