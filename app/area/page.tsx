@@ -12,8 +12,8 @@ export default function AreaPage() {
   return (
     <main id="main-content">
       <PageHero
-        eyebrow="Gardner & Wachusett"
-        title="A little farther from the pond."
+        eyebrow="Local area"
+        title="Gardner & Wachusett."
         intro="Gardner has local shops and restaurants, and Wachusett offers skiing, hiking, and seasonal events."
         image="/images/kpl/website-top-50/09-Waterfront-and-Grounds/46-kendall-pond-lodge-autumn-pond-and-dock.jpg"
         imageAlt="Kendall Pond from the Lodge"
