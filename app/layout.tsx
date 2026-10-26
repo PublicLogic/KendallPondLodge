@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://kendallpondlodge.com"),
   title: { default: "Lodge at Kendall Pond", template: "%s · KPL" },
   description:
-    "A private waterfront lodge on Kendall Pond in Gardner, Massachusetts. Explore the property, request a stay, and use the private guest Guidebook after booking.",
+    "The Lodge at Kendall Pond in Gardner, Massachusetts. Three bedrooms, private shoreline, dock, hot tub, and room for eight.",
   applicationName: "The Lodge at Kendall Pond",
   icons: {
     icon: [
