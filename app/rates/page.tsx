@@ -22,7 +22,7 @@ export default function RatesPage() {
     <main id="main-content">
       <PageHero
         eyebrow="Rates & booking"
-        title="Booking options."
+        title="Alright. Let’s get you here."
         intro={directEnabled
           ? "Send us a request for a direct quote, or book through Airbnb."
           : "Direct requests are temporarily closed. Check availability and pricing on Airbnb."}
