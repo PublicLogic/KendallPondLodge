@@ -47,9 +47,14 @@ export const metadata: Metadata = {
     "A private waterfront lodge on Kendall Pond in Gardner, Massachusetts. Explore the property, request a stay, and use the private guest Guidebook after booking.",
   applicationName: "The Lodge at Kendall Pond",
   icons: {
-    icon: [{ url: "/images/kpl/lodge-seal.png", type: "image/png" }],
-    shortcut: ["/images/kpl/lodge-seal.png"],
-    apple: [{ url: "/images/kpl/lodge-seal.png", type: "image/png" }],
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: ["/favicon.ico"],
+    apple: [
+      { url: "/apple-icon.png", type: "image/png", sizes: "180x180" },
+    ],
   },
   openGraph: {
     title: "The Lodge at Kendall Pond",
@@ -59,13 +64,20 @@ export const metadata: Metadata = {
     siteName: "The Lodge at Kendall Pond",
     images: [
       {
-        url: "/images/kpl/pond-seating.jpg",
+        url: "/opengraph-image.png",
         width: 1200,
-        height: 900,
-        alt: "The Lodge at Kendall Pond overlooking the water",
+        height: 630,
+        alt: "The Lodge at Kendall Pond · private waterfront stay in Gardner, Massachusetts",
       },
     ],
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Lodge at Kendall Pond",
+    description:
+      "Private waterfront on Kendall Pond — hot tub, private dock, kayaks, and room for eight.",
+    images: ["/twitter-image.png"],
   },
 };
 
