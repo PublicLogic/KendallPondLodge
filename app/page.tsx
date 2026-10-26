@@ -140,7 +140,7 @@ export default function HomePage() {
           <div><strong>8</strong><span>Guests</span></div>
           <div><strong>3</strong><span>Bedrooms</span></div>
           <div><strong>2</strong><span>Full baths</span></div>
-          <div><strong>1</strong><span>Pond-side getaway</span></div>
+          <div><strong>2</strong><span>Fireplaces</span></div>
         </div>
       </section>
 
