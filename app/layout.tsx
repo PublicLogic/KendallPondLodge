@@ -5,6 +5,7 @@ import { directBookingEnabled } from "@/lib/booking-db";
 import "./globals.css";
 import "./experience.css";
 import "./booking.css";
+import "./a-plus.css";
 
 const plexSans = localFont({
   variable: "--font-sans",

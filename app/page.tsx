@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { Icon } from "@/app/_components/Icons";
-import { PageHero } from "@/app/_components/PageHero";
-import { PhotoCard } from "@/app/_components/PhotoCard";
-import { StatBand } from "@/app/_components/StatBand";
+
 import { directBookingEnabled } from "@/lib/booking-db";
 
 export const metadata: Metadata = {
-  description: "Lakefront on Kendall Pond in Gardner, Massachusetts. Hot tub, firepit, private dock, and room for eight.",
+  title: "The Lodge at Kendall Pond",
+  description:
+    "A private lake house on Kendall Pond in Gardner, Massachusetts — hot tub, private dock, kayaks, firepit and room for eight.",
 };
 
 const airbnb =
@@ -17,90 +17,197 @@ const airbnb =
 export default function HomePage() {
   const directEnabled = directBookingEnabled();
 
+  const bookingHref = directEnabled ? "/book" : airbnb;
+
   return (
-    <main id="main-content">
-      <PageHero
-        eyebrow="Fall at Kendall Pond · Gardner, Massachusetts"
-        title="Your place by the pond."
-        intro="Hot tub. Firepit. Foliage. Private shoreline. Room for eight."
-        image="/images/kpl/fall-lodge.webp"
-        imageAlt="The Lodge at Kendall Pond surrounded by fall foliage"
-        imagePosition="center"
-        primaryAction={{
-          href: directEnabled ? "/book" : airbnb,
-          label: directEnabled ? "Book your stay" : "Reserve on Airbnb",
-        }}
-        secondaryAction={{ href: "/lodge", label: "See inside" }}
-      />
+    <main
+      id="main-content"
+      className="hospitality-home"
+    >
+      <section className="hospitality-cover">
+        <Image
+          alt="Kendall Pond in fall"
+          className="hospitality-cover-image"
+          fill
+          priority
+          sizes="100vw"
+          src="/images/kpl/fall-pond.webp"
+        />
 
-      <StatBand
-        stats={[
-          { value: "8", label: "Guests" },
-          { value: "3", label: "Bedrooms" },
-          { value: "2", label: "Full baths" },
-          { value: "Private", label: "Beach & dock" },
-        ]}
-      />
+        <div
+          className="hospitality-cover-shade"
+          aria-hidden="true"
+        />
 
-      <section className="home-review-strip">
-        <a href={`${airbnb}#reviews`} target="_blank" rel="noreferrer">
-          <strong>Guest Favorite on Airbnb</strong>
-          <span className="home-review-arrow">Read reviews ↗</span>
+        <div className="hospitality-cover-copy">
+          <p className="hospitality-kicker">
+            Kendall Pond · Gardner, Massachusetts
+          </p>
+
+          <h1>The Lodge at Kendall Pond</h1>
+
+          <p className="hospitality-lead">
+            A private lake house for weekends that
+            don’t need an itinerary.
+          </p>
+
+          <div className="hospitality-cover-actions">
+            {directEnabled ? (
+              <Link
+                className="hospitality-primary-action"
+                href={bookingHref}
+              >
+                Check dates
+              </Link>
+            ) : (
+              <a
+                className="hospitality-primary-action"
+                href={bookingHref}
+                rel="noreferrer"
+                target="_blank"
+              >
+                Check dates
+              </a>
+            )}
+
+            <Link
+              className="hospitality-text-action"
+              href="/lodge"
+            >
+              See the Lodge
+            </Link>
+          </div>
+
+          <div className="hospitality-cover-facts">
+            <span>Sleeps 8</span>
+            <span>Private dock</span>
+            <span>Hot tub</span>
+            <span>3 bedrooms</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="hospitality-proof">
+        <a
+          href={`${airbnb}#reviews`}
+          rel="noreferrer"
+          target="_blank"
+        >
+          <span>
+            <small>Guest Favorite</small>
+            <strong>Guests come for the pond.</strong>
+          </span>
+
+          <span>Read Airbnb reviews ↗</span>
         </a>
       </section>
 
-      <section className="content-section home-simple-story">
-        <div className="home-simple-copy">
-          <p className="eyebrow">The good stuff</p>
-          <h2>Swim. Paddle. Cook. Soak. Sit by the fire.</h2>
-          <p>The house opens to the deck, patio, lawn, dock, and pond. Everything you came for is right there.</p>
-          <div className="home-inline-links">
-            <Link href="/lodge">Inside the Lodge →</Link>
-            <Link href="/grounds">Waterfront →</Link>
-          </div>
-        </div>
+      <section className="hospitality-story">
+        <figure className="hospitality-story-image">
+          <Image
+            alt="The Lodge at Kendall Pond in autumn"
+            fill
+            sizes="(max-width: 800px) 100vw, 55vw"
+            src="/images/kpl/fall-lodge.webp"
+          />
+        </figure>
 
-        <div className="photo-grid">
-          <PhotoCard
-            src="/images/kpl/great-room.jpg"
-            alt="The great room at the Lodge"
-            title="Great room"
-            note="Cathedral ceiling · fireplace · room to gather"
-            wide
-          />
-          <PhotoCard
-            src="/images/kpl/fall-firepit.webp"
-            alt="The shoreline firepit in fall"
-            title="Firepit"
-            note="Cool nights · shoreline fire"
-          />
-          <PhotoCard
-            src="/images/kpl/fall-pond.webp"
-            alt="Kendall Pond in fall"
-            title="Kendall Pond"
-            note="Private shoreline · fall color"
-          />
+        <div className="hospitality-story-copy">
+          <p className="hospitality-kicker">
+            Nothing complicated
+          </p>
+
+          <h2>Lake days. Long dinners. Fire after dark.</h2>
+
+          <p>
+            The house opens straight into the reason
+            you came: the deck, lawn, shoreline, dock
+            and water. Paddle out in the morning.
+            Soak at night. Stay in if the weather turns.
+          </p>
+
+          <div className="hospitality-story-links">
+            <Link href="/lodge">Inside the Lodge →</Link>
+            <Link href="/grounds">The Pond →</Link>
+          </div>
         </div>
       </section>
 
-      <section className="content-section home-final-cta">
+      <section
+        className="hospitality-gallery"
+        aria-label="A look at the Lodge"
+      >
+        <figure className="hospitality-gallery-large">
+          <Image
+            alt="Great room at the Lodge"
+            fill
+            sizes="(max-width: 800px) 100vw, 58vw"
+            src="/images/kpl/great-room.jpg"
+          />
+          <figcaption>Room to be together.</figcaption>
+        </figure>
+
+        <figure>
+          <Image
+            alt="Firepit by Kendall Pond"
+            fill
+            sizes="(max-width: 800px) 100vw, 42vw"
+            src="/images/kpl/fall-firepit.webp"
+          />
+          <figcaption>Stay out after sunset.</figcaption>
+        </figure>
+
+        <figure>
+          <Image
+            alt="Kendall Pond shoreline"
+            fill
+            sizes="(max-width: 800px) 100vw, 42vw"
+            src="/images/kpl/pond-seating.jpg"
+          />
+          <figcaption>Your shoreline for the stay.</figcaption>
+        </figure>
+      </section>
+
+      <section className="hospitality-final">
         <div>
-          <p className="eyebrow">Hosted by Nate & Allie</p>
-          <h2>Come stay.</h2>
-          <p>Send your dates. We’ll check them and send the full price before you pay.</p>
+          <p className="hospitality-kicker">
+            Hosted by Nate &amp; Allie
+          </p>
+
+          <h2>Come stay by the water.</h2>
+
+          <p>
+            Pick your dates. We’ll check the live
+            calendar and send the full price before
+            anything is charged.
+          </p>
         </div>
-        <div className="home-host-actions">
+
+        <div className="hospitality-final-actions">
           {directEnabled ? (
-            <Link className="button button-primary" href="/book">
-              Book your stay <Icon name="arrow" size={18} />
+            <Link
+              className="hospitality-primary-action"
+              href="/book"
+            >
+              Check dates
             </Link>
           ) : (
-            <a className="button button-primary" href={airbnb} target="_blank" rel="noreferrer">
-              Reserve on Airbnb <Icon name="arrow" size={18} />
+            <a
+              className="hospitality-primary-action"
+              href={airbnb}
+              rel="noreferrer"
+              target="_blank"
+            >
+              Reserve on Airbnb
             </a>
           )}
-          <Link className="home-soft-link" href="/explore">Explore nearby →</Link>
-          <Link className="home-soft-link" href="/guidebook">Guest Guide →</Link>
+
+          <Link
+            className="hospitality-text-action hospitality-text-action-dark"
+            href="/explore"
+          >
+            Around here →
+          </Link>
         </div>
       </section>
     </main>

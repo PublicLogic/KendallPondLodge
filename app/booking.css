@@ -271,67 +271,112 @@
 /* === AIRBNB-STYLE PUBLIC DATE PICKER === */
 
 .stay-request-form{
-  gap:.9rem;
+  gap:.85rem;
+}
+
+/* Keep the STAY identity present, but subordinate to the actual booking task. */
+.booking-panel-direct .booking-brand{
+  display:flex;
+  align-items:center;
+  gap:.65rem;
+  margin-bottom:.45rem;
+}
+
+.booking-panel-direct .booking-brand img{
+  width:60px !important;
+  height:auto !important;
+}
+
+.booking-panel-direct .booking-brand small{
+  max-width:22ch;
+  color:#75817e;
+  font-size:.62rem;
+  line-height:1.3;
+}
+
+.booking-panel-direct h2{
+  margin-bottom:.7rem;
 }
 
 .stay-date-picker{
-  border:1px solid #d5ddd8;
+  overflow:hidden;
+  border:1px solid #d7dfda;
+  border-radius:16px;
   background:#fff;
+  box-shadow:
+    0 1px 1px rgba(19,55,48,.03),
+    0 12px 32px rgba(19,55,48,.06);
 }
 
+/* Selected stay summary */
 .stay-date-summary{
   display:grid;
-  grid-template-columns:1fr 1fr .8fr auto;
+  grid-template-columns:1fr 1fr .72fr auto;
   align-items:stretch;
-  border-bottom:1px solid #d5ddd8;
+  border-bottom:1px solid #e2e7e4;
+  background:#fbfcfa;
 }
 
 .stay-date-summary>div{
   display:grid;
-  gap:.2rem;
-  padding:.75rem .9rem;
-  border-right:1px solid #e1e6e3;
+  gap:.22rem;
+  min-width:0;
+  padding:.78rem .88rem;
+  border-right:1px solid #e5e9e6;
 }
 
 .stay-date-summary span{
-  color:#6b7779;
-  font-size:.63rem;
+  color:#5d6b67;
+  font-size:.6rem;
   font-weight:750;
-  letter-spacing:.07em;
+  letter-spacing:.08em;
   text-transform:uppercase;
 }
 
 .stay-date-summary strong{
-  color:#173b43;
-  font-size:.82rem;
-  font-weight:720;
+  overflow:hidden;
+  color:#183d38;
+  font-size:.8rem;
+  font-weight:730;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
 .stay-date-clear{
   align-self:center;
-  margin:0 .75rem;
-  padding:.4rem;
+  margin:0 .7rem;
+  padding:.42rem .55rem;
   border:0;
+  border-radius:999px;
   background:transparent;
-  color:#47645f;
+  color:#42645c;
   font:inherit;
-  font-size:.7rem;
-  font-weight:700;
-  text-decoration:underline;
+  font-size:.68rem;
+  font-weight:720;
   cursor:pointer;
 }
 
+.stay-date-clear:hover{
+  background:#eef3f0;
+}
+
+.stay-date-clear:focus-visible{
+  outline:3px solid #98b9aa;
+  outline-offset:2px;
+}
+
+/* Month navigation */
 .stay-calendar-nav{
   display:grid;
   grid-template-columns:38px 1fr 38px;
   align-items:center;
   gap:.5rem;
-  padding:.65rem .75rem 0;
+  padding:.7rem .78rem .15rem;
 }
 
 .stay-calendar-nav p{
   margin:0;
-  color:#4c6165;
+  color:#526663;
   font-size:.72rem;
   font-weight:650;
   text-align:center;
@@ -345,33 +390,41 @@
   border:0;
   border-radius:50%;
   background:transparent;
-  color:#173b43;
-  font-size:1.05rem;
+  color:#183d38;
+  font-size:1rem;
   cursor:pointer;
+  transition:background-color .12s ease, transform .12s ease;
 }
 
 .stay-calendar-nav button:hover:not(:disabled){
-  background:#f0f4f1;
+  background:#eef3f0;
+  transform:translateY(-1px);
+}
+
+.stay-calendar-nav button:focus-visible{
+  outline:3px solid #98b9aa;
+  outline-offset:1px;
 }
 
 .stay-calendar-nav button:disabled{
-  color:#bdc6c3;
+  color:#c2cac7;
   cursor:default;
 }
 
 .stay-calendar-months{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:1.3rem;
-  padding:.7rem .9rem .9rem;
+  gap:1.45rem;
+  padding:.7rem 1rem .95rem;
 }
 
 .stay-calendar-month h3{
-  margin:.15rem 0 .65rem;
-  color:#1b353c;
+  margin:.1rem 0 .7rem;
+  color:#1b3935;
   font-family:var(--font-sans),sans-serif;
-  font-size:.9rem;
-  font-weight:750;
+  font-size:.88rem;
+  font-weight:760;
+  letter-spacing:-.015em;
   text-align:center;
 }
 
@@ -382,93 +435,177 @@
 }
 
 .stay-calendar-weekdays span{
-  padding:.3rem 0;
-  color:#83908e;
-  font-size:.55rem;
-  font-weight:720;
+  padding:.26rem 0 .38rem;
+  color:#8a9491;
+  font-size:.54rem;
+  font-weight:730;
+  letter-spacing:.03em;
   text-align:center;
   text-transform:uppercase;
 }
 
 .stay-calendar-empty{
-  min-height:42px;
+  min-height:44px;
 }
 
+/*
+ * The button owns the whole grid cell, but visual selection lives on the
+ * inner number. The ::before layer creates a continuous range band behind it.
+ */
 .stay-calendar-day{
   position:relative;
+  isolation:isolate;
   display:grid;
+  width:100%;
   min-width:0;
-  min-height:42px;
+  min-height:44px;
+  justify-self:stretch;
   place-items:center;
+  padding:0;
   border:0;
-  border-radius:50%;
+  border-radius:0;
   background:transparent;
-  color:#243c42;
+  color:#253e3a;
   font:inherit;
   font-size:.72rem;
   font-weight:650;
   cursor:pointer;
 }
 
-.stay-calendar-day:hover:not(:disabled):not(.is-selected){
-  outline:1.5px solid #173b43;
-  outline-offset:-2px;
+.stay-calendar-day::before{
+  position:absolute;
+  z-index:0;
+  top:50%;
+  right:-1px;
+  left:-1px;
+  height:36px;
+  background:#edf3ef;
+  content:"";
+  opacity:0;
+  transform:translateY(-50%);
+  pointer-events:none;
+}
+
+/* Middle nights get the full band. */
+.stay-calendar-day.is-range::before{
+  opacity:1;
+}
+
+/* Start and checkout dates fill only toward the selected range. */
+.stay-calendar-day.is-range-start::before{
+  left:50%;
+  opacity:1;
+}
+
+.stay-calendar-day.is-range-end::before{
+  right:50%;
+  opacity:1;
+}
+
+.stay-calendar-day-number{
+  position:relative;
+  z-index:2;
+  display:grid;
+  width:min(38px,100%);
+  height:auto;
+  aspect-ratio:1;
+  place-items:center;
+  border-radius:50%;
+  transition:
+    background-color .12s ease,
+    box-shadow .12s ease,
+    color .12s ease,
+    transform .12s ease;
+}
+
+.stay-calendar-day:hover:not(:disabled):not(.is-selected) .stay-calendar-day-number{
+  box-shadow:inset 0 0 0 1.5px #31584f;
+}
+
+.stay-calendar-day:focus-visible{
+  outline:none;
+}
+
+.stay-calendar-day:focus-visible .stay-calendar-day-number{
+  outline:3px solid #98b9aa;
+  outline-offset:2px;
+}
+
+/* Check-in / checkout endpoints */
+.stay-calendar-day.is-selected .stay-calendar-day-number{
+  background:#173f38;
+  color:#fff;
+  box-shadow:0 3px 10px rgba(23,63,56,.18);
+}
+
+.stay-calendar-day.is-selected:hover .stay-calendar-day-number{
+  transform:translateY(-1px);
+}
+
+/* Hovered checkout before the user commits to the range. */
+.stay-calendar-day.is-preview-end .stay-calendar-day-number{
+  background:#fff;
+  color:#173f38;
+  box-shadow:inset 0 0 0 1.5px #173f38;
+}
+
+/* Past dates are quiet rather than visually noisy. */
+.stay-calendar-day.is-past .stay-calendar-day-number{
+  color:#c1c8c5;
 }
 
 .stay-calendar-day.is-past{
-  color:#bdc4c3;
   cursor:default;
 }
 
+/* Unavailable = subdued number + single clean strike. */
+.stay-calendar-day.is-blocked:not(.is-selected) .stay-calendar-day-number{
+  color:#a8b0ad;
+}
+
+.stay-calendar-day.is-blocked:not(.is-selected) .stay-calendar-day-number::after{
+  position:absolute;
+  width:19px;
+  height:1px;
+  background:#a2aaa7;
+  content:"";
+  transform:rotate(-42deg);
+}
+
 .stay-calendar-day.is-blocked{
-  color:#a4adab;
-  text-decoration:line-through;
   cursor:not-allowed;
 }
 
-.stay-calendar-day.is-range{
-  border-radius:0;
-  background:#e9f2ed;
-  color:#173b43;
+/*
+ * A blocked Airbnb arrival can still be a legal checkout because checkout
+ * is exclusive. Show that as a quiet outlined date, not the old underline.
+ */
+.stay-calendar-day.is-checkout-only .stay-calendar-day-number{
+  color:#536762;
+  box-shadow:inset 0 0 0 1px #bdc8c4;
 }
 
-.stay-calendar-day.is-selected{
-  z-index:2;
-  border-radius:50%;
-  background:#173f38;
-  color:#fff;
+.stay-calendar-day.is-checkout-only .stay-calendar-day-number::after{
+  display:none;
 }
 
-.stay-calendar-day.is-checkout-only{
-  color:#596a68;
-  text-decoration:none;
-}
-
-.stay-calendar-day.is-checkout-only::after{
-  position:absolute;
-  right:8px;
-  bottom:7px;
-  left:8px;
-  height:1px;
-  background:#9ca9a6;
-  content:"";
-}
-
+/* Legend */
 .stay-calendar-key{
   display:flex;
   flex-wrap:wrap;
   gap:.45rem 1rem;
-  padding:.6rem .9rem;
-  border-top:1px solid #e2e7e4;
-  color:#6e7a79;
-  font-size:.61rem;
+  padding:.62rem .9rem;
+  border-top:1px solid #e4e9e6;
+  background:#fbfcfa;
+  color:#72807c;
+  font-size:.6rem;
   font-weight:650;
 }
 
 .stay-calendar-key span{
   display:inline-flex;
   align-items:center;
-  gap:.35rem;
+  gap:.36rem;
 }
 
 .stay-calendar-key i{
@@ -479,7 +616,7 @@
 }
 
 .stay-key-open{
-  border:1px solid #768783;
+  border:1px solid #7b8d88;
   background:#fff;
 }
 
@@ -488,38 +625,75 @@
 }
 
 .stay-key-blocked{
-  background:
-    linear-gradient(
-      135deg,
-      transparent 44%,
-      #a2adab 45%,
-      #a2adab 55%,
-      transparent 56%
-    );
+  position:relative;
+  border:1px solid #bbc4c1;
+  background:#fff;
 }
 
+.stay-key-blocked::after{
+  position:absolute;
+  top:3px;
+  left:0;
+  width:9px;
+  height:1px;
+  background:#9ca7a3;
+  content:"";
+  transform:rotate(-42deg);
+}
+
+/* Contact details become the second step, not part of the calendar noise. */
 .booking-guest-fields{
   grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  margin-top:.05rem;
+  padding-top:.85rem;
+  border-top:1px solid #e2e7e4;
+}
+
+.booking-guest-fields label{
+  color:#435854;
+}
+
+.stay-submit-row{
+  padding-top:.15rem;
+}
+
+.stay-submit-row .button{
+  min-height:46px;
+  padding:.72rem 1rem;
+  box-shadow:0 5px 16px rgba(23,63,56,.12);
 }
 
 .stay-submit-row button:disabled{
-  opacity:.45;
+  box-shadow:none;
+  opacity:.42;
   cursor:not-allowed;
 }
 
+/* Tablet */
 @media(max-width:900px){
   .stay-calendar-months{
-    gap:.7rem;
-    padding-inline:.65rem;
+    gap:.8rem;
+    padding-inline:.7rem;
   }
 
   .stay-calendar-day,
   .stay-calendar-empty{
-    min-height:40px;
+    min-height:42px;
+  }
+
+  .stay-calendar-day-number{
+    width:min(36px,100%);
+    height:auto;
+    aspect-ratio:1;
   }
 }
 
+/* Mobile: one comfortable month instead of two compressed months. */
 @media(max-width:700px){
+  .stay-date-picker{
+    border-radius:14px;
+  }
+
   .stay-date-summary{
     grid-template-columns:1fr 1fr;
   }
@@ -529,18 +703,19 @@
   }
 
   .stay-date-summary>div:nth-child(3){
-    border-top:1px solid #e1e6e3;
+    border-top:1px solid #e5e9e6;
   }
 
   .stay-date-clear{
     align-self:stretch;
     margin:0;
-    border-top:1px solid #e1e6e3;
+    border-top:1px solid #e5e9e6;
+    border-radius:0;
   }
 
   .stay-calendar-months{
     grid-template-columns:1fr;
-    padding:.65rem .8rem .8rem;
+    padding:.65rem .82rem .85rem;
   }
 
   .stay-calendar-month:nth-child(2){
@@ -549,7 +724,17 @@
 
   .stay-calendar-day,
   .stay-calendar-empty{
-    min-height:44px;
+    min-height:46px;
+  }
+
+  .stay-calendar-day-number{
+    width:min(40px,100%);
+    height:auto;
+    aspect-ratio:1;
+  }
+
+  .stay-calendar-day::before{
+    height:38px;
   }
 
   .booking-guest-fields{
@@ -558,12 +743,8 @@
 }
 
 @media(max-width:430px){
-  .stay-date-summary{
-    grid-template-columns:1fr 1fr;
-  }
-
   .stay-date-summary>div{
-    padding:.65rem;
+    padding:.66rem;
   }
 
   .stay-date-summary>div:nth-child(3){
@@ -571,19 +752,32 @@
   }
 
   .stay-calendar-nav{
-    padding-inline:.45rem;
+    padding-inline:.48rem;
   }
 
   .stay-calendar-months{
-    padding-inline:.4rem;
+    padding-inline:.45rem;
   }
 
   .stay-calendar-day,
   .stay-calendar-empty{
-    min-height:41px;
+    min-height:44px;
+  }
+
+  .stay-calendar-day-number{
+    width:min(38px,100%);
+    height:auto;
+    aspect-ratio:1;
   }
 
   .booking-guest-fields{
     grid-template-columns:1fr !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .stay-calendar-day-number,
+  .stay-calendar-nav button{
+    transition:none;
   }
 }
