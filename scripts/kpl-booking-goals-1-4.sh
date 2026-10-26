@@ -1103,6 +1103,42 @@ describe('KPL governed booking messaging', () => {
 });
 EOF
 
+
+say "PJ LEGACY TEST ISOLATION"
+
+python3 <<'PY'
+from pathlib import Path
+
+p = Path("apps/puddlejumper/test/kpl-guest-access-and-request-cases.test.ts")
+s = p.read_text()
+
+old = """    expect(h.db.prepare('SELECT COUNT(*) n FROM stayos_messages').get()).toEqual({ n: 0 });"""
+new = """    expect(
+      h.db.prepare(
+        "SELECT COUNT(*) n FROM stayos_messages WHERE idempotency_key LIKE 'stay-access:%'"
+      ).get()
+    ).toEqual({ n: 0 });"""
+
+if old not in s:
+    raise SystemExit("legacy stay-message count assertion anchor changed")
+
+s = s.replace(old, new, 1)
+
+old = """    const res = await advance(h, caseId, 'PRE_ARRIVAL').expect(200);
+    expect(res.body.data.guestAccess.delivery).toMatchObject({ status: 'not_sent', reason: 'recipient_changed' });
+    expect(h.sentEmails).toHaveLength(0);"""
+
+new = """    const sentBefore = h.sentEmails.length;
+    const res = await advance(h, caseId, 'PRE_ARRIVAL').expect(200);
+    expect(res.body.data.guestAccess.delivery).toMatchObject({ status: 'not_sent', reason: 'recipient_changed' });
+    expect(h.sentEmails).toHaveLength(sentBefore);"""
+
+if old not in s:
+    raise SystemExit("legacy sent-email assertion anchor changed")
+
+p.write_text(s.replace(old, new, 1))
+PY
+
 say "PJ DOCS"
 
 cat > docs/KPL-BOOKING-MESSAGING.md <<'EOF'
@@ -1156,6 +1192,7 @@ git add \
   apps/puddlejumper/src/api/server.ts \
   apps/puddlejumper/scripts/kpl-beta/harness.ts \
   apps/puddlejumper/test/booking-messaging.test.ts \
+  apps/puddlejumper/test/kpl-guest-access-and-request-cases.test.ts \
   docs/KPL-BOOKING-MESSAGING.md
 
 refresh_checksums
