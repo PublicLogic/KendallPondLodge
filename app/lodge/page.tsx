@@ -15,8 +15,8 @@ export default function LodgePage() {
     <main id="main-content">
       <PageHero
         eyebrow="Inside the Lodge"
-        title="Room for eight."
-        intro="Three bedrooms, two full bathrooms, a kitchen and dining area, and a great room with a fireplace."
+        title="The inside is pretty good, too."
+        intro="Three bedrooms, two full baths, and a great room that makes a rainy day feel like a pretty good plan."
         image="/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg"
         imageAlt="The great room at the Lodge at Kendall Pond"
         imagePosition="center"
@@ -34,7 +34,7 @@ export default function LodgePage() {
       />
 
       <section className="content-section">
-        <SectionHeading eyebrow="Main level" title="The main living space." intro="The kitchen, dining area, and great room connect on the main level." />
+        <SectionHeading eyebrow="Main level" title="Everyone ends up here." intro="The kitchen, dining area, and great room connect on the main level." />
         <div className="photo-grid photo-grid-two">
           <PhotoCard src="/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg" alt="The Lodge great room" title="Great room" note="Cathedral ceiling · fireplace · group seating" wide />
           <PhotoCard src="/images/kpl/website-top-50/04-Kitchen-and-Dining/17-kendall-pond-lodge-kitchen-and-breakfast-bar.jpg" alt="The Lodge kitchen and dining area" title="Kitchen & dining" note="Open kitchen and dining area" />
@@ -42,7 +42,7 @@ export default function LodgePage() {
       </section>
 
       <section className="content-section surface-section">
-        <SectionHeading eyebrow="Sleeping" title="The bedrooms." intro="There’s a king room, queen room, and bunk room. We can confirm the pull-out sleeping setup if your group needs it." />
+        <SectionHeading eyebrow="When it’s time to call it a night" title="Pick a room. Unpack." intro="There’s a king room, queen room, and bunk room. We can confirm the pull-out sleeping setup if your group needs it." />
         <div className="photo-grid">
           <PhotoCard src="/images/kpl/king-room.jpg" alt="King bedroom" title="King room" note="King bed" />
           <PhotoCard src="/images/kpl/queen-room.jpg" alt="Queen bedroom" title="Queen room" note="Queen bed" />
@@ -52,7 +52,7 @@ export default function LodgePage() {
       </section>
 
       <section className="content-section">
-        <SectionHeading eyebrow="Around the house" title="More about the house." />
+        <SectionHeading eyebrow="A few more things" title="Good to know." />
         <div className="info-grid info-grid-two">
           <InfoCard title="Two full baths"><p>Two full bathrooms for your group.</p></InfoCard>
           <InfoCard title="Two fireplaces"><p>One fireplace upstairs and one downstairs.</p></InfoCard>
