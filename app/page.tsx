@@ -22,7 +22,7 @@ const moments = [
     title: "The dock and shoreline",
     detail: "The lawn leads down to Kendall Pond and the private dock.",
     href: "/grounds",
-    link: "Explore the waterfront",
+    link: "See the waterfront",
   },
   {
     order: 4,
@@ -104,7 +104,7 @@ export default function HomePage() {
                 Check your dates <span aria-hidden="true">↗</span>
               </BookingAction>
               <Link className="showcase-quiet-link" href="/photos">
-                Explore the photos <span aria-hidden="true">→</span>
+                View photos <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>
@@ -119,7 +119,7 @@ export default function HomePage() {
 
       <div className="showcase-trust">
         <div className="showcase-trust-inner">
-          <p><strong>Hosted by Nate &amp; Allie.</strong> A waterfront home in Gardner, Massachusetts.</p>
+          <p><strong>Hosted by Nate &amp; Allie.</strong> We’re happy to answer questions before you book.</p>
           <a href={airbnb + "#reviews"} target="_blank" rel="noopener noreferrer">
             Read guest reviews on Airbnb <span aria-hidden="true">↗</span>
           </a>
@@ -195,7 +195,7 @@ export default function HomePage() {
             in view.
           </p>
           <div className="showcase-water-links">
-            <Link href="/grounds">Explore the waterfront <span aria-hidden="true">→</span></Link>
+            <Link href="/grounds">See the waterfront <span aria-hidden="true">→</span></Link>
             <Link href="/explore">Around Gardner <span aria-hidden="true">→</span></Link>
           </div>
         </div>
