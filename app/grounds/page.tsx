@@ -16,7 +16,7 @@ export default function GroundsPage() {
         eyebrow="Outside"
         title="Down by the water."
         intro="Beach. Dock. Boats. Hot tub. Firepit. All right outside."
-        image="/images/kpl/pond.jpg"
+        image="/images/kpl/website-top-50/01-Hero/02-kendall-pond-lodge-autumn-waterfront.jpg"
         imageAlt="Kendall Pond from the Lodge"
         imagePosition="center 55%"
         primaryAction={{ href: "/book", label: "Book your stay" }}
@@ -26,16 +26,16 @@ export default function GroundsPage() {
       <section className="content-section">
         <SectionHeading eyebrow="Shoreline" title="The pond is the backyard." />
         <div className="photo-grid photo-grid-two">
-          <PhotoCard src="/images/kpl/pond.jpg" alt="Kendall Pond" title="Kendall Pond" note="Private beach · dock" wide position="center 55%" />
-          <PhotoCard src="/images/kpl/waterfront-dock.jpg" alt="The private dock" title="On the water" note="Kayaks · paddle boat" />
+          <PhotoCard src="/images/kpl/website-top-50/01-Hero/02-kendall-pond-lodge-autumn-waterfront.jpg" alt="Kendall Pond" title="Kendall Pond" note="Private beach · dock" wide position="center 55%" />
+          <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/43-kendall-pond-lodge-private-dock.jpg" alt="The private dock" title="On the water" note="Kayaks · paddle boat" />
         </div>
       </section>
 
       <section className="content-section surface-section">
         <SectionHeading eyebrow="After dark" title="Stay outside." />
         <div className="photo-grid photo-grid-two">
-          <PhotoCard src="/images/kpl/hot-tub.jpg" alt="Hot tub overlooking Kendall Pond" title="Hot tub" note="Covered patio · pond view" wide />
-          <PhotoCard src="/images/kpl/firepit.jpg" alt="Firepit by Kendall Pond" title="Firepit" note="A few steps from the water" />
+          <PhotoCard src="/images/kpl/website-top-50/01-Hero/04-kendall-pond-lodge-hot-tub-with-pond-view.jpg" alt="Hot tub overlooking Kendall Pond" title="Hot tub" note="Covered patio · pond view" wide />
+          <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/40-kendall-pond-lodge-summer-firepit-and-shoreline.jpg" alt="Firepit by Kendall Pond" title="Firepit" note="A few steps from the water" />
         </div>
         <div className="info-grid info-grid-three">
           <InfoCard title="Deck"><p>Coffee. Dinner. Pond view.</p></InfoCard>
