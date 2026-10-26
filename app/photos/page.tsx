@@ -25,7 +25,7 @@ export default function PhotosPage() {
     <main id="main-content" className="gallery-page">
       <section className="gallery-intro" aria-labelledby="gallery-title">
         <div className="gallery-intro-copy">
-          <p className="showcase-eyebrow">An unfiltered look at the place</p>
+          <p className="showcase-eyebrow">Actual photos of the Lodge</p>
           <h1 id="gallery-title">Picture your days here.</h1>
           <p>
             The actual Lodge, from the rooms to the shoreline. Browse all
