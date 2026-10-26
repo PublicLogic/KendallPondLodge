@@ -57,8 +57,10 @@ export default function RatesPage() {
         <div className="booking-cta-panel">
           <div>
             <p className="eyebrow">Reservations</p>
-            <h2>Choose how to book.</h2>
-            <p>Request a quote from us, or use Airbnb to reserve.</p>
+            <h2>{directEnabled ? "Choose how to book." : "Reserve through Airbnb."}</h2>
+            <p>{directEnabled
+              ? "Request a quote from us, or use Airbnb to reserve."
+              : "Our Airbnb listing has current availability and checkout details."}</p>
           </div>
           <div>
             {directEnabled && (
@@ -67,7 +69,7 @@ export default function RatesPage() {
               </Link>
             )}
             <p className="booking-guest-link">
-              <a href={airbnb} target="_blank" rel="noreferrer">Prefer Airbnb? Reserve there ↗</a>
+              <a href={airbnb} target="_blank" rel="noreferrer">{directEnabled ? "Prefer Airbnb? Reserve there ↗" : "Check dates on Airbnb ↗"}</a>
             </p>
           </div>
         </div>
