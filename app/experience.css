@@ -1533,3 +1533,536 @@
     gap:1.4rem;
   }
 }
+
+
+/* === GUIDEBOOK COMMAND CENTER 2026-10-26 === */
+
+/*
+ * The authenticated Guidebook is an application, not a public webpage.
+ * The viewport stays fixed; individual content panes may scroll internally.
+ */
+.guide-dashboard{
+  height:100vh;
+  height:100dvh;
+  min-height:0;
+  overflow:hidden;
+  padding:.75rem;
+  background:
+    radial-gradient(circle at 92% 2%, rgba(184,156,110,.16), transparent 25rem),
+    radial-gradient(circle at 8% 100%, rgba(77,114,94,.09), transparent 25rem),
+    #eef2ee;
+}
+
+.guide-dashboard-shell{
+  width:min(1500px,100%);
+  height:100%;
+  min-height:0;
+  gap:.7rem;
+}
+
+.guide-shell-frame{
+  overflow:hidden;
+}
+
+.guide-dashboard-topbar{
+  min-height:60px;
+  flex:none;
+  padding:.75rem 1rem;
+  border-radius:16px;
+  background:rgba(255,255,255,.9);
+  box-shadow:0 8px 30px rgba(17,34,51,.06);
+}
+
+.guide-dashboard-title h1{
+  font-size:1.15rem;
+}
+
+.guide-dashboard-eyebrow{
+  font-size:.58rem;
+}
+
+.guide-shell-body{
+  min-height:0;
+  overflow:hidden;
+  gap:.7rem;
+}
+
+.guide-shell-nav,
+.guide-shell-content{
+  min-height:0;
+  border-radius:16px;
+  background:rgba(255,255,255,.88);
+}
+
+.guide-shell-nav{
+  width:220px;
+  padding:.7rem;
+}
+
+.guide-shell-nav-links{
+  gap:.25rem;
+  margin-top:.7rem;
+}
+
+.guide-shell-nav-link{
+  min-height:44px;
+  gap:.6rem;
+  padding:.55rem .65rem;
+  border-radius:11px;
+  font-size:.75rem;
+}
+
+.guide-shell-nav-link .icon-chip{
+  width:30px;
+  height:30px;
+}
+
+.guide-shell-content{
+  overflow:hidden;
+}
+
+.guide-shell-content-inner{
+  height:100%;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-gutter:stable;
+  padding:.75rem;
+}
+
+.guide-shell-content-inner::-webkit-scrollbar{
+  width:8px;
+}
+
+.guide-shell-content-inner::-webkit-scrollbar-thumb{
+  border:2px solid transparent;
+  border-radius:999px;
+  background:#b8c4be;
+  background-clip:padding-box;
+}
+
+.guide-shell-content-actions{
+  position:absolute;
+  z-index:4;
+  top:1.45rem;
+  right:1.5rem;
+  margin:0;
+}
+
+.guide-shell-content{
+  position:relative;
+}
+
+.guide-dashboard-close-button{
+  min-height:34px;
+  padding:0 .7rem;
+  background:rgba(255,255,255,.94);
+  font-size:.68rem;
+}
+
+/* Dashboard home */
+.guide-command-center{
+  display:grid;
+  min-height:100%;
+  grid-template-columns:minmax(340px,.95fr) minmax(0,1.5fr);
+  grid-template-rows:minmax(245px,.8fr) minmax(0,1.2fr);
+  grid-template-areas:
+    "hero actions"
+    "help actions";
+  gap:.75rem;
+}
+
+.guide-command-hero,
+.guide-command-help,
+.guide-command-action{
+  border:1px solid rgba(31,45,61,.08);
+  border-radius:16px;
+  background:rgba(255,255,255,.94);
+  box-shadow:0 8px 24px rgba(17,34,51,.045);
+}
+
+.guide-command-hero{
+  grid-area:hero;
+  display:flex;
+  min-height:0;
+  flex-direction:column;
+  padding:1.15rem;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(184,156,110,.13), transparent 14rem),
+    rgba(255,255,255,.96);
+}
+
+.guide-command-copy{
+  padding-right:5.5rem;
+}
+
+.guide-command-copy h2{
+  margin:.2rem 0 0;
+  color:var(--navy);
+  font-family:var(--font-sans),sans-serif;
+  font-size:clamp(1.7rem,2.4vw,2.45rem);
+  font-weight:760;
+  letter-spacing:-.045em;
+  line-height:1;
+}
+
+.guide-command-copy>p:last-child{
+  max-width:46ch;
+  margin-top:.45rem;
+  color:var(--muted);
+  font-size:.78rem;
+  line-height:1.5;
+}
+
+.guide-command-hero .kendall-search-embedded{
+  display:flex;
+  min-height:0;
+  flex:1;
+  flex-direction:column;
+  justify-content:center;
+  max-width:none;
+  margin-top:.65rem;
+  padding:.75rem;
+  border:1px solid rgba(31,45,61,.08);
+  border-radius:13px;
+  background:#f7f8f5;
+  box-shadow:none;
+}
+
+.guide-command-hero .kendall-form{
+  gap:.45rem;
+}
+
+.guide-command-hero .kendall-form label{
+  font-size:.68rem;
+}
+
+.guide-command-hero .kendall-input-row input{
+  min-height:42px;
+}
+
+.guide-command-hero .kendall-input-row button{
+  min-height:42px;
+}
+
+.guide-command-hero .kendall-starters{
+  gap:.3rem;
+  margin-top:.5rem;
+}
+
+.guide-command-hero .kendall-starters button{
+  min-height:28px;
+  padding:.28rem .45rem;
+  font-size:.58rem;
+}
+
+.guide-command-hero .kendall-note{
+  margin-top:.45rem;
+  font-size:.58rem;
+}
+
+.guide-command-actions{
+  grid-area:actions;
+  display:grid;
+  min-height:0;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:repeat(3,minmax(0,1fr));
+  gap:.65rem;
+}
+
+.guide-command-action{
+  display:grid;
+  min-width:0;
+  min-height:0;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:.7rem;
+  padding:.9rem;
+  color:inherit;
+  text-decoration:none;
+  transition:
+    transform 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.guide-command-action:hover{
+  transform:translateY(-2px);
+  border-color:#9dafA6;
+  box-shadow:0 12px 30px rgba(17,34,51,.08);
+}
+
+.guide-command-action:focus-visible{
+  outline:3px solid #91b4a3;
+  outline-offset:2px;
+}
+
+.guide-command-action-icon{
+  display:grid;
+  width:38px;
+  height:38px;
+  place-items:center;
+  border-radius:11px;
+  background:#edf3ee;
+  color:#315f4b;
+}
+
+.guide-command-action-copy{
+  min-width:0;
+}
+
+.guide-command-action-copy small{
+  display:block;
+  color:#7a8782;
+  font-size:.53rem;
+  font-weight:760;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+}
+
+.guide-command-action-copy strong{
+  display:block;
+  margin-top:.12rem;
+  overflow:hidden;
+  color:var(--navy);
+  font-size:.84rem;
+  font-weight:760;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.guide-command-action-copy>span{
+  display:block;
+  margin-top:.2rem;
+  color:var(--muted);
+  font-size:.66rem;
+  line-height:1.35;
+}
+
+.guide-command-help{
+  grid-area:help;
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(150px,.65fr);
+  gap:.8rem;
+  align-items:center;
+  padding:1rem 1.1rem;
+  background:
+    linear-gradient(135deg,#173b38,#214b47);
+  color:#fff;
+}
+
+.guide-command-help .guide-dashboard-label{
+  color:#c3d5cc;
+}
+
+.guide-command-help>div:first-child>strong{
+  display:block;
+  margin-top:.2rem;
+  font-size:.92rem;
+}
+
+.guide-command-help>div:first-child>p:last-child{
+  max-width:52ch;
+  margin-top:.3rem;
+  color:#cedbd6;
+  font-size:.69rem;
+  line-height:1.45;
+}
+
+.guide-command-emergency{
+  padding-left:.85rem;
+  border-left:1px solid rgba(255,255,255,.2);
+}
+
+.guide-command-emergency small,
+.guide-command-emergency span{
+  display:block;
+  color:#c7d8d1;
+  font-size:.56rem;
+}
+
+.guide-command-emergency strong{
+  display:block;
+  margin:.15rem 0;
+  font-size:1rem;
+}
+
+/* Section pages retain the same app shell, with internal scroll only. */
+.guide-section-page{
+  padding-top:.1rem;
+}
+
+.guide-section-header,
+.guide-section-stack{
+  border-radius:15px;
+  box-shadow:none;
+}
+
+/* Tablet: still a dashboard, but one primary column. */
+@media(max-width:1050px){
+  .guide-shell-body{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .guide-shell-nav{
+    width:auto;
+    flex:none;
+    padding:.35rem;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+
+  .guide-shell-nav::-webkit-scrollbar{
+    display:none;
+  }
+
+  .guide-shell-nav-head{
+    display:none;
+  }
+
+  .guide-shell-nav-links{
+    display:flex;
+    width:max-content;
+    gap:.25rem;
+    margin:0;
+  }
+
+  .guide-shell-nav-link{
+    min-width:max-content;
+  }
+
+  .guide-command-center{
+    grid-template-columns:minmax(280px,.9fr) minmax(0,1.1fr);
+  }
+
+  .guide-command-actions{
+    grid-template-columns:1fr;
+    grid-template-rows:repeat(6,minmax(76px,auto));
+  }
+}
+
+/* Mobile remains full-screen. Navigation scrolls sideways; the page does not. */
+@media(max-width:700px){
+  .guide-dashboard{
+    height:100dvh;
+    min-height:0;
+    padding:.45rem;
+  }
+
+  .guide-dashboard-shell{
+    height:100%;
+    min-height:0;
+    gap:.4rem;
+  }
+
+  .guide-dashboard-topbar{
+    min-height:52px;
+    padding:.55rem .7rem;
+    border-radius:13px;
+  }
+
+  .guide-dashboard-topbar-actions{
+    width:auto;
+  }
+
+  .guide-dashboard-home-link{
+    font-size:.68rem;
+  }
+
+  .guide-shell-body{
+    min-height:0;
+    overflow:hidden;
+    gap:.4rem;
+  }
+
+  .guide-shell-nav{
+    display:block;
+    flex:none;
+    border-radius:12px;
+  }
+
+  .guide-shell-nav-link{
+    min-height:38px;
+    padding:.35rem .55rem;
+    border-radius:9px;
+    font-size:.66rem;
+  }
+
+  .guide-shell-nav-link .icon-chip{
+    width:26px;
+    height:26px;
+  }
+
+  .guide-shell-content{
+    flex:1;
+    min-height:0;
+    border-radius:12px;
+  }
+
+  .guide-shell-content-inner{
+    height:100%;
+    overflow-y:auto;
+    padding:.55rem;
+  }
+
+  .guide-shell-content-actions{
+    top:.8rem;
+    right:.8rem;
+  }
+
+  .guide-shell-mobile-actions{
+    display:none;
+  }
+
+  .guide-dashboard-close-button span{
+    display:none;
+  }
+
+  .guide-command-center{
+    display:flex;
+    min-height:auto;
+    flex-direction:column;
+    gap:.55rem;
+  }
+
+  .guide-command-hero{
+    min-height:300px;
+    flex:none;
+    padding:.85rem;
+  }
+
+  .guide-command-copy{
+    padding-right:2.8rem;
+  }
+
+  .guide-command-actions{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:.45rem;
+  }
+
+  .guide-command-action{
+    min-height:74px;
+    padding:.72rem;
+  }
+
+  .guide-command-help{
+    grid-template-columns:1fr;
+    gap:.65rem;
+    flex:none;
+  }
+
+  .guide-command-emergency{
+    padding-top:.6rem;
+    padding-left:0;
+    border-top:1px solid rgba(255,255,255,.2);
+    border-left:0;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .guide-command-action{
+    transition:none;
+  }
+}

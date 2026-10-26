@@ -6,8 +6,10 @@ import { GuidebookTopbar } from "./GuidebookTopbar";
 
 export function GuidebookShell({ children }: { children: ReactNode }) {
   return (
-    <main id="main-content" className="guide-dashboard guide-shell-app">
-      <div className="guide-dashboard-shell guide-shell-frame">
+    <>
+      <a className="skip-link" href="#main-content">Skip to Guidebook</a>
+      <main id="main-content" className="guide-dashboard guide-shell-app">
+        <div className="guide-dashboard-shell guide-shell-frame">
         <GuidebookTopbar />
         <div className="guide-shell-body">
           <GuidebookNav />
@@ -33,7 +35,8 @@ export function GuidebookShell({ children }: { children: ReactNode }) {
             </div>
           </section>
         </div>
-      </div>
-    </main>
+        </div>
+      </main>
+    </>
   );
 }

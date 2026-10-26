@@ -4,12 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { publicNavigation } from "@/app/_data/navigation";
-import { AskKendall } from "./AskKendall";
 import { Brand } from "./Brand";
-import { MobileNav } from "./MobileNav";
 import { PublicMobileNav } from "./PublicMobileNav";
-import { SiteFooter } from "./SiteFooter";
-import { SiteHeader } from "./SiteHeader";
 import { StayOsFooterMark } from "./StayOsFooterMark";
 
 const legacyGuidePaths = new Set([
@@ -126,15 +122,10 @@ export function ExperienceShell({
   }
 
   if (isGuidebook) {
-    return (
-      <>
-        <SiteHeader />
-        {children}
-        <SiteFooter />
-        <AskKendall />
-        <MobileNav />
-      </>
-    );
+    // Once a confirmed guest enters the Guidebook, it becomes its own
+    // full-screen application shell. Do not wrap it in the public property
+    // header/footer or duplicate its built-in search/navigation.
+    return <>{children}</>;
   }
 
   return (
