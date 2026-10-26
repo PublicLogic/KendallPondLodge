@@ -28,3 +28,24 @@ test('booking calendar uses continuous range band with circular endpoints', () =
     1,
   );
 });
+
+test('calendar polish keeps range geometry and selected checkout readable', () => {
+  const css = read('app/booking.css');
+
+  assert.match(
+    css,
+    /\.stay-calendar-day\{[\s\S]*width:100%;[\s\S]*justify-self:stretch/,
+  );
+
+  assert.match(
+    css,
+    /\.stay-calendar-day-number\{[\s\S]*width:min\(38px,100%\)/,
+  );
+
+  assert.match(
+    css,
+    /\.stay-calendar-day\.is-blocked:not\(\.is-selected\) \.stay-calendar-day-number/,
+  );
+
+  assert.doesNotMatch(css, /color:#7b8683/);
+});

@@ -1,100 +1,882 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { bookingConfigured, bookingDb, bookingAttention, type BookingAttention, type Booking, usd, publicError } from '@/lib/booking-db';
-import { nightsBetween, quoteHasPaymentWindow } from '@/lib/booking.mjs';
-import { airbnbStayStatus, fetchAirbnbIcs } from '@/lib/airbnb-ical.mjs';
-import { BookingBrand } from '@/app/_components/BookingBrand';
-import { requireKplOwner } from '@/lib/require-kpl-owner';
-import { issueQuote, releaseQuote, resolvePaymentProblem } from './actions';
+import type { Metadata } from "next";
+import Link from "next/link";
 
-export const metadata: Metadata = { title: 'Direct booking requests', robots: { index: false, follow: false } };
-export const dynamic = 'force-dynamic';
+import {
+  bookingAttention,
+  bookingConfigured,
+  bookingDb,
+  publicError,
+  type Booking,
+  type BookingAttention,
+  usd,
+} from "@/lib/booking-db";
 
-export default async function OwnerBookings({ searchParams }: { searchParams: Promise<{ status?: string }> }) {
-  await requireKplOwner('/owner/bookings');
+import {
+  nightsBetween,
+  quoteHasPaymentWindow,
+} from "@/lib/booking.mjs";
+
+import {
+  airbnbStayStatus,
+  fetchAirbnbIcs,
+} from "@/lib/airbnb-ical.mjs";
+
+import { requireKplOwner } from "@/lib/require-kpl-owner";
+
+import {
+  issueQuote,
+  releaseQuote,
+  resolvePaymentProblem,
+} from "./actions";
+
+import { QuoteLinkActions } from "./QuoteLinkActions";
+
+export const metadata: Metadata = {
+  title: "Direct bookings",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
+export const dynamic = "force-dynamic";
+
+const workflow = [
+  "Request",
+  "Quote",
+  "Airbnb block",
+  "Payment",
+] as const;
+
+function statusLabel(status: Booking["status"]) {
+  const labels: Record<Booking["status"], string> = {
+    requested: "New request",
+    quoted: "Quoted",
+    checkout: "Payment open",
+    confirmed: "Confirmed",
+    expired: "Expired",
+    declined: "Declined",
+  };
+
+  return labels[status];
+}
+
+function workflowPosition(
+  request: Booking,
+  stayStatus: string | null,
+) {
+  if (request.status === "confirmed") return 5;
+  if (request.status === "checkout") return 4;
+
+  if (request.status === "quoted") {
+    return stayStatus === "owner-blocked"
+      ? 4
+      : 3;
+  }
+
+  if (request.status === "requested") return 2;
+
+  return 1;
+}
+
+function WorkflowRail({
+  request,
+  stayStatus,
+}: {
+  request: Booking;
+  stayStatus: string | null;
+}) {
+  const position =
+    workflowPosition(request, stayStatus);
+
+  return (
+    <div
+      className="owner-booking-progress"
+      aria-label="Booking progress"
+    >
+      {workflow.map((step, index) => {
+        const number = index + 1;
+
+        const state =
+          number < position
+            ? "is-done"
+            : number === position
+              ? "is-current"
+              : "";
+
+        return (
+          <div
+            className={`owner-booking-step ${state}`}
+            key={step}
+          >
+            <span>{number}</span>
+            <strong>{step}</strong>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+export default async function OwnerBookings({
+  searchParams,
+}: {
+  searchParams: Promise<{
+    status?: string;
+  }>;
+}) {
+  await requireKplOwner("/owner/bookings");
+
   const { status } = await searchParams;
+
   let attention: BookingAttention | null = null;
   let attentionFailed = false;
+
   const configured = bookingConfigured();
+
   let requests: Booking[] = [];
   let failed = false;
+
   if (configured) {
-    try { requests = await bookingDb<Booking[]>('kpl_booking_requests?select=*&order=created_at.desc&limit=100'); }
-    catch { failed = true; }
-    try { attention = await bookingAttention(); } catch { attentionFailed = true; }
+    try {
+      requests = await bookingDb<Booking[]>(
+        "kpl_booking_requests?select=*&order=created_at.desc&limit=100",
+      );
+    } catch {
+      failed = true;
+    }
+
+    try {
+      attention = await bookingAttention();
+    } catch {
+      attentionFailed = true;
+    }
   }
-  // Recheck on each owner visit. Quoted links are shown only after the owner's
-  // Airbnb block is visible for every night; the payment action checks again.
+
   let airbnbIcs: string | null = null;
   let airbnbCheckFailed = false;
-  if (requests.some((request) => ['requested', 'quoted'].includes(request.status))) {
-    try { airbnbIcs = await fetchAirbnbIcs({ fresh: true }); }
-    catch { airbnbCheckFailed = true; }
+
+  if (
+    requests.some((request) =>
+      ["requested", "quoted"].includes(
+        request.status,
+      ),
+    )
+  ) {
+    try {
+      airbnbIcs = await fetchAirbnbIcs({
+        fresh: true,
+      });
+    } catch {
+      airbnbCheckFailed = true;
+    }
   }
-  return <main id="main-content" className="content-section booking-page">
-    <BookingBrand owner /><p className="eyebrow">Owner dashboard</p>
-    <h1>Direct booking requests</h1>
-    <p>Check that the dates are free, then issue the exact quote. Immediately block every quoted night on Airbnb. Refresh this page and send the private link only when the block is verified below. An unpaid quote expires after up to 48 hours; once Checkout starts, its hold remains until payment confirms or you verify the Stripe session and release it.</p>
-    <p><Link href="/owner">← Owner dashboard</Link> · <Link href="/owner/settings">Booking setup</Link></p>
-    {status && <p role="status" className="booking-alert">{status === 'quoted' ? 'Quote issued. Block every quoted night on Airbnb, then refresh before sending the link.' : status === 'released' ? 'Unpaid hold released. Verify there is no payment or other reservation before changing Airbnb dates.' : status === 'resolved' ? 'Your correction note was recorded. This did not issue a refund or cancel a stay.' : publicError(status)}</p>}
-    {!configured && <p className="booking-alert">Booking storage is not configured. See the setup guide.</p>}
-    {failed && <p className="booking-alert">Booking storage is unavailable. Please check configuration.</p>}
-    {attentionFailed && <p className="booking-alert" role="alert">Payment follow-up is temporarily unavailable. Check Stripe before releasing any dates.</p>}
-    {attention && <section className="booking-panel"><h2>Needs attention</h2>
-      {attention.items.filter(item => item.problems.some(p => p.severity === 'action')).length === 0 ? <p>No payment issues reported by PJ.</p> :
-      attention.items.filter(item => item.problems.some(p => p.severity === 'action')).map((item, index) => {
-        const bookingId = item.id ?? item.booking_id ?? item.booking_request_id;
-        const canResolve = item.problems.some(p => ['refund_required', 'payment_rejected'].includes(p.code));
-        return <article key={bookingId ?? index}><h3>{item.check_in} → {item.check_out}</h3>
-          {item.problems.map((p, i) => <p key={i}>{p.message}</p>)}
-          <p>Check the payment in Stripe. Refund or correct it there first. This page does not send refunds or cancel confirmed stays.</p>
-          {bookingId && canResolve && <form action={resolvePaymentProblem} className="booking-form"><input type="hidden" name="id" value={bookingId} />
-            <label>Correction or refund reference<textarea name="note" minLength={3} maxLength={500} required /></label>
-            <label className="booking-check"><input type="checkbox" name="correction_done" value="yes" required /> I have already completed and checked the correction in Stripe.</label>
-            <button type="submit" className="button button-secondary">Record completed correction</button></form>}
-        </article>;
-      })}
-    </section>}
-    {!failed && configured && requests.length === 0 && <p className="booking-alert">No requests yet. Guests can send dates from the public booking page without signing in.</p>}
-    {requests.map((request) => {
-      const stayStatus = airbnbIcs && ['requested', 'quoted'].includes(request.status)
-        ? airbnbStayStatus(airbnbIcs, nightsBetween(request.check_in, request.check_out)) : null;
-      const quoteOpen = request.status === 'quoted' && quoteHasPaymentWindow(request.quote_expires);
-      return <article className="booking-panel" key={request.id}>
-      <div className="booking-request-head"><div><h2>{request.check_in} → {request.check_out}</h2><p>{request.guest_name} · {request.guest_email} · {request.guests} guests · {request.pets} pets</p></div><strong>{request.status}</strong></div>
-      {request.note && <p>{request.note}</p>}
-      {request.status === 'requested' && airbnbCheckFailed && <p className="booking-alert">Couldn't check Airbnb — try again before quoting.</p>}
-      {request.status === 'requested' && !airbnbCheckFailed && stayStatus !== 'free' && <p className="booking-alert">These dates already show blocked on Airbnb. A quote cannot be issued; check the Airbnb calendar.</p>}
-      {request.status === 'requested' && !airbnbCheckFailed && stayStatus === 'free' && <form action={issueQuote} className="booking-form">
-        <input type="hidden" name="id" value={request.id} />
-        <p>These prices and terms apply only to this quote. They are not saved as property-wide pricing settings.</p><div className="booking-fields">
-          <label>Nightly rate ($)<input name="nightly" type="number" min="0.01" max="999999" step="0.01" required /></label>
-          <label>Cleaning ($)<input name="cleaning" type="number" min="0" step="0.01" defaultValue="0" required /></label>
-          <label>Pets ($)<input name="pet" type="number" min="0" step="0.01" defaultValue="0" required /></label>
-          <label>Taxes ($)<input name="tax" type="number" min="0" step="0.01" defaultValue="0" required /></label>
-          <label>Other fee ($)<input name="other" type="number" min="0" step="0.01" defaultValue="0" required /></label>
-          <label>Other fee name<input name="other_label" maxLength={80} /></label>
-          <label>Deposit due now ($)<input name="deposit" type="number" min="0.01" step="0.01" required /></label>
+
+  const actionItems =
+    attention?.items.filter((item) =>
+      item.problems.some(
+        (problem) =>
+          problem.severity === "action",
+      ),
+    ) ?? [];
+
+  const counts = {
+    new: requests.filter(
+      (request) =>
+        request.status === "requested",
+    ).length,
+
+    quoted: requests.filter(
+      (request) =>
+        request.status === "quoted",
+    ).length,
+
+    paying: requests.filter(
+      (request) =>
+        request.status === "checkout",
+    ).length,
+
+    confirmed: requests.filter(
+      (request) =>
+        request.status === "confirmed",
+    ).length,
+  };
+
+  return (
+    <main
+      id="main-content"
+      className="owner-bookings-page"
+    >
+      <header className="owner-bookings-head">
+        <div>
+          <p className="eyebrow">
+            Direct stays
+          </p>
+
+          <h1>Bookings</h1>
+
+          <p>
+            One workflow from guest request to
+            verified payment.
+          </p>
         </div>
-        <label>Cancellation and refund terms<textarea name="cancellation_terms" minLength={20} maxLength={2000} required placeholder="State the exact cancellation deadline, refund amount, and any nonrefundable portion." /></label>
-        <label>Remaining balance terms<textarea name="balance_terms" minLength={20} maxLength={1000} required placeholder="State when and how the balance will be collected." /></label>
-        <label className="booking-check"><input name="availability_checked" value="yes" type="checkbox" required /> I will block these dates on Airbnb immediately after issuing the quote and before sending its link.</label>
-        <button className="button button-primary" type="submit">Issue quote and hold dates in KPL</button>
-      </form>}
-      {['quoted','checkout','confirmed'].includes(request.status) && <div>
-        <p>Stay total: {usd(request.total_cents ?? 0)} · Deposit: {usd(request.deposit_cents ?? 0)} · Balance: {usd((request.total_cents ?? 0) - (request.deposit_cents ?? 0))}</p><p>{request.balance_terms}</p>{request.refund_reason && <p className="booking-alert">Payment needs refund review. This is not a confirmed stay.</p>}{request.reservation_sync_error && <p className="booking-alert">The payment is recorded, but the stay record needs attention. Do not tell the guest the booking is complete.</p>}
-        {request.status === 'quoted' && !quoteOpen && <p className="booking-alert">This quote no longer has enough time for payment. Release the hold, then unblock Airbnb; ask the guest for a new request if needed.</p>}
-        {request.status === 'quoted' && quoteOpen && airbnbCheckFailed && <p className="booking-alert">Couldn't verify the Airbnb block. Do not send the quote; refresh when the calendar is available.</p>}
-        {request.status === 'quoted' && quoteOpen && !airbnbCheckFailed && stayStatus === 'conflict' && <p className="booking-alert">Airbnb shows a reservation or unrecognized block. Do not send this quote; investigate the dates.</p>}
-        {request.status === 'quoted' && quoteOpen && !airbnbCheckFailed && stayStatus !== 'owner-blocked' && stayStatus !== 'conflict' && <p className="booking-alert">Block every quoted night on Airbnb, wait for its calendar to update, then refresh. Do not send the link yet.</p>}
-        {request.status === 'quoted' && quoteOpen && !airbnbCheckFailed && stayStatus === 'owner-blocked' && <p>Airbnb block verified. Private quote ready to send: <Link href={`/book/quote/${request.quote_token}`}>{`/book/quote/${request.quote_token}`}</Link></p>}
-        {request.status !== 'quoted' && <p>Private quote: <Link href={`/book/quote/${request.quote_token}`}>{`/book/quote/${request.quote_token}`}</Link></p>}
-        <p>Quote expiration: {request.quote_expires ? new Date(request.quote_expires).toLocaleString('en-US', { timeZone: 'America/New_York' }) + ' ET' : '—'}</p>
-        {request.status === 'checkout' && <p>Checkout has started. Do not unblock dates until Stripe confirms the session expired or the payment is reconciled.</p>}
-        {request.status !== 'confirmed' && <form action={releaseQuote} className="booking-form"><input type="hidden" name="id" value={request.id} /><button className="button button-secondary" type="submit">Release unpaid hold</button></form>}
-      </div>}
-      {request.status === 'expired' && <p>Expired. Check Stripe, any refund follow-up, and other reservations before changing the Airbnb block.</p>}
-    </article>;
-    })}
-  </main>;
+
+        <div className="owner-bookings-head-actions">
+          <Link
+            className="button button-secondary"
+            href="/owner/availability"
+          >
+            Availability
+          </Link>
+
+          <Link
+            className="button button-secondary"
+            href="/owner/settings"
+          >
+            Settings
+          </Link>
+        </div>
+      </header>
+
+      <section
+        className="owner-booking-summary"
+        aria-label="Booking status"
+      >
+        <div>
+          <span>New</span>
+          <strong>{counts.new}</strong>
+        </div>
+
+        <div>
+          <span>Quoted</span>
+          <strong>{counts.quoted}</strong>
+        </div>
+
+        <div>
+          <span>Paying</span>
+          <strong>{counts.paying}</strong>
+        </div>
+
+        <div>
+          <span>Confirmed</span>
+          <strong>{counts.confirmed}</strong>
+        </div>
+      </section>
+
+      {status && (
+        <p
+          role="status"
+          className="booking-alert owner-booking-flash"
+        >
+          {status === "quoted"
+            ? "Quote created. Block every quoted night on Airbnb, then refresh."
+            : status === "released"
+              ? "Unpaid hold released. Check Stripe and other reservations before changing Airbnb."
+              : status === "resolved"
+                ? "Correction note recorded. This did not issue a refund or cancel the stay."
+                : publicError(status)}
+        </p>
+      )}
+
+      {!configured && (
+        <p className="booking-alert">
+          Booking storage is not configured.
+        </p>
+      )}
+
+      {failed && (
+        <p className="booking-alert">
+          Booking storage is unavailable.
+        </p>
+      )}
+
+      {attentionFailed && (
+        <p
+          className="booking-alert"
+          role="alert"
+        >
+          Payment follow-up is temporarily
+          unavailable. Check Stripe before
+          releasing dates.
+        </p>
+      )}
+
+      {attention && actionItems.length > 0 && (
+        <section className="owner-booking-attention">
+          <div className="owner-booking-section-head">
+            <div>
+              <p className="eyebrow">
+                Needs attention
+              </p>
+              <h2>Payment follow-up</h2>
+            </div>
+
+            <strong>
+              {actionItems.length}
+            </strong>
+          </div>
+
+          {actionItems.map((item, index) => {
+            const bookingId =
+              item.id ??
+              item.booking_id ??
+              item.booking_request_id;
+
+            const canResolve =
+              item.problems.some((problem) =>
+                [
+                  "refund_required",
+                  "payment_rejected",
+                ].includes(problem.code),
+              );
+
+            return (
+              <article
+                className="owner-attention-item"
+                key={bookingId ?? index}
+              >
+                <strong>
+                  {item.check_in} → {item.check_out}
+                </strong>
+
+                {item.problems.map(
+                  (problem, problemIndex) => (
+                    <p key={problemIndex}>
+                      {problem.message}
+                    </p>
+                  ),
+                )}
+
+                <p>
+                  Complete the correction in Stripe
+                  first. This screen only records
+                  what you already did.
+                </p>
+
+                {bookingId && canResolve && (
+                  <form
+                    action={resolvePaymentProblem}
+                    className="booking-form"
+                  >
+                    <input
+                      type="hidden"
+                      name="id"
+                      value={bookingId}
+                    />
+
+                    <label>
+                      Correction / refund reference
+                      <textarea
+                        name="note"
+                        minLength={3}
+                        maxLength={500}
+                        required
+                      />
+                    </label>
+
+                    <label className="booking-check">
+                      <input
+                        type="checkbox"
+                        name="correction_done"
+                        value="yes"
+                        required
+                      />
+                      I already completed and checked
+                      the correction in Stripe.
+                    </label>
+
+                    <button
+                      type="submit"
+                      className="button button-secondary"
+                    >
+                      Record correction
+                    </button>
+                  </form>
+                )}
+              </article>
+            );
+          })}
+        </section>
+      )}
+
+      {!failed &&
+        configured &&
+        requests.length === 0 && (
+          <div className="owner-booking-empty">
+            <p className="eyebrow">
+              Nothing waiting
+            </p>
+            <h2>No direct requests yet.</h2>
+            <p>
+              New guest requests from /book will
+              appear here.
+            </p>
+          </div>
+        )}
+
+      <section className="owner-booking-list">
+        {requests.map((request) => {
+          const stayStatus =
+            airbnbIcs &&
+            ["requested", "quoted"].includes(
+              request.status,
+            )
+              ? airbnbStayStatus(
+                  airbnbIcs,
+                  nightsBetween(
+                    request.check_in,
+                    request.check_out,
+                  ),
+                )
+              : null;
+
+          const quoteOpen =
+            request.status === "quoted" &&
+            quoteHasPaymentWindow(
+              request.quote_expires,
+            );
+
+          const total =
+            request.total_cents ?? 0;
+
+          const deposit =
+            request.deposit_cents ?? 0;
+
+          const balance =
+            total - deposit;
+
+          const quotePath =
+            `/book/quote/${request.quote_token}`;
+
+          return (
+            <article
+              className={`owner-booking-card owner-booking-${request.status}`}
+              key={request.id}
+            >
+              <header className="owner-booking-card-head">
+                <div>
+                  <p className="owner-booking-dates">
+                    {request.check_in} →{" "}
+                    {request.check_out}
+                  </p>
+
+                  <h2>{request.guest_name}</h2>
+
+                  <p>
+                    {request.guest_email}
+                    {" · "}
+                    {request.guests} guest
+                    {request.guests === 1
+                      ? ""
+                      : "s"}
+                    {" · "}
+                    {request.pets} pet
+                    {request.pets === 1
+                      ? ""
+                      : "s"}
+                  </p>
+                </div>
+
+                <span
+                  className={`owner-booking-status status-${request.status}`}
+                >
+                  {statusLabel(request.status)}
+                </span>
+              </header>
+
+              <WorkflowRail
+                request={request}
+                stayStatus={stayStatus}
+              />
+
+              {request.note && (
+                <blockquote className="owner-booking-note">
+                  {request.note}
+                </blockquote>
+              )}
+
+              {request.status === "requested" &&
+                airbnbCheckFailed && (
+                  <p className="booking-alert">
+                    Airbnb could not be checked.
+                    Refresh before quoting.
+                  </p>
+                )}
+
+              {request.status === "requested" &&
+                !airbnbCheckFailed &&
+                stayStatus !== "free" && (
+                  <p className="booking-alert">
+                    Airbnb already shows these dates
+                    blocked. Investigate before
+                    quoting.
+                  </p>
+                )}
+
+              {request.status === "requested" &&
+                !airbnbCheckFailed &&
+                stayStatus === "free" && (
+                  <section className="owner-booking-action-panel">
+                    <div className="owner-booking-action-copy">
+                      <span>Step 2</span>
+                      <h3>Price this stay</h3>
+                      <p>
+                        Enter the exact quote for this
+                        guest. Nothing here becomes a
+                        property-wide rate.
+                      </p>
+                    </div>
+
+                    <form
+                      action={issueQuote}
+                      className="booking-form owner-quote-form"
+                    >
+                      <input
+                        type="hidden"
+                        name="id"
+                        value={request.id}
+                      />
+
+                      <div className="booking-fields owner-price-grid">
+                        <label>
+                          Nightly
+                          <input
+                            name="nightly"
+                            type="number"
+                            min="0.01"
+                            max="999999"
+                            step="0.01"
+                            required
+                          />
+                        </label>
+
+                        <label>
+                          Cleaning
+                          <input
+                            name="cleaning"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            defaultValue="0"
+                            required
+                          />
+                        </label>
+
+                        <label>
+                          Pets
+                          <input
+                            name="pet"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            defaultValue="0"
+                            required
+                          />
+                        </label>
+
+                        <label>
+                          Taxes
+                          <input
+                            name="tax"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            defaultValue="0"
+                            required
+                          />
+                        </label>
+
+                        <label>
+                          Other
+                          <input
+                            name="other"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            defaultValue="0"
+                            required
+                          />
+                        </label>
+
+                        <label>
+                          Other fee name
+                          <input
+                            name="other_label"
+                            maxLength={80}
+                          />
+                        </label>
+
+                        <label>
+                          Deposit due now
+                          <input
+                            name="deposit"
+                            type="number"
+                            min="0.01"
+                            step="0.01"
+                            required
+                          />
+                        </label>
+                      </div>
+
+                      <div className="owner-terms-grid">
+                        <label>
+                          Cancellation / refund terms
+                          <textarea
+                            name="cancellation_terms"
+                            minLength={20}
+                            maxLength={2000}
+                            required
+                            placeholder="Exact cancellation deadline, refund amount and nonrefundable portion."
+                          />
+                        </label>
+
+                        <label>
+                          Remaining balance terms
+                          <textarea
+                            name="balance_terms"
+                            minLength={20}
+                            maxLength={1000}
+                            required
+                            placeholder="When and how the remaining balance will be collected."
+                          />
+                        </label>
+                      </div>
+
+                      <label className="booking-check">
+                        <input
+                          name="availability_checked"
+                          value="yes"
+                          type="checkbox"
+                          required
+                        />
+                        I will block every quoted
+                        night on Airbnb immediately
+                        after creating this quote.
+                      </label>
+
+                      <button
+                        className="button button-primary"
+                        type="submit"
+                      >
+                        Create quote & hold dates
+                      </button>
+                    </form>
+                  </section>
+                )}
+
+              {[
+                "quoted",
+                "checkout",
+                "confirmed",
+              ].includes(request.status) && (
+                <section className="owner-booking-quoted">
+                  <dl className="owner-booking-money">
+                    <div>
+                      <dt>Total</dt>
+                      <dd>{usd(total)}</dd>
+                    </div>
+
+                    <div>
+                      <dt>Deposit</dt>
+                      <dd>{usd(deposit)}</dd>
+                    </div>
+
+                    <div>
+                      <dt>Balance</dt>
+                      <dd>{usd(balance)}</dd>
+                    </div>
+                  </dl>
+
+                  {request.balance_terms && (
+                    <p className="owner-balance-terms">
+                      {request.balance_terms}
+                    </p>
+                  )}
+
+                  {request.refund_reason && (
+                    <p className="booking-alert">
+                      Payment needs refund review.
+                      This is not a confirmed stay.
+                    </p>
+                  )}
+
+                  {request.reservation_sync_error && (
+                    <p className="booking-alert">
+                      Payment is recorded, but the
+                      stay record needs attention.
+                    </p>
+                  )}
+
+                  {request.status === "quoted" &&
+                    !quoteOpen && (
+                      <div className="owner-next-step owner-next-step-warn">
+                        <span>Quote expired</span>
+                        <strong>
+                          Release this hold before
+                          changing Airbnb.
+                        </strong>
+                      </div>
+                    )}
+
+                  {request.status === "quoted" &&
+                    quoteOpen &&
+                    airbnbCheckFailed && (
+                      <div className="owner-next-step owner-next-step-warn">
+                        <span>Step 3</span>
+                        <strong>
+                          Airbnb block cannot be
+                          verified yet.
+                        </strong>
+                        <p>
+                          Do not send the quote.
+                          Refresh once the calendar
+                          source is available.
+                        </p>
+                      </div>
+                    )}
+
+                  {request.status === "quoted" &&
+                    quoteOpen &&
+                    !airbnbCheckFailed &&
+                    stayStatus === "conflict" && (
+                      <div className="owner-next-step owner-next-step-danger">
+                        <span>Conflict</span>
+                        <strong>
+                          Airbnb shows a reservation
+                          or unknown block.
+                        </strong>
+                        <p>
+                          Do not send this quote.
+                          Investigate these dates.
+                        </p>
+                      </div>
+                    )}
+
+                  {request.status === "quoted" &&
+                    quoteOpen &&
+                    !airbnbCheckFailed &&
+                    stayStatus !==
+                      "owner-blocked" &&
+                    stayStatus !==
+                      "conflict" && (
+                      <div className="owner-next-step">
+                        <span>Step 3</span>
+                        <strong>
+                          Block the stay on Airbnb.
+                        </strong>
+                        <p>
+                          Block every quoted night,
+                          wait for the Airbnb calendar
+                          to update, then refresh this
+                          page.
+                        </p>
+                      </div>
+                    )}
+
+                  {request.status === "quoted" &&
+                    quoteOpen &&
+                    !airbnbCheckFailed &&
+                    stayStatus ===
+                      "owner-blocked" && (
+                      <div className="owner-next-step owner-next-step-ready">
+                        <span>
+                          Airbnb block verified
+                        </span>
+
+                        <strong>
+                          Quote is ready for the guest.
+                        </strong>
+
+                        <QuoteLinkActions
+                          path={quotePath}
+                          email={request.guest_email}
+                        />
+                      </div>
+                    )}
+
+                  {request.status === "checkout" && (
+                    <div className="owner-next-step owner-next-step-paying">
+                      <span>Step 4</span>
+                      <strong>
+                        Guest opened payment.
+                      </strong>
+                      <p>
+                        Keep the dates blocked until
+                        Stripe and PJ resolve this
+                        checkout.
+                      </p>
+                    </div>
+                  )}
+
+                  {request.status ===
+                    "confirmed" && (
+                    <div className="owner-next-step owner-next-step-confirmed">
+                      <span>Confirmed</span>
+                      <strong>
+                        Deposit verified.
+                      </strong>
+                      <p>
+                        PJ owns the confirmed stay
+                        record and payment evidence.
+                      </p>
+                    </div>
+                  )}
+
+                  <p className="owner-quote-expiry">
+                    Quote expiration:{" "}
+                    {request.quote_expires
+                      ? `${new Date(
+                          request.quote_expires,
+                        ).toLocaleString("en-US", {
+                          timeZone:
+                            "America/New_York",
+                        })} ET`
+                      : "—"}
+                  </p>
+
+                  {request.status !==
+                    "confirmed" && (
+                    <form
+                      action={releaseQuote}
+                      className="owner-release-form"
+                    >
+                      <input
+                        type="hidden"
+                        name="id"
+                        value={request.id}
+                      />
+
+                      <button
+                        className="button button-secondary"
+                        type="submit"
+                      >
+                        Release unpaid hold
+                      </button>
+                    </form>
+                  )}
+                </section>
+              )}
+
+              {request.status === "expired" && (
+                <div className="owner-next-step owner-next-step-warn">
+                  <strong>Expired hold.</strong>
+                  <p>
+                    Check Stripe and any other
+                    reservation before changing the
+                    Airbnb block.
+                  </p>
+                </div>
+              )}
+
+              {request.status === "declined" && (
+                <div className="owner-next-step">
+                  <strong>Request closed.</strong>
+                </div>
+              )}
+            </article>
+          );
+        })}
+      </section>
+    </main>
+  );
 }
