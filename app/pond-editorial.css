@@ -1,0 +1,425 @@
+/* The Lodge at Kendall Pond
+   Editorial treatment for the public homepage only.
+   STAY booking, Guidebook and owner pages retain their systems. */
+
+.showcase-louder {
+  --pond-ink: #152f2b;
+  --pond-cream: #f8f4e8;
+  --pond-warm: #f1d296;
+  --pond-copper: #d29a4d;
+  --pond-slate: #527066;
+  background: var(--pond-cream);
+}
+
+/* Full-bleed Lodge photograph with an oversized, unmistakable point of view */
+.showcase-louder .showcase-hero {
+  min-height: clamp(690px, calc(100svh - 76px), 990px);
+  background: #1a382e;
+  align-items: end;
+}
+.showcase-louder .showcase-hero-image {
+  object-position: 55% 49%;
+  filter: saturate(1.03) contrast(1.015);
+}
+.showcase-louder .showcase-hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(5, 23, 18, .88) 0%, rgba(7, 27, 22, .58) 43%, rgba(8, 25, 20, .08) 87%),
+    linear-gradient(0deg, rgba(6, 25, 20, .90) 0%, rgba(6, 25, 20, .15) 61%);
+}
+.showcase-louder .showcase-hero-inner {
+  position: relative;
+  padding-top: clamp(4rem, 10vw, 10rem);
+  padding-bottom: clamp(1.4rem, 3vw, 2.3rem);
+}
+.showcase-louder .showcase-hero-copy {
+  width: 100%;
+  max-width: 850px;
+  position: relative;
+  z-index: 2;
+}
+.showcase-louder .showcase-eyebrow {
+  letter-spacing: .145em;
+  font-size: .69rem;
+  font-weight: 760;
+  line-height: 1.5;
+}
+.showcase-louder .showcase-eyebrow-light {
+  color: #f2d9aa;
+}
+.showcase-louder .showcase-hero .showcase-eyebrow span {
+  margin-inline: .52em;
+  opacity: .8;
+}
+.showcase-louder .showcase-hero h1 {
+  max-width: 11.5ch;
+  margin-top: 1.1rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(4.2rem, 7.65vw, 8.35rem);
+  line-height: .98;
+  letter-spacing: -.068em;
+  text-wrap: balance;
+}
+.showcase-louder .showcase-hero h1 span {
+  display: block;
+}
+.showcase-louder .showcase-hero h1 span:last-child {
+  color: #f5d9a5;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -.064em;
+}
+.showcase-louder .showcase-hero-lead {
+  max-width: 46ch;
+  margin-top: clamp(1.4rem, 2vw, 2.1rem);
+  color: #fffdf5;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(1rem, 1.35vw, 1.15rem);
+  line-height: 1.7;
+  font-weight: 470;
+}
+.showcase-louder .showcase-hero-actions {
+  margin-top: 1.9rem;
+  gap: 1rem 1.8rem;
+}
+.showcase-louder .showcase-button-light {
+  min-height: 54px;
+  padding: .9rem 1.35rem;
+  background: #f4d8a4;
+  border-color: #f4d8a4;
+  color: #17342a;
+  font-weight: 790;
+}
+.showcase-louder .showcase-button-light:hover {
+  background: #fff0d5;
+  border-color: #fff0d5;
+}
+.showcase-louder .showcase-quiet-link {
+  color: #fff6e6;
+  font-weight: 720;
+  text-underline-offset: .3rem;
+}
+.showcase-louder .showcase-hero-facts {
+  width: 100%;
+  margin-top: clamp(4rem, 8vw, 7rem);
+  padding-top: 1.15rem;
+  padding-bottom: .1rem;
+  border-top: 1px solid rgba(253, 233, 195, .45);
+  color: #f8f3e5;
+  font-size: .66rem;
+  letter-spacing: .095em;
+  font-weight: 760;
+  line-height: 1.5;
+  gap: .6rem 1.2rem;
+}
+.showcase-louder .showcase-hero-facts li:not(:last-child)::after {
+  color: #f1d295;
+  margin-left: 1.2rem;
+}
+
+/* The inset deck shot brings movement without fabricated imagery. */
+.showcase-hero-postcard {
+  position: absolute;
+  z-index: 1;
+  top: 9%;
+  right: clamp(2rem, 4vw, 4.75rem);
+  display: none;
+  width: clamp(225px, 22vw, 305px);
+  margin: 0;
+  padding: .6rem .6rem .9rem;
+  background: #f8f2e4;
+  color: #1c3b32;
+  box-shadow: 0 18px 60px rgba(2, 17, 11, .32);
+  transform: rotate(4deg);
+}
+.showcase-hero-postcard-image {
+  position: relative;
+  aspect-ratio: 1.1;
+  overflow: hidden;
+  background: #c6ccbd;
+}
+.showcase-hero-postcard-image img { object-fit: cover; }
+.showcase-hero-postcard figcaption {
+  display: grid;
+  gap: .4rem;
+  padding: .85rem .5rem .1rem;
+}
+.showcase-hero-postcard small {
+  color: #416858;
+  font-family: var(--font-sans), sans-serif;
+  font-size: .59rem;
+  font-weight: 760;
+  letter-spacing: .1em;
+}
+.showcase-hero-postcard strong {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  letter-spacing: -.03em;
+}
+
+/* Host message that feels like a real invitation, not a testimonial. */
+.showcase-louder .showcase-trust { background: #1a4035; border: 0; }
+.showcase-louder .showcase-trust-inner {
+  max-width: 1370px;
+  padding: 1.35rem clamp(1.25rem, 5vw, 5.5rem);
+  min-height: 80px;
+}
+.showcase-louder .showcase-trust p { color: #f2f0e7; font-size: .9rem; line-height: 1.5; }
+.showcase-louder .showcase-trust strong { color: #f4d8a4; }
+.showcase-louder .showcase-trust a { color: #ffe1a9; font-size: .82rem; }
+
+/* Generous typography and a non-dashboard fact panel */
+.showcase-louder .showcase-intro {
+  padding-top: clamp(5.5rem, 10vw, 9rem);
+  padding-bottom: clamp(5.5rem, 10vw, 9rem);
+}
+.showcase-louder .showcase-intro-main h2 {
+  max-width: 14.5ch;
+  font-size: clamp(3.1rem, 5.5vw, 5.8rem);
+  color: #173d32;
+}
+.showcase-louder .showcase-intro-main > p:last-of-type {
+  font-size: clamp(.99rem, 1.25vw, 1.13rem);
+  color: #4b6659;
+  line-height: 1.85;
+}
+.showcase-intro-link { display: inline-block; margin-top: 1.5rem; }
+.showcase-louder .showcase-intro-aside {
+  border-color: #cad4c7;
+  transform: rotate(-1.5deg);
+  background: #e4eadc;
+  box-shadow: 12px 14px 0 #d4ddcc;
+}
+.showcase-louder .showcase-intro-aside > div { min-height: 155px; border-color: #c1d1bf; }
+.showcase-louder .showcase-intro-aside strong {
+  font-family: var(--font-serif), Georgia, serif;
+  color: #173f32;
+  font-size: clamp(3.5rem, 5vw, 5rem);
+  letter-spacing: -.07em;
+  line-height: 1;
+}
+.showcase-louder .showcase-intro-aside span {
+  color: #3c6150;
+  font-weight: 650;
+  letter-spacing: .015em;
+}
+
+/* The feature cards now have editorial rhythm instead of four equal tiles. */
+.showcase-louder .showcase-moments {
+  padding-top: clamp(5rem, 8vw, 8rem);
+  padding-bottom: clamp(5rem, 8vw, 8rem);
+  background: #e5e9df;
+}
+.showcase-louder .showcase-section-head { margin-bottom: 2.3rem; }
+.showcase-louder .showcase-section-head h2 { max-width: 14ch; font-size: clamp(2.9rem, 5vw, 5.1rem); }
+.showcase-louder .showcase-moments-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.1rem;
+}
+.showcase-louder .showcase-moment {
+  grid-column: span 5;
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  background: #f8f6f0;
+  box-shadow: none;
+}
+.showcase-louder .showcase-moment:nth-child(4n + 1),
+.showcase-louder .showcase-moment:nth-child(4n + 4) { grid-column: span 7; }
+.showcase-louder .showcase-moment-image {
+  flex: none;
+  aspect-ratio: 1.58;
+}
+.showcase-louder .showcase-moment:nth-child(4n + 2) .showcase-moment-image,
+.showcase-louder .showcase-moment:nth-child(4n + 3) .showcase-moment-image { aspect-ratio: 1.12; }
+.showcase-louder .showcase-moment-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: start;
+  gap: .7rem;
+  min-height: 225px;
+  padding: clamp(1.2rem, 2.9vw, 2.2rem);
+}
+.showcase-moment-index {
+  display: block;
+  color: #44725b;
+  font-family: var(--font-sans), sans-serif;
+  font-size: .64rem;
+  font-weight: 780;
+  letter-spacing: .12em;
+}
+.showcase-louder .showcase-moment-copy h3 {
+  margin: 0;
+  color: #1e4235;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(1.9rem, 3vw, 2.95rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -.05em;
+}
+.showcase-louder .showcase-moment-copy p {
+  min-height: 0;
+  margin: 0;
+  max-width: 45ch;
+  color: #4f6258;
+  font-size: .94rem;
+  line-height: 1.6;
+}
+.showcase-moment-link {
+  display: inline-block;
+  margin-top: auto !important;
+  padding-top: .6rem;
+  color: #235a42;
+  font-family: var(--font-sans), sans-serif;
+  font-size: .79rem;
+  font-weight: 760;
+}
+
+/* An immersive, darker chapter between warm sections */
+.showcase-louder .showcase-water-story {
+  background: #15392e;
+  color: #f8f4eb;
+  min-height: 680px;
+}
+.showcase-louder .showcase-water-image { min-height: 680px; }
+.showcase-louder .showcase-water-image img { object-position: center 50%; }
+.showcase-water-image-caption {
+  position: absolute;
+  z-index: 1;
+  bottom: 1.6rem;
+  left: 1.6rem;
+  padding: .65rem .85rem;
+  background: rgba(13, 42, 29, .79);
+  color: #fff4df;
+  font-family: var(--font-sans), sans-serif;
+  font-size: .6rem;
+  font-weight: 720;
+  letter-spacing: .1em;
+}
+.showcase-louder .showcase-water-copy { padding: clamp(3rem, 6vw, 6.5rem); }
+.showcase-louder .showcase-water-copy .showcase-eyebrow { color: #f3d18c; }
+.showcase-louder .showcase-water-copy h2 {
+  max-width: 10ch;
+  color: #fff8e7;
+  font-size: clamp(3rem, 5vw, 5.8rem);
+}
+.showcase-louder .showcase-water-copy > p:not(.showcase-eyebrow) {
+  color: #dee9dd;
+  font-size: 1rem;
+  line-height: 1.85;
+}
+.showcase-louder .showcase-water-links a { color: #f5d9a2; }
+.showcase-louder .showcase-water-links a:hover { color: #fff; }
+
+/* A punchy photography-led end to the page */
+.showcase-louder .showcase-photo-section { background: #f5f0e6; }
+.showcase-louder .showcase-photo-mosaic { gap: .85rem; }
+.showcase-louder .showcase-photo-tile { border-radius: 0; }
+.showcase-louder .showcase-photo-tile img { transition: transform .5s ease; }
+.showcase-louder .showcase-photo-tile:hover img { transform: scale(1.035); }
+.showcase-louder .showcase-photo-tile span {
+  left: clamp(.8rem, 2vw, 1.65rem);
+  bottom: clamp(.8rem, 2vw, 1.35rem);
+  font-size: clamp(1.35rem, 2.4vw, 2.2rem);
+}
+.showcase-louder .showcase-close {
+  background: #eecb8b;
+  border: 0;
+  padding-block: clamp(5rem, 8vw, 9rem);
+}
+.showcase-louder .showcase-close h2 {
+  max-width: 15ch;
+  font-size: clamp(3.1rem, 5.5vw, 6rem);
+  color: #163b31;
+}
+.showcase-louder .showcase-close .showcase-eyebrow { color: #3b634a; }
+.showcase-louder .showcase-close > div > p:last-child {
+  color: #334e41;
+  font-size: 1.03rem;
+  line-height: 1.7;
+}
+.showcase-louder .showcase-close .showcase-inline-link { color: #1b513e; }
+
+/* Responsive rhythm */
+@media (min-width: 1250px) {
+  .showcase-hero-postcard { display: block; }
+  .showcase-louder .showcase-hero-copy { max-width: min(740px, 65%); }
+}
+@media (max-width: 1050px) {
+  .showcase-louder .showcase-moments-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .showcase-louder .showcase-moment,
+  .showcase-louder .showcase-moment:nth-child(4n + 1),
+  .showcase-louder .showcase-moment:nth-child(4n + 4) { grid-column: span 1; }
+  .showcase-louder .showcase-moment-image,
+  .showcase-louder .showcase-moment:nth-child(4n + 2) .showcase-moment-image,
+  .showcase-louder .showcase-moment:nth-child(4n + 3) .showcase-moment-image { aspect-ratio: 1.25; }
+  .showcase-louder .showcase-hero h1 { max-width: 12ch; }
+}
+@media (max-width: 880px) {
+  .showcase-louder .showcase-water-story { grid-template-columns: 1fr; }
+  .showcase-louder .showcase-water-image { min-height: 480px; }
+  .showcase-louder .showcase-intro-aside { margin-right: 1rem; }
+}
+@media (max-width: 760px) {
+  .showcase-louder .showcase-hero {
+    min-height: max(730px, calc(100svh - 66px));
+  }
+  .showcase-louder .showcase-hero-image { object-position: 56% 42%; }
+  .showcase-louder .showcase-hero-overlay {
+    background: linear-gradient(0deg, rgba(7, 25, 20, .98) 0%, rgba(8, 31, 25, .84) 36%, rgba(9, 36, 27, .3) 67%, rgba(9, 36, 27, .12) 100%);
+  }
+  .showcase-louder .showcase-hero-inner {
+    padding: 2rem 1.2rem 1.5rem;
+  }
+  .showcase-louder .showcase-hero h1 {
+    font-size: clamp(3.15rem, 12.1vw, 5.5rem);
+    letter-spacing: -.058em;
+    max-width: 13ch;
+    line-height: .99;
+  }
+  .showcase-louder .showcase-hero-lead {
+    font-size: .98rem;
+    line-height: 1.62;
+  }
+  .showcase-louder .showcase-hero-facts { margin-top: 2.8rem; }
+  .showcase-louder .showcase-intro { padding-block: 5.2rem; }
+  .showcase-louder .showcase-intro-main h2 { font-size: clamp(3rem, 9vw, 4.25rem); }
+  .showcase-louder .showcase-intro-aside { transform: rotate(-.8deg); }
+  .showcase-louder .showcase-moments-grid { gap: .8rem; }
+  .showcase-louder .showcase-moment-copy { min-height: 220px; padding: 1.2rem; }
+  .showcase-louder .showcase-moment-copy h3 { font-size: clamp(1.65rem, 4vw, 2.5rem); }
+  .showcase-louder .showcase-moment-copy p { font-size: .85rem; }
+  .showcase-louder .showcase-water-image { min-height: 400px; }
+  .showcase-louder .showcase-water-copy { padding: 4rem 1.25rem; }
+  .showcase-louder .showcase-close { padding-block: 5.3rem; }
+  .showcase-louder .showcase-close h2 { font-size: clamp(3rem, 10vw, 4.5rem); }
+}
+@media (max-width: 620px) {
+  .showcase-louder .showcase-moments-grid { grid-template-columns: 1fr; }
+  .showcase-louder .showcase-moment-image,
+  .showcase-louder .showcase-moment:nth-child(4n + 2) .showcase-moment-image,
+  .showcase-louder .showcase-moment:nth-child(4n + 3) .showcase-moment-image { aspect-ratio: 1.25; }
+  .showcase-louder .showcase-moment-copy { min-height: 0; }
+  .showcase-louder .showcase-moment-copy h3 { font-size: 2rem; }
+  .showcase-louder .showcase-moment-link { margin-top: .7rem !important; }
+  .showcase-louder .showcase-trust-inner { gap: .6rem; }
+  .showcase-louder .showcase-intro-aside > div { min-height: 125px; }
+  .showcase-louder .showcase-intro-aside strong { font-size: 3.8rem; }
+  .showcase-louder .showcase-hero-actions { align-items: start; }
+  .showcase-louder .showcase-hero-facts li:not(:last-child)::after { margin-left: .6rem; }
+}
+@media (max-width: 375px) {
+  .showcase-louder .showcase-hero h1 { font-size: 3.08rem; }
+  .showcase-louder .showcase-hero .showcase-eyebrow { font-size: .58rem; }
+  .showcase-louder .showcase-hero-facts { gap: .48rem .5rem; font-size: .58rem; }
+  .showcase-louder .showcase-hero-facts li:not(:last-child)::after { margin-left: .5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .showcase-louder *, .showcase-louder *::before, .showcase-louder *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
