@@ -423,3 +423,91 @@
     transition: none !important;
   }
 }
+
+
+/* Gallery keeps the same point of view, with room to see the photos. */
+.gallery-louder .gallery-intro {
+  background: #193e33;
+  color: #f9f3e6;
+}
+.gallery-louder .gallery-intro-copy { background: #193e33; }
+.gallery-louder .gallery-intro .showcase-eyebrow { color: #f0cd8c; }
+.gallery-louder .gallery-intro h1 {
+  color: #fff7e8;
+  max-width: 11ch;
+  font-size: clamp(3.6rem, 6.8vw, 7rem);
+  font-weight: 500;
+  letter-spacing: -.065em;
+  line-height: .98;
+}
+.gallery-louder .gallery-intro-copy > p:not(.showcase-eyebrow) {
+  color: #e4ece3;
+  max-width: 55ch;
+  line-height: 1.77;
+}
+.gallery-louder .gallery-intro-copy > p.gallery-intro-note {
+  color: #c3d7ca;
+  font-size: .74rem;
+  line-height: 1.6;
+}
+.gallery-louder .gallery-intro-copy .showcase-inline-link { color: #f4d7a2; }
+.gallery-louder .gallery-content { background: #f8f4ea; }
+.gallery-louder .gallery-content .showcase-section-head h2 {
+  color: #1c4335;
+  max-width: 18ch;
+  font-size: clamp(2.8rem, 4.8vw, 5.1rem);
+}
+.gallery-louder .gallery-filter { border-radius: 3px; }
+.gallery-louder .gallery-filter[aria-pressed="true"] {
+  background: #203e32;
+  color: #fff;
+}
+.gallery-louder .gallery-photo-card { background: #fdfbf6; }
+.gallery-louder .gallery-photo-caption { color: #234739; }
+.gallery-louder .gallery-close { background: #efd099; }
+.gallery-louder .gallery-close h2 {
+  color: #143a2e;
+  font-size: clamp(3rem, 5vw, 5.5rem);
+}
+
+/* Interior pages: matching typography, not a second generic template. */
+body:has(.hospitality-header) .page-hero {
+  background: #f6f1e7;
+}
+body:has(.hospitality-header) .page-hero-copy {
+  background: #f6f1e7;
+}
+body:has(.hospitality-header) .page-hero-copy .eyebrow {
+  color: #37674b;
+  letter-spacing: .1em;
+}
+body:has(.hospitality-header) .page-hero h1 {
+  color: #1b4436;
+  font-size: clamp(3.2rem, 5.3vw, 5.8rem);
+  letter-spacing: -.06em;
+  font-weight: 500;
+  line-height: 1.03;
+  max-width: 13ch;
+}
+body:has(.hospitality-header) .page-hero .hero-intro {
+  color: #496858;
+  max-width: 44ch;
+  font-size: clamp(1.04rem, 1.25vw, 1.22rem);
+  line-height: 1.75;
+}
+body:has(.hospitality-header) .page-hero-photo img { filter: none; }
+body:has(.hospitality-header) .booking-cta-panel h2 {
+  color: #183e31;
+}
+body:has(.hospitality-header) .section-heading h2 {
+  letter-spacing: -.045em;
+}
+@media (max-width: 880px) {
+  .gallery-louder .gallery-intro-copy { padding: 4rem 1.5rem; }
+  body:has(.hospitality-header) .page-hero h1 { font-size: clamp(3.2rem, 8vw, 5.2rem); }
+}
+@media (max-width: 620px) {
+  .gallery-louder .gallery-intro h1 { font-size: clamp(3.45rem, 12vw, 5rem); }
+  .gallery-louder .gallery-intro-visual { min-height: 350px; }
+  body:has(.hospitality-header) .page-hero h1 { font-size: clamp(2.9rem, 12vw, 4.2rem); }
+}
