@@ -7,6 +7,7 @@ import "./experience.css";
 import "./booking.css";
 import "./a-plus.css";
 import "./showcase.css";
+import "./pond-editorial.css";
 
 const plexSans = localFont({
   variable: "--font-sans",
