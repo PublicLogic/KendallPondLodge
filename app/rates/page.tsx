@@ -24,7 +24,7 @@ export default function RatesPage() {
         eyebrow="Rates & booking"
         title="Book it your way."
         intro="Direct with us, or Airbnb. Full price first either way."
-        image="/images/kpl/pond-seating.jpg"
+        image="/images/kpl/website-top-50/01-Hero/03-kendall-pond-lodge-lakeview-deck.jpg"
         imageAlt="The Lodge deck overlooking Kendall Pond"
         imagePosition="center"
         primaryAction={
