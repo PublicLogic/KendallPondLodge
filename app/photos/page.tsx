@@ -9,7 +9,7 @@ import { directBookingEnabled } from "@/lib/booking-db";
 export const metadata: Metadata = {
   title: "Photos of the Lodge & Waterfront",
   description:
-    "Explore 50 real photos of the Lodge at Kendall Pond: bedrooms, great room, kitchen, private waterfront, dock, deck, hot tub and firepit in Gardner, Massachusetts.",
+    "Photos of the Lodge at Kendall Pond in Gardner, Massachusetts, including bedrooms, living spaces, deck, hot tub and private waterfront.",
 };
 
 const airbnb =
@@ -25,13 +25,13 @@ export default function PhotosPage() {
     <main id="main-content" className="gallery-page">
       <section className="gallery-intro" aria-labelledby="gallery-title">
         <div className="gallery-intro-copy">
-          <p className="showcase-eyebrow">Actual photos of the Lodge</p>
-          <h1 id="gallery-title">Picture your days here.</h1>
+          <p className="showcase-eyebrow">Photo gallery</p>
+          <h1 id="gallery-title">The Lodge, in photos.</h1>
           <p>
-            The actual Lodge, from the rooms to the shoreline. Browse all
-            {" "}{lodgePhotos.length} curated photos or choose the part you want to see.
+            Browse {" "}{lodgePhotos.length} photos of the rooms, deck, hot tub,
+            dock, and shoreline. Choose a category below to see more of each space.
           </p>
-          <p className="gallery-intro-note">No stock imagery. Photos show the property across different seasons; furnishings and amenities may change.</p>
+          <p className="gallery-intro-note">These photos were taken at different times of year. Furniture and outdoor amenities may vary by season.</p>
           <a className="showcase-inline-link" href="#all-photos">
             Browse the gallery <span aria-hidden="true">↓</span>
           </a>
@@ -60,11 +60,11 @@ export default function PhotosPage() {
       <section id="all-photos" className="gallery-content" aria-labelledby="gallery-browse-title">
         <div className="showcase-section-head">
           <div>
-            <p className="showcase-eyebrow">Look around</p>
-            <h2 id="gallery-browse-title">Every corner, at your pace.</h2>
+            <p className="showcase-eyebrow">Browse by area</p>
+            <h2 id="gallery-browse-title">Rooms, grounds, and waterfront.</h2>
           </div>
           <Link href="/lodge" className="showcase-inline-link">
-            Read about the Lodge <span aria-hidden="true">→</span>
+            See the Lodge details <span aria-hidden="true">→</span>
           </Link>
         </div>
         <LodgePhotoGallery />
@@ -72,12 +72,12 @@ export default function PhotosPage() {
 
       <section className="showcase-close gallery-close" aria-labelledby="gallery-close-title">
         <div>
-          <p className="showcase-eyebrow">Ready to find a weekend?</p>
-          <h2 id="gallery-close-title">Come see it in person.</h2>
+          <p className="showcase-eyebrow">Booking</p>
+          <h2 id="gallery-close-title">Interested in staying?</h2>
           <p>
             {bookEnabled
-              ? "Send us your dates. We'll confirm the live calendar and send an itemized quote before payment."
-              : "Check available dates and reservation options on Airbnb."}
+              ? "Send us your dates and we’ll check availability. You’ll get a full quote before any charge."
+              : "See dates and prices on our Airbnb listing."}
           </p>
         </div>
         <div className="showcase-close-actions">

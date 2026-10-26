@@ -13,9 +13,9 @@ export default function ExplorePage() {
   return (
     <main id="main-content">
       <PageHero
-        eyebrow="Around Kendall Pond"
-        title="A little farther out."
-        intro="Gardner. Wachusett. Weddings. Food. Easy day plans."
+        eyebrow="Around Gardner"
+        title="Gardner and Wachusett."
+        intro="Find local restaurants, spend a day at Wachusett, or stay nearby for a wedding."
         image="/images/kpl/website-top-50/09-Waterfront-and-Grounds/46-kendall-pond-lodge-autumn-pond-and-dock.jpg"
         imageAlt="Kendall Pond in fall"
         imagePosition="center 58%"
@@ -25,8 +25,8 @@ export default function ExplorePage() {
 
       <section className="content-section">
         <div className="info-grid info-grid-three">
-          <InfoCard title="Wachusett"><p>Ski. Hike. Catch an event. Be back at the pond by dinner.</p></InfoCard>
-          <InfoCard title="Gardner"><p>Coffee, groceries, restaurants, and local stops are close.</p></InfoCard>
+          <InfoCard title="Wachusett"><p>Hiking, skiing, and seasonal events are good reasons to head out for the day.</p></InfoCard>
+          <InfoCard title="Gardner"><p>Restaurants, coffee, groceries, and everyday stops are in town.</p></InfoCard>
           <InfoCard title="Weddings"><p>The Polish American Citizens Club is a short walk from the Lodge.</p></InfoCard>
         </div>
       </section>
@@ -35,10 +35,11 @@ export default function ExplorePage() {
         <div className="explore-arrival-strip">
           <div>
             <p className="eyebrow">Getting here</p>
-            <h2>Easy.</h2>
+            <h2>Getting to the Lodge.</h2>
             <p>
-              Gardner is right off Route 2. Coming from Boston by commuter rail?
-              Wachusett Station is the useful stop. Plan the last ride to the Lodge separately.
+              Gardner is off Route 2. If you’re coming by commuter rail from Boston,
+              Wachusett Station is on the Fitchburg Line. You’ll need to arrange
+              a ride from the station to the Lodge.
             </p>
           </div>
           <div className="explore-arrival-links">
@@ -51,9 +52,9 @@ export default function ExplorePage() {
 
       <section className="content-section">
         <div className="photo-grid">
-          <PhotoCard src="/images/kpl/website-top-50/02-Exterior/07-kendall-pond-lodge-autumn-lodge-and-yard.jpg" alt="The Lodge in fall" title="Fall" note="Cool air · bright leaves · hot tub" wide />
-          <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/48-kendall-pond-lodge-autumn-lawn.jpg" alt="The waterfront lawn in fall" title="Outside" note="Lawn · pond · room to slow down" />
-          <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/47-kendall-pond-lodge-late-autumn-firepit.jpg" alt="The shoreline firepit in fall" title="Later" note="Firepit · cooler nights" />
+          <PhotoCard src="/images/kpl/website-top-50/02-Exterior/07-kendall-pond-lodge-autumn-lodge-and-yard.jpg" alt="The Lodge in fall" title="The Lodge in fall" note="Autumn foliage around the house" wide />
+          <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/48-kendall-pond-lodge-autumn-lawn.jpg" alt="The waterfront lawn in fall" title="The waterfront lawn" note="Lawn between the house and shoreline" />
+          <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/47-kendall-pond-lodge-late-autumn-firepit.jpg" alt="The shoreline firepit in fall" title="Firepit by the water" note="Shoreline seating in autumn" />
         </div>
       </section>
     </main>

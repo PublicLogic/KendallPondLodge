@@ -22,8 +22,10 @@ export default function RatesPage() {
     <main id="main-content">
       <PageHero
         eyebrow="Rates & booking"
-        title="Book it your way."
-        intro="Direct with us, or Airbnb. Full price first either way."
+        title="Booking options."
+        intro={directEnabled
+          ? "Send us a request for a direct quote, or book through Airbnb."
+          : "Direct requests are temporarily closed. Check availability and pricing on Airbnb."}
         image="/images/kpl/website-top-50/01-Hero/03-kendall-pond-lodge-lakeview-deck.jpg"
         imageAlt="The Lodge deck overlooking Kendall Pond"
         imagePosition="center"
@@ -35,37 +37,39 @@ export default function RatesPage() {
         secondaryAction={{ href: "/lodge", label: "See inside" }}
       />
 
-      <section className="content-section">
+      {directEnabled && <section className="content-section">
         <SectionHeading
-          eyebrow="Direct"
-          title="Direct is simple."
-          intro="Send the dates. We check them and send one itemized quote."
+          eyebrow="Booking directly"
+          title="How direct requests work."
+          intro="Choose your dates and group size. We’ll confirm availability, then send a full quote and deposit details."
         />
         <div className="info-grid info-grid-two">
           <InfoCard icon="house" title="No charge to ask">
-            <p>Ask first. Nothing is charged.</p>
+            <p>Submitting a request does not reserve your dates or charge your card.</p>
           </InfoCard>
           <InfoCard icon="help" title="Full price before payment">
-            <p>Everything is itemized before you pay.</p>
+            <p>We’ll show nightly rates, fees, and deposit terms before payment.</p>
           </InfoCard>
         </div>
-      </section>
+      </section>}
 
       <section className="content-section surface-section">
         <div className="booking-cta-panel">
           <div>
-            <p className="eyebrow">Choose what works for you</p>
-            <h2>Book direct or use Airbnb.</h2>
-            <p>Same Lodge. Pick the checkout you prefer.</p>
+            <p className="eyebrow">Reservations</p>
+            <h2>{directEnabled ? "Choose how to book." : "Reserve through Airbnb."}</h2>
+            <p>{directEnabled
+              ? "Request a quote from us, or use Airbnb to reserve."
+              : "Our Airbnb listing has current availability and checkout details."}</p>
           </div>
           <div>
             {directEnabled && (
               <Link className="button button-primary" href="/book">
-                Request direct <Icon name="arrow" size={18} />
+                Check dates <Icon name="arrow" size={18} />
               </Link>
             )}
             <p className="booking-guest-link">
-              <a href={airbnb} target="_blank" rel="noreferrer">Prefer Airbnb? Reserve there ↗</a>
+              <a href={airbnb} target="_blank" rel="noreferrer">{directEnabled ? "Prefer Airbnb? Reserve there ↗" : "Check dates on Airbnb ↗"}</a>
             </p>
           </div>
         </div>

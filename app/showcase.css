@@ -681,3 +681,23 @@
   .showcase-page *, .gallery-page *,
   .hospitality-header * { transition-duration: 0ms !important; scroll-behavior: auto !important; }
 }
+
+
+/* Hospitality brand hierarchy: Lodge first, STAY booking credit second. */
+.booking-panel-direct .booking-brand img { width: 82px !important; }
+
+.hospitality-footer-platform {
+  margin-top: .7rem;
+}
+.hospitality-footer [data-stayos-footer-mark] {
+  opacity: 1;
+  transform: none;
+}
+@media (max-width: 760px) {
+  .hospitality-footer-platform {
+    margin-top: 1rem;
+  }
+  .booking-panel-direct .booking-brand img {
+    width: 82px !important;
+  }
+}

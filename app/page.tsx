@@ -9,7 +9,7 @@ import { directBookingEnabled } from "@/lib/booking-db";
 export const metadata: Metadata = {
   title: "The Lodge at Kendall Pond | Private Waterfront Stay in Gardner, MA",
   description:
-    "A whole lake house on Kendall Pond in Gardner, MA. Three bedrooms, two baths, hot tub, private dock, firepit and space for eight. Explore real photos and request your dates.",
+    "Three-bedroom waterfront house in Gardner, Massachusetts. Sleeps eight, with a private dock, deck, hot tub and firepit on Kendall Pond.",
 };
 
 const airbnb =
@@ -19,29 +19,29 @@ const airbnb =
 const moments = [
   {
     order: 42,
-    title: "Mornings by the water",
-    detail: "Private shoreline, dock and room to slow down.",
+    title: "The dock and shoreline",
+    detail: "The lawn leads down to Kendall Pond and the private dock.",
     href: "/grounds",
-    link: "Explore the waterfront",
+    link: "See the waterfront",
   },
   {
     order: 4,
-    title: "An evening in the hot tub",
-    detail: "A pond view from the covered patio.",
+    title: "Hot tub under the deck",
+    detail: "The covered patio and hot tub overlook the pond.",
     href: "/grounds",
     link: "See the outdoor spaces",
   },
   {
     order: 5,
-    title: "Everyone under one roof",
-    detail: "A generous great room for staying in.",
+    title: "The great room",
+    detail: "Tall ceilings, a fireplace, and room for everyone to sit together.",
     href: "/lodge",
     link: "Step inside",
   },
   {
     order: 35,
-    title: "Dinner on the deck",
-    detail: "Fresh air and the pond just beyond the table.",
+    title: "The upper deck",
+    detail: "Outdoor dining and lounge seating above the water.",
     href: "/lodge",
     link: "See the Lodge",
   },
@@ -49,10 +49,10 @@ const moments = [
 
 const photoPreview = [
   { order: 11, label: "The great room" },
-  { order: 43, label: "Your own dock" },
+  { order: 43, label: "The private dock" },
   { order: 17, label: "Kitchen & dining" },
-  { order: 26, label: "Room for the family" },
-  { order: 40, label: "Firepit evenings" },
+  { order: 26, label: "The bunk room" },
+  { order: 40, label: "Firepit by the pond" },
 ] as const;
 
 function BookingAction({
@@ -97,14 +97,14 @@ export default function HomePage() {
             </p>
             <h1 id="showcase-title">The Lodge at Kendall Pond</h1>
             <p className="showcase-hero-lead">
-              A whole place by the water, with nowhere else you need to be.
+              Three bedrooms, room for eight, a private dock, and a hot tub overlooking Kendall Pond.
             </p>
             <div className="showcase-hero-actions">
               <BookingAction enabled={directEnabled} className="showcase-button showcase-button-light">
                 Check your dates <span aria-hidden="true">↗</span>
               </BookingAction>
               <Link className="showcase-quiet-link" href="/photos">
-                Explore the photos <span aria-hidden="true">→</span>
+                View photos <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>
@@ -119,7 +119,7 @@ export default function HomePage() {
 
       <div className="showcase-trust">
         <div className="showcase-trust-inner">
-          <p><strong>Hosted by Nate &amp; Allie.</strong> A real place to make memories together.</p>
+          <p><strong>Hosted by Nate &amp; Allie.</strong> We’re happy to answer questions before you book.</p>
           <a href={airbnb + "#reviews"} target="_blank" rel="noopener noreferrer">
             Read guest reviews on Airbnb <span aria-hidden="true">↗</span>
           </a>
@@ -128,12 +128,12 @@ export default function HomePage() {
 
       <section className="showcase-intro" aria-labelledby="showcase-intro-title">
         <div className="showcase-intro-main">
-          <p className="showcase-eyebrow">Your corner of Kendall Pond</p>
-          <h2 id="showcase-intro-title">Come for the water. Stay for the time together.</h2>
+          <p className="showcase-eyebrow">The property</p>
+          <h2 id="showcase-intro-title">The pond is right outside.</h2>
           <p>
-            Coffee out on the deck. A paddle on the pond. A long dinner, a fire,
-            and a night that doesn’t need a plan. The Lodge gives your whole group
-            a place to settle in and feel at home.
+            The upper deck looks out over Kendall Pond, and the lawn leads down
+            to the shoreline and dock. Inside, the great room and kitchen give
+            everyone a place to cook, eat, and spend time together.
           </p>
         </div>
         <div className="showcase-intro-aside" aria-label="Property highlights">
@@ -147,8 +147,8 @@ export default function HomePage() {
       <section className="showcase-moments" aria-labelledby="showcase-moments-title">
         <div className="showcase-section-head">
           <div>
-            <p className="showcase-eyebrow">The best parts of staying here</p>
-            <h2 id="showcase-moments-title">Make the weekend yours.</h2>
+            <p className="showcase-eyebrow">Around the property</p>
+            <h2 id="showcase-moments-title">Take a look around.</h2>
           </div>
           <Link className="showcase-inline-link" href="/photos">See all 50 photos <span aria-hidden="true">→</span></Link>
         </div>
@@ -186,15 +186,16 @@ export default function HomePage() {
           />
         </div>
         <div className="showcase-water-copy">
-          <p className="showcase-eyebrow">Right outside the door</p>
-          <h2 id="showcase-water-title">The pond is the point.</h2>
+          <p className="showcase-eyebrow">Waterfront</p>
+          <h2 id="showcase-water-title">From the deck to the dock.</h2>
           <p>
-            Walk down to the shoreline and find your spot. Spend the afternoon
-            out on the water, then come back for the hot tub or a fire by the pond.
-            You’re close to Gardner and Wachusett, but you might not want to leave.
+            The lawn runs down to the shore, where you’ll find the dock and
+            firepit. Sit by the water or take out a kayak when seasonal equipment
+            is available. The hot tub is under the covered patio, with the pond
+            in view.
           </p>
           <div className="showcase-water-links">
-            <Link href="/grounds">Explore the waterfront <span aria-hidden="true">→</span></Link>
+            <Link href="/grounds">See the waterfront <span aria-hidden="true">→</span></Link>
             <Link href="/explore">Around Gardner <span aria-hidden="true">→</span></Link>
           </div>
         </div>
@@ -203,11 +204,11 @@ export default function HomePage() {
       <section className="showcase-photo-section" aria-labelledby="showcase-photo-title">
         <div className="showcase-section-head">
           <div>
-            <p className="showcase-eyebrow">A closer look</p>
-            <h2 id="showcase-photo-title">See yourself here.</h2>
-            <p>Not stock photos. The rooms, outdoor spaces, and shoreline you’ll actually visit.</p>
+            <p className="showcase-eyebrow">Photos</p>
+            <h2 id="showcase-photo-title">Inside and out.</h2>
+            <p>Browse the rooms, deck, dock, and grounds in photos taken at the Lodge.</p>
           </div>
-          <Link className="showcase-inline-link" href="/photos">Open the complete gallery <span aria-hidden="true">→</span></Link>
+          <Link className="showcase-inline-link" href="/photos">See all photos <span aria-hidden="true">→</span></Link>
         </div>
         <div className="showcase-photo-mosaic">
           {photoPreview.map((item) => {
@@ -230,20 +231,20 @@ export default function HomePage() {
 
       <section className="showcase-close" aria-labelledby="showcase-close-title">
         <div>
-          <p className="showcase-eyebrow">A stay worth making time for</p>
-          <h2 id="showcase-close-title">Your dates. Your people. The pond.</h2>
+          <p className="showcase-eyebrow">Plan a stay</p>
+          <h2 id="showcase-close-title">Have a weekend in mind?</h2>
           <p>
             {directEnabled
-              ? "Choose your dates and send us a request. We’ll check availability and share the full price before any payment."
-              : "Explore available dates and reservation options on our Airbnb listing."}
+              ? "Send us the dates you’re considering. We’ll check availability and send the full price before asking for payment."
+              : "Check available dates and prices on our Airbnb listing."}
           </p>
         </div>
         <div className="showcase-close-actions">
           <BookingAction enabled={directEnabled} className="showcase-button showcase-button-dark">
-            {directEnabled ? "Check dates & request a stay" : "Check dates on Airbnb"}
+            {directEnabled ? "Check dates" : "Check dates on Airbnb"}
             <span aria-hidden="true">↗</span>
           </BookingAction>
-          <Link href="/lodge" className="showcase-inline-link">Take a look inside <span aria-hidden="true">→</span></Link>
+          <Link href="/lodge" className="showcase-inline-link">See the rooms <span aria-hidden="true">→</span></Link>
         </div>
       </section>
     </main>

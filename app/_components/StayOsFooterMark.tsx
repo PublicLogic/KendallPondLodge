@@ -5,22 +5,26 @@ type StayOsFooterMarkProps = {
   inverse?: boolean;
 };
 
+/** Booking platform credit, not the primary Lodge identity. */
 export function StayOsFooterMark({ inverse = false }: StayOsFooterMarkProps) {
   return (
     <div
       className={`${styles.mark}${inverse ? ` ${styles.inverse}` : ""}`}
-      aria-label="Powered by PuddleJumper STAY"
       data-stayos-footer-mark
+      aria-label="Booking with PuddleJumper STAY, by PublicLogic"
     >
-      <span className={styles.label}>Powered by</span>
-      <span className={styles.logo}>
-        <Image
-          src="/brand/stay/puddlejumper-beta.png"
-          alt="PuddleJumper Beta"
-          fill
-          sizes="220px"
-        />
-      </span>
+      <Image
+        className={styles.logo}
+        src="/brand/stay/puddlejumper-stay.png"
+        alt="PuddleJumper STAY"
+        width={401}
+        height={422}
+        sizes="84px"
+      />
+      <div className={styles.copy}>
+        <span className={styles.label}>STAY booking</span>
+        <span className={styles.credit}>By PublicLogic</span>
+      </div>
     </div>
   );
 }

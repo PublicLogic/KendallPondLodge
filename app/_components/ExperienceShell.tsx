@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 
 import { publicNavigation } from "@/app/_data/navigation";
 import { Brand } from "./Brand";
+import { StayOsFooterMark } from "./StayOsFooterMark";
 
 const legacyGuidePaths = new Set([
   "/house-guide",
@@ -103,6 +104,9 @@ function PublicFooter({ bookEnabled }: { bookEnabled: boolean }) {
           <Link href="/guidebook">Guest Guide</Link>
           <Link className="footer-owner-link" href="/owner">Owner sign-in</Link>
         </nav>
+        <div className="hospitality-footer-platform">
+          <StayOsFooterMark inverse />
+        </div>
       </div>
     </footer>
   );

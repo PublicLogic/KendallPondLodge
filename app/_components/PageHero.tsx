@@ -38,7 +38,6 @@ export function PageHero({
       </div>
       <figure className="page-hero-photo">
         <Image src={image} alt={imageAlt} fill priority sizes="(max-width: 860px) 100vw, 48vw" style={{ objectPosition: imagePosition }} />
-        <figcaption>Actual property photo · Kendall Pond</figcaption>
       </figure>
     </section>
   );
