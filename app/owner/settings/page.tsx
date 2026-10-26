@@ -1,40 +1,274 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { bookingClient, bookingConfigured, directBookingEnabled, paymentConfigured } from '@/lib/booking-db';
+import {
+  bookingClient,
+  bookingConfigured,
+  directBookingEnabled,
+  paymentConfigured,
+} from '@/lib/booking-db';
 import { requireKplOwner } from '@/lib/require-kpl-owner';
-import { BookingBrand } from '@/app/_components/BookingBrand';
-export const metadata: Metadata = { title: 'Booking setup', robots: { index: false, follow: false } };
+import { airbnbCalendarConfigured } from '@/lib/airbnb-ical.mjs';
+import { CalendarSyncControl } from './CalendarSyncControl';
+import { syncAirbnbCalendar } from './actions';
+
+export const metadata: Metadata = {
+  title: 'Booking setup',
+  robots: { index: false, follow: false },
+};
+
 export const dynamic = 'force-dynamic';
 
-export default async function BookingSettings() {
+function StatusItem({
+  label,
+  value,
+  good,
+}: {
+  label: string;
+  value: string;
+  good: boolean;
+}) {
+  return (
+    <div className="owner-status-item">
+      <span className="owner-status-label">{label}</span>
+      <strong className={good ? 'owner-status-good' : 'owner-status-warn'}>
+        {value}
+      </strong>
+    </div>
+  );
+}
+
+export default async function BookingSettings({
+  searchParams,
+}: {
+  searchParams: Promise<{ calendar?: string; events?: string }>;
+}) {
   await requireKplOwner('/owner/settings');
-  let store = 'Not set up', calendar = 'Not set up';
+
+  const query = await searchParams;
+
+  let store = 'Not set up';
+  let calendar = 'Not set up';
+
   if (bookingConfigured()) {
     try {
       const status = await bookingClient().contentStatus();
       store = 'Connected';
-      calendar = status.calendarConfigured ? 'Source registered' : 'Not set up';
-    } catch { store = 'Needs attention'; calendar = 'Needs attention'; }
+      calendar = status.calendarConfigured
+        ? 'Source registered'
+        : 'Not set up';
+    } catch {
+      store = 'Needs attention';
+      calendar = 'Needs attention';
+    }
   }
-  return <main id="main-content" className="content-section booking-page">
-    <BookingBrand owner /><p className="eyebrow">Lodge at Kendall Pond</p><h1>Booking setup.</h1>
-    <p><Link href="/owner/bookings">← Requests & bookings</Link></p>
-    <div className="booking-grid">
-      <section className="booking-panel"><h2>Connections</h2><dl className="booking-totals">
-        <div><dt>Booking records</dt><dd>{store}</dd></div>
-        <div><dt>Airbnb calendar in PJ</dt><dd>{calendar}</dd></div>
-        <div><dt>Local Airbnb calendar check</dt><dd>{process.env.KPL_AIRBNB_ICAL_URL?.trim() ? 'Source configured' : 'Not set up'}</dd></div>
-        <div><dt>Payment setup</dt><dd>{paymentConfigured() ? 'Configured' : 'Needs attention'}</dd></div>
-        <div><dt>Direct requests</dt><dd>{directBookingEnabled() ? 'Open' : 'Closed'}</dd></div>
-      </dl><p>Registration is not proof of availability. The calendar is checked again when quoting and before checkout. Payment setup does not verify a transaction.</p>
-      <p>Connection keys, calendar links, and payment secrets stay on the server. Changes to them are made through hosting configuration, not this page.</p></section>
-      <section className="booking-panel"><h2>Pricing & terms</h2><p>Nightly rate, cleaning, pets, taxes, other fees and the exact deposit are entered on each quote. There are no saved price defaults here.</p>
-        <p>Include complete cancellation/refund terms and balance-payment terms. This checkout charges only the quoted deposit; it does not schedule the balance.</p>
-        <p>Quotes last up to 48 hours, capped at the arrival date. More than 65 minutes must remain to start payment.</p>
-        <p>Any active PJ booking policy is enforced by PJ. Policy changes are not editable here and cannot be bypassed by this interface.</p>
+
+  const localCalendar = airbnbCalendarConfigured();
+  const payments = paymentConfigured();
+  const directRequests = directBookingEnabled();
+
+  const guestEmail =
+    process.env.KPL_BOOKING_CONTACT_EMAIL?.trim() ||
+    'info@publiclogic.org';
+
+  return (
+    <main id="main-content" className="owner-settings-page">
+      <header className="owner-page-head">
+        <div>
+          <p className="eyebrow">Lodge operations</p>
+          <h1>Settings</h1>
+          <p className="owner-page-intro">
+            Connections, booking rules, and the boundaries that keep direct
+            stays governed.
+          </p>
+        </div>
+
+        <div className="owner-page-context">
+          <span>PuddleJumper STAY</span>
+          <strong>Lodge at Kendall Pond</strong>
+        </div>
+      </header>
+
+      <section
+        className="owner-status-board"
+        aria-labelledby="connection-status-title"
+      >
+        <div className="owner-status-head">
+          <div>
+            <p className="eyebrow">System status</p>
+            <h2 id="connection-status-title">Booking infrastructure</h2>
+          </div>
+          <span className="owner-live-mark">Owner view</span>
+        </div>
+
+        <div className="owner-status-grid">
+          <StatusItem
+            label="Booking records"
+            value={store}
+            good={store === 'Connected'}
+          />
+          <StatusItem
+            label="Airbnb → PJ"
+            value={calendar}
+            good={calendar === 'Source registered'}
+          />
+          <StatusItem
+            label="Airbnb check"
+            value={localCalendar ? 'Source configured' : 'Not set up'}
+            good={localCalendar}
+          />
+          <StatusItem
+            label="Payments"
+            value={payments ? 'Configured' : 'Needs attention'}
+            good={payments}
+          />
+          <StatusItem
+            label="Direct requests"
+            value={directRequests ? 'Open' : 'Closed'}
+            good={directRequests}
+          />
+        </div>
       </section>
-      <section className="booking-panel"><h2>Guest communication</h2><p>Manual delivery</p><p>After the complete Airbnb block is visible, copy and send the private quote link yourself. KPL does not send booking emails from this release. A recorded request is not a sent notification.</p><p>Messages governed by PJ remain held unless its messaging service is enabled. This page has no switch that can change that.</p></section>
-      <section className="booking-panel"><h2>Owner access & cancellations</h2><p>Owner-code sign-in uses a signed session that expires after 12 hours. Guests never need this code.</p><p>Only unpaid holds can be released here. For a paid stay, handle the guest’s cancellation and any refund with Stripe and the booking operator. Recording a correction note does not cancel the reservation or issue a refund.</p><p>This first release uses light mode.</p></section>
-    </div>
-  </main>;
+
+      <div className="owner-settings-layout">
+        <section className="owner-control-card owner-calendar-card">
+          <div className="owner-card-head">
+            <div>
+              <p className="eyebrow">Availability control</p>
+              <h2>Airbnb calendar</h2>
+            </div>
+
+            <span
+              className={
+                calendar === 'Source registered'
+                  ? 'owner-pill owner-pill-good'
+                  : 'owner-pill owner-pill-warn'
+              }
+            >
+              {calendar}
+            </span>
+          </div>
+
+          <p className="owner-card-lead">
+            Register the private Airbnb calendar with PJ and verify the live
+            feed from the deployed server.
+          </p>
+
+          {query.calendar === 'registered' && (
+            <p className="booking-alert owner-sync-result" role="status">
+              Airbnb calendar synced with PJ
+              {query.events ? ` · ${query.events} calendar events read` : ''}.
+            </p>
+          )}
+
+          {query.calendar === 'missing' && (
+            <p className="booking-alert owner-sync-result" role="alert">
+              Airbnb calendar source is not configured on this deployment.
+            </p>
+          )}
+
+          {query.calendar === 'unverified' && (
+            <p className="booking-alert owner-sync-result" role="alert">
+              PJ did not confirm the calendar source after registration.
+            </p>
+          )}
+
+          {query.calendar === 'error' && (
+            <p className="booking-alert owner-sync-result" role="alert">
+              Calendar sync failed. No booking or payment was changed.
+            </p>
+          )}
+
+          <div className="owner-calendar-action">
+            <CalendarSyncControl action={syncAirbnbCalendar}>Sync Airbnb calendar</CalendarSyncControl>
+
+            <p>
+              Fresh validation runs again when quoting and before checkout.
+              Registration alone is never proof that dates are available.
+            </p>
+          </div>
+
+          <div className="owner-security-note">
+            <strong>Private by design.</strong>
+            <span>
+              Calendar links, connection keys, and payment secrets stay in the
+              server runtime and are never displayed here.
+            </span>
+          </div>
+        </section>
+
+        <aside className="owner-control-card owner-rule-card">
+          <p className="eyebrow">How booking works</p>
+          <h2>Quote rules</h2>
+
+          <dl className="owner-rule-list">
+            <div>
+              <dt>Pricing</dt>
+              <dd>Entered per quote</dd>
+            </div>
+            <div>
+              <dt>Deposit</dt>
+              <dd>Exact quoted amount</dd>
+            </div>
+            <div>
+              <dt>Quote life</dt>
+              <dd>Up to 48 hours</dd>
+            </div>
+            <div>
+              <dt>Payment start</dt>
+              <dd>More than 65 min. remaining</dd>
+            </div>
+            <div>
+              <dt>Availability</dt>
+              <dd>Rechecked before payment</dd>
+            </div>
+          </dl>
+
+          <p className="owner-card-footnote">
+            Active PJ booking policy is enforced by PJ and cannot be bypassed
+            from this Lodge interface.
+          </p>
+        </aside>
+      </div>
+
+      <div className="owner-settings-secondary">
+        <section className="owner-mini-card">
+          <p className="eyebrow">Guest identity</p>
+          <h3>Communication</h3>
+          <p>
+            <strong>The Lodge at Kendall Pond</strong>
+            <br />
+            {guestEmail}
+          </p>
+          <p>
+            PJ governs sender authorization, delivery state, retries, and
+            audit. Manual delivery remains the fallback until messaging is
+            enabled.
+          </p>
+        </section>
+
+        <section className="owner-mini-card">
+          <p className="eyebrow">Terms</p>
+          <h3>Each stay is explicit</h3>
+          <p>
+            Nightly rate, cleaning, pets, taxes, other fees, cancellation
+            terms, balance terms, and deposit are entered on the individual
+            quote.
+          </p>
+          <p>No invented or hidden saved-price defaults.</p>
+        </section>
+
+        <section className="owner-mini-card">
+          <p className="eyebrow">Owner boundary</p>
+          <h3>Access & cancellations</h3>
+          <p>
+            Owner sessions expire after 12 hours. Guests never need the owner
+            code.
+          </p>
+          <p>
+            Unpaid holds may be released here. Paid cancellations and refunds
+            remain explicit operator actions.
+          </p>
+        </section>
+      </div>
+    </main>
+  );
 }

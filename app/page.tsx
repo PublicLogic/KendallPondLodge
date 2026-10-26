@@ -20,11 +20,11 @@ export default function HomePage() {
   return (
     <main id="main-content">
       <PageHero
-        eyebrow="Kendall Pond · Gardner, Massachusetts"
+        eyebrow="Fall at Kendall Pond · Gardner, Massachusetts"
         title="Your place by the pond."
-        intro="Private shoreline. Hot tub. Firepit. Dock. Room for eight."
-        image="/images/kpl/pond-seating.jpg"
-        imageAlt="The Lodge overlooking Kendall Pond"
+        intro="Hot tub. Firepit. Foliage. Private shoreline. Room for eight."
+        image="/images/kpl/fall-lodge.webp"
+        imageAlt="The Lodge at Kendall Pond surrounded by fall foliage"
         imagePosition="center"
         primaryAction={{
           href: directEnabled ? "/book" : airbnb,
@@ -69,16 +69,16 @@ export default function HomePage() {
             wide
           />
           <PhotoCard
-            src="/images/kpl/hot-tub.jpg"
-            alt="The hot tub overlooking Kendall Pond"
-            title="Hot tub"
-            note="Covered patio · pond view"
+            src="/images/kpl/fall-firepit.webp"
+            alt="The shoreline firepit in fall"
+            title="Firepit"
+            note="Cool nights · shoreline fire"
           />
           <PhotoCard
-            src="/images/kpl/pond.jpg"
-            alt="Kendall Pond from the Lodge"
-            title="Your shoreline"
-            note="Beach · dock · kayaks · paddle boat"
+            src="/images/kpl/fall-pond.webp"
+            alt="Kendall Pond in fall"
+            title="Kendall Pond"
+            note="Private shoreline · fall color"
           />
         </div>
       </section>

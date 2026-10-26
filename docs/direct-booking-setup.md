@@ -17,7 +17,7 @@ Use Node 24 and the included npm lockfile. Run `npm ci`, `npm run test:core`, an
 | `KPL_AIRBNB_ICAL_URL` | Private Airbnb export, used for KPL's owner checks and explicit server-to-server registration with PJ. Never expose it to a browser or log it. |
 | `STRIPE_SECRET_KEY` | Matching test or live account key. Test mode for rehearsal. |
 | `STRIPE_WEBHOOK_SECRET` | Secret belonging to the same environment's endpoint `/api/stripe/webhook`. |
-| `KPL_BOOKING_CONTACT_EMAIL` | Optional real contact address. Without it the UI retains the Airbnb contact fallback. |
+| `KPL_BOOKING_CONTACT_EMAIL` | Guest contact address. KPL uses `info@publiclogic.org`. This is contact identity only; outbound delivery belongs to PJ. |
 | `KPL_OWNER_CODE_HASH` | SHA-256 hex of the owner's strong passphrase. No development bypass is accepted by the new owner module. |
 | `KPL_OWNER_SESSION_TOKEN` | Existing name, now used as an HMAC signing secret of at least 32 characters. It is not sent as a cookie. |
 | `KPL_GUIDEBOOK_CODE_HASH`, `KPL_GUIDEBOOK_SESSION_TOKEN` | Existing separate guidebook settings; no changes to the guest guidebook access model in this patch. |
@@ -66,7 +66,9 @@ This is still a shared-owner gate, not per-person Google identity or grant-based
 
 ## Messaging, cancellation and appearance
 
-Delivery of quotes remains manual. No messaging toggle is added. The UI does not claim that PJ messages have been sent or that a disabled provider is active.
+Outbound guest messaging belongs to PuddleJumper. KPL keeps the guest contact identity (`info@publiclogic.org`) and booking UI, but it does not own provider credentials, a mail queue, retries, or delivery state.
+
+PJ remains fail-safe: messages are held unless its Stay messaging gate is enabled and a workspace sender/provider is authorized. Until the PJ sender is connected and rehearsed, quote delivery remains manual.
 
 Unpaid holds can be released. Confirmed-stay cancellation, automated refunds and collection of the later balance are not implemented by this adapter. Decide and rehearse the manual workflow before enabling live payments. Recording a correction note does not refund a card or cancel the stay.
 
