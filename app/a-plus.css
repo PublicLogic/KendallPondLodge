@@ -1646,3 +1646,65 @@
     transition:none;
   }
 }
+
+
+/* === GOVERNED BOOKING DELIVERY === */
+.owner-booking-progress{
+  grid-template-columns:repeat(6,minmax(0,1fr));
+}
+
+.owner-message-state{
+  display:inline-flex;
+  min-height:39px;
+  align-items:center;
+  padding:.5rem .7rem;
+  border:1px solid #b8d1c4;
+  background:#edf7f1;
+  color:#286347;
+  font-size:.68rem;
+  font-weight:760;
+}
+
+.booking-confirmed-panel{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:1.5rem;
+  margin:1rem 0 1.25rem;
+  padding:1.2rem 1.3rem;
+  border:1px solid #b7d3c4;
+  border-left:4px solid #2d7654;
+  background:#edf7f1;
+}
+
+.booking-confirmed-panel h2{
+  margin:.15rem 0 .35rem;
+  color:#214d3d;
+  font-family:var(--font-sans),sans-serif;
+  font-size:1.4rem;
+}
+
+.booking-confirmed-panel p{
+  margin:.25rem 0;
+  color:#526a60;
+}
+
+.booking-confirmed-actions{
+  display:grid;
+  gap:.5rem;
+  min-width:180px;
+}
+
+@media(max-width:760px){
+  .owner-booking-progress{
+    grid-template-columns:repeat(6,120px);
+  }
+
+  .booking-confirmed-panel{
+    grid-template-columns:1fr;
+  }
+
+  .booking-confirmed-actions{
+    min-width:0;
+  }
+}

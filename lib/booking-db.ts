@@ -32,3 +32,28 @@ export type BookingAttention = {
  problems:Array<{code:string;severity:'action'|'todo'|'info';message:string}>}>;
 };
 export async function bookingAttention(): Promise<BookingAttention> { return bookingClient().attention(); }
+
+
+export type BookingMessageState = {
+ kind:'request_guest'|'request_owner'|'quote_guest'|'confirmed_guest'|'confirmed_owner';
+ status:string;
+ hold_reason:string|null;
+ sent_at:string|null;
+ verification:string;
+ provider_accepted:boolean;
+};
+
+export type BookingMessagingStatus = {
+ readiness:{
+   enabled:boolean;
+   sender_authorized:boolean;
+   provider_connected:boolean;
+   owner_recipients:number;
+   public_base_configured:boolean;
+ };
+ bookings:Record<string,Partial<Record<BookingMessageState['kind'],BookingMessageState>>>;
+};
+
+export async function bookingMessageStatus():Promise<BookingMessagingStatus>{
+ return bookingClient().messageStatus() as Promise<BookingMessagingStatus>;
+}

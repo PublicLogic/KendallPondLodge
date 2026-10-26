@@ -49,24 +49,29 @@ test("authenticated Guidebook owns the viewport", () => {
   );
 });
 
-test("owner bookings expose the governed four-step workflow", () => {
+test("owner bookings expose the governed six-step workflow", () => {
   const page = read("app/owner/bookings/page.tsx");
   const actions = read("app/owner/bookings/QuoteLinkActions.tsx");
 
-  assert.match(page, /"Request"/);
-  assert.match(page, /"Quote"/);
-  assert.match(page, /"Airbnb block"/);
-  assert.match(page, /"Payment"/);
+  for (const step of [
+    '"New"',
+    '"Quote"',
+    '"Airbnb"',
+    '"Send"',
+    '"Paying"',
+    '"Confirmed"',
+  ]) {
+    assert.match(page, new RegExp(step));
+  }
 
+  assert.match(page, /Waiting for Airbnb block/);
   assert.match(page, /QuoteLinkActions/);
-  assert.match(page, /Airbnb block verified/);
+  assert.match(page, /bookingMessageStatus/);
 
-  assert.match(actions, /Copy quote link/);
-  assert.match(actions, /Open email draft/);
-  assert.match(
-    actions,
-    /Email delivery is still manual until PJ/,
-  );
+  assert.match(actions, /Send quote/);
+  assert.match(actions, /Copy link/);
+  assert.match(actions, /accepted by email provider/);
+  assert.doesNotMatch(actions, /mailto:/);
 });
 
 test("calendar closes all four polish review findings", () => {

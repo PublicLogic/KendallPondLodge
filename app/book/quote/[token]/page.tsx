@@ -32,7 +32,42 @@ export default async function QuotePage({ params, searchParams }: {
     <h1>Your stay at Kendall Pond.</h1>
     <p>{quote.check_in} to {quote.check_out} · {nights} {nights === 1 ? 'night' : 'nights'} · {quote.guests} guests · {quote.pets} pets</p>
     <p>This quote is for the dates above only. Keep this link private. Review all charges and terms before paying.</p>
-    {state === 'confirmed' && <p className="booking-alert" role="status">Your deposit is recorded and your booking is confirmed. Your hosts will follow up about the balance and arrival.</p>}
+    {state === 'confirmed' && (
+      <section
+        className="booking-confirmed-panel"
+        role="status"
+      >
+        <div>
+          <p className="eyebrow">Confirmed</p>
+          <h2>You’re booked.</h2>
+          <p>
+            Your {usd(deposit)} deposit is recorded for
+            {` ${quote.check_in} → ${quote.check_out}`}.
+          </p>
+          <p>
+            Remaining balance: {usd(total - deposit)}.
+            {quote.balance_terms
+              ? ` ${quote.balance_terms}`
+              : ' Nate & Allie will follow up before arrival.'}
+          </p>
+        </div>
+
+        <div className="booking-confirmed-actions">
+          <Link
+            className="button button-primary"
+            href="/guidebook"
+          >
+            Open Guest Guide
+          </Link>
+          <a
+            className="button button-secondary"
+            href={hostContactHref()}
+          >
+            Contact Nate & Allie
+          </a>
+        </div>
+      </section>
+    )}
     {state === 'checking' && <p className="booking-alert" role="status">We’re checking the payment and booking record. A return from Stripe is not proof of a completed booking. Please don’t start another payment. Refresh this page or contact your hosts.</p>}
     {state === 'refund_review' && <p className="booking-alert" role="alert">Your payment needs refund review. These dates are not confirmed. Do not pay again; contact your hosts for the next step.</p>}
     {state === 'needs_attention' && <p className="booking-alert" role="alert">Your payment is recorded, but the stay needs host attention before we can confirm it. Please contact your hosts; do not pay again.</p>}
