@@ -174,7 +174,7 @@ export default function HomePage() {
         <div className="showcase-section-head">
           <div>
             <p className="showcase-eyebrow">Pick your favorite part</p>
-            <h2 id="showcase-moments-title">Good reasons to stay put.</h2>
+            <h2 id="showcase-moments-title">There’s more than one good spot.</h2>
           </div>
           <Link className="showcase-inline-link" href="/photos">
             All 50 photos <span aria-hidden="true">→</span>
