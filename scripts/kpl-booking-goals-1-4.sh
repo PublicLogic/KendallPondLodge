@@ -1828,6 +1828,48 @@ cat >> app/a-plus.css <<'EOF'
 }
 EOF
 
+
+say "KPL A+ WORKFLOW TEST UPDATE"
+
+python3 <<'PY'
+from pathlib import Path
+
+p = Path("tests/a-plus-experience.test.mjs")
+s = p.read_text()
+
+start = s.index('test("owner bookings expose the governed four-step workflow"')
+end = s.index('test("calendar closes all four polish review findings"')
+
+replacement = r'''test("owner bookings expose the governed six-step workflow", () => {
+  const page = read("app/owner/bookings/page.tsx");
+  const actions = read("app/owner/bookings/QuoteLinkActions.tsx");
+
+  for (const step of [
+    '"New"',
+    '"Quote"',
+    '"Airbnb"',
+    '"Send"',
+    '"Paying"',
+    '"Confirmed"',
+  ]) {
+    assert.match(page, new RegExp(step));
+  }
+
+  assert.match(page, /Waiting for Airbnb block/);
+  assert.match(page, /QuoteLinkActions/);
+  assert.match(page, /bookingMessageStatus/);
+
+  assert.match(actions, /Send quote/);
+  assert.match(actions, /Copy link/);
+  assert.match(actions, /accepted by email provider/);
+  assert.doesNotMatch(actions, /mailto:/);
+});
+
+'''
+
+p.write_text(s[:start] + replacement + s[end:])
+PY
+
 say "KPL REGRESSION TESTS"
 
 cat > tests/booking-messaging-ui.test.mjs <<'EOF'
@@ -1938,6 +1980,7 @@ git add \
   app/book/quote/[token]/page.tsx \
   app/a-plus.css \
   tests/booking-messaging-ui.test.mjs \
+  tests/a-plus-experience.test.mjs \
   docs/BOOKING-E2E.md
 
 refresh_checksums
