@@ -16,7 +16,7 @@ export default function ExplorePage() {
         eyebrow="Around Kendall Pond"
         title="A little farther out."
         intro="Gardner. Wachusett. Weddings. Food. Easy day plans."
-        image="/images/kpl/fall-pond.webp"
+        image="/images/kpl/website-top-50/09-Waterfront-and-Grounds/46-kendall-pond-lodge-autumn-pond-and-dock.jpg"
         imageAlt="Kendall Pond in fall"
         imagePosition="center 58%"
         primaryAction={{ href: "/area", label: "Gardner & Wachusett" }}
@@ -51,9 +51,9 @@ export default function ExplorePage() {
 
       <section className="content-section">
         <div className="photo-grid">
-          <PhotoCard src="/images/kpl/fall-lodge.webp" alt="The Lodge in fall" title="Fall" note="Cool air · bright leaves · hot tub" wide />
-          <PhotoCard src="/images/kpl/fall-lawn.webp" alt="The waterfront lawn in fall" title="Outside" note="Lawn · pond · room to slow down" />
-          <PhotoCard src="/images/kpl/fall-firepit.webp" alt="The shoreline firepit in fall" title="Later" note="Firepit · cooler nights" />
+          <PhotoCard src="/images/kpl/website-top-50/02-Exterior/07-kendall-pond-lodge-autumn-lodge-and-yard.jpg" alt="The Lodge in fall" title="Fall" note="Cool air · bright leaves · hot tub" wide />
+          <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/48-kendall-pond-lodge-autumn-lawn.jpg" alt="The waterfront lawn in fall" title="Outside" note="Lawn · pond · room to slow down" />
+          <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/47-kendall-pond-lodge-late-autumn-firepit.jpg" alt="The shoreline firepit in fall" title="Later" note="Firepit · cooler nights" />
         </div>
       </section>
     </main>

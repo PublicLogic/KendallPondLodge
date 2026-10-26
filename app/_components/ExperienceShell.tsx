@@ -6,7 +6,6 @@ import type { ReactNode } from "react";
 
 import { publicNavigation } from "@/app/_data/navigation";
 import { Brand } from "./Brand";
-import { StayOsFooterMark } from "./StayOsFooterMark";
 
 const legacyGuidePaths = new Set([
   "/house-guide",
@@ -55,7 +54,7 @@ function PublicHeader({
             ))}
           </nav>
 
-          <details className="hospitality-menu">
+          <details className="hospitality-menu" key={pathname}>
             <summary>Menu</summary>
 
             <nav aria-label="Property menu">
@@ -83,25 +82,27 @@ function PublicHeader({
   );
 }
 
-function PublicFooter() {
+function PublicFooter({ bookEnabled }: { bookEnabled: boolean }) {
   return (
     <footer className="experience-footer hospitality-footer">
       <div className="site-footer-brand">
         <Brand />
-        <p>
-          Private waterfront on Kendall Pond · Gardner, Massachusetts
-        </p>
+        <p>Private waterfront on Kendall Pond · Gardner, Massachusetts</p>
+        <p>Hosted by Nate &amp; Allie</p>
       </div>
 
       <div className="hospitality-footer-right">
-        <div className="footer-links">
+        <nav className="footer-links" aria-label="Property footer navigation">
+          <Link href="/">Home</Link>
+          {publicNavigation.map((item) => (
+            <Link key={item.href} href={item.href}>{item.label}</Link>
+          ))}
+          <Link href={bookEnabled ? "/book" : "/rates"}>Check dates</Link>
+        </nav>
+        <nav className="footer-links footer-quiet-links" aria-label="Guest and owner tools">
           <Link href="/guidebook">Guest Guide</Link>
-          <Link className="footer-owner-link" href="/owner">
-            Owner
-          </Link>
-        </div>
-
-        <StayOsFooterMark inverse />
+          <Link className="footer-owner-link" href="/owner">Owner sign-in</Link>
+        </nav>
       </div>
     </footer>
   );
@@ -143,7 +144,7 @@ export function ExperienceShell({
     <>
       <PublicHeader bookEnabled={bookEnabled} />
       {children}
-      <PublicFooter />
+      <PublicFooter bookEnabled={bookEnabled} />
     </>
   );
 }

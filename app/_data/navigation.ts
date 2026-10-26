@@ -18,7 +18,7 @@ export const mobileNavigation = [
 
 export const publicNavigation = [
   { href: "/lodge", label: "The Lodge" },
-  { href: "/grounds", label: "The Pond" },
-  { href: "/explore", label: "Around Here" },
-  { href: "/guidebook", label: "Guest Guide" },
+  { href: "/grounds", label: "Waterfront" },
+  { href: "/photos", label: "Photos" },
+  { href: "/explore", label: "Explore" },
 ];
