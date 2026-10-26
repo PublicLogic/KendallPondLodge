@@ -59,7 +59,7 @@ export function LodgePhotoGallery() {
       </div>
 
       <p className="gallery-count" role="status" aria-live="polite">
-        Showing {visible.length} real property photos
+        Showing {visible.length} photos
       </p>
 
       <div className="gallery-grid">
