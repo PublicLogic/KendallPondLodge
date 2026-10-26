@@ -14,8 +14,8 @@ export default function GroundsPage() {
     <main id="main-content">
       <PageHero
         eyebrow="Outside"
-        title="Down by the water."
-        intro="Private shoreline, a dock, lawn and firepit, plus a covered patio with a hot tub."
+        title="Yep. That’s all out back."
+        intro="The lawn, the dock, the firepit and the hot tub are all steps from the house. No day trip required."
         image="/images/kpl/website-top-50/01-Hero/02-kendall-pond-lodge-autumn-waterfront.jpg"
         imageAlt="Kendall Pond from the Lodge"
         imagePosition="center 55%"
@@ -24,7 +24,7 @@ export default function GroundsPage() {
       />
 
       <section className="content-section">
-        <SectionHeading eyebrow="Shoreline" title="Down by the dock." />
+        <SectionHeading eyebrow="Shoreline" title="Follow the lawn." />
         <div className="photo-grid photo-grid-two">
           <PhotoCard src="/images/kpl/website-top-50/01-Hero/02-kendall-pond-lodge-autumn-waterfront.jpg" alt="Kendall Pond" title="Kendall Pond" note="Private shoreline · dock" wide position="center 55%" />
           <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/43-kendall-pond-lodge-private-dock.jpg" alt="The private dock" title="On the water" note="Seasonal kayaks · paddle boat" />
@@ -32,7 +32,7 @@ export default function GroundsPage() {
       </section>
 
       <section className="content-section surface-section">
-        <SectionHeading eyebrow="Outside the house" title="Deck, patio, and firepit." />
+        <SectionHeading eyebrow="When the sun starts to drop" title="Stay out a little longer." />
         <div className="photo-grid photo-grid-two">
           <PhotoCard src="/images/kpl/website-top-50/01-Hero/04-kendall-pond-lodge-hot-tub-with-pond-view.jpg" alt="Hot tub overlooking Kendall Pond" title="Hot tub" note="Covered patio · pond view" wide />
           <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/40-kendall-pond-lodge-summer-firepit-and-shoreline.jpg" alt="Firepit by Kendall Pond" title="Firepit" note="A few steps from the water" />
