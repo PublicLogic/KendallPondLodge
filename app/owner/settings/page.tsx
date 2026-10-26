@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { bookingClient, bookingConfigured, directBookingEnabled, paymentConfigured } from '@/lib/booking-db';
 import { requireKplOwner } from '@/lib/require-kpl-owner';
 import { BookingBrand } from '@/app/_components/BookingBrand';
+import { airbnbCalendarConfigured } from '@/lib/airbnb-ical.mjs';
+import { CalendarSyncControl } from './CalendarSyncControl';
 import { syncAirbnbCalendar } from './actions';
 export const metadata: Metadata = { title: 'Booking setup', robots: { index: false, follow: false } };
 export const dynamic = 'force-dynamic';
@@ -30,7 +32,7 @@ export default async function BookingSettings({
       <section className="booking-panel"><h2>Connections</h2><dl className="booking-totals">
         <div><dt>Booking records</dt><dd>{store}</dd></div>
         <div><dt>Airbnb calendar in PJ</dt><dd>{calendar}</dd></div>
-        <div><dt>Local Airbnb calendar check</dt><dd>{process.env.KPL_AIRBNB_ICAL_URL?.trim() ? 'Source configured' : 'Not set up'}</dd></div>
+        <div><dt>Local Airbnb calendar check</dt><dd>{airbnbCalendarConfigured() ? 'Source configured' : 'Not set up'}</dd></div>
         <div><dt>Payment setup</dt><dd>{paymentConfigured() ? 'Configured' : 'Needs attention'}</dd></div>
         <div><dt>Direct requests</dt><dd>{directBookingEnabled() ? 'Open' : 'Closed'}</dd></div>
       </dl>
@@ -38,9 +40,7 @@ export default async function BookingSettings({
       {query.calendar === 'missing' && <p className="booking-alert" role="alert">Airbnb calendar source is not configured on this deployment.</p>}
       {query.calendar === 'unverified' && <p className="booking-alert" role="alert">PJ did not confirm the calendar source after registration.</p>}
       {query.calendar === 'error' && <p className="booking-alert" role="alert">Calendar sync failed. No booking or payment was changed.</p>}
-      <form action={syncAirbnbCalendar}>
-        <button className="button button-secondary" type="submit">Sync Airbnb calendar</button>
-      </form>
+      <CalendarSyncControl action={syncAirbnbCalendar}>Sync Airbnb calendar</CalendarSyncControl>
       <p>Registration is not proof of availability. The calendar is checked again when quoting and before checkout. Payment setup does not verify a transaction.</p>
       <p>Connection keys, calendar links, and payment secrets stay on the server. The sync action uses them in the server runtime and never displays the private Airbnb URL.</p></section>
       <section className="booking-panel"><h2>Pricing & terms</h2><p>Nightly rate, cleaning, pets, taxes, other fees and the exact deposit are entered on each quote. There are no saved price defaults here.</p>
