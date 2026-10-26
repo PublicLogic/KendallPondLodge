@@ -9,7 +9,7 @@ export function BookingBrand({ owner = false }: { owner?: boolean }) {
         height={owner ? 342 : 422}
         alt={owner ? "PuddleJumper Beta" : "PuddleJumper STAY"}
       />
-      {!owner && <small>Direct booking · By PublicLogic</small>}
+      {!owner && <small>STAY booking · By PublicLogic</small>}
     </div>
   );
 }
