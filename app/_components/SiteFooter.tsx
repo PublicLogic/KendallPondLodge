@@ -7,7 +7,7 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer-brand">
         <Brand />
-        <p>The private Guidebook for the house, waterfront, and an active stay.</p>
+        <p>House and waterfront information for guests staying at the Lodge.</p>
       </div>
       <div style={{ display: "grid", gap: "0.75rem", justifyItems: "end" }}>
         <div className="footer-links">
