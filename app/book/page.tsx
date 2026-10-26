@@ -97,7 +97,7 @@ export default async function BookPage({
           <div className="booking-intro-copy">
             <p className="eyebrow">Direct with Nate & Allie</p>
 
-            <h1>{enabled ? "Request a stay." : "Check available dates."}</h1>
+            <h1>{enabled ? "Pick a weekend." : "Check available dates."}</h1>
 
             <p>
               {enabled
