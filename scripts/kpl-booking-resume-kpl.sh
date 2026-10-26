@@ -3,18 +3,14 @@ set -euo pipefail
 
 REPO="PublicLogic/KendallPondLodge"
 
+KPL_SOURCE="$HOME/Desktop/KendallPondLodge"
+
 WORKTREE="$(
-  find /private/tmp /tmp -maxdepth 1 -type d -name 'kpl-booking-*' 2>/dev/null |
-  while read -r d; do
-    if git -C "$d" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-      b="$(git -C "$d" branch --show-current 2>/dev/null || true)"
-      case "$b" in
-        feat/kpl-booking-completion-*)
-          printf '%s\n' "$d"
-          ;;
-      esac
-    fi
-  done |
+  git -C "$KPL_SOURCE" worktree list --porcelain |
+  awk '
+    /^worktree / { wt = substr($0, 10) }
+    /^branch refs\/heads\/feat\/kpl-booking-completion-/ { print wt }
+  ' |
   sort |
   tail -n 1
 )"
