@@ -22,14 +22,15 @@ export default function PhotosPage() {
   const bookEnabled = directBookingEnabled();
 
   return (
-    <main id="main-content" className="gallery-page">
+    <main id="main-content" className="gallery-page gallery-louder">
       <section className="gallery-intro" aria-labelledby="gallery-title">
         <div className="gallery-intro-copy">
-          <p className="showcase-eyebrow">Photo gallery</p>
-          <h1 id="gallery-title">The Lodge, in photos.</h1>
+          <p className="showcase-eyebrow">The Lodge / Photo tour</p>
+          <h1 id="gallery-title">Come on in.</h1>
           <p>
-            Browse {" "}{lodgePhotos.length} photos of the rooms, deck, hot tub,
-            dock, and shoreline. Choose a category below to see more of each space.
+            Great room, bedrooms, deck, dock, hot tub. We took
+            {" "}{lodgePhotos.length} photos so you can really get the lay of the place
+            before you show up with your bags.
           </p>
           <p className="gallery-intro-note">These photos were taken at different times of year. Furniture and outdoor amenities may vary by season.</p>
           <a className="showcase-inline-link" href="#all-photos">
@@ -60,8 +61,8 @@ export default function PhotosPage() {
       <section id="all-photos" className="gallery-content" aria-labelledby="gallery-browse-title">
         <div className="showcase-section-head">
           <div>
-            <p className="showcase-eyebrow">Browse by area</p>
-            <h2 id="gallery-browse-title">Rooms, grounds, and waterfront.</h2>
+            <p className="showcase-eyebrow">Your tour, your order</p>
+            <h2 id="gallery-browse-title">Where to first?</h2>
           </div>
           <Link href="/lodge" className="showcase-inline-link">
             See the Lodge details <span aria-hidden="true">→</span>
@@ -72,8 +73,8 @@ export default function PhotosPage() {
 
       <section className="showcase-close gallery-close" aria-labelledby="gallery-close-title">
         <div>
-          <p className="showcase-eyebrow">Booking</p>
-          <h2 id="gallery-close-title">Interested in staying?</h2>
+          <p className="showcase-eyebrow">Seen enough?</p>
+          <h2 id="gallery-close-title">Come see it for real.</h2>
           <p>
             {bookEnabled
               ? "Send us your dates and we’ll check availability. You’ll get a full quote before any charge."
