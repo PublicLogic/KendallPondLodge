@@ -15,7 +15,7 @@ export default function LodgePage() {
     <main id="main-content">
       <PageHero
         eyebrow="Inside the Lodge"
-        title="Room for eight, with space to spread out."
+        title="Room for eight."
         intro="Three bedrooms, two full bathrooms, a kitchen and dining area, and a great room with a fireplace."
         image="/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg"
         imageAlt="The great room at the Lodge at Kendall Pond"
