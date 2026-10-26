@@ -1,35 +1,45 @@
-# Public website: copy and brand standard
+# Public website: the Lodge voice and visual standard
 
-The Lodge at Kendall Pond is a real waterfront rental, not a technology product landing page. Keep the guest's decision simple: see the place, understand what is included, ask about dates, and know what happens next.
+This is **The Lodge at Kendall Pond**, not a tech demo, generic vacation-rental template, or an appliance inventory. Make people want to be here, then make it easy to trust what they'll book.
 
 ## Brand hierarchy
 
-1. **The Lodge at Kendall Pond** is the public-facing property and main header logo. Use `/brand/kpl/lodge-by-publiclogic.png`.
-2. **PuddleJumper STAY** is the direct-booking and guest-stay platform. Use the approved `/brand/stay/puddlejumper-stay.png` artwork on booking surfaces and in a quiet public/Guidebook footer credit. Label it “STAY booking · By PublicLogic”.
-3. **PuddleJumper Beta** belongs in owner tooling only. Do not substitute its graphic for STAY in guest/public pages.
-4. **PublicLogic** is the parent attribution, not a separate guest-facing call to action.
+1. **The Lodge at Kendall Pond** is the property's identity. Use the production logo at `/brand/kpl/lodge-by-publiclogic.png`.
+2. **PuddleJumper STAY** is the direct-booking/guest-stay system. Keep its approved `/brand/stay/puddlejumper-stay.png` image on the booking surface and in a quiet public/guest footer credit.
+3. **PuddleJumper Beta** belongs in the owner environment, not the front-facing vacation-rental site.
+4. **PublicLogic** is the maker/parent attribution, never the headline on this site.
 
-The legacy `/images/kpl/Stay.OS.PNG` is not the approved current PuddleJumper STAY artwork. Do not mix generations of the two marks in the same public header or footer.
+Don't swap in the older `/images/kpl/Stay.OS.PNG` as if it were the current PuddleJumper STAY identity.
 
-## Voice
+## Voice: personality plus proof
 
-- Write as a host who knows the house: warm, specific, direct, and unhurried.
-- Lead with real facts: Gardner, Kendall Pond, entire waterfront house, sleeps eight, three bedrooms, two baths, private dock, upper deck, firepit, hot tub, and the rooms shown in photographs.
-- Prefer natural sentences to stacks of one-word promises and slogans. Describe where things are and what a guest actually does with them.
-- Use *we* for the hosts when discussing a request or a reply. Avoid inventing emotional testimonials or promising a transformative stay.
-- Give each section one job. The hero introduces the property; room and waterfront pages describe spaces; the booking page explains the process.
+- Start with one **memorable, human line**, then earn it with details. "Bring the crew. We've got the pond." works because the property really sleeps eight and has direct waterfront.
+- Speak like a host who knows the place, not a real-estate salesperson or a generic luxury brand. Light humor is welcome; manufactured amazement is not.
+- Favor scenes and specifics: the deck over the water, lawn to the dock, hot tub below the deck, a great room with fireplace, meals around the table.
+- A headline can be lively. Supporting paragraphs should be clear and economical. Don't turn every card into a slogan, or give each feature the same three-part rhythm.
+- Keep Gardner and Kendall Pond in the SEO title and on the page. The location is a feature; don't suggest the house is remote from civilization.
+- "We" means the hosts. Never fabricate a guest quote, "award", review rating, event policy, distance, or response time.
+- Give sections distinct jobs: hook; what's here; on the water; the rooms; booking. Avoid repeated amenity lists in every section.
 
-Avoid vague copy such as “make memories,” “exhale,” “your people,” “picture your days here,” “the pond is the point,” “curated collection,” and “not stock photos.” There is no need to tell guests that the photos or language are authentic; the details should demonstrate it.
+Avoid "make memories," "your people," "exhale," "the pond is the point," "curated photo collection," and text claiming pictures are unfiltered or authentic. Let the actual photos speak.
+
+## Visual tone
+
+- Real property photography leads. Use the public image manifest, never generic water/lodge stock.
+- Editorial, relaxed and confident: generous type, asymmetrical photographs, deep pond green, warm cream and amber highlights.
+- No dashboards, fake status badges, glassmorphism panels or decorative AI-tech concepts on the guest site.
+- The main logo must work on a phone. A single high-contrast booking call to action should remain visible without dominating every photo.
+- Reduced-motion and keyboard focus states matter more than animation tricks.
 
 ## Trust and accuracy
 
-- A request is **not** a confirmed booking or payment. We verify availability, issue a full itemized quote, and confirm only after the required verified payment process.
-- Never invent nightly rates, deposit terms, review scores, distance estimates, availability, or response times.
-- Say when boating equipment is seasonal; confirm specific amenities when relevant instead of guaranteeing them for all dates.
-- Photos show the property at different times of year; furnishings and outdoor amenities may differ.
-- Do not describe the Lodge as an event venue just because it accommodates wedding guests nearby.
-- Keep owner secrets, booking tokens, and operational details out of public copy.
+- **Asking about dates is not booking.** The hosts verify availability, provide an itemized quote, and payment confirmation is governed by the existing booking flow.
+- Never invent dates, discounts, deposit terms, reviews, square footage, proximity times, or guest counts.
+- Seasonal equipment (kayaks, paddle boat, etc.) is described as seasonal; no promises for every date.
+- Photos span seasons and furnishings/amenities can vary.
+- Don't market the property as an event venue merely because nearby events attract guests.
+- Do not show owner credentials, reservation tokens, private calendars or admin screens publicly.
 
-## Copy maintenance
+## Editing rule
 
-Read the final page in context on both phone and desktop. Check every heading, button, alt text, disclosure, empty/error state, and outgoing booking link. A change to prose must not change booking safeguards or owner permissions.
+Before merging, check the actual desktop and phone preview: headline wrapping, home logo, image crops, CTA routing, STAY footer credit, form copy, focus state and mobile menu. Only approve a build when the code and visual result both work. Do not change payment or availability logic during copy/design cleanup.
