@@ -101,3 +101,48 @@ export async function resolvePaymentProblem(form: FormData) {
   } catch { redirect('/owner/bookings?status=resolve-error'); }
   redirect('/owner/bookings?status=resolved');
 }
+
+
+export async function sendQuoteEmail(form: FormData) {
+  const cookie = (await cookies()).get(OWNER_COOKIE_NAME)?.value;
+  if (!verifyOwnerSessionToken(cookie)) {
+    redirect('/owner/access?next=/owner/bookings');
+  }
+
+  const id = String(form.get('id') ?? '');
+  if (!/^[0-9a-f-]{36}$/i.test(id)) {
+    redirect('/owner/bookings?status=invalid');
+  }
+
+  let outcome = 'quote-sent';
+
+  try {
+    const quote = await bookingClient().get(id);
+
+    if (!quote || quote.status !== 'quoted') {
+      throw new BookingServiceError(409, 'not_open');
+    }
+
+    const ics = await fetchAirbnbIcs({ fresh: true });
+    const nights = nightsBetween(quote.check_in, quote.check_out);
+
+    if (airbnbStayStatus(ics, nights) !== 'owner-blocked') {
+      throw new BookingServiceError(409, 'calendar_conflict');
+    }
+
+    const result = await bookingClient().sendQuote(id);
+
+    if (result?.status !== 'sent' || result?.provider_accepted !== true) {
+      outcome = 'quote-held';
+    }
+  } catch (error) {
+    const code = error instanceof BookingServiceError
+      ? error.code
+      : 'quote-email-error';
+
+    console.error('Could not send quote:', code);
+    outcome = code;
+  }
+
+  redirect(`/owner/bookings?status=${encodeURIComponent(outcome)}`);
+}

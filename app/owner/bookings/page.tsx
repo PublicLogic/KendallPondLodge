@@ -5,9 +5,12 @@ import {
   bookingAttention,
   bookingConfigured,
   bookingDb,
+  bookingMessageStatus,
   publicError,
   type Booking,
   type BookingAttention,
+  type BookingMessageState,
+  type BookingMessagingStatus,
   usd,
 } from "@/lib/booking-db";
 
@@ -42,52 +45,68 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 const workflow = [
-  "Request",
+  "New",
   "Quote",
-  "Airbnb block",
-  "Payment",
+  "Airbnb",
+  "Send",
+  "Paying",
+  "Confirmed",
 ] as const;
 
-function statusLabel(status: Booking["status"]) {
-  const labels: Record<Booking["status"], string> = {
-    requested: "New request",
-    quoted: "Quoted",
-    checkout: "Payment open",
-    confirmed: "Confirmed",
-    expired: "Expired",
-    declined: "Declined",
-  };
+function quoteSent(
+  message: BookingMessageState | null | undefined,
+) {
+  return (
+    message?.status === "sent" &&
+    message.provider_accepted === true
+  );
+}
 
-  return labels[status];
+function statusLabel(
+  request: Booking,
+  stayStatus: string | null,
+  quoteMessage: BookingMessageState | null | undefined,
+) {
+  if (request.status === "requested") return "New";
+
+  if (request.status === "quoted") {
+    if (stayStatus !== "owner-blocked") return "Waiting for Airbnb block";
+    return quoteSent(quoteMessage) ? "Sent" : "Quote ready";
+  }
+
+  if (request.status === "checkout") return "Paying";
+  if (request.status === "confirmed") return "Confirmed";
+  if (request.status === "expired") return "Expired";
+  return "Declined";
 }
 
 function workflowPosition(
   request: Booking,
   stayStatus: string | null,
+  quoteMessage: BookingMessageState | null | undefined,
 ) {
-  if (request.status === "confirmed") return 5;
-  if (request.status === "checkout") return 4;
+  if (request.status === "confirmed") return 7;
+  if (request.status === "checkout") return 5;
 
   if (request.status === "quoted") {
-    return stayStatus === "owner-blocked"
-      ? 4
-      : 3;
+    if (stayStatus !== "owner-blocked") return 3;
+    return quoteSent(quoteMessage) ? 5 : 4;
   }
 
-  if (request.status === "requested") return 2;
-
+  if (request.status === "requested") return 1;
   return 1;
 }
 
 function WorkflowRail({
   request,
   stayStatus,
+  quoteMessage,
 }: {
   request: Booking;
   stayStatus: string | null;
+  quoteMessage: BookingMessageState | null | undefined;
 }) {
-  const position =
-    workflowPosition(request, stayStatus);
+  const position = workflowPosition(request, stayStatus, quoteMessage);
 
   return (
     <div
@@ -96,7 +115,6 @@ function WorkflowRail({
     >
       {workflow.map((step, index) => {
         const number = index + 1;
-
         const state =
           number < position
             ? "is-done"
@@ -131,6 +149,7 @@ export default async function OwnerBookings({
 
   let attention: BookingAttention | null = null;
   let attentionFailed = false;
+  let messaging: BookingMessagingStatus | null = null;
 
   const configured = bookingConfigured();
 
@@ -150,6 +169,12 @@ export default async function OwnerBookings({
       attention = await bookingAttention();
     } catch {
       attentionFailed = true;
+    }
+
+    try {
+      messaging = await bookingMessageStatus();
+    } catch {
+      messaging = null;
     }
   }
 
@@ -270,11 +295,15 @@ export default async function OwnerBookings({
         >
           {status === "quoted"
             ? "Quote created. Block every quoted night on Airbnb, then refresh."
-            : status === "released"
-              ? "Unpaid hold released. Check Stripe and other reservations before changing Airbnb."
-              : status === "resolved"
-                ? "Correction note recorded. This did not issue a refund or cancel the stay."
-                : publicError(status)}
+            : status === "quote-sent"
+              ? "Quote email was accepted by the connected provider."
+              : status === "quote-held"
+                ? "The quote is safe, but email delivery is held. Check PJ messaging readiness or use Copy link."
+                : status === "released"
+                  ? "Unpaid hold released. Check Stripe and other reservations before changing Airbnb."
+                  : status === "resolved"
+                    ? "Correction note recorded. This did not issue a refund or cancel the stay."
+                    : publicError(status)}
         </p>
       )}
 
@@ -448,6 +477,16 @@ export default async function OwnerBookings({
           const quotePath =
             `/book/quote/${request.quote_token}`;
 
+          const quoteMessage =
+            messaging?.bookings?.[request.id]?.quote_guest ?? null;
+
+          const messagingReady = Boolean(
+            messaging?.readiness.enabled &&
+            messaging?.readiness.sender_authorized &&
+            messaging?.readiness.provider_connected &&
+            messaging?.readiness.public_base_configured,
+          );
+
           return (
             <article
               className={`owner-booking-card owner-booking-${request.status}`}
@@ -480,13 +519,14 @@ export default async function OwnerBookings({
                 <span
                   className={`owner-booking-status status-${request.status}`}
                 >
-                  {statusLabel(request.status)}
+                  {statusLabel(request, stayStatus, quoteMessage)}
                 </span>
               </header>
 
               <WorkflowRail
                 request={request}
                 stayStatus={stayStatus}
+                quoteMessage={quoteMessage}
               />
 
               {request.note && (
@@ -788,8 +828,12 @@ export default async function OwnerBookings({
                         </strong>
 
                         <QuoteLinkActions
+                          id={request.id}
                           path={quotePath}
-                          email={request.guest_email}
+                          deliveryStatus={quoteMessage?.status}
+                          providerAccepted={quoteMessage?.provider_accepted}
+                          holdReason={quoteMessage?.hold_reason}
+                          messagingReady={messagingReady}
                         />
                       </div>
                     )}
