@@ -17,7 +17,7 @@ export default function LodgePage() {
         eyebrow="Inside the Lodge"
         title="Room for the whole crew."
         intro="Three bedrooms. Two baths. Two fireplaces. Big kitchen. Bigger great room."
-        image="/images/kpl/great-room.jpg"
+        image="/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg"
         imageAlt="The great room at the Lodge at Kendall Pond"
         imagePosition="center"
         primaryAction={{ href: "/book", label: "Book your stay" }}
@@ -36,8 +36,8 @@ export default function LodgePage() {
       <section className="content-section">
         <SectionHeading eyebrow="Main level" title="Made for a full house." intro="Kitchen, dining, and the great room share one open space." />
         <div className="photo-grid photo-grid-two">
-          <PhotoCard src="/images/kpl/great-room.jpg" alt="The Lodge great room" title="Great room" note="Cathedral ceiling · fireplace · big seating area" wide />
-          <PhotoCard src="/images/kpl/kitchen-dining.jpg" alt="The Lodge kitchen and dining area" title="Kitchen & dining" note="Open plan · built for a group" />
+          <PhotoCard src="/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg" alt="The Lodge great room" title="Great room" note="Cathedral ceiling · fireplace · big seating area" wide />
+          <PhotoCard src="/images/kpl/website-top-50/04-Kitchen-and-Dining/17-kendall-pond-lodge-kitchen-and-breakfast-bar.jpg" alt="The Lodge kitchen and dining area" title="Kitchen & dining" note="Open plan · built for a group" />
         </div>
       </section>
 
@@ -46,8 +46,8 @@ export default function LodgePage() {
         <div className="photo-grid">
           <PhotoCard src="/images/kpl/king-room.jpg" alt="King bedroom" title="King room" note="King bed" />
           <PhotoCard src="/images/kpl/queen-room.jpg" alt="Queen bedroom" title="Queen room" note="Queen bed" />
-          <PhotoCard src="/images/kpl/bunk-room.jpg" alt="Bunk room" title="Bunk room" note="Twin over full" />
-          <PhotoCard src="/images/kpl/great-room.jpg" alt="Shared living space" title="Extra space" note="Queen pull-out + lounge space" wide />
+          <PhotoCard src="/images/kpl/website-top-50/05-Bedrooms/26-kendall-pond-lodge-bunk-room-wide.jpg" alt="Bunk room" title="Bunk room" note="Twin over full" />
+          <PhotoCard src="/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg" alt="Shared living space" title="Extra space" note="Queen pull-out + lounge space" wide />
         </div>
       </section>
 
