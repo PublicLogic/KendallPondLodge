@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import styles from "./RetreatHero.module.css";
 
 type Scene = {
@@ -18,59 +15,56 @@ type Props = {
   scenes: readonly [Scene, Scene, Scene];
 };
 
-/** Visitor-controlled views: the first frame stays still until a guest chooses. */
+/** Real property photographs in a still, server-rendered pond-house opening. */
 export function RetreatHero({ directEnabled, airbnbHref, scenes }: Props) {
-  const [selected, setSelected] = useState(0);
-  const scene = scenes[selected];
-  const action = <><span>Find your dates</span><span aria-hidden="true">↗</span></>;
+  const photographs = [
+    { ...scenes[2], caption: "The upper deck", href: "/photos" },
+    { ...scenes[1], caption: "A long soak", href: "/grounds" },
+    { ...scenes[0], caption: "Down at the dock", href: "/grounds" },
+  ];
+  const action = <><span>Check your dates</span><span aria-hidden="true">↗</span></>;
 
   return (
-    <section className={styles.hero} aria-labelledby="showcase-title" data-retreat-hero>
-      <div className={styles.photograph} id="retreat-view">
-        <Image
-          src={scene.src}
-          alt={scene.alt}
-          fill
-          priority={selected === 0}
-          sizes="100vw"
-          style={{ objectPosition: scene.position }}
-        />
-      </div>
-      <div className={styles.shade} aria-hidden="true" />
-      <div className={styles.inner}>
-        <p className={styles.location}>Kendall Pond <span aria-hidden="true">/</span> Gardner, Massachusetts</p>
-        <div className={styles.copy}>
-          <p className={styles.eyebrow}>A weekend at your own pace</p>
-          <h1 id="showcase-title">Make time<br /><em>for each other.</em></h1>
-          <p className={styles.intro}>Coffee by the water. A long soak in the hot tub. The whole place to yourselves, with no need to rush.</p>
+    <section className={styles.hero} aria-labelledby="showcase-title" data-retreat-hero data-pond-header>
+      <div className={styles.copy} data-pond-copy>
+        <p className={styles.location}>The Lodge at Kendall Pond<span>Gardner, Massachusetts</span></p>
+        <div className={styles.story}>
+          <h1 id="showcase-title"><span>Down by</span>{" "}<span>the pond.</span></h1>
+          <p className={styles.intro}>Coffee on the deck. A long afternoon at the dock. A fire by the water when the day winds down.</p>
+          <p className={styles.welcome}>Just the two of you, or a weekend with friends.</p>
           <div className={styles.actions}>
             {directEnabled ? (
               <Link className={styles.primary} href="/book">{action}</Link>
             ) : (
               <a className={styles.primary} href={airbnbHref} target="_blank" rel="noopener noreferrer">{action}<span className={styles.srOnly}> on Airbnb</span></a>
             )}
-            <Link className={styles.secondary} href="/photos">Take a look around <span aria-hidden="true">→</span></Link>
+            <Link className={styles.secondary} href="/photos">Look around <span aria-hidden="true">→</span></Link>
           </div>
         </div>
-        <div className={styles.bottom}>
-          <p className={styles.invitation}>A little of what’s waiting.</p>
-          <div className={styles.scenes} role="group" aria-label="Choose a view of the Lodge">
-            {scenes.map((item, index) => (
-              <button
-                className={styles.scene}
-                type="button"
-                key={item.src}
-                aria-pressed={selected === index}
-                aria-controls="retreat-view"
-                onClick={() => setSelected(index)}
-              >
-                <span className={styles.sceneNumber} aria-hidden="true">0{index + 1}</span>
-                {item.label}
-              </button>
-            ))}
-          </div>
-          <span className={styles.srOnly} role="status" aria-live="polite">{scene.label}: {scene.alt}</span>
+        <div className={styles.details} aria-label="Stay at a glance">
+          <span>The whole house</span><span>Up to eight guests</span><span>Private waterfront</span>
         </div>
+      </div>
+      <div className={styles.photographs} data-pond-photos>
+        {photographs.map((scene, index) => (
+          <Link
+            className={`${styles.photograph} ${index === 0 ? styles.leadPhoto : styles.detailPhoto}`}
+            href={scene.href}
+            key={scene.src}
+            aria-label={`${scene.caption}: ${index === 0 ? "see the Lodge photos" : "explore the waterfront"}`}
+            data-pond-photo={index}
+          >
+            <Image
+              src={scene.src}
+              alt={scene.alt}
+              fill
+              priority={index === 0}
+              sizes={index === 0 ? "(max-width: 800px) 100vw, 61vw" : "(max-width: 800px) 50vw, 31vw"}
+              style={{ objectPosition: scene.position }}
+            />
+            <span className={styles.caption}><span>{scene.caption}</span><span aria-hidden="true">↗</span></span>
+          </Link>
+        ))}
       </div>
     </section>
   );
