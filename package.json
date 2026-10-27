@@ -8,6 +8,7 @@
   "scripts": {
     "install:ci": "bash scripts/install-ci.sh",
     "dev": "next dev",
+    "prebuild": "node scripts/pj-preflight.mjs || true; node scripts/pj-calendar-source.mjs --apply && node scripts/pj-preflight.mjs",
     "build": "next build",
     "start": "next start",
     "build:sites": "bash scripts/build-verified.sh",
