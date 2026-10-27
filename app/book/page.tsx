@@ -20,7 +20,6 @@ import {
 } from '@/lib/booking.mjs';
 
 import { requestStay } from './actions';
-import { BookingBrand } from '@/app/_components/BookingBrand';
 import { BookingSteps } from '@/app/_components/StayInformation';
 import { StayRequestForm } from './StayRequestForm';
 
@@ -99,11 +98,11 @@ export default async function BookPage({
           <div className="booking-intro-copy">
             <p className="eyebrow">Direct with Nate & Allie</p>
 
-            <h1>{enabled ? "Request a stay." : "Check available dates."}</h1>
+            <h1>{enabled ? "A stay worth slowing down for." : "Check available dates."}</h1>
 
             <p>
               {enabled
-                ? "Choose your dates and tell us how many guests are coming. We’ll check availability and send you a full quote. There’s no charge for asking."
+                ? "Coffee on the deck. A long soak in the hot tub. Start with your dates and we’ll send the full quote. There’s no charge for asking."
                 : "Direct booking requests are closed for now. You can check dates and book through Airbnb."}
             </p>
 
@@ -140,8 +139,6 @@ export default async function BookPage({
         </div>
 
         <div className="booking-panel booking-panel-direct">
-          <BookingBrand />
-
           <h2>Your stay.</h2>
 
           {status === 'received' && (

@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { BookingBrand } from '@/app/_components/BookingBrand';
 
 type ServerAction = (formData: FormData) => void | Promise<void>;
 
@@ -445,6 +446,9 @@ export function StayRequestForm({
             <i className="stay-key-blocked" />
             Unavailable
           </span>
+        </div>
+        <div className="stay-calendar-credit" data-calendar-credit>
+          <BookingBrand />
         </div>
       </div>
 

@@ -85,3 +85,59 @@
 .booking-panel-direct .booking-brand small { color: #4b6258; font-size: .75rem; }
 .booking-page-direct .booking-direct-foot { color: #485e52; font-size: .85rem; }
 body:has(.gallery-lightbox[open]) { overflow: hidden; }
+
+/* Final release polish: credit belongs to the calendar, not the sales heading. */
+.booking-panel-direct .stay-calendar-credit {
+  border-top: 1px solid #dce3dc;
+  padding: .65rem 1rem;
+  background: #fafbf8;
+}
+.booking-panel-direct .stay-calendar-credit .booking-brand {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+}
+.booking-panel-direct .stay-calendar-credit .booking-brand img {
+  width: 42px !important;
+  height: auto;
+  flex: none;
+}
+.booking-panel-direct .stay-calendar-credit .booking-brand small {
+  color: #405b4e;
+  font-size: .75rem;
+  max-width: none;
+}
+.booking-page-direct .booking-intro-copy h1 {
+  max-width: 15ch;
+  font-size: clamp(2.6rem, 4.2vw, 4.3rem);
+  line-height: 1.08;
+  letter-spacing: -.045em;
+}
+.gallery-retreat .gallery-intro {
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  min-height: 520px;
+}
+.gallery-retreat .gallery-intro-copy { padding: clamp(2rem, 4.5vw, 4.5rem); }
+.gallery-retreat .gallery-intro h1 {
+  max-width: 13ch;
+  font-size: clamp(2.8rem, 4.6vw, 4.6rem);
+  line-height: 1.06;
+}
+.gallery-retreat .gallery-intro-visual {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  min-height: 520px;
+  gap: 8px;
+}
+.gallery-retreat .gallery-intro-small img { object-position: center; }
+.gallery-season-note { margin: 1.75rem 0 0; color: #4b6053; font-size: .8rem; line-height: 1.6; }
+@media (max-width: 800px) {
+  .gallery-retreat .gallery-intro { grid-template-columns: 1fr; }
+  .gallery-retreat .gallery-intro-copy { padding: 2.5rem 1.25rem; }
+  .gallery-retreat .gallery-intro-visual { min-height: 260px; grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 480px) {
+  .gallery-retreat .gallery-intro-visual { min-height: 210px; gap: 5px; }
+  .booking-page-direct .booking-intro-copy h1 { font-size: 2.65rem; }
+}
