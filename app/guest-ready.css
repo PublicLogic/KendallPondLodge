@@ -1,0 +1,87 @@
+/* Public guest decision surfaces. Private owner and Guidebook styles are unchanged. */
+.guest-ready-home { background: #f8f6f0; }
+.guest-ready-home .showcase-hero { min-height: min(820px, max(620px, calc(100svh - 80px))); }
+.guest-ready-home .showcase-hero h1 { max-width: 13ch; font-size: clamp(3.3rem, 6.5vw, 6.5rem); line-height: 1.03; letter-spacing: -.05em; }
+.guest-ready-home .showcase-hero h1 em { color: #f6dfad; font-weight: 400; }
+.guest-ready-home .showcase-hero-lead { font-family: var(--font-sans), sans-serif; max-width: 41ch; font-size: clamp(1rem, 1.35vw, 1.2rem); line-height: 1.65; }
+.guest-ready-home .showcase-hero-overlay { background: linear-gradient(90deg,rgba(9,29,22,.85),rgba(9,29,22,.4) 60%,rgba(9,29,22,.08)),linear-gradient(0deg,rgba(9,29,22,.72),transparent 70%); }
+.guest-ready-home .showcase-button-light { background: #f6dfad; border-color: #f6dfad; }
+.guest-ready-home .showcase-hero-facts { margin-top: 2.8rem; }
+.stay-review-evidence { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.4rem max(1.25rem,calc((100vw - 1280px)/2)); background: #173f35; color: #f7f7ed; }
+.stay-review-evidence p { margin: 0; color: inherit; font-size: .9rem; }
+.stay-review-evidence strong { font-size: 1.65rem; font-family: var(--font-serif),Georgia,serif; font-weight: 500; margin-right: .5rem; }
+.stay-review-evidence strong span { font-size: 1rem; }
+.stay-review-evidence small { display: block; margin-top: .3rem; font-size: .73rem; color: #e0e8dc; }
+.stay-review-evidence a { color: #f8dfaa; font-weight: 650; font-size: .86rem; padding: .7rem 0; }
+.guest-spaces-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1rem; }
+.guest-ready-home .showcase-moments { background: #f8f6f0; }
+.guest-ready-home .showcase-section-head h2 { max-width: 17ch; }
+.guest-spaces-grid .showcase-moment { display: flex; flex-direction: column; background: #efece2; }
+.guest-spaces-grid .showcase-moment-image { aspect-ratio: 4/3; }
+.guest-spaces-grid .showcase-moment-copy { flex: 1; display: flex; flex-direction: column; align-items: start; padding: 1.4rem; }
+.guest-spaces-grid .showcase-moment-copy h3 { font-size: clamp(1.5rem,2.15vw,2.15rem); }
+.guest-spaces-grid .showcase-moment-copy p { font-size: .92rem; margin-bottom: 1rem; }
+.guest-spaces-grid .showcase-moment-copy > span { margin-top: auto; font-size: .82rem; }
+.guest-house-story { display: grid; grid-template-columns: 1.1fr 1fr; background: #e7ecdf; }
+.guest-house-photo { position: relative; min-height: 580px; }
+.guest-house-photo img { object-fit: cover; }
+.guest-house-copy { padding: clamp(2rem,5vw,5rem); align-self: center; }
+.guest-house-copy h2 { color: #1a3e31; font-size: clamp(2.5rem,4vw,4.5rem); font-weight: 500; letter-spacing: -.045em; line-height: 1.1; margin: .8rem 0 1.2rem; }
+.guest-house-copy > p:not(.showcase-eyebrow) { color: #405b4e; font-size: 1rem; line-height: 1.75; margin-bottom: 1.2rem; }
+.guest-host-note { border-top: 1px solid #b9c8b8; margin-top: 2rem; padding-top: 1.5rem; }
+.guest-host-note strong { display: block; color: #1b3d2e; margin-bottom: .35rem; }
+.stay-info-section { width: min(1280px,calc(100% - 3rem)); margin: 0 auto; padding: clamp(3.5rem,6vw,6rem) 0; color: #1a3e31; }
+.stay-section-heading { max-width: 720px; margin-bottom: 2rem; }
+.stay-section-heading h2 { font-size: clamp(2.3rem,4vw,4rem); font-weight: 500; letter-spacing: -.04em; line-height: 1.1; margin: .6rem 0 .8rem; }
+.stay-section-heading > p:not(.showcase-eyebrow) { color: #496354; line-height: 1.7; }
+.stay-booking-steps { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 2rem; margin: 0; padding: 0; list-style: none; }
+.stay-booking-steps li { border-top: 1px solid #bdcdbd; padding-top: 1.1rem; }
+.stay-booking-steps li > span { font-size: .8rem; color: #4a6a55; font-weight: 700; }
+.stay-booking-steps h3 { font-size: 1.3rem; margin: .7rem 0; color: #1d4535; }
+.stay-booking-steps p { color: #496354; line-height: 1.75; font-size: .94rem; }
+.stay-sleep-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1px; background: #cbd5c6; border: 1px solid #cbd5c6; margin: 1.5rem 0 1rem; }
+.stay-sleep-grid > div { background: #f5f5ed; padding: 1.4rem; }
+.stay-sleep-grid dt { color: #254633; font-size: 1rem; font-weight: 700; }
+.stay-sleep-grid dd { margin: .6rem 0 0; color: #4a5e50; line-height: 1.6; font-size: .94rem; }
+.stay-detail-note { max-width: 85ch; font-size: .9rem; line-height: 1.7; color: #475e50; }
+.stay-faq-section { border-top: 1px solid #d1d8ca; }
+.stay-faq-list { border-top: 1px solid #c2d0bd; }
+.stay-faq-list details { border-bottom: 1px solid #c2d0bd; scroll-margin-top: 110px; }
+.stay-faq-list summary { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: 1.25rem 0; min-height: 56px; color: #1c4130; cursor: pointer; list-style: none; font-size: 1.05rem; font-weight: 650; }
+.stay-faq-list summary::-webkit-details-marker { display: none; }
+.stay-faq-list summary > span { font-size: 1.6rem; font-weight: 400; flex: none; }
+.stay-faq-list details[open] summary > span { transform: rotate(45deg); }
+.stay-faq-list details > p { max-width: 82ch; margin: 0; padding: 0 2.5rem 1.5rem 0; color: #455f4f; font-size: .97rem; line-height: 1.8; }
+.stay-question-link { margin-top: 1.5rem; color: #4a604f; }
+.stay-question-link a { color: #21573d; text-underline-offset: .2em; font-weight: 650; }
+.stay-info-section a:focus-visible,.stay-info-section summary:focus-visible,.stay-review-evidence a:focus-visible { outline: 3px solid #a4762e; outline-offset: 5px; }
+#sleeping,#before-you-book { scroll-margin-top: 110px; }
+.guest-ready-home .showcase-close { background: #eddbb5; }
+.hospitality-header .experience-header-inner { min-width: 0; }
+.hospitality-footer .kpl-brand-lockup { display: block; }
+.hospitality-footer .kpl-brand-seal-mobile { display: none; }
+@media (min-width: 761px) { .hospitality-header .experience-nav { display: flex; order: 0; width: auto; padding: 0; overflow: visible; } }
+@media (max-width: 1000px) { .hospitality-header .experience-header-inner { gap: 1rem; } .hospitality-header .hospitality-nav { gap: 1rem; } }
+@media (max-width: 800px) { .guest-house-story { grid-template-columns: 1fr; } .guest-house-photo { min-height: 0; aspect-ratio: 4/3; } .stay-sleep-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 700px) {
+  .guest-ready-home .showcase-hero { min-height: max(620px,calc(100svh - 66px)); }
+  .guest-ready-home .showcase-hero h1 { font-size: clamp(3rem,12vw,4.5rem); }
+  .guest-ready-home .showcase-hero-overlay { background: linear-gradient(0deg,rgba(8,28,21,.96),rgba(8,28,21,.7) 55%,rgba(8,28,21,.15)); }
+  .stay-review-evidence { align-items: start; flex-direction: column; gap: .45rem; }
+  .guest-spaces-grid,.stay-booking-steps { grid-template-columns: 1fr; }
+  .guest-spaces-grid { gap: 1.6rem; }
+  .stay-info-section { width: calc(100% - 2.5rem); padding-block: 3.5rem; }
+  .stay-booking-steps { gap: 1.5rem; }
+  .stay-sleep-grid > div { padding: 1rem; }
+  .stay-faq-list summary { font-size: .98rem; }
+  .booking-page-direct .booking-intro-photo { display: none; }
+  .booking-page-direct .booking-intro { grid-template-rows: auto; }
+  .booking-page-direct .booking-direct-foot { padding-bottom: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) { .guest-ready-home *, .stay-info-section * { scroll-behavior: auto; transition: none; } }
+
+/* Findings from rendered browser checks, not assumed accessibility. */
+.guest-ready-home .showcase-close .showcase-eyebrow { color: #32523e; }
+.booking-panel-direct .booking-brand small { color: #4b6258; font-size: .75rem; }
+.booking-page-direct .booking-direct-foot { color: #485e52; font-size: .85rem; }
+body:has(.gallery-lightbox[open]) { overflow: hidden; }

@@ -21,10 +21,12 @@ import {
 
 import { requestStay } from './actions';
 import { BookingBrand } from '@/app/_components/BookingBrand';
+import { BookingSteps } from '@/app/_components/StayInformation';
 import { StayRequestForm } from './StayRequestForm';
 
 export const metadata: Metadata = {
-  title: 'Book your stay',
+  title: 'Request a stay',
+  alternates: { canonical: '/book' },
   description:
     'Choose your dates and request a direct stay at the Lodge at Kendall Pond.',
 };
@@ -195,6 +197,7 @@ export default async function BookPage({
             : "Direct requests are paused; visit Airbnb for current availability."}
         </p>
       </section>
+      {enabled && <BookingSteps />}
     </main>
   );
 }

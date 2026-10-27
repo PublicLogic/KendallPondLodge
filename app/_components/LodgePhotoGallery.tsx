@@ -11,6 +11,7 @@ import {
 export function LodgePhotoGallery() {
   const [filterId, setFilterId] = useState<PhotoFilterId>("all");
   const [activeOrder, setActiveOrder] = useState(1);
+  const [isOpen, setIsOpen] = useState(false);
   const viewer = useRef<HTMLDialogElement>(null);
 
   const filter = photoFilters.find((item) => item.id === filterId) ?? photoFilters[0];
@@ -27,6 +28,7 @@ export function LodgePhotoGallery() {
 
   function viewPhoto(order: number) {
     setActiveOrder(order);
+    setIsOpen(true);
     if (!viewer.current?.open) viewer.current?.showModal();
   }
 
@@ -93,6 +95,7 @@ export function LodgePhotoGallery() {
         className="gallery-lightbox"
         ref={viewer}
         aria-label="Property photo viewer"
+        onClose={() => setIsOpen(false)}
         onClick={(event) => {
           if (event.target === event.currentTarget) viewer.current?.close();
         }}
@@ -115,20 +118,20 @@ export function LodgePhotoGallery() {
             </button>
           </div>
           <div className="gallery-lightbox-image">
-            <Image
+            {isOpen && <Image
               src={activePhoto.src}
               alt={activePhoto.alt}
               width={activePhoto.width}
               height={activePhoto.height}
               sizes="(max-width: 900px) 95vw, 82vw"
-            />
+            />}
           </div>
           <div className="gallery-lightbox-footer">
             <button type="button" onClick={() => movePhoto(-1)} disabled={visible.length < 2}
               aria-label="Previous photo">
               <span aria-hidden="true">←</span> Previous
             </button>
-            <p>{activePhoto.alt}<span>{currentIndex + 1} / {visible.length}</span></p>
+            <p aria-live="polite">{activePhoto.alt}<span>{currentIndex + 1} / {visible.length}</span></p>
             <button type="button" onClick={() => movePhoto(1)} disabled={visible.length < 2}
               aria-label="Next photo">
               Next <span aria-hidden="true">→</span>

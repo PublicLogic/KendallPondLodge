@@ -70,8 +70,9 @@ test("Approved PJ identity is shared across every footer shell", () => {
   const guidebookFooter = readFileSync(join(root, "app/_components/SiteFooter.tsx"), "utf8");
   const experienceShell = readFileSync(join(root, "app/_components/ExperienceShell.tsx"), "utf8");
 
-  assert.match(mark, /puddlejumper-beta\.png/);
-  assert.match(mark, /Powered by/);
+  assert.match(mark, /puddlejumper-stay\.png/);
+  assert.doesNotMatch(mark, /puddlejumper-beta\.png/);
+  assert.match(mark, /By PublicLogic/);
   assert.match(mark, /next\/image/);
   assert.match(guidebookFooter, /StayOsFooterMark/);
   assert.match(experienceShell, /StayOsFooterMark inverse/);

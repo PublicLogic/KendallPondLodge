@@ -55,7 +55,13 @@ function PublicHeader({
             ))}
           </nav>
 
-          <details className="hospitality-menu" key={pathname}>
+          <details className="hospitality-menu" key={pathname}
+            onKeyDown={(event) => {
+              if (event.key === "Escape") {
+                event.currentTarget.open = false;
+                event.currentTarget.querySelector("summary")?.focus();
+              }
+            }}>
             <summary>Menu</summary>
 
             <nav aria-label="Property menu">
@@ -101,6 +107,7 @@ function PublicFooter({ bookEnabled }: { bookEnabled: boolean }) {
           <Link href={bookEnabled ? "/book" : "/rates"}>Check dates</Link>
         </nav>
         <nav className="footer-links footer-quiet-links" aria-label="Guest and owner tools">
+          <Link href="/rates#before-you-book">Before you book</Link>
           <Link href="/guidebook">Guest Guide</Link>
           <Link className="footer-owner-link" href="/owner">Owner sign-in</Link>
         </nav>

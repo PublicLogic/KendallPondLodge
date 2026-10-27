@@ -19,12 +19,12 @@ test("guest footer and booking use STAY, while owner keeps Beta", () => {
 
 test("guest copy clearly distinguishes requests from reservations", () => {
   const booking = source("app/book/page.tsx");
-  const rates = source("app/rates/page.tsx");
+  const rates = source("app/_data/public-stay.json");
   const home = source("app/page.tsx");
 
   assert.match(booking, /Sending a request does not hold your dates/);
   assert.match(booking, /no charge for asking/i);
-  assert.match(rates, /does not reserve your dates or charge your card/);
+  assert.match(rates, /not a reservation/);
   assert.match(home, /full price before asking for payment/);
 });
 

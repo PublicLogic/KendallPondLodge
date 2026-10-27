@@ -3,10 +3,12 @@ import Link from "next/link";
 import { InfoCard, Notice, SectionHeading } from "@/app/_components/Content";
 import { PageHero } from "@/app/_components/PageHero";
 import { PhotoCard } from "@/app/_components/PhotoCard";
+import { SleepPlan } from "@/app/_components/StayInformation";
 import { StatBand } from "@/app/_components/StatBand";
 
 export const metadata: Metadata = {
   title: "Inside the Lodge",
+  alternates: { canonical: "/lodge" },
   description: "Three bedrooms, two full baths, two fireplaces, an open kitchen, and a cathedral-ceiling great room.",
 };
 
@@ -20,7 +22,7 @@ export default function LodgePage() {
         image="/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg"
         imageAlt="The great room at the Lodge at Kendall Pond"
         imagePosition="center"
-        primaryAction={{ href: "/book", label: "Book your stay" }}
+        primaryAction={{ href: "/book", label: "Request your dates" }}
         secondaryAction={{ href: "/grounds", label: "Waterfront" }}
       />
 
@@ -41,8 +43,9 @@ export default function LodgePage() {
         </div>
       </section>
 
-      <section className="content-section surface-section">
-        <SectionHeading eyebrow="Sleeping" title="The bedrooms." intro="There’s a king room, queen room, and bunk room. We can confirm the pull-out sleeping setup if your group needs it." />
+      <section className="content-section surface-section" id="sleeping">
+        <SectionHeading eyebrow="Sleeping" title="The bedrooms." intro="Three bedrooms, plus a queen sleeper sofa for a different sleeping arrangement." />
+        <SleepPlan />
         <div className="photo-grid">
           <PhotoCard src="/images/kpl/king-room.jpg" alt="King bedroom" title="King room" note="King bed" />
           <PhotoCard src="/images/kpl/queen-room.jpg" alt="Queen bedroom" title="Queen room" note="Queen bed" />
@@ -54,7 +57,7 @@ export default function LodgePage() {
       <section className="content-section">
         <SectionHeading eyebrow="Around the house" title="More about the house." />
         <div className="info-grid info-grid-two">
-          <InfoCard title="Two full baths"><p>Two full bathrooms for your group.</p></InfoCard>
+          <InfoCard title="Two full baths"><p>Two bathrooms, both with bathing facilities. Ask us about the layout if stairs or bathroom access affect your stay.</p></InfoCard>
           <InfoCard title="Two fireplaces"><p>One fireplace upstairs and one downstairs.</p></InfoCard>
           <InfoCard title="Deck + walkout patio"><p>Outdoor dining on the upper deck and a covered patio near the hot tub.</p></InfoCard>
           <InfoCard title="Real-life basics"><p>A full kitchen, laundry, and space to settle in.</p></InfoCard>

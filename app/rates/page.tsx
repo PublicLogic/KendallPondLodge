@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { InfoCard, SectionHeading } from "@/app/_components/Content";
 import { PageHero } from "@/app/_components/PageHero";
 import { Icon } from "@/app/_components/Icons";
-import { directBookingEnabled } from "@/lib/booking-db";
+import { BookingSteps, StayFAQ } from "@/app/_components/StayInformation";
+import { directBookingEnabled, hostContactHref } from "@/lib/booking-db";
 
 const airbnb =
   process.env.NEXT_PUBLIC_KPL_BOOKING_URL?.trim() ||
@@ -11,6 +11,7 @@ const airbnb =
 
 export const metadata: Metadata = {
   title: "Rates & Booking",
+  alternates: { canonical: "/rates" },
   description:
     "Request a direct quote for the Lodge at Kendall Pond or book through Airbnb.",
 };
@@ -37,21 +38,7 @@ export default function RatesPage() {
         secondaryAction={{ href: "/lodge", label: "See inside" }}
       />
 
-      {directEnabled && <section className="content-section">
-        <SectionHeading
-          eyebrow="Booking directly"
-          title="How direct requests work."
-          intro="Choose your dates and group size. We’ll confirm availability, then send a full quote and deposit details."
-        />
-        <div className="info-grid info-grid-two">
-          <InfoCard icon="house" title="No charge to ask">
-            <p>Submitting a request does not reserve your dates or charge your card.</p>
-          </InfoCard>
-          <InfoCard icon="help" title="Full price before payment">
-            <p>We’ll show nightly rates, fees, and deposit terms before payment.</p>
-          </InfoCard>
-        </div>
-      </section>}
+      {directEnabled && <BookingSteps />}
 
       <section className="content-section surface-section">
         <div className="booking-cta-panel">
@@ -74,6 +61,7 @@ export default function RatesPage() {
           </div>
         </div>
       </section>
+      <StayFAQ contactHref={hostContactHref()} />
     </main>
   );
 }

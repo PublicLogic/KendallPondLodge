@@ -7,6 +7,7 @@ import "./experience.css";
 import "./booking.css";
 import "./a-plus.css";
 import "./showcase.css";
+import "./guest-ready.css";
 
 const plexSans = localFont({
   variable: "--font-sans",
@@ -31,6 +32,7 @@ const plexSerif = localFont({
 });
 
 const plexMono = localFont({
+  preload: false,
   variable: "--font-mono",
   display: "swap",
   src: [
