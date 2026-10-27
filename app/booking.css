@@ -11,7 +11,7 @@
 .booking-form label { display: grid; gap: .4rem; font-size: .92rem; font-weight: 600; }
 .booking-form input:not([type=checkbox]), .booking-form textarea { background: #fff; color: #172d31; border: 1px solid #aebfba; border-radius: 8px; padding: .75rem .85rem; font: inherit; width: 100%; min-width: 0; }
 .booking-form textarea { min-height: 6rem; resize: vertical; }
-.booking-form input:focus-visible, .booking-form textarea:focus-visible { outline: 3px solid #8dc5b1; outline-offset: 2px; }
+.booking-form input:focus-visible, .booking-form textarea:focus-visible { outline: 3px solid #205f43; outline-offset: 2px; }
 .booking-form .booking-check { display: flex; align-items: flex-start; gap: .75rem; font-weight: 500; line-height: 1.5; }
 .booking-check input { margin-top: .25rem; width: 1.2rem; height: 1.2rem; flex: none; }
 .booking-form button { justify-self: start; cursor: pointer; }
