@@ -75,36 +75,30 @@ function BookingAction({
 
 export default function HomePage() {
   const directEnabled = directBookingEnabled();
-  const hero = lodgePhoto(1);
+  const hero = lodgePhoto(3);
+  const hotTub = lodgePhoto(4);
+  const fireside = lodgePhoto(5);
   const waterfront = lodgePhoto(2);
 
   return (
     <main id="main-content" className="showcase-page">
       <section className="showcase-hero" aria-labelledby="showcase-title">
-        <Image
-          alt={hero.alt}
-          className="showcase-hero-image"
-          fill
-          priority
-          sizes="100vw"
-          src={hero.src}
-        />
-        <div className="showcase-hero-overlay" aria-hidden="true" />
         <div className="showcase-hero-inner">
           <div className="showcase-hero-copy">
             <p className="showcase-eyebrow showcase-eyebrow-light">
-              Private waterfront · Gardner, Massachusetts
+              The Lodge at Kendall Pond · Gardner, Massachusetts
             </p>
-            <h1 id="showcase-title">The Lodge at Kendall Pond</h1>
+            <h1 id="showcase-title">Your own place by the pond.</h1>
             <p className="showcase-hero-lead">
-              Three bedrooms, room for eight, a private dock, and a hot tub overlooking Kendall Pond.
+              Spend the day on the deck or by the water, then head inside to the fireplace.
+              Just the two of you, or a whole weekend with friends.
             </p>
             <div className="showcase-hero-actions">
               <BookingAction enabled={directEnabled} className="showcase-button showcase-button-light">
                 Check your dates <span aria-hidden="true">↗</span>
               </BookingAction>
               <Link className="showcase-quiet-link" href="/photos">
-                View photos <span aria-hidden="true">→</span>
+                Explore the photos <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>
@@ -114,6 +108,41 @@ export default function HomePage() {
             <li>2 bathrooms</li>
             <li>Private waterfront</li>
           </ul>
+        </div>
+        <div className="showcase-hero-media">
+          <figure className="showcase-hero-primary">
+            <Image
+              alt={hero.alt}
+              className="showcase-hero-photo"
+              fill
+              priority
+              sizes="(max-width: 880px) 100vw, 58vw"
+              src={hero.src}
+            />
+            <figcaption>Upper deck · Kendall Pond</figcaption>
+          </figure>
+          <div className="showcase-hero-secondary">
+            <figure className="showcase-hero-detail">
+              <Image
+                alt={hotTub.alt}
+                className="showcase-hero-photo"
+                fill
+                sizes="(max-width: 880px) 50vw, 29vw"
+                src={hotTub.src}
+              />
+              <figcaption>Hot tub with a view</figcaption>
+            </figure>
+            <figure className="showcase-hero-detail">
+              <Image
+                alt={fireside.alt}
+                className="showcase-hero-photo"
+                fill
+                sizes="(max-width: 880px) 50vw, 29vw"
+                src={fireside.src}
+              />
+              <figcaption>Room to settle in</figcaption>
+            </figure>
+          </div>
         </div>
       </section>
 

@@ -54,3 +54,14 @@ test("public-facing pages omit removed generic marketing filler", () => {
     assert.ok(!combined.includes(phrase), "Generic copy returned: " + phrase);
   }
 });
+
+test("homepage leads with the real deck, hot tub, and great room photographs", () => {
+  const home = source("app/page.tsx");
+  assert.match(home, /const hero = lodgePhoto\(3\)/);
+  assert.match(home, /const hotTub = lodgePhoto\(4\)/);
+  assert.match(home, /const fireside = lodgePhoto\(5\)/);
+  assert.match(home, /showcase-hero-media/);
+  assert.match(home, /priority/);
+  assert.match(home, /alt={hotTub.alt}/);
+  assert.match(home, /alt={fireside.alt}/);
+});
