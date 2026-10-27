@@ -8,6 +8,7 @@
   "scripts": {
     "install:ci": "bash scripts/install-ci.sh",
     "dev": "next dev",
+    "prebuild": "node scripts/staging-quote-rehearsal.mjs && node scripts/pj-preflight.mjs",
     "build": "next build",
     "start": "next start",
     "build:sites": "bash scripts/build-verified.sh",
