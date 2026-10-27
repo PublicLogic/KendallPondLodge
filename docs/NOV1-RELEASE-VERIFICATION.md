@@ -19,10 +19,19 @@ The booking remains request → owner itemized quote → deposit → verified co
 | Whitespace validation | Passed | `git diff --check`. |
 | Preview and production deployment | Passed | PR #19 merged as `7978e5ceb7ed8490bedbfdcb0e8668cf495b86d9`; Vercel production `dpl_8uJfCqwXhpEZD51NHmeUseoQjaYx` reached READY with `kendallpondlodge.com` assigned. The merged source tree matches the reviewed tree. |
 | Live desktop/browser verification | Passed for the inspected paths | Home, Explore, Area, Events and Book display the new content. Selecting November 3–5 showed two nights and enabled the request button; the selection was cleared without submitting. STAY remains below the calendar legend and before guest fields. No horizontal overflow was observed on the inspected home/Explore desktop viewport. |
+| Live desktop keyboard inspection | Passed for the inspected flow | On published revision `a48e2eee1d24e8a90a963b45add15ce2805169c9` at 1363 × 936: skip link, navigation, available calendar dates, month controls, Clear, labeled fields, consent and the request button were keyboard reachable. Enter/Space selected November 3–5; Clear restored the disabled request button. No guest details were entered or request submitted. |
 | Full phone and transactional browser proof | Not completed | Desktop inspection and helper tests do not prove phone rendering, actual submit/redirect handling, delivered email or hosted payment. |
 | Real payment/email rehearsal | Not completed | Requires the current deployed backend, an isolated test property/calendar, authorized owner access and controlled recipients. |
 
 The local HTTP contract test initially could not open its loopback listener inside the restricted execution sandbox. It passed with local network permission, and the complete suite above was then run with that permission. The fixture transport test is not an actual PJ/Stripe rehearsal. Final live inspection also identified a pre-existing misencoded arrow in shared guide links; the narrow follow-up replaces it with the CSS Unicode escape for a right arrow.
+
+The keyboard follow-up strengthens the form input/textarea/consent focus outline from `#8dc5b1`
+to the existing dark green `#205f43`, preserving the 3px outline and 2px offset. Calculated contrast
+against white increases from 1.95:1 to 7.56:1; this is a color-pair measurement, not an accessibility
+conformance assessment. Use the follow-up PR/deployment evidence for the published CSS check.
+Calendar interaction was verified with Tab/Shift+Tab and Enter/Space; Right Arrow did not move
+between dates. Screen-reader announcements, phone layout and actual submission remain separate
+unverified checks.
 
 ## Retry behavior and limits
 
