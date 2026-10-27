@@ -42,6 +42,106 @@ export default function HomePage() {
       <RetreatHero directEnabled={enabled} airbnbHref={airbnb} scenes={heroScenes} />
       <GuestReviewEvidence />
       <section className="showcase-moments guest-spaces" aria-labelledby="spaces-title">
+  const directEnabled = directBookingEnabled();
+  const hero = lodgePhoto(3);
+  const hotTub = lodgePhoto(4);
+  const fireside = lodgePhoto(5);
+  const waterfront = lodgePhoto(2);
+
+  return (
+    <main id="main-content" className="showcase-page">
+      <section className="showcase-hero" aria-labelledby="showcase-title">
+        <div className="showcase-hero-inner">
+          <div className="showcase-hero-copy">
+            <p className="showcase-eyebrow showcase-eyebrow-light">
+              The Lodge at Kendall Pond · Gardner, Massachusetts
+            </p>
+            <h1 id="showcase-title">Your own place by the pond.</h1>
+            <p className="showcase-hero-lead">
+              Spend the day on the deck or by the water, then head inside to the fireplace.
+              Just the two of you, or a whole weekend with friends.
+            </p>
+            <div className="showcase-hero-actions">
+              <BookingAction enabled={directEnabled} className="showcase-button showcase-button-light">
+                Check your dates <span aria-hidden="true">↗</span>
+              </BookingAction>
+              <Link className="showcase-quiet-link" href="/photos">
+                Explore the photos <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </div>
+          <ul className="showcase-hero-facts" aria-label="Stay at a glance">
+            <li>Sleeps 8</li>
+            <li>3 bedrooms</li>
+            <li>2 bathrooms</li>
+            <li>Private waterfront</li>
+          </ul>
+        </div>
+        <div className="showcase-hero-media">
+          <figure className="showcase-hero-primary">
+            <Image
+              alt={hero.alt}
+              className="showcase-hero-photo"
+              fill
+              priority
+              sizes="(max-width: 880px) 100vw, 58vw"
+              src={hero.src}
+            />
+            <figcaption>Upper deck · Kendall Pond</figcaption>
+          </figure>
+          <div className="showcase-hero-secondary">
+            <figure className="showcase-hero-detail">
+              <Image
+                alt={hotTub.alt}
+                className="showcase-hero-photo"
+                fill
+                sizes="(max-width: 880px) 50vw, 29vw"
+                src={hotTub.src}
+              />
+              <figcaption>Hot tub with a view</figcaption>
+            </figure>
+            <figure className="showcase-hero-detail">
+              <Image
+                alt={fireside.alt}
+                className="showcase-hero-photo"
+                fill
+                sizes="(max-width: 880px) 50vw, 29vw"
+                src={fireside.src}
+              />
+              <figcaption>Room to settle in</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <div className="showcase-trust">
+        <div className="showcase-trust-inner">
+          <p><strong>Hosted by Nate &amp; Allie.</strong> We’re happy to answer questions before you book.</p>
+          <a href={airbnb + "#reviews"} target="_blank" rel="noopener noreferrer">
+            Read guest reviews on Airbnb <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <section className="showcase-intro" aria-labelledby="showcase-intro-title">
+        <div className="showcase-intro-main">
+          <p className="showcase-eyebrow">The property</p>
+          <h2 id="showcase-intro-title">The pond is right outside.</h2>
+          <p>
+            The upper deck looks out over Kendall Pond, and the lawn leads down
+            to the shoreline and dock. Inside, the great room and kitchen give
+            everyone a place to cook, eat, and spend time together.
+          </p>
+        </div>
+        <div className="showcase-intro-aside" aria-label="Property highlights">
+          <div><strong>8</strong><span>Guests</span></div>
+          <div><strong>3</strong><span>Bedrooms</span></div>
+          <div><strong>2</strong><span>Full baths</span></div>
+          <div><strong>2</strong><span>Fireplaces</span></div>
+        </div>
+      </section>
+
+      <section className="showcase-moments" aria-labelledby="showcase-moments-title">
         <div className="showcase-section-head">
           <div><p className="showcase-eyebrow">At the house</p><h2 id="spaces-title">A few good places to land.</h2></div>
           <Link className="showcase-inline-link" href="/photos">See all 50 photos <span aria-hidden="true">→</span></Link>
