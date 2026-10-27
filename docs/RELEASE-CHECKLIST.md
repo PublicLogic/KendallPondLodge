@@ -4,9 +4,10 @@ Target: **November 1, 2026**. Record actual results, exact revisions, operator a
 
 ## Code and deployment
 
-- [ ] Review the combined changes against the current approved site and booking safeguards.
-- [ ] Run `npm ci`, `npm run test:core` and `npm run build` on Node 24; record commands and outcomes.
-- [ ] Verify phone/desktop rendering, keyboard/focus behavior, calendar states, pending/error feedback and STAY placement in a rendered browser.
+- [x] Review the combined changes against the current approved site and booking safeguards.
+- [x] Install locked dependencies and run `npm run test:core` and `npm run build` on Node 24; record commands and outcomes.
+- [x] Inspect the deployed desktop guest pages, date selection and STAY placement.
+- [ ] Complete phone rendering, keyboard/focus and actual pending/error/receipt browser proof in the isolated rehearsal.
 - [ ] Identify the deployed KPL and PJ revisions. Confirm that PJ includes durable request-key deduplication; the client field alone is insufficient.
 - [ ] Verify the current Preview URL, isolated test workspace/property, scoped key and property provisioning. Do not assume an old alias has the new build.
 - [ ] Verify a controlled test calendar with fresh reads and complete owner-block classification.

@@ -637,7 +637,7 @@ p {
 }
 
 .text-link::after {
-  content: "â†’";
+  content: "\2192";
   transition: transform var(--duration-fast) var(--ease-out);
 }
 

@@ -17,10 +17,12 @@ The booking remains request → owner itemized quote → deposit → verified co
 | Production build | Passed | `npm run build`; Next.js compiled and generated the route output. |
 | Changed runtime JavaScript/TypeScript lint | Passed | ESLint over the changed page/components, actions, booking helpers and test files. The declaration file retains four pre-existing `no-explicit-any` findings, reproduced on the base revision; its optional request-key field is typechecked by the production build. |
 | Whitespace validation | Passed | `git diff --check`. |
-| Browser/deployment verification | Pending in this record | Confirm the exact reviewed deployment and inspect the served pages before claiming publication. |
+| Preview and production deployment | Passed | PR #19 merged as `7978e5ceb7ed8490bedbfdcb0e8668cf495b86d9`; Vercel production `dpl_8uJfCqwXhpEZD51NHmeUseoQjaYx` reached READY with `kendallpondlodge.com` assigned. The merged source tree matches the reviewed tree. |
+| Live desktop/browser verification | Passed for the inspected paths | Home, Explore, Area, Events and Book display the new content. Selecting November 3–5 showed two nights and enabled the request button; the selection was cleared without submitting. STAY remains below the calendar legend and before guest fields. No horizontal overflow was observed on the inspected home/Explore desktop viewport. |
+| Full phone and transactional browser proof | Not completed | Desktop inspection and helper tests do not prove phone rendering, actual submit/redirect handling, delivered email or hosted payment. |
 | Real payment/email rehearsal | Not completed | Requires the current deployed backend, an isolated test property/calendar, authorized owner access and controlled recipients. |
 
-The local HTTP contract test initially could not open its loopback listener inside the restricted execution sandbox. It passed with local network permission, and the complete suite above was then run with that permission. The fixture transport test is not an actual PJ/Stripe rehearsal.
+The local HTTP contract test initially could not open its loopback listener inside the restricted execution sandbox. It passed with local network permission, and the complete suite above was then run with that permission. The fixture transport test is not an actual PJ/Stripe rehearsal. Final live inspection also identified a pre-existing misencoded arrow in shared guide links; the narrow follow-up replaces it with the CSS Unicode escape for a right arrow.
 
 ## Retry behavior and limits
 
