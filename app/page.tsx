@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { RetreatHero } from "@/app/_components/RetreatHero";
 import { lodgePhoto } from "@/app/_data/lodge-photos";
 import { BookingSteps, GuestReviewEvidence, SleepPlanLink, StayFAQ } from "@/app/_components/StayInformation";
 import { directBookingEnabled, hostContactHref } from "@/lib/booking-db";
@@ -23,28 +24,22 @@ function BookingAction({ enabled, className, children }: { enabled: boolean; cla
 }
 export default function HomePage() {
   const enabled = directBookingEnabled();
-  const hero = lodgePhoto(1);
+  const heroScenes = [
+    { photo: 46, label: "By the water", position: "center 55%" },
+    { photo: 4, label: "In the hot tub", position: "center 55%" },
+    { photo: 3, label: "On the deck", position: "center 52%" },
+  ].map(({ photo, label, position }) => {
+    const { src, alt } = lodgePhoto(photo);
+    return { src, alt, label, position };
+  }) as [
+    { src: string; alt: string; label: string; position: string },
+    { src: string; alt: string; label: string; position: string },
+    { src: string; alt: string; label: string; position: string },
+  ];
   const deck = lodgePhoto(3);
   return (
     <main id="main-content" className="showcase-page guest-ready-home">
-      <section className="showcase-hero" aria-labelledby="showcase-title">
-        <Image src={hero.src} alt={hero.alt} className="showcase-hero-image" fill priority sizes="100vw" />
-        <div className="showcase-hero-overlay" aria-hidden="true" />
-        <div className="showcase-hero-inner">
-          <div className="showcase-hero-copy">
-            <p className="showcase-eyebrow showcase-eyebrow-light">The Lodge at Kendall Pond · Gardner, Massachusetts</p>
-            <h1 id="showcase-title">Bring the crew.<br /><em>We’ve got the pond.</em></h1>
-            <p className="showcase-hero-lead">A whole house on the water, a hot tub under the deck, and enough room to make a weekend of it.</p>
-            <div className="showcase-hero-actions">
-              <BookingAction enabled={enabled} className="showcase-button showcase-button-light">{enabled ? "Check dates" : "Check dates on Airbnb"}<span aria-hidden="true">↗</span></BookingAction>
-              <Link className="showcase-quiet-link" href="/photos">Take the photo tour <span aria-hidden="true">→</span></Link>
-            </div>
-          </div>
-          <ul className="showcase-hero-facts" aria-label="Stay at a glance">
-            <li>Entire house</li><li>Up to 8 guests</li><li>3 bedrooms · 2 baths</li><li>Private waterfront</li>
-          </ul>
-        </div>
-      </section>
+      <RetreatHero directEnabled={enabled} airbnbHref={airbnb} scenes={heroScenes} />
       <GuestReviewEvidence />
       <section className="showcase-moments guest-spaces" aria-labelledby="spaces-title">
         <div className="showcase-section-head">
