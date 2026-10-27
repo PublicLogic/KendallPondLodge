@@ -40,7 +40,7 @@ export function InfoCard({
       {icon && <span className="icon-chip"><Icon name={icon} /></span>}
       <h3>{title}</h3>
       <div className="card-copy">{children}</div>
-      {href && <Link className="text-link" href={href}>{linkLabel ?? "Open"}<Icon name="arrow" size={17} /></Link>}
+      {href && <Link className="text-link" href={href}>{linkLabel ?? "Open"}</Link>}
     </article>
   );
 }
