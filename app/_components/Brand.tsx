@@ -7,6 +7,7 @@ export function Brand() {
       <Image
         src="/brand/kpl/lodge-by-publiclogic.png"
         alt="The Lodge at Kendall Pond · By PublicLogic"
+        sizes="(max-width: 760px) 164px, 220px"
         width={1946}
         height={808}
         priority
@@ -17,7 +18,7 @@ export function Brand() {
         alt=""
         width={512}
         height={512}
-        priority
+        sizes="48px"
         className="kpl-brand-seal-mobile"
         aria-hidden
       />

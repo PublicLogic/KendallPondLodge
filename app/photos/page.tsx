@@ -22,16 +22,15 @@ export default function PhotosPage() {
   const bookEnabled = directBookingEnabled();
 
   return (
-    <main id="main-content" className="gallery-page">
+    <main id="main-content" className="gallery-page gallery-retreat">
       <section className="gallery-intro" aria-labelledby="gallery-title">
         <div className="gallery-intro-copy">
           <p className="showcase-eyebrow">Photo gallery</p>
-          <h1 id="gallery-title">The Lodge, in photos.</h1>
+          <h1 id="gallery-title">Find your favorite spot.</h1>
           <p>
-            Browse {" "}{lodgePhotos.length} photos of the rooms, deck, hot tub,
-            dock, and shoreline. Choose a category below to see more of each space.
+            The deck, the hot tub, the shoreline, and a look inside.
+            Browse all {lodgePhotos.length} photos or choose a space below.
           </p>
-          <p className="gallery-intro-note">These photos were taken at different times of year. Furniture and outdoor amenities may vary by season.</p>
           <a className="showcase-inline-link" href="#all-photos">
             Browse the gallery <span aria-hidden="true">↓</span>
           </a>
@@ -43,7 +42,7 @@ export default function PhotosPage() {
               alt={mainPhoto.alt}
               fill
               priority
-              sizes="(max-width: 850px) 100vw, 43vw"
+              sizes="(max-width: 800px) 50vw, 34vw"
             />
           </div>
           <div className="gallery-intro-small">
@@ -51,7 +50,7 @@ export default function PhotosPage() {
               src={detailPhoto.src}
               alt={detailPhoto.alt}
               fill
-              sizes="(max-width: 850px) 50vw, 18vw"
+              sizes="(max-width: 800px) 50vw, 28vw"
             />
           </div>
         </div>
@@ -68,6 +67,7 @@ export default function PhotosPage() {
           </Link>
         </div>
         <LodgePhotoGallery />
+        <p className="gallery-season-note">Photos span different seasons; furnishings and outdoor amenities may vary.</p>
       </section>
 
       <section className="showcase-close gallery-close" aria-labelledby="gallery-close-title">

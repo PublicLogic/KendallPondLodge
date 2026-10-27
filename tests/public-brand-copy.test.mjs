@@ -19,12 +19,12 @@ test("guest footer and booking use STAY, while owner keeps Beta", () => {
 
 test("guest copy clearly distinguishes requests from reservations", () => {
   const booking = source("app/book/page.tsx");
-  const rates = source("app/rates/page.tsx");
+  const rates = source("app/_data/public-stay.json");
   const home = source("app/page.tsx");
 
   assert.match(booking, /Sending a request does not hold your dates/);
   assert.match(booking, /no charge for asking/i);
-  assert.match(rates, /does not reserve your dates or charge your card/);
+  assert.match(rates, /not a reservation/);
   assert.match(home, /full price before asking for payment/);
 });
 
@@ -55,13 +55,12 @@ test("public-facing pages omit removed generic marketing filler", () => {
   }
 });
 
-test("homepage leads with the real deck, hot tub, and great room photographs", () => {
+test("homepage keeps the actual deck, hot tub, waterfront and great room photographs", () => {
   const home = source("app/page.tsx");
-  assert.match(home, /const hero = lodgePhoto\(3\)/);
-  assert.match(home, /const hotTub = lodgePhoto\(4\)/);
-  assert.match(home, /const fireside = lodgePhoto\(5\)/);
-  assert.match(home, /showcase-hero-media/);
-  assert.match(home, /priority/);
-  assert.match(home, /alt={hotTub.alt}/);
-  assert.match(home, /alt={fireside.alt}/);
+  const hero = source("app/_components/RetreatHero.tsx");
+  for (const photo of [3, 4, 5, 46]) assert.ok(home.includes(`photo: ${photo}`));
+  assert.match(home, /lodgePhoto\(photo\)/);
+  assert.match(home, /<RetreatHero/);
+  assert.match(hero, /priority/);
+  assert.match(hero, /alt=\{scene.alt\}/);
 });

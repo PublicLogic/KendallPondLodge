@@ -12,9 +12,9 @@ test("public home is hospitality-first, not dashboard-first", () => {
   const home = read("app/page.tsx");
   const shell = read("app/_components/ExperienceShell.tsx");
 
-  assert.match(home, /hospitality-cover/);
+  assert.match(home, /RetreatHero/);
   assert.match(home, /The Lodge at Kendall Pond/);
-  assert.match(home, /weekends that/);
+  assert.match(home, /GuestReviewEvidence/);
 
   assert.doesNotMatch(home, /PageHero/);
   assert.doesNotMatch(home, /StatBand/);
