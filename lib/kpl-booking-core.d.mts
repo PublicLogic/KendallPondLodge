@@ -3,7 +3,7 @@ export function stayNights(checkIn: string, checkOut: string): number;
 export function propertyToday(now?: Date): string;
 export function validateGuestRequest(raw: Record<string, unknown>, now?: Date): {
  check_in: string; check_out: string; guest_name: string; guest_email: string;
- guests: number; pets: number; note: string;
+ guests: number; pets: number; note: string; request_key?: string;
 };
 export function publicBookingState(booking: Booking, payment?: string): 'refund_review'|'confirmed'|'needs_attention'|'checking'|'expired'|'quote';
 export function beginGuestCheckout(options: {

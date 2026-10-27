@@ -31,7 +31,7 @@ export function RetreatHero({ directEnabled, airbnbHref, scenes }: Props) {
         <div className={styles.story}>
           <h1 id="showcase-title"><span>Down by</span>{" "}<span>the pond.</span></h1>
           <p className={styles.intro}>Coffee on the deck. A long afternoon at the dock. A fire by the water when the day winds down.</p>
-          <p className={styles.welcome}>Just the two of you, or a weekend with friends.</p>
+          <p className={styles.welcome}>A waterfront home in Gardner, with three bedrooms, a hot tub, and room for up to eight.</p>
           <div className={styles.actions}>
             {directEnabled ? (
               <Link className={styles.primary} href="/book">{action}</Link>

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { InfoCard } from "@/app/_components/Content";
+import { InfoCard, SectionHeading } from "@/app/_components/Content";
 import { PageHero } from "@/app/_components/PageHero";
 import { PhotoCard } from "@/app/_components/PhotoCard";
 
 export const metadata: Metadata = {
-  title: "Explore",
-  description: "Gardner, Wachusett, nearby events, and getting to the Lodge at Kendall Pond.",
+  title: { absolute: "Things to Do Near Gardner, MA | The Lodge at Kendall Pond" },
+  description: "Plan a stay on Kendall Pond with local coffee and dinner, Wachusett hikes, Fitchburg Art Museum, and a place to stay for a Gardner wedding.",
+  alternates: { canonical: "/explore" },
 };
 
 export default function ExplorePage() {
@@ -14,39 +15,51 @@ export default function ExplorePage() {
     <main id="main-content">
       <PageHero
         eyebrow="Around Gardner"
-        title="Gardner and Wachusett."
-        intro="Find local restaurants, spend a day at Wachusett, or stay nearby for a wedding."
+        title="A few days around Gardner."
+        intro="Breakfast in town, a walk at Wachusett, and dinner back at the house. Here are a few local places to help you plan your stay."
         image="/images/kpl/website-top-50/09-Waterfront-and-Grounds/46-kendall-pond-lodge-autumn-pond-and-dock.jpg"
         imageAlt="Kendall Pond in fall"
         imagePosition="center 58%"
-        primaryAction={{ href: "/area", label: "Gardner & Wachusett" }}
-        secondaryAction={{ href: "/events", label: "Wedding weekend?" }}
+        primaryAction={{ href: "/book", label: "Check dates" }}
+        secondaryAction={{ href: "/area", label: "Getting here" }}
       />
 
       <section className="content-section">
+        <SectionHeading eyebrow="Make a little room in the week" title="Three ways to spend your stay." />
         <div className="info-grid info-grid-three">
-          <InfoCard title="Wachusett"><p>Hiking, skiing, and seasonal events are good reasons to head out for the day.</p></InfoCard>
-          <InfoCard title="Gardner"><p>Restaurants, coffee, groceries, and everyday stops are in town.</p></InfoCard>
-          <InfoCard title="Weddings"><p>The Polish American Citizens Club is a short walk from the Lodge.</p></InfoCard>
+          <InfoCard title="A quiet midweek">
+            <p>Start with breakfast at <a href="https://cafeedesia.toast.site/">Cafe Edesia in Gardner</a>, then head back for an afternoon at the house.</p>
+            <p>For dinner out, <a href="https://www.moonhillbrewing.com/">Gardner Ale House &amp; Moon Hill Brewing</a> has a restaurant and brewery downtown. Or cook together and spend the evening by the fireplace.</p>
+          </InfoCard>
+          <InfoCard title="An autumn day outside">
+            <p>Plan a hike at <a href="https://www.mass.gov/locations/wachusett-mountain-state-reservation">Wachusett Mountain State Reservation</a>. Check the official trail and access information for your date before setting out.</p>
+            <p>Leave time to get back to the Lodge for a soak in the hot tub and a meal overlooking the pond.</p>
+          </InfoCard>
+          <InfoCard title="A wedding weekend" href="/events" linkLabel="Plan a wedding guest stay">
+            <p>Coming to a wedding in Gardner? Share the house with your group, with three bedrooms, two full bathrooms, and a kitchen for breakfast the next morning.</p>
+            <p>The Lodge accommodates up to eight overnight guests. Check the sleeping plan before you decide who is staying.</p>
+          </InfoCard>
         </div>
       </section>
 
       <section className="content-section surface-section">
-        <div className="explore-arrival-strip">
-          <div>
-            <p className="eyebrow">Getting here</p>
-            <h2>Getting to the Lodge.</h2>
-            <p>
-              Gardner is off Route 2. If you’re coming by commuter rail from Boston,
-              Wachusett Station is on the Fitchburg Line. You’ll need to arrange
-              a ride from the station to the Lodge.
-            </p>
-          </div>
-          <div className="explore-arrival-links">
-            <Link href="/area">Gardner & Wachusett →</Link>
-            <Link href="/events">Wedding stays →</Link>
-            <Link href="/book">Book your stay →</Link>
-          </div>
+        <SectionHeading eyebrow="Keep the season in mind" title="A different plan for a different day." intro="Use the official links for current hours, access, and conditions." />
+        <div className="info-grid info-grid-two">
+          <InfoCard title="When it is cold or rainy">
+            <p><a href="https://fitchburgartmuseum.org/visit/">Fitchburg Art Museum</a> is an indoor option for an afternoon out. Look at the exhibitions and visitor information before you go; the museum is not open every day.</p>
+            <p>Staying in works, too: the great room, kitchen, and pond views are all part of the house.</p>
+          </InfoCard>
+          <InfoCard title="When ski season arrives">
+            <p>For a winter visit, start with <a href="https://www.wachusett.com/first-time-visitor-guide/">Wachusett Mountain’s visitor guide</a> and check the <a href="https://www.wachusett.com/the-mountain/your-visit/snow-report/">current snow report</a> before planning a ski day.</p>
+            <p>Skiing depends on the season and operating conditions. Dock use and boating at the Lodge also depend on the season; ask us about any outdoor amenity that matters to your trip.</p>
+          </InfoCard>
+        </div>
+      </section>
+
+      <section className="content-section">
+        <div className="booking-cta-panel">
+          <div><p className="eyebrow">Have a few days in mind?</p><h2>See which nights work.</h2><p>Send your dates and group size. We’ll check availability and send the full quote before you pay.</p></div>
+          <Link className="button button-primary" href="/book">Check dates →</Link>
         </div>
       </section>
 

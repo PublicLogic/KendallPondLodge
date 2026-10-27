@@ -1,15 +1,19 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import Link from 'next/link';
+import { useMemo, useRef, useState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { BookingBrand } from '@/app/_components/BookingBrand';
+import { clearGuestRequestKey, createGuestRequestKeyManager } from '@/lib/guest-request-key.mjs';
 
-type ServerAction = (formData: FormData) => void | Promise<void>;
+type ServerAction = (formData: FormData) => Promise<{ received: true }>;
 
 type Props = {
   action: ServerAction;
   unavailableDates: string[];
   today: string;
   availabilityReady: boolean;
+  initialError?: string;
 };
 
 type Month = {
@@ -18,6 +22,42 @@ type Month = {
 };
 
 const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+export function StayRequestReceipt({ onNewRequest }: { onNewRequest?: () => void }) {
+  return (
+    <div>
+      <p className="booking-alert" role="status">
+        Request received. Sending a request does not reserve the dates or charge you.
+      </p>
+      <p>We’ll review your dates and send the full quote before you pay.</p>
+      <Link className="button button-secondary" href="/book" onClick={onNewRequest}>Request another stay</Link>
+    </div>
+  );
+}
+
+function RequestSubmit({ ready, nights }: { ready: boolean; nights: number }) {
+  const { pending } = useFormStatus();
+
+  return (
+    <div className="booking-submit-row stay-submit-row">
+      <button
+        className="button button-primary"
+        disabled={!ready || pending}
+        type="submit"
+      >
+        {pending ? 'Sending request…' : 'Request these dates'}
+      </button>
+
+      <small role="status" aria-live="polite">
+        {pending
+          ? 'Sending your dates. Please keep this page open.'
+          : nights > 0
+            ? `${nights} night${nights === 1 ? '' : 's'} · Full itemized quote before payment.`
+            : 'Choose your dates first. No charge now.'}
+      </small>
+    </div>
+  );
+}
 
 function parseIso(value: string) {
   const [year, month, day] = value.split('-').map(Number);
@@ -251,6 +291,7 @@ export function StayRequestForm({
   unavailableDates,
   today,
   availabilityReady,
+  initialError,
 }: Props) {
   const blocked = useMemo(
     () => new Set(unavailableDates),
@@ -260,6 +301,7 @@ export function StayRequestForm({
   const [checkIn, setCheckIn] = useState<string | null>(null);
   const [checkOut, setCheckOut] = useState<string | null>(null);
   const [hover, setHover] = useState<string | null>(null);
+  const [received, setReceived] = useState(false);
   const [viewMonth, setViewMonth] = useState<Month>(
     monthFromIso(today),
   );
@@ -323,11 +365,41 @@ export function StayRequestForm({
   const canGoBack =
     monthKey(viewMonth) > monthKey(currentMonth);
 
+  const requestKey = useRef<ReturnType<typeof createGuestRequestKeyManager> | null>(null);
+
+  async function submitRequest(form: FormData) {
+    let storage: Storage | null = null;
+    try {
+      storage = window.sessionStorage;
+    } catch {
+      // The same open form remains retry-safe when storage is blocked.
+    }
+    if (!requestKey.current) {
+      requestKey.current = createGuestRequestKeyManager(storage);
+    }
+    const submittedKey = await requestKey.current(form);
+    form.set('request_key', submittedKey);
+    const result = await action(form);
+    if (result.received) {
+      clearGuestRequestKey(storage, submittedKey);
+      requestKey.current = null;
+      setReceived(true);
+    }
+  }
+
+  if (received) {
+    return <StayRequestReceipt onNewRequest={() => {
+      clearDates();
+      setReceived(false);
+    }} />;
+  }
+
   return (
     <form
-      action={action}
+      action={submitRequest}
       className="booking-form booking-form-direct stay-request-form"
     >
+      {initialError && <p className="booking-alert" role="alert">{initialError}</p>}
       <input
         name="check_in"
         type="hidden"
@@ -535,25 +607,7 @@ export function StayRequestForm({
         </span>
       </label>
 
-      <div className="booking-submit-row stay-submit-row">
-        <button
-          className="button button-primary"
-          disabled={
-            !availabilityReady ||
-            !checkIn ||
-            !checkOut
-          }
-          type="submit"
-        >
-          Request these dates
-        </button>
-
-        <small>
-          {nights > 0
-            ? `${nights} night${nights === 1 ? '' : 's'} · Full itemized quote before payment.`
-            : 'Choose your dates first. No charge now.'}
-        </small>
-      </div>
+      <RequestSubmit ready={availabilityReady && !!checkIn && !!checkOut} nights={nights} />
     </form>
   );
 }

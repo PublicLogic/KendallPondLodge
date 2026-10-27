@@ -135,7 +135,9 @@ export async function requestStay(form: FormData) {
     );
   }
 
-  redirect('/book?status=received');
+  // This acknowledgement is tied to the awaited submission. A stale receipt
+  // URL must never clear a newer, ambiguous request's browser retry identity.
+  return { received: true as const };
 }
 
 export async function payDeposit(form: FormData) {
