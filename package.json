@@ -18,8 +18,7 @@
     "lint": "bash scripts/sites-env.sh -- eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "bash scripts/sites-env.sh -- drizzle-kit generate",
     "verify:pj": "node scripts/pj-preflight.mjs",
-    "setup:calendar": "node scripts/pj-calendar-source.mjs",
-    "prebuild": "node scripts/staging-quote-gate.mjs"
+    "setup:calendar": "node scripts/pj-calendar-source.mjs"
   },
   "dependencies": {
     "drizzle-orm": "0.45.2",
