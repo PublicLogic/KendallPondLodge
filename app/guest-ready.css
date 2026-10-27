@@ -141,3 +141,7 @@ body:has(.gallery-lightbox[open]) { overflow: hidden; }
   .gallery-retreat .gallery-intro-visual { min-height: 210px; gap: 5px; }
   .booking-page-direct .booking-intro-copy h1 { font-size: 2.65rem; }
 }
+
+/* Verified against the enabled hosted calendar, not just its local fallback. */
+.booking-panel-direct .stay-calendar-weekdays span,
+.booking-panel-direct .stay-calendar-key { color: #405b4e; }

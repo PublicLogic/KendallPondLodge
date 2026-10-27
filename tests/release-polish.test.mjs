@@ -25,3 +25,7 @@ test('gallery has balanced real photos, rather than the narrow hot-tub strip', (
   assert.match(page, /lodgePhoto\(4\)/);
   assert.match(css, /\.gallery-retreat \.gallery-intro-visual/);
 });
+test('active calendar weekday and legend text retain readable contrast', () => {
+  const css = read('app/guest-ready.css');
+  assert.match(css, /\.booking-panel-direct \.stay-calendar-weekdays span,\s*\.booking-panel-direct \.stay-calendar-key\s*\{\s*color: #405b4e;/);
+});
