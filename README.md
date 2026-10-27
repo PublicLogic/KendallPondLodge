@@ -1,32 +1,12 @@
-# Kendall Pond Lodge — PJ booking adapter
+# The Lodge at Kendall Pond
 
-**This is the actual KPL Next.js site, not the earlier HTML design preview.** Guest booking stays on KPL. Customers need no PJ account, no Google login, no subscription and no owner code.
+This repository contains the KPL Next.js website and its direct-booking interface. The public site is hosted by Vercel project `kpl` at `https://kendallpondlodge.com`.
 
-The flow remains **public request → host's itemized private quote → Stripe deposit → verified PJ booking record**. It is not instant booking: this release preserves the established per-quote pricing and manual Airbnb block.
+The booking flow is **guest request → owner’s itemized quote → verified Airbnb block → owner sends quote → Stripe deposit → verified confirmation**. Guests need no account. A request does not reserve dates, and Checkout collects the quoted deposit only.
 
-## Destination
+## Working on the site
 
-Put this source in the **KPL repository**, `PublicLogic/KendallPondLodge`, not inside the shared PJ app. That repository was empty when inspected. The current hosting project is **Vercel / kpl**, with `kendallpondlodge.com` assigned to it. The Cloudflare/Sites files inherited from the source snapshot are not the active deployment instructions.
-
-The integration targets `PublicLogic/PuddleJumper` at commit `90042243a1caaec577d1e2882c1bb68d98becdd5`, through `/api/stayos/booking`. No PJ code changes are required by this package. An available PJ deployment, matching scoped key, property provisioning and calendar registration are still required.
-
-## What changed
-
-- Replaced Supabase REST/RPC transport with the exact PJ booking endpoint map, preserving the existing KPL call-site shapes.
-- Kept `/book`, `/book/quote/<token>` and `/owner/bookings`; kept owner-code login rather than introducing a Google migration.
-- Acknowledged PJ's durably reported payment rejections/refund requirements; retry transient errors. A return from Stripe never confirms a stay.
-- Added owner payment-attention records and an explicit **record completed correction** action. This does not issue refunds or cancel stays.
-- Kept exact per-quote deposit amounts, every fee, cancellation/balance terms, and the 48-hour quote cap. No browser-saved pricing defaults.
-- Added read-only `/owner/settings`, clear calendar-unavailable states, approved STAY/PJ artwork, and booking-specific typography/focus improvements. No cleaner module.
-- Replaced the raw owner-secret cookie with a randomized, HMAC-signed, 12-hour session. Existing owner cookies must sign in again. The same environment-variable names are retained.
-
-## Inspect the downloaded package
-
-`node scripts/verify-package.mjs` checks the bundled hashes without installing dependencies or making network calls. The hashes detect changed bytes; they are not an independent publisher signature. Review the source before running it.
-
-## Run / verify
-
-Use Node 24 (`.nvmrc`) and npm. No install script deploys, provisions, sends messages, or enables live booking.
+Use Node 24 (`.nvmrc`) and the included npm lockfile:
 
 ```sh
 npm ci
@@ -35,34 +15,50 @@ npm run build
 npm run dev
 ```
 
-Copy `.env.example` to `.env.local` privately, then fill the existing environment values. Next reads `.env.local`; the standalone setup scripts need it loaded explicitly:
+Read [the public copy and brand standard](docs/PUBLIC-SITE-VOICE.md) before changing guest pages. Keep real property photographs and approved brand placement. Cloudflare/Sites scripts are retained for their existing purpose; Vercel is the public deployment target.
+
+Local tests, a successful build, a deployed page and a completed payment rehearsal are different evidence. Record commands, exact revisions and limitations in [the November 1 release verification](docs/NOV1-RELEASE-VERIFICATION.md). Earlier evidence remains in [the original verification record](docs/VERIFICATION.md); it does not establish the state of a later release.
+
+## Booking responsibilities
+
+KPL owns the public form, private quote page, owner interface, Stripe Checkout and signed webhook adapter. PuddleJumper owns scoped booking records, payment decisions, reservations, Case linkage, reconciliation and outbound booking messages.
+
+Every quote has exact amounts for the nightly rate, fees, taxes and deposit, plus written cancellation and balance terms. The code does not choose business policies. A Stripe return URL never confirms a booking by itself.
+
+Initial request retries carry a stable `request_key`. The matching backend implementation must be deployed to make duplicate creation and message suppression durable. A pending button alone is not that guarantee; see the [adapter contract](docs/PJ-ADAPTER.md) and [release verification](docs/NOV1-RELEASE-VERIFICATION.md).
+
+## Owner workflow
+
+1. Review the request while its dates are still free.
+2. Enter and issue the exact itemized quote and terms.
+3. Manually block every quoted night on Airbnb, then wait for a fresh calendar read to verify the complete owner block.
+4. Click **Send quote** in Owner → Bookings. Issuing a quote does not send its email.
+5. Follow the verified payment state and **Needs attention**. Collect any remaining balance through the agreed process in the quote.
+
+Request acknowledgements and confirmation messages are queued by PJ when configured. Owner messaging status distinguishes held/failed messages from provider acceptance. Provider acceptance does not prove inbox delivery.
+
+Use the [owner runbook](docs/DIRECT-BOOKING-RUNBOOK.md) for held email, unpaid holds, balances, cancellations and corrections.
+
+## Configuration and release
+
+Follow [direct-booking setup](docs/direct-booking-setup.md) for the environment contract. Keep secrets in the hosting environment or private local environment files, never source control. A read-only preflight is available:
 
 ```sh
 node --env-file=.env.local scripts/pj-preflight.mjs
-# Explicit one-time calendar registration, only after verifying the key's property:
+```
+
+Calendar registration is a separate deliberate write. Run it only after verifying the intended environment and property:
+
+```sh
 node --env-file=.env.local scripts/pj-calendar-source.mjs --apply
 ```
 
-The preflight is read-only. Calendar registration is a deliberate write to PJ and never runs at installation or build time. A registration receipt is not a successful availability read.
+A registration receipt does not prove a fresh calendar read. A working service key does not prove property provisioning, messaging readiness or Stripe pairing.
 
-**Do not use live keys until the rehearsal and operational decisions in [the release checklist](docs/RELEASE-CHECKLIST.md) pass.** See [verification evidence](docs/VERIFICATION.md) for what actually ran. Full Next build, browser accessibility audit, and real PJ/Stripe rehearsal have **not** passed in this environment; no such claim is made.
+For the November 1 release, use:
 
-## Owner sequence
-
-1. Review the public guest request. Check that the dates are free.
-2. Enter the nightly amount, every fee, **exact deposit amount**, cancellation terms and balance terms. Amounts belong to this quote only.
-3. Issue the quote. Its local hold does not block Airbnb automatically.
-4. Block **every quoted night** on Airbnb. Wait for its export to show the full block, then refresh the owner page.
-5. Only when the complete block is verified, copy and send `/book/quote/<token>` to the guest. Sending remains manual.
-6. Follow payment outcomes in **Needs attention**. Never release a paid stay using the unpaid-hold action.
-
-## Documentation
-
-- [Install and environment contract](docs/direct-booking-setup.md)
-- [Adapter route map and error behavior](docs/PJ-ADAPTER.md)
-- [Review disposition / what was deliberately deferred](docs/REVIEW-DISPOSITION.md)
-- [Release checklist and real rehearsal](docs/RELEASE-CHECKLIST.md)
-- [Verification and limits](docs/VERIFICATION.md)
-- [Source provenance](docs/SOURCE-PROVENANCE.md)
-
-The original source snapshot and its dirty-tree history are preserved in the provenance record. No `.env` files, databases, real payment credentials, dependencies or generated build output are packaged.
+- [Release checklist](docs/RELEASE-CHECKLIST.md): release gates and unresolved owner decisions.
+- [Human booking proof](docs/HUMAN-BOOKING-PROOF.md): the full current-preview acceptance run.
+- [Rehearsal quick sheet](docs/BOOKING-E2E.md): the short sequence during that run.
+- [Release verification](docs/NOV1-RELEASE-VERIFICATION.md): actual results and remaining limits.
+- [Source provenance](docs/SOURCE-PROVENANCE.md): historical source identity, retained separately from current operating instructions.

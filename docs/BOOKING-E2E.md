@@ -1,57 +1,33 @@
-# KPL direct booking — real release rehearsal
+# Direct-booking rehearsal quick sheet
 
-Run this after the PJ PR is merged/deployed and the KPL PR is deployed.
+Use this beside [the full human booking proof](HUMAN-BOOKING-PROOF.md). Record results in [release verification](NOV1-RELEASE-VERIFICATION.md).
 
-## Preconditions
+**Target:** `<CURRENT_REVIEWED_PREVIEW_ORIGIN>/book`, filled from the actual deployment for this run. Verify the exact KPL/PJ revisions. An older test alias or the production Lodge URL is not the rehearsal target.
 
-PJ Owner Bookings readiness must show:
+## Ready to start
 
-- messaging enabled
-- authorized email sender
-- connected Google or Microsoft provider
-- public booking base configured
+Use an isolated test property/key/calendar, authorized owner access, controlled guest and owner inboxes, Stripe test credentials and a matching test webhook. Confirm the property exists for reservation/Case creation and the deployed backend supports `request_key`.
 
-Stripe must be in test mode for the rehearsal.
+Owner messaging readiness must show enabled messaging, an authorized sender, a connected provider, owner recipients and the correct public base. PJ uses `KPL_BOOKING_PUBLIC_BASE_URL` and `KPL_BOOKING_OWNER_EMAILS`; a configured workspace email identity also needs provider permission.
 
-## Rehearsal
+## Run
 
-1. Open `https://kendallpondlodge.com/book`.
-2. Submit a future actually-free test stay using an inbox you can read.
-3. Verify the request appears in Owner Bookings.
-4. Verify the guest acknowledgement arrives once.
-5. Verify the owner request notification arrives once.
-6. Enter the exact itemized owner quote.
-7. Block every stayed night on Airbnb.
-8. Wait for Airbnb export state to become `owner-blocked`.
-9. Refresh Owner Bookings.
-10. Click **Send quote**.
-11. Verify PJ shows provider accepted.
-12. Verify the guest gets exactly one quote email.
-13. Open the private quote.
-14. Review the exact itemized price and terms.
-15. Accept the terms.
-16. Enter Stripe test Checkout.
-17. Complete Checkout using Stripe's published test card.
-18. Return to the quote page.
-19. Verify the booking reaches **Confirmed**.
-20. Verify deposit and remaining balance equal the PJ record.
-21. Verify Owner Bookings shows Confirmed.
-22. Verify one guest confirmation email.
-23. Verify one owner confirmation email.
-24. Verify a Stripe webhook retry does not create a duplicate confirmation.
-25. Verify the Guidebook link opens the protected guest Guidebook.
-26. Verify PJ attention/reconciliation has no unresolved payment problem.
+1. Signed out, submit future free dates. Check pending feedback and the received state; no card or reservation yet.
+2. Retry the unchanged initial request with the same request key in the controlled retry scenario. Verify one request, one creation event and one logical acknowledgement/owner-notification pair.
+3. Check actual receipt in both controlled inboxes, separately from provider acceptance.
+4. As owner, enter the exact itemized amounts, deposit, cancellation terms and balance terms; **issue while dates remain free**.
+5. Manually block every stayed night in the test calendar. Refresh until the full stay is `owner-blocked`.
+6. Click **Send quote**. Check its result and the one received quote email. Issuing alone does not send it.
+7. Open the private quote as guest. Match dates, fees, total, deposit, balance, terms and expiry.
+8. Accept terms and complete hosted Stripe **test** Checkout for the deposit.
+9. Return to KPL. Require the verified payment result; a redirect alone is not confirmation.
+10. Check confirmed state in KPL/PJ, exact amounts, one reservation/Case and no unresolved payment or reservation-sync issue.
+11. Verify guest and owner confirmations in the controlled inboxes.
+12. Refresh the return page and replay the same signed test webhook. Confirm unchanged payment truth and no duplicate booking, reservation, Case or logical confirmation message.
+13. Run the separate recovery cases in the full proof: calendar failure, session retry, transient confirmation failure, signature/mode rejection, held email, unpaid release and completed correction.
 
-## Evidence to keep
+The remaining balance is not collected by this Checkout. A paid cancellation/refund needs the owner’s actual reservation, Stripe and accounting actions; **Record correction** only records work already done.
 
-Record:
+## Keep
 
-- booking request id
-- PJ audit event ids
-- Stripe test Checkout Session id
-- Stripe test PaymentIntent id
-- provider-accepted message ids
-- confirmation timestamp
-- screenshots of the guest and owner final states
-
-Do not put the private quote bearer token into the evidence package.
+Record the run time/operator, exact deployments, request ID, test payment/event references, scoped record/message counts and redacted final-state evidence. Mark each result **PASS**, **FAIL** or **BLOCKED**. Keep private quote tokens, calendar URLs, codes, credentials and guest contact details out of the repository.

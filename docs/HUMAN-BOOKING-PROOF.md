@@ -1,180 +1,107 @@
-# KPL human booking proof
+# Human booking proof
 
-This is the release acceptance test for the direct-booking experience. It proves a person can complete the actual KPL workflow and that PuddleJumper records and emails the same state.
+This is the acceptance run for the actual KPL guest and owner interfaces, PJ records and messaging, and Stripe hosted **test-mode** Checkout. Unit tests and an offline payment fixture support it; they do not replace it.
 
-Run this against **Preview/test only** until the entire checklist passes.
+Use the exact **current Preview URL** recorded for the run. Do not use the production Lodge URL or assume that an old test alias points to the reviewed release. Record actual outcomes in [release verification](NOV1-RELEASE-VERIFICATION.md).
 
-## Pass criteria
+## Before the run
 
-A run passes only when all of these are true:
+The operator must establish:
 
-1. A guest can submit dates from the real KPL `/book` page without signing in.
-2. The owner can sign in to the real KPL Owner workspace and see the same request.
-3. PuddleJumper sends the guest a **request received** email.
-4. The owner can issue an itemized quote from KPL.
-5. After the owner blocks the full stay on Airbnb and the block is visible to PJ, PuddleJumper sends the guest a **quote ready** email containing the private KPL quote link.
-6. The guest can open that emailed link, see the exact quote and terms, accept them, and enter Stripe test checkout.
-7. A successful Stripe test payment is verified through the KPL webhook and PJ changes the booking to `confirmed`.
-8. PuddleJumper sends the guest a **booking confirmed** email.
-9. The owner sees the confirmed booking in KPL with no unresolved payment-reconciliation item.
-10. PJ has one confirmed direct reservation linked to the same booking/Case. No duplicate booking, payment, email, reservation, or Case is created by refresh/retry.
+- The Preview deployment’s exact KPL commit and the deployed PJ commit, including request-key deduplication support.
+- An isolated test workspace/property and scoped key, with the property provisioned for reservation/Case creation.
+- A controlled test calendar whose dates can be made free, fully owner-blocked, conflicting and unreadable without changing real guest inventory.
+- Stripe test credentials and a matching test webhook endpoint at the Preview origin. Confirm the actual key/account and Checkout are in test mode; a separate mode label is not proof.
+- Authorized owner access, a controlled guest inbox and authorized owner notification recipients. Use no unrelated person’s email.
+- PJ messaging readiness: `PJ_STAY_MESSAGING=enabled`, `KPL_BOOKING_PUBLIC_BASE_URL` set to the exact Preview origin, and `KPL_BOOKING_OWNER_EMAILS` set to authorized test recipients. An authorized workspace sender and connected provider are required.
+- If `PJ_STAY_EMAIL_IDENTITIES` is configured, its test workspace identity must be allowed by the connected provider. Verify the intended From and Reply-To in the received mail.
 
-## Required test configuration
+The KPL `KPL_BOOKING_ORIGIN`, PJ public base and Stripe return/webhook environment must agree. Do not publish credentials, private calendar URLs or the configured inboxes as evidence.
 
-KPL Preview:
+## 1. Request and initial retry
 
-- `KPL_DIRECT_BOOKING_ENABLED=true`
-- Preview `KPL_STORE_URL` and `KPL_STORE_KEY`
-- Preview Airbnb calendar source registered with PJ
-- Stripe **test** key and matching Preview webhook secret
-- `KPL_BOOKING_CONTACT_EMAIL=info@publiclogic.org`
-- `KPL_BOOKING_ORIGIN` set to the exact Preview origin used for the run
+Open the Preview `/book` page in a signed-out browser. Select future free dates and submit a controlled test guest, two guests and no pets.
 
-PuddleJumper Preview/test:
+Check that the form gives pending feedback and prevents another normal submit while pending. The received state must say that the request is not a reservation and no payment has been taken. Verify one request in Owner → Bookings and the intended PJ scope.
 
-- the KPL Preview booking key is bound to the Preview workspace/property
-- `PJ_STAY_MESSAGING=enabled`
-- `PJ_STAY_EMAIL_IDENTITIES` includes the Preview workspace with:
-  - name: `The Lodge at Kendall Pond`
-  - address: `info@publiclogic.org`
-  - replyTo: `info@publiclogic.org`
-- an authorized email sender is connected for that same workspace and the provider allows it to send as `info@publiclogic.org`
-- `KPL_QUOTE_LINK_BASES` maps that Preview workspace/property to the exact KPL Preview `/book/quote` base
+Exercise an ambiguous initial-submit retry with the same unchanged form and original `request_key`, using the approved test harness or controlled response-loss scenario. Verify:
 
-Do not use live Stripe credentials for this proof.
+- One canonical request and one creation audit entry.
+- One logical guest acknowledgement and one owner notification message record; retry does not enqueue another of either kind.
+- The controlled guest and owner inboxes receive the expected request messages. Record provider acceptance and inbox receipt separately.
 
-## Human run
+Backend contract checks must also verify that a changed payload with the same key is rejected, and another workspace/property cannot retrieve this request. A later browser retry may be stopped by fresh calendar/overlap checks after an owner hold or confirmation; it must not create a second request. Do not infer a guarantee from a disabled button or from an older backend that ignores the key.
 
-Use a real inbox you can read as the guest. Do not use the Lodge sender address as the guest address.
+## 2. Quote, block, explicit send
 
-### 1. Guest requests dates
+While every requested night remains **free**, enter the exact nightly amount, cleaning, pet, tax, named other fee, deposit, cancellation terms and balance terms in Owner → Bookings. Review and **issue the quote**.
 
-Open the KPL Preview `/book` page in a normal browser.
+Check that its dates, total, deposit, remaining balance and expiry match the inputs. Issuing the quote must not be treated as an automatic quote email or an Airbnb block.
 
-Submit:
-- future free check-in/check-out dates
-- 2 guests
-- 0 pets
-- your test guest name
-- your real test inbox
+Manually block every stayed night in the test calendar. Refresh until the fresh read reports the entire stay as `owner-blocked`. A partial block is insufficient. Click **Send quote** and verify:
 
-Expected:
-- KPL shows **request received**
-- no card is requested and no charge is made
-- Owner → Bookings shows one new request
-- the guest receives **We got your dates — The Lodge at Kendall Pond**
-- From is **The Lodge at Kendall Pond <info@publiclogic.org>**
-- Reply-To is **info@publiclogic.org**
+- The owner sees the actual sent/held/failed result.
+- Provider acceptance is reported accurately.
+- The controlled guest receives one quote email containing the private KPL quote link.
+- The intended sender identity and reply address are correct.
 
-Record:
-- booking request ID
-- guest email timestamp/message ID
-- screenshot of the received state
-- screenshot of the owner request
+Do not copy the bearer link into screenshots or repository evidence. Redact it in the private evidence package too when a full URL is unnecessary.
 
-### 2. Owner issues the quote
+## 3. Accept and pay the deposit
 
-In Owner → Bookings, enter the exact nightly price, cleaning, pet/tax/other fees, exact deposit, cancellation terms, and balance terms.
+Open the received link as the guest. Compare every price line with the owner quote, including deposit now and remaining balance later. Read the cancellation and balance terms. The page must not claim that the stay is already confirmed.
 
-Issue the quote.
+Accept the terms and enter Stripe hosted **test-mode** Checkout. Verify the displayed deposit and currency before completing Stripe’s documented successful test-card flow. Never use a live card for this run.
 
-Then block every quoted night in Airbnb. Wait until the export/PJ check shows the complete owner block.
+On return, require the authoritative payment result. If confirmation is still pending, the page must keep showing that state rather than treating the redirect as proof. Verify the signed test webhook reaches KPL and the matching payment decision reaches PJ.
 
-Expected:
-- booking status is `quoted`
-- guest receives **Your stay at The Lodge at Kendall Pond is ready**
-- email contains the private KPL `/book/quote/<token>` link
-- the token is not displayed in the owner UI as an email-delivery secret and is not stored in the PJ message body
+## 4. Confirm and replay
 
-Record:
-- quote timestamp
-- email message ID
-- screenshot of the quote in Owner
-- screenshot of the received quote email
+Check all of the following:
 
-### 3. Guest accepts and pays
+- KPL and PJ show the same confirmed booking, exact deposit and remaining balance.
+- There is one direct reservation and the expected linked Case; no reservation-sync or payment problem remains unresolved.
+- Guest and owner confirmation messages have the expected provider outcomes and are received in the controlled inboxes.
+- Refreshing the quote/return page and replaying the same signed Stripe test event creates no additional booking, payment record, reservation, Case or logical confirmation message.
+- The existing payment reference and paid timestamp remain consistent after replay.
 
-Open the quote link from the email.
+Keep the distinction between a logical message record, provider acceptance and inbox receipt. Report any discrepancy instead of marking the run passed.
 
-Expected before payment:
-- dates match the original request
-- every price line matches Owner
-- deposit amount is exact
-- cancellation and balance terms are visible
-- page does not say the stay is booked yet
+## 5. Recovery checks
 
-Accept the terms and continue to Stripe test checkout.
+Use separate controlled fixtures for these cases; do not disrupt the successful paid fixture or real inventory:
 
-Complete the test payment using Stripe's standard successful test-card flow.
-
-Expected:
-- KPL returns to a checking/payment-processing state, not a redirect-only “booked” claim
-- the signed Stripe webhook reaches KPL
-- PJ verifies the payment amount/session and moves the booking to `confirmed`
-
-Record:
-- Stripe Checkout Session ID
-- Stripe test Payment/Checkout event ID
-- screenshot of the quote before payment
-- screenshot of the post-payment KPL state
-
-### 4. Confirmation
-
-Expected:
-- Owner → Bookings shows the stay confirmed/paid
-- no refund/payment-rejected reconciliation is open
-- PJ has one direct StayOS reservation for the same dates
-- PJ booking and reservation point to the same governed Case lineage
-- guest receives **You’re booked — The Lodge at Kendall Pond**
-- confirmation From/Reply-To remain the Lodge identity
-
-Record:
-- confirmation email message ID
-- PJ reservation ID
-- Case ID
-- screenshot of Owner confirmed state
-- screenshot of confirmation email
-
-### 5. Retry/idempotency check
-
-Refresh the quote/payment-return page and redeliver the same Stripe test webhook once.
-
-Expected:
-- still one booking
-- still one payment record
-- still one direct reservation
-- no second Case
-- no duplicate confirmation email
-- no new reconciliation problem
-
-## Optional stay-access proof
-
-Advance the confirmed stay through the PJ/KPL host flow to `PRE_ARRIVAL`.
-
-Expected:
-- guest receives the private stay link by email
-- the bearer token is rendered only for provider delivery and is not stored in the PJ message body or returned to the host
-- revoke/reissue behavior remains owner-controlled
+| Case | Required outcome |
+| --- | --- |
+| Unreadable calendar, occupied dates or partial owner block | No unsupported availability, send or payment approval. |
+| Repeated Checkout attempt | Existing compatible session reused; no second session with changed payment parameters. |
+| Transient PJ/network failure during webhook handling | Retryable failure remains visible, and a later valid delivery settles once. |
+| Invalid signature or test/live mismatch | No booking confirmation. |
+| Recorded payment rejection or refund requirement | Durable owner attention item; no false confirmation. |
+| Held/failed email after payment | Paid booking remains true; message issue remains visible. |
+| Abandoned unpaid quote | Session checked/expired before release; calendar reconciled separately. A confirmed stay cannot use unpaid release. |
+| Completed correction record | Records the action already performed; it does not initiate a refund or cancellation. |
 
 ## Evidence record
 
-Save one small proof record for the run:
+Keep the detailed record in the authorized private location. The repository summary can contain revisions, test outcomes and limitations without guest data or bearer links.
 
 ```text
-Run date:
-KPL Preview URL:
-PJ revision:
-KPL revision:
-Guest test inbox:
-Booking request ID:
-Quote email message ID:
-Stripe Checkout Session:
-Stripe event:
-PJ reservation ID:
-Case ID:
-Confirmation email message ID:
-Result: PASS / FAIL
-Notes:
+Run date and operator:
+Current KPL Preview URL and deployed commit:
+Deployed PJ revision:
+Verified isolated test workspace/property:
+Controlled calendar and inbox evidence location:
+Request ID and creation/message counts after retry:
+Quote inputs/terms review and full-block evidence:
+Quote provider acceptance and inbox receipt:
+Stripe test Checkout Session/event references:
+Confirmed booking, reservation and Case references:
+Confirmation provider acceptance and inbox receipt:
+Webhook replay outcome and record counts:
+Recovery-case outcomes:
+Result: PASS / FAIL / BLOCKED
+Unresolved items and responsible person:
 ```
 
-Do not put booking keys, Stripe secrets, owner codes, Airbnb calendar URLs, or guest-access bearer tokens in the evidence record.
+Do not include secrets, owner codes, private calendar URLs, full guest contact details or quote/stay access tokens. A blocked dependency remains **BLOCKED**; neither a source implementation nor a passing local fixture resolves it.

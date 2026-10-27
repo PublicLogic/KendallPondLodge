@@ -21,7 +21,7 @@ import {
 
 import { requestStay } from './actions';
 import { BookingSteps } from '@/app/_components/StayInformation';
-import { StayRequestForm } from './StayRequestForm';
+import { StayRequestForm, StayRequestReceipt } from './StayRequestForm';
 
 export const metadata: Metadata = {
   title: 'Request a stay',
@@ -141,20 +141,15 @@ export default async function BookPage({
         <div className="booking-panel booking-panel-direct">
           <h2>Your stay.</h2>
 
-          {status === 'received' && (
-            <p className="booking-alert" role="status">
-              Request received. Nothing has been charged and the
-              dates are not reserved yet.
-            </p>
-          )}
-
-          {status && status !== 'received' && (
+          {status && status !== 'received' && (!enabled || !availabilityReady) && (
             <p className="booking-alert" role="alert">
-              {publicError(status)} Your dates are not reserved.
+              {publicError(status)}
             </p>
           )}
 
-          {!enabled ? (
+          {status === 'received' ? (
+            <StayRequestReceipt />
+          ) : !enabled ? (
             <p className="booking-alert">
               Direct requests are closed right now.{' '}
               <a href={airbnb}>Book on Airbnb instead.</a>
@@ -180,6 +175,7 @@ export default async function BookPage({
             <StayRequestForm
               action={requestStay}
               availabilityReady={availabilityReady}
+              initialError={status ? publicError(status) : undefined}
               today={today}
               unavailableDates={[...unavailable].sort()}
             />
