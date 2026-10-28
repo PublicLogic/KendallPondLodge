@@ -25,20 +25,13 @@ function BookingAction({ enabled, className, children }: { enabled: boolean; cla
 export default function HomePage() {
   const enabled = directBookingEnabled();
   const heroScenes = [
-    {
-      src: "/images/kpl/2026-10-28/kendall-pond-lodge-dawn-mist.webp",
-      alt: "Morning mist above still water and reflected trees on Kendall Pond",
-      label: "By the water",
-      position: "center 45%",
-    },
+    { ...lodgePhoto(2), label: "By the water", position: "center 55%" },
     { ...lodgePhoto(4), label: "In the hot tub", position: "center 55%" },
     {
       src: "/images/kpl/2026-10-28/kendall-pond-lodge-deck-lounge-autumn.webp",
       alt: "Cushioned deck seating overlooking autumn trees and mist on Kendall Pond",
       label: "On the deck",
       position: "center 52%",
-      videoSrc: "/videos/kpl/2026-10-28/kendall-pond-dawn-autumn.mp4",
-      poster: "/images/kpl/2026-10-28/kendall-pond-lodge-dawn-mist.webp",
     },
   ] as const;
   const house = lodgePhoto(7);

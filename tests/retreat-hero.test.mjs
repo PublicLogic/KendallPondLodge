@@ -22,11 +22,12 @@ test('the header follows the approved split rural-pond composition', () => {
 test('the static collage uses existing property photos and keeps both booking paths', () => {
   const hero = read('app/_components/RetreatHero.tsx');
   const home = read('app/page.tsx');
-  for (const name of ['dawn-mist', 'deck-lounge-autumn']) {
+  for (const name of ['deck-lounge-autumn']) {
     const src = '/images/kpl/2026-10-28/kendall-pond-lodge-' + name + '.webp';
     assert.ok(home.includes(src));
     assert.ok(existsSync(new URL('../public' + src, import.meta.url)));
   }
+  assert.match(home, /lodgePhoto\(2\)/);
   assert.match(home, /lodgePhoto\(4\)/);
   assert.match(home, /const house = lodgePhoto\(7\)/);
   assert.doesNotMatch(home + hero, /<iframe/);

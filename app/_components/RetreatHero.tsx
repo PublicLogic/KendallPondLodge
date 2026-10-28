@@ -1,15 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./RetreatHero.module.css";
-import { LivingPhotoVideo } from "./LivingPhotoVideo";
 
 type Scene = {
   label: string;
   src: string;
   alt: string;
   position: string;
-  videoSrc?: string;
-  poster?: string;
 };
 
 type Props = {
@@ -21,9 +18,9 @@ type Props = {
 /** Real property photographs in a still, server-rendered pond-house opening. */
 export function RetreatHero({ directEnabled, airbnbHref, scenes }: Props) {
   const photographs = [
-    { ...scenes[0], caption: "Morning on the pond", href: "/grounds" },
+    { ...scenes[0], caption: "Autumn on the pond", href: "/grounds" },
     { ...scenes[1], caption: "A long soak", href: "/grounds" },
-    { ...scenes[2], caption: "Dawn on the pond", href: "/grounds" },
+    { ...scenes[2], caption: "The upper deck", href: "/photos" },
   ];
   const action = <><span>Check your dates</span><span aria-hidden="true">↗</span></>;
 
@@ -65,14 +62,6 @@ export function RetreatHero({ directEnabled, airbnbHref, scenes }: Props) {
               sizes={index === 0 ? "(max-width: 800px) 100vw, 61vw" : "(max-width: 800px) 50vw, 31vw"}
               style={{ objectPosition: scene.position }}
             />
-            {scene.videoSrc && (
-              <LivingPhotoVideo
-                className={styles.motionVideo}
-                src={scene.videoSrc}
-                poster={scene.poster}
-                objectPosition={scene.position}
-              />
-            )}
             <span className={styles.caption}><span>{scene.caption}</span><span aria-hidden="true">↗</span></span>
           </Link>
         ))}

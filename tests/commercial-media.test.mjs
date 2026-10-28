@@ -3,16 +3,13 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 const read = path => readFileSync(new URL("../"+path, import.meta.url), "utf8");
 
-test("deck motion behaves like a photograph, not a player", () => {
+test("homepage hero uses distinct still photography without player chrome", () => {
   const home = read("app/page.tsx");
   const hero = read("app/_components/RetreatHero.tsx");
-  const css = read("app/_components/RetreatHero.module.css");
-  assert.match(home, /kendall-pond-dawn-autumn\\.mp4/);
-  assert.match(home, /kendall-pond-lodge-dawn-mist\\.webp/);
-  assert.match(hero, /<LivingPhotoVideo/);
-  assert.match(css, /\.motionVideo/);
-  assert.match(css, /prefers-reduced-motion/);
-  assert.match(css, /max-width:\s*800px/);
+  assert.match(home, /lodgePhoto\(2\)/);
+  assert.match(home, /lodgePhoto\(4\)/);
+  assert.match(home, /kendall-pond-lodge-deck-lounge-autumn\.webp/);
+  assert.doesNotMatch(home + hero, /<video|videoSrc:|controls=/);
 });
 
 test("the Lodge shows the downstairs and upgrades the outside image", () => {
