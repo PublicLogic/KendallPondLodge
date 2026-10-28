@@ -1,0 +1,74 @@
+name: Import approved property photographs
+on:
+  push:
+    branches: [media/premium-rooms-grounds-20261028]
+    paths: [.github/workflows/premium-photo-import.yml]
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Install locked image encoder
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Fetch and encode reviewed Adobe photo treatments
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import sharp from 'sharp';
+          import {createHash} from 'node:crypto';
+          const items = [
+            ['tiled-bedroom','https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:fbade233-1010-43a6-8ab7-601fb671b0df'],
+            ['wood-bedroom','https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:ab67ed27-e928-4a7d-8d39-4c84606bc3e6'],
+            ['bunk-room','https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:3eeccb58-117f-4a27-81b6-2ab96fe30fb2'],
+            ['summer-lawn','https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:8bffdcd9-c49b-4122-9063-806ac3a14e4b'],
+            ['autumn-lawn','https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:f5a8f20f-e70a-4fbf-bd9f-ecacab999a18']
+          ];
+          const dir='public/images/kpl/2026-10-28';
+          const records=[];
+          for(const [name,url] of items){
+            const r=await fetch(url,{signal:AbortSignal.timeout(60000)});
+            if(!r.ok)throw Error(name+' download failed: '+r.status);
+            const input=Buffer.from(await r.arrayBuffer());
+            if(input.length>40000000)throw Error('Unexpected image size');
+            const m=await sharp(input).metadata();
+            if(!m.width||!m.height||m.width<1200||m.width>5000)throw Error('Invalid image dimensions');
+            const out=await sharp(input).toColourspace('srgb').webp({quality:84,effort:6}).toBuffer();
+            const path=dir+'/kendall-pond-lodge-'+name+'-premium.webp';
+            fs.writeFileSync(path,out);
+            records.push({path,width:m.width,height:m.height,bytes:out.length,sha256:createHash('sha256').update(out).digest('hex')});
+          }
+          fs.writeFileSync('/tmp/kpl-import-records.json',JSON.stringify(records));
+          console.log(JSON.stringify(records,null,2));
+          JS
+      - name: Store image blobs on media branch only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const repo=process.env.GITHUB_REPOSITORY;
+          const branch='media/premium-rooms-grounds-20261028';
+          async function api(path,body){
+            const r=await fetch('https://api.github.com/repos/'+repo+path,{method:body?'POST':'GET',headers:{'Authorization':'Bearer '+process.env.GH_TOKEN,'Accept':'application/vnd.github+json','Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'},body:body?JSON.stringify(body):undefined});
+            if(!r.ok)throw Error('GitHub operation failed: '+r.status);
+            return r.json();
+          }
+          const ref=await api('/git/ref/heads/'+branch);
+          if(ref.object.sha!==process.env.GITHUB_SHA)throw Error('Branch changed; refusing to overwrite');
+          const base=await api('/git/commits/'+ref.object.sha);
+          const entries=[];
+          for(const item of JSON.parse(fs.readFileSync('/tmp/kpl-import-records.json'))){
+            const blob=await api('/git/blobs',{content:fs.readFileSync(item.path).toString('base64'),encoding:'base64'});
+            entries.push({path:item.path,mode:'100644',type:'blob',sha:blob.sha});
+          }
+          const tree=await api('/git/trees',{base_tree:base.tree.sha,tree:entries});
+          const commit=await api('/git/commits',{message:'Add five naturally finished original room and grounds photographs',tree:tree.sha,parents:[ref.object.sha]});
+          const r=await fetch('https://api.github.com/repos/'+repo+'/git/refs/heads/'+branch,{method:'PATCH',headers:{'Authorization':'Bearer '+process.env.GH_TOKEN,'Content-Type':'application/json','Accept':'application/vnd.github+json'},body:JSON.stringify({sha:commit.sha,force:false})});
+          if(!r.ok)throw Error('Branch update failed: '+r.status);
+          console.log('Imported assets committed to media branch: '+commit.sha);
+          JS
