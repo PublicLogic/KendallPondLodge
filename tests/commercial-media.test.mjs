@@ -6,7 +6,7 @@ const read = path => readFileSync(new URL("../"+path, import.meta.url), "utf8");
 test("homepage hero uses distinct still photography without player chrome", () => {
   const home = read("app/page.tsx");
   const hero = read("app/_components/RetreatHero.tsx");
-  assert.match(home, /kendall-pond-golden-mist-sunrise\.webp/);
+  assert.match(home, /lodgePhoto\\(46\\)/);
   assert.match(home, /lodgePhoto\(4\)/);
   assert.match(home, /kendall-pond-lodge-deck-lounge-autumn\.webp/);
   assert.doesNotMatch(home + hero, /<video|videoSrc:|controls=/);

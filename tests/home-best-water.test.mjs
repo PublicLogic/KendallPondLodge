@@ -6,9 +6,8 @@ const hero = readFileSync(new URL("../app/_components/RetreatHero.tsx", import.m
 
 test("the homepage lead uses the golden mist sunrise photo", () => {
   const heroScenes = home.slice(home.indexOf("const heroScenes"), home.indexOf("const house"));
-  assert.match(heroScenes, /kendall-pond-golden-mist-sunrise\.webp/);
-  assert.doesNotMatch(heroScenes, /lodgePhoto\(2\)/);
-  assert.match(hero, /Golden morning on the pond/);
+  assert.match(heroScenes, /lodgePhoto\\(46\\)/);
+    assert.match(hero, /Kendall Pond in fall/);
 });
 
 test("hot tub and deck remain distinct supporting scenes", () => {

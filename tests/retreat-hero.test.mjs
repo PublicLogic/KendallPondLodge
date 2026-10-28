@@ -27,7 +27,7 @@ test('the static collage uses existing property photos and keeps both booking pa
     assert.ok(home.includes(src));
     assert.ok(existsSync(new URL('../public' + src, import.meta.url)));
   }
-  assert.match(home, /kendall-pond-golden-mist-sunrise\.webp/);
+  assert.match(home, /lodgePhoto\\(46\\)/);
   assert.match(home, /lodgePhoto\(4\)/);
   assert.match(home, /const house = lodgePhoto\(7\)/);
   assert.doesNotMatch(home + hero, /<iframe/);

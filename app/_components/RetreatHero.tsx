@@ -18,7 +18,7 @@ type Props = {
 /** Real property photographs in a still, server-rendered pond-house opening. */
 export function RetreatHero({ directEnabled, airbnbHref, scenes }: Props) {
   const photographs = [
-    { ...scenes[0], caption: "Golden morning on the pond", href: "/grounds" },
+    { ...scenes[0], caption: "Kendall Pond in fall", href: "/grounds" },
     { ...scenes[1], caption: "A long soak", href: "/grounds" },
     { ...scenes[2], caption: "The upper deck", href: "/photos" },
   ];
