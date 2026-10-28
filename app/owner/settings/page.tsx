@@ -74,6 +74,7 @@ export default async function BookingSettings({
     pet_fee_mode?: 'per_stay' | 'per_pet';
     tax_basis_points?: number;
     taxable_fees?: boolean;
+    airbnb_channel_guarded?: boolean;
     deposit_percent?: number;
     min_nights?: number;
     booking_window_days?: number;
@@ -164,6 +165,11 @@ export default async function BookingSettings({
             value={importCalendarReady ? 'Ready' : 'Not set up'}
             good={importCalendarReady}
           />
+          <StatusItem
+            label="Airbnb channel mode"
+            value={instantSettings?.airbnb_channel_guarded ? 'Guarded' : 'Verify first'}
+            good={instantSettings?.airbnb_channel_guarded === true}
+          />
         </div>
       </section>
 
@@ -241,19 +247,19 @@ export default async function BookingSettings({
           <dl className="owner-rule-list">
             <div>
               <dt>Pricing</dt>
-              <dd>Entered per quote</dd>
+              <dd>Property policy</dd>
             </div>
             <div>
               <dt>Deposit</dt>
-              <dd>Exact quoted amount</dd>
+              <dd>Policy percentage</dd>
             </div>
             <div>
-              <dt>Quote life</dt>
-              <dd>Up to 48 hours</dd>
+              <dt>Direct hold</dt>
+              <dd>90–360 minutes</dd>
             </div>
             <div>
-              <dt>Payment start</dt>
-              <dd>More than 65 min. remaining</dd>
+              <dt>Airbnb</dt>
+              <dd>Request-to-Book</dd>
             </div>
             <div>
               <dt>Availability</dt>
@@ -291,6 +297,13 @@ export default async function BookingSettings({
                 : 'Create the private outbound calendar token before connecting Airbnb.'}
             </p>
             {importCalendarReady && <code className="owner-calendar-url">{importCalendarUrl}</code>}
+            {importCalendarReady && (
+              <ol className="owner-calendar-steps">
+                <li>In Airbnb, import this calendar URL for the Lodge listing.</li>
+                <li>Turn off Airbnb Instant Book so Airbnb stays require host approval.</li>
+                <li>Only then enable instant direct booking below.</li>
+              </ol>
+            )}
           </div>
           <div>
             <strong>Pricing policy</strong>
@@ -329,7 +342,11 @@ export default async function BookingSettings({
             <label className="booking-check"><input type="checkbox" name="taxable_fees" value="yes" defaultChecked={instantSettings.taxable_fees === true} /> Tax cleaning and pet fees too</label>
             <label>Cancellation / refund terms<textarea name="cancellation_terms" minLength={20} maxLength={4000} required defaultValue={instantSettings.cancellation_terms ?? ''} /></label>
             <label>Remaining balance terms<textarea name="balance_terms" minLength={20} maxLength={4000} required defaultValue={instantSettings.balance_terms ?? ''} /></label>
-            <label className="booking-check"><input type="checkbox" name="enabled" value="yes" defaultChecked={instantSettings.enabled === true} /> Enable instant booking with this policy</label>
+            <label className="booking-check">
+              <input type="checkbox" name="airbnb_channel_guarded" value="yes" defaultChecked={instantSettings.airbnb_channel_guarded === true} />
+              I connected the private KPL calendar to Airbnb and turned off Airbnb Instant Book (Request-to-Book only).
+            </label>
+            <label className="booking-check"><input type="checkbox" name="enabled" value="yes" defaultChecked={instantSettings.enabled === true} /> Enable instant direct booking with this policy</label>
             <button className="button button-primary" type="submit">Save booking policy</button>
           </form>
         )}
@@ -355,9 +372,8 @@ export default async function BookingSettings({
           <p className="eyebrow">Terms</p>
           <h3>Each stay is explicit</h3>
           <p>
-            Nightly rate, cleaning, pets, taxes, other fees, cancellation
-            terms, balance terms, and deposit are entered on the individual
-            quote.
+            Nightly rates, cleaning, pets, taxes, deposit, cancellation terms,
+            and balance terms are set once as the property booking policy.
           </p>
           <p>Changes stay explicit and governed; routine bookings do not need owner repricing.</p>
         </section>

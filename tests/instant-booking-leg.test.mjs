@@ -48,4 +48,13 @@ test("owner settings shows instant booking and Airbnb outbound calendar", () => 
   assert.match(settings, /Instant booking/);
   assert.match(settings, /Airbnb import calendar/);
   assert.match(settings, /instantSettings/);
+  assert.match(settings, /Airbnb Instant Book/);
+  assert.match(settings, /airbnb_channel_guarded/);
+});
+
+test("owner cannot enable instant booking without the Airbnb channel guard", () => {
+  const actions = read("app/owner/settings/actions.ts");
+  assert.match(actions, /airbnbChannelGuarded/);
+  assert.match(actions, /KPL_AIRBNB_IMPORT_TOKEN/);
+  assert.match(actions, /airbnb_channel_guarded: airbnbChannelGuarded/);
 });
