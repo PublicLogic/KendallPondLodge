@@ -25,7 +25,12 @@ function BookingAction({ enabled, className, children }: { enabled: boolean; cla
 export default function HomePage() {
   const enabled = directBookingEnabled();
   const heroScenes = [
-    { ...lodgePhoto(2), label: "By the water", position: "center 55%" },
+    {
+      src: "/images/kpl/2026-10-28/kendall-pond-golden-mist-sunrise.webp",
+      alt: "Golden morning mist glowing over still water on Kendall Pond",
+      label: "Golden morning",
+      position: "center 48%",
+    },
     { ...lodgePhoto(4), label: "In the hot tub", position: "center 55%" },
     {
       src: "/images/kpl/2026-10-28/kendall-pond-lodge-deck-lounge-autumn.webp",

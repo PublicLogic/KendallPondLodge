@@ -63,7 +63,7 @@ test("homepage keeps the actual pond header and samples bedroom, yard and great 
     assert.ok(home.includes(`kendall-pond-lodge-${name}.webp`));
   }
   assert.match(home, /lodgePhoto\(space.photo\)/);
-  assert.match(home, /lodgePhoto\(2\)/);
+  assert.match(home, /kendall-pond-golden-mist-sunrise\.webp/);
   assert.match(home, /const house = lodgePhoto\(7\)/);
   assert.doesNotMatch(home + hero, /<iframe/);
   assert.match(home, /<RetreatHero/);
