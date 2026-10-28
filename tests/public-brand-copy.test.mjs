@@ -17,13 +17,13 @@ test("guest footer and booking use STAY, while owner keeps Beta", () => {
   assert.match(booking, /"\/brand\/stay\/puddlejumper-stay\.png"/);
 });
 
-test("guest copy clearly distinguishes requests from reservations", () => {
+test("guest copy clearly distinguishes instant booking from reservation truth", () => {
   const booking = source("app/book/page.tsx");
   const rates = source("app/_data/public-stay.json");
   const home = source("app/page.tsx");
 
-  assert.match(booking, /Sending a request does not hold your dates/);
-  assert.match(booking, /no charge for asking/i);
+  assert.match(booking, /Exact price and terms next|priced and held automatically|Instant direct booking is being set up/);
+  assert.doesNotMatch(booking, /Start with your dates and we’ll send the full quote/);
   assert.match(rates, /not a reservation/);
   assert.match(home, /full price before asking for payment/);
 });

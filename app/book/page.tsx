@@ -57,6 +57,7 @@ export default async function BookPage({
       instant = false;
     }
   }
+  const bookable = enabled && instant;
   const today = propertyToday();
 
   const unavailable = new Set<string>();
@@ -106,14 +107,14 @@ export default async function BookPage({
           <div className="booking-intro-copy">
             <p className="eyebrow">Direct with Nate & Allie</p>
 
-            <h1>{enabled ? "A stay worth slowing down for." : "Check available dates."}</h1>
+            <h1>{bookable ? "A stay worth slowing down for." : "Check available dates."}</h1>
 
             <p>
-              {enabled
-                ? instant
-                  ? "Coffee on the deck. A long soak in the hot tub. Choose your dates to see the complete direct price and book securely."
-                  : "Coffee on the deck. A long soak in the hot tub. Start with your dates and we’ll send the full quote. There’s no charge for asking."
-                : "Direct booking requests are closed for now. You can check dates and book through Airbnb."}
+              {bookable
+                ? "Coffee on the deck. A long soak in the hot tub. Choose your dates to see the complete direct price and book securely."
+                : enabled
+                  ? "Instant direct booking is being set up. For now, check current availability and book through Airbnb."
+                  : "Direct booking is closed for now. You can check dates and book through Airbnb."}
             </p>
 
             <div className="booking-intro-facts">
@@ -157,11 +158,9 @@ export default async function BookPage({
             </p>
           )}
 
-          {status === 'received' ? (
-            <StayRequestReceipt />
-          ) : !enabled ? (
+          {!bookable ? (
             <p className="booking-alert">
-              Direct requests are closed right now.{' '}
+              {enabled ? 'Instant direct booking is being set up. ' : 'Direct booking is closed right now. '}
               <a href={airbnb}>Book on Airbnb instead.</a>
             </p>
           ) : !availabilityReady ? (
@@ -196,14 +195,12 @@ export default async function BookPage({
 
       <section className="booking-direct-foot">
         <p>
-          {enabled
-            ? instant
-              ? "Eligible dates are priced and held automatically while you review the complete price and terms. Payment is handled securely through Stripe."
-              : "Sending a request does not hold your dates or charge you. We’ll confirm availability and price before asking for payment."
-            : "Direct requests are paused; visit Airbnb for current availability."}
+          {bookable
+            ? "Eligible dates are priced and held automatically while you review the complete price and terms. Payment is handled securely through Stripe."
+            : "Instant direct booking is paused; visit Airbnb for current availability."}
         </p>
       </section>
-      {enabled && <BookingSteps instant={instant} />}
+      {bookable && <BookingSteps instant />}
     </main>
   );
 }
