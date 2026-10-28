@@ -16,8 +16,8 @@ export default function AreaPage() {
         eyebrow="Gardner, Massachusetts"
         title="Getting to Kendall Pond."
         intro="The Lodge is a waterfront house in Gardner. Plan your trip into town, then use the private arrival details we send for your confirmed stay."
-        image="/images/kpl/website-top-50/09-Waterfront-and-Grounds/46-kendall-pond-lodge-autumn-pond-and-dock.jpg"
-        imageAlt="Kendall Pond from the Lodge"
+        image="/images/kpl/2026-10-28/kendall-pond-lodge-autumn-lawn-premium.webp"
+        imageAlt="Autumn trees framing the Lodge, lawn and firepit"
         imagePosition="center 55%"
         primaryAction={{ href: "/book", label: "Check dates" }}
         secondaryAction={{ href: "/explore", label: "Local things to do" }}

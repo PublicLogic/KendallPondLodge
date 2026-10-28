@@ -27,8 +27,8 @@ export default function RatesPage() {
         intro={directEnabled
           ? "Send us a request for a direct quote, or book through Airbnb."
           : "Direct requests are temporarily closed. Check availability and pricing on Airbnb."}
-        image="/images/kpl/website-top-50/01-Hero/03-kendall-pond-lodge-lakeview-deck.jpg"
-        imageAlt="The Lodge deck overlooking Kendall Pond"
+        image="/images/kpl/2026-10-28/kendall-pond-lodge-deck-lounge-autumn.webp"
+        imageAlt="Cushioned upper-deck seating overlooking Kendall Pond"
         imagePosition="center"
         primaryAction={
           directEnabled

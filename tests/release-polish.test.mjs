@@ -21,8 +21,8 @@ test('gallery has balanced real photos, rather than the narrow hot-tub strip', (
   const page = read('app/photos/page.tsx');
   const css = read('app/guest-ready.css');
   assert.match(page, /gallery-retreat/);
-  assert.match(page, /lodgePhoto\(3\)/);
-  assert.match(page, /lodgePhoto\(4\)/);
+  assert.match(page, /lodgePhoto\(7\)/);
+  assert.match(page, /lodgePhoto\(25\)/);
   assert.match(css, /\.gallery-retreat \.gallery-intro-visual/);
 });
 test('active calendar weekday and legend text retain readable contrast', () => {

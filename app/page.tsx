@@ -41,10 +41,7 @@ export default function HomePage() {
       poster: "/images/kpl/2026-10-28/kendall-pond-deck-lounge-autumn-poster.jpg",
     },
   ] as const;
-  const house = {
-    src: "/images/kpl/2026-10-28/kendall-pond-lodge-exterior-autumn.webp",
-    alt: "The yellow Lodge, brown deck, and covered hot tub framed by autumn trees",
-  };
+  const house = lodgePhoto(7);
   return (
     <main id="main-content" className="showcase-page guest-ready-home">
       <RetreatHero directEnabled={enabled} airbnbHref={airbnb} scenes={heroScenes} />

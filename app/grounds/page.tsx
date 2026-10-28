@@ -18,8 +18,8 @@ export default function GroundsPage() {
         eyebrow="Outside"
         title="Down by the water."
         intro="Private shoreline, a dock, lawn and firepit, plus a covered patio with a hot tub."
-        image="/images/kpl/website-top-50/01-Hero/02-kendall-pond-lodge-autumn-waterfront.jpg"
-        imageAlt="Kendall Pond from the Lodge"
+        image="/images/kpl/2026-10-28/kendall-pond-lodge-dawn-mist.webp"
+        imageAlt="Morning mist over still water at Kendall Pond"
         imagePosition="center 55%"
         primaryAction={{ href: "/book", label: "Check dates" }}
         secondaryAction={{ href: "/lodge", label: "See inside" }}
@@ -28,7 +28,7 @@ export default function GroundsPage() {
       <section className="content-section">
         <SectionHeading eyebrow="Shoreline" title="Down by the dock." />
         <div className="photo-grid photo-grid-two">
-          <PhotoCard src="/images/kpl/website-top-50/01-Hero/02-kendall-pond-lodge-autumn-waterfront.jpg" alt="Kendall Pond" title="Kendall Pond" note="Private shoreline · dock" wide position="center 55%" />
+          <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/50-kendall-pond-lodge-firepit-and-dock-from-deck.jpg" alt="Elevated view of the firepit, shoreline and dock" title="From the lawn to the water" note="Firepit · shoreline · dock" wide />
           <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/43-kendall-pond-lodge-private-dock.jpg" alt="The private dock" title="On the water" note="Seasonal kayaks · paddle boat" />
         </div>
       </section>

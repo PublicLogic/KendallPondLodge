@@ -24,7 +24,7 @@ export default function OutsidePage() {
       <section className="guide-section-stack guide-section-surface" id="fire-pit">
         <SectionHeading eyebrow="Outdoor areas" title="Fire, pool, and neighbors." />
         <div className="split-section split-section-photo-first">
-          <PhotoCard src="/images/kpl/firepit.jpg" alt="Stone fire pit circle between the lodge and Kendall Pond" title="Shoreline fire pit" note="Extinguish every fire fully" wide />
+          <PhotoCard src="/images/kpl/2026-10-28/kendall-pond-lodge-summer-lawn-premium.webp" alt="The Lodge, stone firepit, lawn and shoreline lounge chair in summer" title="Shoreline fire pit" note="Extinguish every fire fully" wide />
           <div className="stacked-cards">
             <InfoCard title="Fire pit"><p>Use it only when conditions and local rules allow. Keep water nearby, supervise continuously, and extinguish fully. Fireworks are not permitted.</p></InfoCard>
             <InfoCard id="pool" title="Pool"><p>Use it only when available for your stay. No diving, glass, or unsupervised children. Follow all posted instructions.</p></InfoCard>

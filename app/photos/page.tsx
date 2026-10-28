@@ -17,8 +17,8 @@ const airbnb =
   "https://www.airbnb.com/rooms/1667597913565948713";
 
 export default function PhotosPage() {
-  const mainPhoto = lodgePhoto(3);
-  const detailPhoto = lodgePhoto(4);
+  const mainPhoto = lodgePhoto(7);
+  const detailPhoto = lodgePhoto(25);
   const bookEnabled = directBookingEnabled();
 
   return (

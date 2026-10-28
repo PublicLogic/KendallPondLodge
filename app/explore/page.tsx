@@ -17,8 +17,8 @@ export default function ExplorePage() {
         eyebrow="Around Gardner"
         title="A few days around Gardner."
         intro="Breakfast in town, a walk at Wachusett, and dinner back at the house. Here are a few local places to help you plan your stay."
-        image="/images/kpl/website-top-50/09-Waterfront-and-Grounds/46-kendall-pond-lodge-autumn-pond-and-dock.jpg"
-        imageAlt="Kendall Pond in fall"
+        image="/images/kpl/2026-10-28/kendall-pond-lodge-dawn-mist.webp"
+        imageAlt="Morning mist over still water at Kendall Pond"
         imagePosition="center 58%"
         primaryAction={{ href: "/book", label: "Check dates" }}
         secondaryAction={{ href: "/area", label: "Getting here" }}
@@ -65,9 +65,9 @@ export default function ExplorePage() {
 
       <section className="content-section">
         <div className="photo-grid">
-          <PhotoCard src="/images/kpl/website-top-50/02-Exterior/07-kendall-pond-lodge-autumn-lodge-and-yard.jpg" alt="The Lodge in fall" title="The Lodge in fall" note="Autumn foliage around the house" wide />
-          <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/48-kendall-pond-lodge-autumn-lawn.jpg" alt="The waterfront lawn in fall" title="The waterfront lawn" note="Lawn between the house and shoreline" />
-          <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/47-kendall-pond-lodge-late-autumn-firepit.jpg" alt="The shoreline firepit in fall" title="Firepit by the water" note="Shoreline seating in autumn" />
+          <PhotoCard src="/images/kpl/2026-10-28/kendall-pond-lodge-autumn-lawn-premium.webp" alt="Autumn trees framing the Lodge, lawn and stone firepit" title="The Lodge in fall" note="Autumn foliage around the house" wide />
+          <PhotoCard src="/images/kpl/2026-10-28/kendall-pond-lodge-summer-lawn-premium.webp" alt="The Lodge, stone firepit, lawn and shoreline lounge chair in summer" title="The waterfront lawn" note="Lawn between the house and shoreline" />
+          <PhotoCard src="/images/kpl/website-top-50/01-Hero/02-kendall-pond-lodge-autumn-waterfront.jpg" alt="Autumn reflections above the private shoreline and firepit" title="Firepit by the water" note="Shoreline seating in autumn" />
         </div>
       </section>
     </main>

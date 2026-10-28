@@ -129,11 +129,11 @@ export default async function BookPage({
 
           <figure className="booking-intro-photo">
             <Image
-              alt="Lakeview deck at the Lodge at Kendall Pond"
+              alt="Cushioned upper-deck seating overlooking Kendall Pond"
               fill
               priority
               sizes="(max-width: 900px) 100vw, 42vw"
-              src="/images/kpl/website-top-50/01-Hero/03-kendall-pond-lodge-lakeview-deck.jpg"
+              src="/images/kpl/2026-10-28/kendall-pond-lodge-deck-lounge-autumn.webp"
             />
           </figure>
         </div>

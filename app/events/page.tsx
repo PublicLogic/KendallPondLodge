@@ -18,8 +18,8 @@ export default function EventsPage() {
         eyebrow="Wedding weekends"
         title="Stay together for the wedding weekend."
         intro="Coming to a wedding in Gardner? Share a waterfront house with three bedrooms, two full bathrooms, and room for up to eight overnight guests."
-        image="/images/kpl/website-top-50/04-Kitchen-and-Dining/19-kendall-pond-lodge-dining-room-and-kitchen.jpg"
-        imageAlt="The Lodge kitchen and dining area"
+        image="/images/kpl/2026-10-28/kendall-pond-lodge-exterior-autumn.webp"
+        imageAlt="The Lodge and upper deck framed by autumn trees"
         imagePosition="center"
         primaryAction={{ href: "/book", label: "Check dates" }}
         secondaryAction={{ href: "/lodge", label: "See inside" }}
@@ -50,8 +50,8 @@ export default function EventsPage() {
       <section className="content-section">
         <div className="photo-grid">
           <PhotoCard src="/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg" alt="The Lodge great room" title="Great room" note="Fireplace and seating" wide />
-          <PhotoCard src="/images/kpl/website-top-50/04-Kitchen-and-Dining/19-kendall-pond-lodge-dining-room-and-kitchen.jpg" alt="Kitchen and dining" title="Kitchen & dining" note="Space for meals together" />
-          <PhotoCard src="/images/kpl/website-top-50/01-Hero/03-kendall-pond-lodge-lakeview-deck.jpg" alt="Deck overlooking the pond" title="Deck" note="Outdoor seating over the pond" />
+          <PhotoCard src="/images/kpl/2026-10-28/kendall-pond-lodge-wood-bedroom-premium.webp" alt="Wood-floor bedroom with white bedding, tan throw, folded towels and sailboat artwork" title="A real bedroom" note="White bedding · room to settle in" />
+          <PhotoCard src="/images/kpl/2026-10-28/kendall-pond-lodge-deck-lounge-autumn.webp" alt="Cushioned deck seating overlooking autumn trees and Kendall Pond" title="Upper deck" note="Outdoor seating · pond view" />
         </div>
       </section>
 
