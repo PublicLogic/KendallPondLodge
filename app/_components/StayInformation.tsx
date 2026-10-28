@@ -17,7 +17,15 @@ export function SleepPlan() {
   );
 }
 
-export function BookingSteps({ enabled = true }: { enabled?: boolean }) {
+export function BookingSteps({ enabled = true, instant = false }: { enabled?: boolean; instant?: boolean }) {
+  const steps = instant
+    ? [
+        { title: 'Choose your dates', body: 'PJ checks Airbnb availability and existing direct holds before anything is offered.' },
+        { title: 'Review the full price', body: 'Eligible stays are priced from the property policy and held while you review the itemized total and terms.' },
+        { title: 'Pay to confirm', body: 'Complete secure Stripe Checkout. The stay becomes confirmed only after the signed payment result is verified.' },
+      ]
+    : stay.bookingSteps;
+
   return (
     <section className="stay-info-section" aria-labelledby="booking-steps-title">
       <div className="stay-section-heading">
@@ -26,7 +34,7 @@ export function BookingSteps({ enabled = true }: { enabled?: boolean }) {
         {!enabled && <p>Direct requests are paused right now. You can still check dates and reserve on Airbnb.</p>}
       </div>
       <ol className="stay-booking-steps">
-        {stay.bookingSteps.map((step, index) => (
+        {steps.map((step, index) => (
           <li key={step.title}>
             <span aria-hidden="true">0{index + 1}</span>
             <h3>{step.title}</h3>

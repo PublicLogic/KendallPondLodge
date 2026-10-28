@@ -32,3 +32,48 @@ export async function syncAirbnbCalendar(): Promise<void> {
   const suffix = outcome === "registered" ? "&events=" + Math.min(eventCount, 9999) : "";
   redirect("/owner/settings?calendar=" + outcome + suffix);
 }
+
+
+function wholeNumber(form: FormData, name: string, min: number, max: number) {
+  const value = Number(form.get(name));
+  if (!Number.isInteger(value) || value < min || value > max) throw new Error(name);
+  return value;
+}
+
+function moneyCents(form: FormData, name: string, min = 0) {
+  const value = Number(form.get(name));
+  const cents = Math.round(value * 100);
+  if (!Number.isFinite(value) || !Number.isInteger(cents) || cents < min) throw new Error(name);
+  return cents;
+}
+
+export async function saveInstantBookingPolicy(form: FormData): Promise<void> {
+  const session = (await cookies()).get(OWNER_COOKIE_NAME)?.value;
+  if (!verifyOwnerSessionToken(session)) redirect("/owner/access?next=/owner/settings");
+
+  try {
+    const taxPercent = Number(form.get("tax_percent"));
+    if (!Number.isFinite(taxPercent) || taxPercent < 0 || taxPercent > 30) throw new Error("tax");
+
+    await bookingClient().updateInstantSettings({
+      enabled: form.get("enabled") === "yes",
+      base_nightly_cents: moneyCents(form, "base_nightly", 1),
+      weekend_nightly_cents: moneyCents(form, "weekend_nightly", 1),
+      cleaning_cents: moneyCents(form, "cleaning"),
+      pet_fee_cents: moneyCents(form, "pet_fee"),
+      pet_fee_mode: String(form.get("pet_fee_mode") ?? ""),
+      tax_basis_points: Math.round(taxPercent * 100),
+      taxable_fees: form.get("taxable_fees") === "yes",
+      deposit_percent: wholeNumber(form, "deposit_percent", 1, 100),
+      min_nights: wholeNumber(form, "min_nights", 1, 30),
+      booking_window_days: wholeNumber(form, "booking_window_days", 1, 730),
+      hold_minutes: wholeNumber(form, "hold_minutes", 90, 360),
+      cancellation_terms: String(form.get("cancellation_terms") ?? "").trim(),
+      balance_terms: String(form.get("balance_terms") ?? "").trim(),
+    });
+  } catch {
+    redirect("/owner/settings?instant=error");
+  }
+
+  redirect("/owner/settings?instant=saved");
+}

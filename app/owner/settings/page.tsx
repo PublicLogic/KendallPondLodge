@@ -8,7 +8,7 @@ import {
 import { requireKplOwner } from '@/lib/require-kpl-owner';
 import { airbnbCalendarConfigured } from '@/lib/airbnb-ical.mjs';
 import { CalendarSyncControl } from './CalendarSyncControl';
-import { syncAirbnbCalendar } from './actions';
+import { saveInstantBookingPolicy, syncAirbnbCalendar } from './actions';
 
 export const metadata: Metadata = {
   title: 'Booking setup',
@@ -39,7 +39,7 @@ function StatusItem({
 export default async function BookingSettings({
   searchParams,
 }: {
-  searchParams: Promise<{ calendar?: string; events?: string }>;
+  searchParams: Promise<{ calendar?: string; events?: string; instant?: string }>;
 }) {
   await requireKplOwner('/owner/settings');
 
@@ -64,7 +64,23 @@ export default async function BookingSettings({
   const localCalendar = airbnbCalendarConfigured();
   const payments = paymentConfigured();
   const directRequests = directBookingEnabled();
-  let instantSettings: { enabled?: boolean } | null = null;
+  let instantSettings: {
+    configured?: boolean;
+    enabled?: boolean;
+    base_nightly_cents?: number;
+    weekend_nightly_cents?: number;
+    cleaning_cents?: number;
+    pet_fee_cents?: number;
+    pet_fee_mode?: 'per_stay' | 'per_pet';
+    tax_basis_points?: number;
+    taxable_fees?: boolean;
+    deposit_percent?: number;
+    min_nights?: number;
+    booking_window_days?: number;
+    hold_minutes?: number;
+    cancellation_terms?: string;
+    balance_terms?: string;
+  } | null = null;
   if (bookingConfigured()) {
     try {
       instantSettings = await bookingClient().instantSettings();
@@ -220,7 +236,7 @@ export default async function BookingSettings({
 
         <aside className="owner-control-card owner-rule-card">
           <p className="eyebrow">How booking works</p>
-          <h2>Quote rules</h2>
+          <h2>Booking guardrails</h2>
 
           <dl className="owner-rule-list">
             <div>
@@ -280,11 +296,43 @@ export default async function BookingSettings({
             <strong>Pricing policy</strong>
             <p>
               {instantSettings?.enabled
-                ? 'PJ can price and hold eligible stays without an owner quote.'
-                : 'PJ backend pricing is not active yet. Requests safely fall back to the current review flow.'}
+                ? 'PJ prices and holds eligible stays automatically.'
+                : instantSettings
+                  ? 'Save the property policy below, then enable instant booking when the terms are ready.'
+                  : 'PJ backend update is still required. The current request flow remains safe until it is deployed.'}
             </p>
           </div>
         </div>
+
+        {query.instant === 'saved' && <p className="booking-alert owner-sync-result" role="status">Instant-booking policy saved.</p>}
+        {query.instant === 'error' && <p className="booking-alert owner-sync-result" role="alert">Policy not saved. Check every amount and term.</p>}
+
+        {instantSettings && (
+          <form action={saveInstantBookingPolicy} className="booking-form owner-instant-policy-form">
+            <div className="booking-fields">
+              <label>Base nightly <input name="base_nightly" type="number" min="0.01" step="0.01" required defaultValue={instantSettings.configured ? ((instantSettings.base_nightly_cents ?? 0) / 100).toFixed(2) : ''} /></label>
+              <label>Fri / Sat nightly <input name="weekend_nightly" type="number" min="0.01" step="0.01" required defaultValue={instantSettings.configured ? ((instantSettings.weekend_nightly_cents ?? 0) / 100).toFixed(2) : ''} /></label>
+              <label>Cleaning <input name="cleaning" type="number" min="0" step="0.01" required defaultValue={instantSettings.configured ? ((instantSettings.cleaning_cents ?? 0) / 100).toFixed(2) : ''} /></label>
+              <label>Pet fee <input name="pet_fee" type="number" min="0" step="0.01" required defaultValue={instantSettings.configured ? ((instantSettings.pet_fee_cents ?? 0) / 100).toFixed(2) : ''} /></label>
+              <label>Pet fee applies
+                <select name="pet_fee_mode" defaultValue={instantSettings.pet_fee_mode ?? 'per_stay'}>
+                  <option value="per_stay">Per stay</option>
+                  <option value="per_pet">Per pet</option>
+                </select>
+              </label>
+              <label>Tax % <input name="tax_percent" type="number" min="0" max="30" step="0.01" required defaultValue={instantSettings.configured ? ((instantSettings.tax_basis_points ?? 0) / 100).toFixed(2) : ''} /></label>
+              <label>Deposit % <input name="deposit_percent" type="number" min="1" max="100" step="1" required defaultValue={instantSettings.deposit_percent ?? ''} /></label>
+              <label>Minimum nights <input name="min_nights" type="number" min="1" max="30" step="1" required defaultValue={instantSettings.min_nights ?? ''} /></label>
+              <label>Booking window · days <input name="booking_window_days" type="number" min="1" max="730" step="1" required defaultValue={instantSettings.booking_window_days ?? ''} /></label>
+              <label>Checkout hold · minutes <input name="hold_minutes" type="number" min="90" max="360" step="1" required defaultValue={instantSettings.hold_minutes ?? ''} /></label>
+            </div>
+            <label className="booking-check"><input type="checkbox" name="taxable_fees" value="yes" defaultChecked={instantSettings.taxable_fees === true} /> Tax cleaning and pet fees too</label>
+            <label>Cancellation / refund terms<textarea name="cancellation_terms" minLength={20} maxLength={4000} required defaultValue={instantSettings.cancellation_terms ?? ''} /></label>
+            <label>Remaining balance terms<textarea name="balance_terms" minLength={20} maxLength={4000} required defaultValue={instantSettings.balance_terms ?? ''} /></label>
+            <label className="booking-check"><input type="checkbox" name="enabled" value="yes" defaultChecked={instantSettings.enabled === true} /> Enable instant booking with this policy</label>
+            <button className="button button-primary" type="submit">Save booking policy</button>
+          </form>
+        )}
       </section>
 
       <div className="owner-settings-secondary">
@@ -311,7 +359,7 @@ export default async function BookingSettings({
             terms, balance terms, and deposit are entered on the individual
             quote.
           </p>
-          <p>No invented or hidden saved-price defaults.</p>
+          <p>Changes stay explicit and governed; routine bookings do not need owner repricing.</p>
         </section>
 
         <section className="owner-mini-card">
