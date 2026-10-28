@@ -18,9 +18,9 @@ type Props = {
 /** Real property photographs in a still, server-rendered pond-house opening. */
 export function RetreatHero({ directEnabled, airbnbHref, scenes }: Props) {
   const photographs = [
-    { ...scenes[2], caption: "The upper deck", href: "/photos" },
-    { ...scenes[1], caption: "A long soak", href: "/grounds" },
     { ...scenes[0], caption: "Morning on the pond", href: "/grounds" },
+    { ...scenes[1], caption: "A long soak", href: "/grounds" },
+    { ...scenes[2], caption: "The upper deck", href: "/photos" },
   ];
   const action = <><span>Check your dates</span><span aria-hidden="true">↗</span></>;
 
@@ -51,7 +51,7 @@ export function RetreatHero({ directEnabled, airbnbHref, scenes }: Props) {
             className={`${styles.photograph} ${index === 0 ? styles.leadPhoto : styles.detailPhoto}`}
             href={scene.href}
             key={scene.src}
-            aria-label={`${scene.caption}: ${index === 0 ? "see the Lodge photos" : "explore the waterfront"}`}
+            aria-label={`${scene.caption}: ${scene.href === "/photos" ? "see the Lodge photos" : "explore the waterfront"}`}
             data-pond-photo={index}
           >
             <Image
