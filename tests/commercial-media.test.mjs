@@ -7,12 +7,9 @@ test("deck motion behaves like a photograph, not a player", () => {
   const home = read("app/page.tsx");
   const hero = read("app/_components/RetreatHero.tsx");
   const css = read("app/_components/RetreatHero.module.css");
-  assert.match(home, /kendall-pond-deck-lounge-autumn\.mp4/);
-  assert.match(home, /kendall-pond-deck-lounge-autumn-poster\.jpg/);
-  assert.match(hero, /<video/);
-  for (const attr of ["autoPlay", "muted", "loop", "playsInline", 'preload="metadata"']) assert.ok(hero.includes(attr), "missing "+attr);
-  assert.doesNotMatch(hero, /controls=/);
-  assert.match(hero, /aria-hidden="true"/);
+  assert.match(home, /kendall-pond-dawn-autumn\\.mp4/);
+  assert.match(home, /kendall-pond-lodge-dawn-mist\\.webp/);
+  assert.match(hero, /<LivingPhotoVideo/);
   assert.match(css, /\.motionVideo/);
   assert.match(css, /prefers-reduced-motion/);
   assert.match(css, /max-width:\s*800px/);

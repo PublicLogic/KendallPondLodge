@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./RetreatHero.module.css";
+import { LivingPhotoVideo } from "./LivingPhotoVideo";
 
 type Scene = {
   label: string;
@@ -22,7 +23,7 @@ export function RetreatHero({ directEnabled, airbnbHref, scenes }: Props) {
   const photographs = [
     { ...scenes[0], caption: "Morning on the pond", href: "/grounds" },
     { ...scenes[1], caption: "A long soak", href: "/grounds" },
-    { ...scenes[2], caption: "The upper deck", href: "/photos" },
+    { ...scenes[2], caption: "Dawn on the pond", href: "/grounds" },
   ];
   const action = <><span>Check your dates</span><span aria-hidden="true">↗</span></>;
 
@@ -65,17 +66,11 @@ export function RetreatHero({ directEnabled, airbnbHref, scenes }: Props) {
               style={{ objectPosition: scene.position }}
             />
             {scene.videoSrc && (
-              <video
+              <LivingPhotoVideo
                 className={styles.motionVideo}
                 src={scene.videoSrc}
                 poster={scene.poster}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-hidden="true"
-                style={{ objectPosition: scene.position }}
+                objectPosition={scene.position}
               />
             )}
             <span className={styles.caption}><span>{scene.caption}</span><span aria-hidden="true">↗</span></span>
