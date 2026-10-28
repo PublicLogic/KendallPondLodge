@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { RetreatHero } from "@/app/_components/RetreatHero";
 import { lodgePhoto } from "@/app/_data/lodge-photos";
-import { BookingSteps, GuestReviewEvidence, SleepPlanLink, StayFAQ } from "@/app/_components/StayInformation";
+import { BookingSteps, GuestReviewEvidence, StayFAQ } from "@/app/_components/StayInformation";
 import { directBookingEnabled, hostContactHref } from "@/lib/booking-db";
 
 export const metadata: Metadata = {
@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 };
 const airbnb = process.env.NEXT_PUBLIC_KPL_BOOKING_URL?.trim() || "https://www.airbnb.com/rooms/1667597913565948713";
 const spaces = [
-  { photo: 42, title: "Your spot on the water.", copy: "The lawn runs down to the private shoreline and dock. Bring your coffee; the view is already here.", href: "/grounds", link: "See the waterfront" },
-  { photo: 4, title: "The hot tub has a view, too.", copy: "Tucked under the upper deck, with the pond just beyond the patio.", href: "/grounds", link: "Around the grounds" },
-  { photo: 5, title: "A good place to stay in.", copy: "A fireplace, tall windows, and a kitchen close enough to keep the cook in the conversation.", href: "/lodge", link: "Inside the Lodge" },
+  { photo: 25, title: "Sleep well.", copy: "Three bedrooms, two full baths, and room for up to eight overnight guests.", href: "/lodge#sleeping", link: "See the bedrooms" },
+  { photo: 6, title: "Step outside.", copy: "The lawn opens toward the firepit, shoreline, and dock, with room to spread out between them.", href: "/grounds", link: "Around the grounds" },
+  { photo: 5, title: "Stay together.", copy: "The great room, kitchen, and dining area keep the main level connected.", href: "/lodge", link: "Inside the Lodge" },
 ];
 function BookingAction({ enabled, className, children }: { enabled: boolean; className: string; children: ReactNode }) {
   return enabled ? <Link className={className} href="/book">{children}</Link> :
@@ -49,7 +49,7 @@ export default function HomePage() {
       <GuestReviewEvidence />
       <section className="showcase-moments guest-spaces" aria-labelledby="spaces-title">
         <div className="showcase-section-head">
-          <div><p className="showcase-eyebrow">At the house</p><h2 id="spaces-title">A few good places to land.</h2></div>
+          <div><p className="showcase-eyebrow">The stay</p><h2 id="spaces-title">The house. The yard. The pond.</h2></div>
           <Link className="showcase-inline-link" href="/photos">See all 50 photos <span aria-hidden="true">→</span></Link>
         </div>
         <div className="guest-spaces-grid">
@@ -65,9 +65,9 @@ export default function HomePage() {
       <section className="guest-house-story" aria-labelledby="house-story-title">
         <div className="guest-house-photo"><Image src={house.src} alt={house.alt} fill sizes="(max-width: 800px) 100vw, 55vw" /></div>
         <div className="guest-house-copy">
-          <p className="showcase-eyebrow">Everyone has a place</p><h2 id="house-story-title">Dinner together.<br />Room to turn in.</h2>
-          <p>A king room, a queen room, a twin-over-full bunk, and a queen sleeper sofa. Three bedrooms, two full baths, and a maximum of eight overnight guests.</p>
-          <SleepPlanLink />
+          <p className="showcase-eyebrow">The whole place</p><h2 id="house-story-title">A whole house, right on the water.</h2>
+          <p>Three bedrooms, two full baths, a kitchen, fireplaces, an upper deck, covered patio, hot tub, lawn, and private waterfront. Up to eight overnight guests.</p>
+          <Link className="showcase-inline-link" href="/lodge">See inside the Lodge <span aria-hidden="true">→</span></Link>
           <p className="guest-host-note"><strong>Hosted by Nate &amp; Allie.</strong> We own the Lodge and live locally. Ask us about your sleeping setup, the season’s outdoor gear, or anything else that matters for your stay.</p>
           <a className="showcase-inline-link" href={hostContactHref()}>Ask us a question <span aria-hidden="true">↗</span></a>
         </div>

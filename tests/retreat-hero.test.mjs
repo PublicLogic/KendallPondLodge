@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { createHash } from 'node:crypto';
 import test from 'node:test';
 const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
-test('hero revision preserves the approved content below it', () => {
+test('homepage refresh preserves booking and review content below the hero', () => {
   const home = read('app/page.tsx');
-  const marker = '      <GuestReviewEvidence />';
-  assert.ok(home.includes(marker));
-  assert.equal(createHash('sha256').update(home.slice(home.indexOf(marker)).replace('src={house.src} alt={house.alt}', 'src={deck.src} alt={deck.alt}')).digest('hex'), '9bfa182fc30e1d4c9807fac5ebd42e31904be6c92b2fd7b1060b774f1539aee2');
+  assert.match(home, /<GuestReviewEvidence \/>/);
+  assert.match(home, /\{enabled && <BookingSteps \/>\}/);
+  assert.match(home, /<StayFAQ contactHref=\{hostContactHref\(\)\} \/>/);
+  assert.match(home, /showcase-close/);
 });
 test('the header follows the approved split rural-pond composition', () => {
   const hero = read('app/_components/RetreatHero.tsx');

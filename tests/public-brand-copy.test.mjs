@@ -55,10 +55,10 @@ test("public-facing pages omit removed generic marketing filler", () => {
   }
 });
 
-test("homepage keeps the actual deck, hot tub, waterfront and great room photographs", () => {
+test("homepage keeps the actual pond header and samples bedroom, yard and great room photographs", () => {
   const home = source("app/page.tsx");
   const hero = source("app/_components/RetreatHero.tsx");
-  for (const photo of [4, 5, 42]) assert.ok(home.includes(`photo: ${photo}`));
+  for (const photo of [25, 6, 5]) assert.ok(home.includes("photo: " + photo));
   for (const name of ["dawn-mist", "deck-lounge-autumn", "exterior-autumn"]) {
     assert.ok(home.includes(`kendall-pond-lodge-${name}.webp`));
   }
