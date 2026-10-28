@@ -120,7 +120,24 @@ export async function requestStay(form: FormData) {
       );
     }
 
-    await client.createRequest(input);
+    const created = await client.createRequest(input);
+
+    try {
+      const instant = await client.instantSettings();
+      if (instant?.enabled === true) {
+        const priced = await client.autoPrice(created.id);
+        if (priced?.quote_token) {
+          return {
+            received: true as const,
+            instant_path: `/book/quote/${priced.quote_token}`,
+          };
+        }
+      }
+    } catch (error) {
+      if (!(error instanceof BookingServiceError && error.status === 404)) {
+        throw error;
+      }
+    }
   } catch (error) {
     const code =
       error instanceof BookingServiceError

@@ -6,7 +6,7 @@ import { useFormStatus } from 'react-dom';
 import { BookingBrand } from '@/app/_components/BookingBrand';
 import { clearGuestRequestKey, createGuestRequestKeyManager } from '@/lib/guest-request-key.mjs';
 
-type ServerAction = (formData: FormData) => Promise<{ received: true }>;
+type ServerAction = (formData: FormData) => Promise<{ received: true; instant_path?: string }>;
 
 type Props = {
   action: ServerAction;
@@ -383,6 +383,10 @@ export function StayRequestForm({
     if (result.received) {
       clearGuestRequestKey(storage, submittedKey);
       requestKey.current = null;
+      if (result.instant_path) {
+        window.location.assign(result.instant_path);
+        return;
+      }
       setReceived(true);
     }
   }

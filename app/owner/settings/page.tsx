@@ -64,6 +64,19 @@ export default async function BookingSettings({
   const localCalendar = airbnbCalendarConfigured();
   const payments = paymentConfigured();
   const directRequests = directBookingEnabled();
+  let instantSettings: { enabled?: boolean } | null = null;
+  if (bookingConfigured()) {
+    try {
+      instantSettings = await bookingClient().instantSettings();
+    } catch {
+      instantSettings = null;
+    }
+  }
+  const importToken = process.env.KPL_AIRBNB_IMPORT_TOKEN?.trim() ?? '';
+  const importCalendarReady = importToken.length >= 24;
+  const importCalendarUrl = importCalendarReady
+    ? `https://kendallpondlodge.com/calendar/${importToken}.ics`
+    : '';
 
   const guestEmail =
     process.env.KPL_BOOKING_CONTACT_EMAIL?.trim() ||
@@ -124,6 +137,16 @@ export default async function BookingSettings({
             label="Direct requests"
             value={directRequests ? 'Open' : 'Closed'}
             good={directRequests}
+          />
+          <StatusItem
+            label="Instant booking"
+            value={instantSettings?.enabled ? 'Active' : 'Setup required'}
+            good={instantSettings?.enabled === true}
+          />
+          <StatusItem
+            label="Airbnb import calendar"
+            value={importCalendarReady ? 'Ready' : 'Not set up'}
+            good={importCalendarReady}
           />
         </div>
       </section>
@@ -228,6 +251,41 @@ export default async function BookingSettings({
           </p>
         </aside>
       </div>
+
+      <section className="owner-control-card owner-instant-booking-card">
+        <div className="owner-card-head">
+          <div>
+            <p className="eyebrow">Instant booking</p>
+            <h2>Price once. Book automatically.</h2>
+          </div>
+          <span className={instantSettings?.enabled ? 'owner-pill owner-pill-good' : 'owner-pill owner-pill-warn'}>
+            {instantSettings?.enabled ? 'Active' : 'Policy not active'}
+          </span>
+        </div>
+        <p className="owner-card-lead">
+          PJ owns the property pricing policy and applies it automatically to each eligible stay.
+          Owner review is for exceptions, not routine bookings.
+        </p>
+        <div className="owner-instant-grid">
+          <div>
+            <strong>Airbnb import calendar</strong>
+            <p>
+              {importCalendarReady
+                ? 'Ready to connect in Airbnb. Held, paying, and confirmed direct stays publish without guest details.'
+                : 'Create the private outbound calendar token before connecting Airbnb.'}
+            </p>
+            {importCalendarReady && <code className="owner-calendar-url">{importCalendarUrl}</code>}
+          </div>
+          <div>
+            <strong>Pricing policy</strong>
+            <p>
+              {instantSettings?.enabled
+                ? 'PJ can price and hold eligible stays without an owner quote.'
+                : 'PJ backend pricing is not active yet. Requests safely fall back to the current review flow.'}
+            </p>
+          </div>
+        </div>
+      </section>
 
       <div className="owner-settings-secondary">
         <section className="owner-mini-card">
