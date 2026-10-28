@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { lodgePhoto } from "@/app/_data/lodge-photos";
 import { InfoCard, Notice, SectionHeading } from "@/app/_components/Content";
 import { PageHero } from "@/app/_components/PageHero";
 import { PhotoCard } from "@/app/_components/PhotoCard";
@@ -13,6 +14,9 @@ export const metadata: Metadata = {
 };
 
 export default function LodgePage() {
+  const woodBedroom = lodgePhoto(25);
+  const tiledBedroom = lodgePhoto(23);
+  const bunkRoom = lodgePhoto(27);
   return (
     <main id="main-content">
       <PageHero
@@ -47,9 +51,9 @@ export default function LodgePage() {
         <SectionHeading eyebrow="Sleeping" title="The bedrooms." intro="Three bedrooms, plus a queen sleeper sofa for a different sleeping arrangement." />
         <SleepPlan />
         <div className="photo-grid">
-          <PhotoCard src="/images/kpl/king-room.jpg" alt="King bedroom" title="King room" note="King bed" />
-          <PhotoCard src="/images/kpl/queen-room.jpg" alt="Queen bedroom" title="Queen room" note="Queen bed" />
-          <PhotoCard src="/images/kpl/website-top-50/05-Bedrooms/26-kendall-pond-lodge-bunk-room-wide.jpg" alt="Bunk room" title="Bunk room" note="Twin over full" />
+          <PhotoCard src={woodBedroom.src} alt={woodBedroom.alt} title="Wood-floor bedroom" note="White bedding · folded towels" />
+          <PhotoCard src={tiledBedroom.src} alt={tiledBedroom.alt} title="Tiled bedroom" note="Blue throw · folded towels" />
+          <PhotoCard src={bunkRoom.src} alt={bunkRoom.alt} title="Bunk room" note="Twin over full" />
           <PhotoCard src="/images/kpl/website-top-50/03-Living-Spaces/13-kendall-pond-lodge-lower-lounge-seating.jpg" alt="Lower-level lounge at the Lodge" title="Lower-level lounge" note="An additional place to sit and relax" wide />
         </div>
       </section>

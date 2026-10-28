@@ -14,8 +14,8 @@ test("the guest gallery uses 50 real, public-safe property photographs", () => {
   const orders = new Set();
 
   for (const photo of manifest.photos) {
-    assert.match(photo.src, /^\/images\/kpl\/website-top-50\//);
-    assert.match(photo.src, /\.jpg$/);
+    assert.match(photo.src, /^\/images\/kpl\/(website-top-50|2026-10-28)\//);
+    assert.match(photo.src, /\.(jpg|webp)$/);
     assert.equal(typeof photo.alt, "string");
     assert.ok(photo.alt.trim().length >= 12);
     assert.ok(photo.width >= 800 && photo.height >= 800);
@@ -31,4 +31,18 @@ test("the guest gallery uses 50 real, public-safe property photographs", () => {
 
   assert.deepEqual([...orders].sort((a, b) => a - b), Array.from({ length: 50 }, (_, i) => i + 1));
   assert.equal(manifest.photos[0].category, "01-Hero");
+});
+
+test("premium replacements preserve gallery size and original property details", () => {
+  const expected = new Map([[6,"summer-lawn"],[7,"autumn-lawn"],[23,"tiled-bedroom"],[25,"wood-bedroom"],[27,"bunk-room"]]);
+  for (const [order, name] of expected) {
+    const photo = manifest.photos.find(item => item.order === order);
+    assert.ok(photo.src.endsWith(name + "-premium.webp"));
+    assert.match(photo.treatment, /Non-generative/);
+    assert.match(photo.sha256, /^[a-f0-9]{64}$/);
+    assert.ok(photo.sourceFile && photo.replaces);
+  }
+  const lodge = readFileSync(new URL("../app/lodge/page.tsx", import.meta.url), "utf8");
+  assert.doesNotMatch(lodge, /src="\/images\/kpl\/(king|queen)-room\.jpg"/);
+  assert.match(lodge, /<SleepPlan \/>/);
 });
