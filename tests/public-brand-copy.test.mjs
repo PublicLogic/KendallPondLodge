@@ -58,8 +58,12 @@ test("public-facing pages omit removed generic marketing filler", () => {
 test("homepage keeps the actual deck, hot tub, waterfront and great room photographs", () => {
   const home = source("app/page.tsx");
   const hero = source("app/_components/RetreatHero.tsx");
-  for (const photo of [3, 4, 5, 46]) assert.ok(home.includes(`photo: ${photo}`));
-  assert.match(home, /lodgePhoto\(photo\)/);
+  for (const photo of [4, 5, 42]) assert.ok(home.includes(`photo: ${photo}`));
+  for (const name of ["dawn-mist", "deck-lounge-autumn", "exterior-autumn"]) {
+    assert.ok(home.includes(`kendall-pond-lodge-${name}.webp`));
+  }
+  assert.match(home, /lodgePhoto\(space.photo\)/);
+  assert.doesNotMatch(home + hero, /<video|<iframe|\.mp4/);
   assert.match(home, /<RetreatHero/);
   assert.match(hero, /priority/);
   assert.match(hero, /alt=\{scene.alt\}/);

@@ -25,18 +25,24 @@ function BookingAction({ enabled, className, children }: { enabled: boolean; cla
 export default function HomePage() {
   const enabled = directBookingEnabled();
   const heroScenes = [
-    { photo: 46, label: "By the water", position: "center 55%" },
-    { photo: 4, label: "In the hot tub", position: "center 55%" },
-    { photo: 3, label: "On the deck", position: "center 52%" },
-  ].map(({ photo, label, position }) => {
-    const { src, alt } = lodgePhoto(photo);
-    return { src, alt, label, position };
-  }) as [
-    { src: string; alt: string; label: string; position: string },
-    { src: string; alt: string; label: string; position: string },
-    { src: string; alt: string; label: string; position: string },
-  ];
-  const deck = lodgePhoto(3);
+    {
+      src: "/images/kpl/2026-10-28/kendall-pond-lodge-dawn-mist.webp",
+      alt: "Morning mist above still water and reflected trees on Kendall Pond",
+      label: "By the water",
+      position: "center 45%",
+    },
+    { ...lodgePhoto(4), label: "In the hot tub", position: "center 55%" },
+    {
+      src: "/images/kpl/2026-10-28/kendall-pond-lodge-deck-lounge-autumn.webp",
+      alt: "Cushioned deck seating overlooking autumn trees and mist on Kendall Pond",
+      label: "On the deck",
+      position: "center 52%",
+    },
+  ] as const;
+  const house = {
+    src: "/images/kpl/2026-10-28/kendall-pond-lodge-exterior-autumn.webp",
+    alt: "The yellow Lodge, brown deck, and covered hot tub framed by autumn trees",
+  };
   return (
     <main id="main-content" className="showcase-page guest-ready-home">
       <RetreatHero directEnabled={enabled} airbnbHref={airbnb} scenes={heroScenes} />
@@ -57,7 +63,7 @@ export default function HomePage() {
         </div>
       </section>
       <section className="guest-house-story" aria-labelledby="house-story-title">
-        <div className="guest-house-photo"><Image src={deck.src} alt={deck.alt} fill sizes="(max-width: 800px) 100vw, 55vw" /></div>
+        <div className="guest-house-photo"><Image src={house.src} alt={house.alt} fill sizes="(max-width: 800px) 100vw, 55vw" /></div>
         <div className="guest-house-copy">
           <p className="showcase-eyebrow">Everyone has a place</p><h2 id="house-story-title">Dinner together.<br />Room to turn in.</h2>
           <p>A king room, a queen room, a twin-over-full bunk, and a queen sleeper sofa. Three bedrooms, two full baths, and a maximum of eight overnight guests.</p>

@@ -20,7 +20,7 @@ export function RetreatHero({ directEnabled, airbnbHref, scenes }: Props) {
   const photographs = [
     { ...scenes[2], caption: "The upper deck", href: "/photos" },
     { ...scenes[1], caption: "A long soak", href: "/grounds" },
-    { ...scenes[0], caption: "Down at the dock", href: "/grounds" },
+    { ...scenes[0], caption: "Morning on the pond", href: "/grounds" },
   ];
   const action = <><span>Check your dates</span><span aria-hidden="true">↗</span></>;
 
