@@ -20,7 +20,7 @@ test("premium photography is used across public marketing surfaces", () => {
   assert.match(pages.home, /lodgePhoto\(7\)/);
   assert.match(pages.area, /kendall-pond-lodge-autumn-lawn-premium\.webp/);
   assert.match(pages.events, /kendall-pond-lodge-exterior-autumn\.webp/);
-  assert.match(pages.events, /kendall-pond-lodge-wood-bedroom-premium\.webp/);
+  assert.match(pages.events, /19-kendall-pond-lodge-dining-room-and-kitchen\.jpg/);
   assert.match(pages.events, /kendall-pond-lodge-deck-lounge-autumn\.webp/);
   assert.match(pages.explore, /kendall-pond-lodge-dawn-mist\.webp/);
   assert.match(pages.explore, /kendall-pond-lodge-autumn-lawn-premium\.webp/);

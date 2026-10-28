@@ -50,7 +50,7 @@ export default function EventsPage() {
       <section className="content-section">
         <div className="photo-grid">
           <PhotoCard src="/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg" alt="The Lodge great room" title="Great room" note="Fireplace and seating" wide />
-          <PhotoCard src="/images/kpl/2026-10-28/kendall-pond-lodge-wood-bedroom-premium.webp" alt="Wood-floor bedroom with white bedding, tan throw, folded towels and sailboat artwork" title="A real bedroom" note="White bedding · room to settle in" />
+          <PhotoCard src="/images/kpl/website-top-50/04-Kitchen-and-Dining/19-kendall-pond-lodge-dining-room-and-kitchen.jpg" alt="Kitchen and dining area at the Lodge" title="Kitchen & dining" note="Breakfast together · full kitchen" />
           <PhotoCard src="/images/kpl/2026-10-28/kendall-pond-lodge-deck-lounge-autumn.webp" alt="Cushioned deck seating overlooking autumn trees and Kendall Pond" title="Upper deck" note="Outdoor seating · pond view" />
         </div>
       </section>

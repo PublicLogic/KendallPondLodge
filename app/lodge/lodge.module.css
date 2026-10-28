@@ -33,7 +33,7 @@
 .section { padding-block:84px; }
 .sectionHead { display:grid; grid-template-columns:1fr .8fr; gap:64px; align-items:end; margin-bottom:34px; }
 .sectionHead > p,.sectionHead > div > p:not(.eyebrow) { max-width:49ch; margin:0; color:var(--lodge-muted); font-size:.99rem; }
-.livingGrid { display:grid; grid-template-columns:1.4fr 1fr; gap:32px; align-items:end; }
+.livingGrid { display:grid; grid-template-columns:1fr 1.25fr; gap:32px; align-items:end; }
 .downstairs { border-top:1px solid var(--lodge-rule); }
 .downstairsGrid { display:grid; grid-template-columns:.78fr 1.22fr; gap:56px; align-items:center; }
 .downstairsCopy > p:not(.eyebrow) { max-width:42ch; margin:22px 0 0; color:var(--lodge-muted); font-size:.97rem; }

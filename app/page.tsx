@@ -16,7 +16,7 @@ const airbnb = process.env.NEXT_PUBLIC_KPL_BOOKING_URL?.trim() || "https://www.a
 const spaces = [
   { photo: 25, title: "Sleep well.", copy: "Three bedrooms, two full baths, and room for up to eight overnight guests.", href: "/lodge#sleeping", link: "See the bedrooms" },
   { photo: 6, title: "Step outside.", copy: "The lawn opens toward the firepit, shoreline, and dock, with room to spread out between them.", href: "/grounds", link: "Around the grounds" },
-  { photo: 5, title: "Stay together.", copy: "The great room, kitchen, and dining area keep the main level connected.", href: "/lodge", link: "Inside the Lodge" },
+  { photo: 17, title: "Cook together.", copy: "Full kitchen, breakfast bar, and dining space for the whole group.", href: "/lodge#living", link: "See the kitchen" },
 ];
 function BookingAction({ enabled, className, children }: { enabled: boolean; className: string; children: ReactNode }) {
   return enabled ? <Link className={className} href="/book">{children}</Link> :
