@@ -263,30 +263,12 @@ export default async function OwnerBookings({
         </div>
       </header>
 
-      <section
-        className="owner-booking-summary"
-        aria-label="Booking status"
-      >
-        <div>
-          <span>New</span>
-          <strong>{counts.new}</strong>
-        </div>
-
-        <div>
-          <span>Quoted</span>
-          <strong>{counts.quoted}</strong>
-        </div>
-
-        <div>
-          <span>Paying</span>
-          <strong>{counts.paying}</strong>
-        </div>
-
-        <div>
-          <span>Confirmed</span>
-          <strong>{counts.confirmed}</strong>
-        </div>
-      </section>
+      <div className="owner-booking-counts" aria-label="Booking status">
+        <span><strong>{counts.new}</strong> New</span>
+        <span><strong>{counts.quoted}</strong> Held</span>
+        <span><strong>{counts.paying}</strong> Paying</span>
+        <span><strong>{counts.confirmed}</strong> Confirmed</span>
+      </div>
 
       {status && (
         <p
@@ -321,7 +303,7 @@ export default async function OwnerBookings({
 
       {attentionFailed && (
         <p
-          className="booking-alert"
+          className="booking-alert owner-inline-warning"
           role="alert"
         >
           Payment follow-up is temporarily
@@ -488,11 +470,11 @@ export default async function OwnerBookings({
           );
 
           return (
-            <article
+            <details
               className={`owner-booking-card owner-booking-${request.status}`}
               key={request.id}
             >
-              <header className="owner-booking-card-head">
+              <summary className="owner-booking-card-head">
                 <div>
                   <p className="owner-booking-dates">
                     {request.check_in} →{" "}
@@ -521,7 +503,7 @@ export default async function OwnerBookings({
                 >
                   {statusLabel(request, stayStatus, quoteMessage)}
                 </span>
-              </header>
+              </summary>
 
               <WorkflowRail
                 request={request}
@@ -917,7 +899,7 @@ export default async function OwnerBookings({
                   <strong>Request closed.</strong>
                 </div>
               )}
-            </article>
+            </details>
           );
         })}
       </section>

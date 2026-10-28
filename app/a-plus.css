@@ -1708,3 +1708,26 @@
     min-width:0;
   }
 }
+
+
+/* Owner bookings: compact CRM queue */
+.owner-booking-counts{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.85rem}
+.owner-booking-counts span{display:inline-flex;align-items:center;gap:.35rem;min-height:30px;padding:.3rem .58rem;border:1px solid #dce2e2;border-radius:999px;background:#fff;color:#66757a;font-size:.68rem;font-weight:650}
+.owner-booking-counts strong{color:#193f39;font-size:.82rem}
+.owner-inline-warning{width:max-content;max-width:100%;margin:.65rem 0 0;padding:.48rem .68rem;font-size:.72rem}
+.owner-booking-list{gap:.55rem}
+.owner-booking-card{overflow:hidden;border:1px solid #dfe5e2;border-radius:10px;background:#fff;box-shadow:0 1px 2px rgba(20,46,40,.035)}
+.owner-booking-card>summary{cursor:pointer;list-style:none;padding:.72rem .9rem;transition:background .15s ease}
+.owner-booking-card>summary::-webkit-details-marker{display:none}
+.owner-booking-card>summary:hover{background:#f8faf8}
+.owner-booking-card[open]>summary{border-bottom:1px solid #e4e9e6;background:#f8faf8}
+.owner-booking-card-head h2{font-size:1rem}
+.owner-booking-card-head p:last-child{font-size:.72rem}
+.owner-booking-dates{font-size:.63rem}
+.owner-booking-status{font-size:.58rem;padding:.26rem .42rem}
+.owner-instant-booking-card{margin-top:1rem}
+.owner-instant-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin-top:1rem}
+.owner-instant-grid>div{padding:.85rem;border:1px solid #e1e6e3;border-radius:8px;background:#fafbf9}
+.owner-instant-grid p{margin:.35rem 0 0;color:#5f706b;font-size:.78rem}
+.owner-calendar-url{display:block;overflow:hidden;margin-top:.55rem;padding:.5rem .6rem;border-radius:6px;background:#eef3ef;color:#24453d;font-size:.68rem;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:760px){.owner-instant-grid{grid-template-columns:1fr}}

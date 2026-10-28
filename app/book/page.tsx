@@ -49,6 +49,14 @@ export default async function BookPage({
   const { status } = await searchParams;
 
   const enabled = directBookingEnabled();
+  let instant = false;
+  if (enabled) {
+    try {
+      instant = (await bookingClient().instantSettings())?.enabled === true;
+    } catch {
+      instant = false;
+    }
+  }
   const today = propertyToday();
 
   const unavailable = new Set<string>();
@@ -102,7 +110,9 @@ export default async function BookPage({
 
             <p>
               {enabled
-                ? "Coffee on the deck. A long soak in the hot tub. Start with your dates and we’ll send the full quote. There’s no charge for asking."
+                ? instant
+                  ? "Coffee on the deck. A long soak in the hot tub. Choose your dates to see the complete direct price and book securely."
+                  : "Coffee on the deck. A long soak in the hot tub. Start with your dates and we’ll send the full quote. There’s no charge for asking."
                 : "Direct booking requests are closed for now. You can check dates and book through Airbnb."}
             </p>
 
@@ -186,11 +196,13 @@ export default async function BookPage({
       <section className="booking-direct-foot">
         <p>
           {enabled
-            ? "Sending a request does not hold your dates or charge you. We’ll confirm availability and price before asking for payment."
+            ? instant
+              ? "Eligible dates are priced and held automatically while you review the complete price and terms. Payment is handled securely through Stripe."
+              : "Sending a request does not hold your dates or charge you. We’ll confirm availability and price before asking for payment."
             : "Direct requests are paused; visit Airbnb for current availability."}
         </p>
       </section>
-      {enabled && <BookingSteps />}
+      {enabled && <BookingSteps instant={instant} />}
     </main>
   );
 }
