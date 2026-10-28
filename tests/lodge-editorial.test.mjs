@@ -9,7 +9,7 @@ test('Lodge page uses the curated exterior, rooms and waterfront without repeati
   assert.match(page,/data-lodge-editorial/);
   const orders=[...page.matchAll(/lodgePhoto\((\d+)\)/g)].map(m=>Number(m[1]));
   assert.equal(orders.length,new Set(orders).size);
-  for(const order of [7,5,17,25,23,27,42,2]) assert.ok(orders.includes(order),'Missing photo '+order);
+  for(const order of [7,5,17,13,25,23,27,6,2]) assert.ok(orders.includes(order),'Missing photo '+order);
   for(const order of orders){const p=manifest.photos.find(x=>x.order===order);assert.ok(p);assert.ok(existsSync(new URL('../public'+p.src,import.meta.url)));}
   for(const order of [7,25,23,27]) assert.match(manifest.photos.find(p=>p.order===order).src, /premium\.webp$/);
 });

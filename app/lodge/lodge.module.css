@@ -34,6 +34,9 @@
 .sectionHead { display:grid; grid-template-columns:1fr .8fr; gap:64px; align-items:end; margin-bottom:34px; }
 .sectionHead > p,.sectionHead > div > p:not(.eyebrow) { max-width:49ch; margin:0; color:var(--lodge-muted); font-size:.99rem; }
 .livingGrid { display:grid; grid-template-columns:1.4fr 1fr; gap:32px; align-items:end; }
+.downstairs { border-top:1px solid var(--lodge-rule); }
+.downstairsGrid { display:grid; grid-template-columns:.78fr 1.22fr; gap:56px; align-items:center; }
+.downstairsCopy > p:not(.eyebrow) { max-width:42ch; margin:22px 0 0; color:var(--lodge-muted); font-size:.97rem; }
 .sleeping { padding-block:80px; background:#e9eee4; }
 .roomLead { display:grid; grid-template-columns:1.5fr .85fr; gap:56px; align-items:center; }
 .roomCopy > p:not(.eyebrow) { color:var(--lodge-muted); font-size:.97rem; margin:22px 0 0; max-width:40ch; }
@@ -68,13 +71,13 @@
 .closeActions p { font-size:.76rem; margin:10px 0 0; }
 .closeActions p a { color:inherit; text-underline-offset:4px; }
 @media (max-width:1000px) { .intro{gap:32px} .actions{gap:8px 14px} .sectionHead{gap:32px}.roomLead{gap:32px;grid-template-columns:1.25fr 1fr}.details{gap:40px}.facts > div{padding-inline:16px} }
-@media (max-width:900px) { .roomLead{grid-template-columns:1fr}.roomCopy{max-width:650px}.roomCopy > p:not(.eyebrow){max-width:65ch}.sleeping{padding-block:56px}.roomPair{margin-top:30px} }
+@media (max-width:900px) { .downstairsGrid{grid-template-columns:1fr;gap:30px}.downstairsCopy{max-width:650px}.roomLead{grid-template-columns:1fr}.roomCopy{max-width:650px}.roomCopy > p:not(.eyebrow){max-width:65ch}.sleeping{padding-block:56px}.roomPair{margin-top:30px} }
 @media (max-width:700px) {
   .container{width:calc(100% - 36px)} .intro{grid-template-columns:1fr;gap:24px;padding:32px 0 28px}.introCopy{max-width:none;justify-self:start;padding:0}.introCopy > p{font-size:.98rem;margin-bottom:18px;max-width:43ch}.page h1{font-size:clamp(3rem,11.8vw,4.6rem)}.page h2{font-size:clamp(2.1rem,8.2vw,3rem)}
   .arrival img{aspect-ratio:4/3}.eyebrow{font-size:.61rem}.photo figcaption{padding-top:10px;font-size:.74rem}.captionDetail{font-size:.68rem}
   .facts{grid-template-columns:1fr 1fr;margin-top:22px}.facts > div{padding:16px 14px}.facts > div:nth-child(2){border-right:0}.facts > div:nth-child(-n+2){border-bottom:1px solid var(--lodge-rule)}.facts > div:nth-child(odd){padding-left:0}.facts dd{font-size:1rem}
   .jumpNav{gap:4px 22px;padding-top:8px}.jumpNav a{font-size:.78rem}.section{padding-block:48px}.sectionHead{grid-template-columns:1fr;gap:20px;margin-bottom:26px}.sectionHead > p,.sectionHead > div > p:not(.eyebrow){font-size:.94rem}
-  .livingGrid,.roomPair,.outsideGrid{grid-template-columns:1fr;gap:28px}.sleeping{padding-block:42px}.roomLead{gap:28px}.roomCopy > p:not(.eyebrow){font-size:.94rem}.roomPair{margin-top:28px}.sleepPlan{margin-top:32px;padding-top:26px}
+  .livingGrid,.roomPair,.outsideGrid,.downstairsGrid{grid-template-columns:1fr;gap:28px}.sleeping{padding-block:42px}.roomLead{gap:28px}.roomCopy > p:not(.eyebrow){font-size:.94rem}.roomPair{margin-top:28px}.sleepPlan{margin-top:32px;padding-top:26px}
   .sleepPlan :global(.stay-sleep-grid){grid-template-columns:1fr 1fr}.sleepPlan :global(.stay-sleep-grid > div){padding:15px 12px}.sleepPlan :global(.stay-sleep-grid > div:nth-child(even)){border-right:0}.sleepPlan :global(.stay-sleep-grid > div:nth-child(odd)){padding-left:0}.sleepPlan :global(.stay-sleep-grid > div:nth-child(-n+2)){border-bottom:1px solid #c9d3c2}
   .details{grid-template-columns:1fr;gap:28px;padding-bottom:48px}.details > div .textLink{margin-top:14px}.detailsList > div{padding:18px 0}.close{padding-block:44px}.closeInner{align-items:flex-start;flex-direction:column;gap:30px}.closeActions{width:100%}.close .button{width:100%}.closeActions p{margin-top:4px}
 }

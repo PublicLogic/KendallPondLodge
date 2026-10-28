@@ -37,6 +37,8 @@ export default function HomePage() {
       alt: "Cushioned deck seating overlooking autumn trees and mist on Kendall Pond",
       label: "On the deck",
       position: "center 52%",
+      videoSrc: "/videos/kpl/2026-10-28/kendall-pond-deck-lounge-autumn.mp4",
+      poster: "/images/kpl/2026-10-28/kendall-pond-deck-lounge-autumn-poster.jpg",
     },
   ] as const;
   const house = {

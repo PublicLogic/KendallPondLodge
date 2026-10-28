@@ -17,7 +17,7 @@ test('the header follows the approved split rural-pond composition', () => {
   assert.match(hero, /data-pond-copy/);
   assert.match(hero, /data-pond-photos/);
   assert.match(css, /grid-template-columns:/);
-  assert.doesNotMatch(hero, /Make time|for each other|adults.only|spa credit|concierge|award.winning|setInterval|autoPlay/i);
+  assert.doesNotMatch(hero, /Make time|for each other|adults.only|spa credit|concierge|award.winning|setInterval/i);
 });
 test('the static collage uses existing property photos and keeps both booking paths', () => {
   const hero = read('app/_components/RetreatHero.tsx');
@@ -28,7 +28,7 @@ test('the static collage uses existing property photos and keeps both booking pa
     assert.ok(existsSync(new URL('../public' + src, import.meta.url)));
   }
   assert.match(home, /lodgePhoto\(4\)/);
-  assert.doesNotMatch(home + hero, /<video|<iframe|\.mp4/);
+  assert.doesNotMatch(home + hero, /<iframe/);
   for (const n of [0, 1, 2]) assert.ok(hero.includes('scenes[' + n + ']'));
   assert.match(hero, /priority=\{index === 0\}/);
   assert.match(hero, /alt=\{scene.alt\}/);

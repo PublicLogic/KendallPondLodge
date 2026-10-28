@@ -86,11 +86,12 @@
 }
 .photograph { position: relative; display: block; min-width: 0; min-height: 0; overflow: hidden; background: #334c3b; color: #fff; }
 .leadPhoto { grid-column: 1 / -1; }
-.photograph img { object-fit: cover; }
-.photograph::after { content: ""; position: absolute; inset: 55% 0 0; background: linear-gradient(0deg, rgba(8, 24, 17, .82), transparent); pointer-events: none; }
+.photograph img { object-fit: cover; z-index: 0; }
+.motionVideo { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.photograph::after { content: ""; position: absolute; inset: 55% 0 0; z-index: 2; background: linear-gradient(0deg, rgba(8, 24, 17, .82), transparent); pointer-events: none; }
 .caption {
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   left: 1.2rem;
   right: 1.2rem;
   bottom: 1rem;
@@ -128,6 +129,7 @@
   .leadPhoto { aspect-ratio: 1.7; }
   .detailPhoto { aspect-ratio: 1.65; }
   .caption { left: .85rem; right: .85rem; bottom: .7rem; font-size: .65rem; }
+  .motionVideo { display: none; }
 }
 @media (max-width: 360px) {
   .copy { padding-inline: 1.25rem; }
@@ -136,4 +138,4 @@
   .primary { gap: 1rem; padding-inline: .95rem; }
   .caption { font-size: .59rem; letter-spacing: .04em; }
 }
-@media (prefers-reduced-motion: reduce) { .hero *, .hero *::after { transition: none; scroll-behavior: auto; } }
+@media (prefers-reduced-motion: reduce) { .motionVideo { display: none; } .hero *, .hero *::after { transition: none; scroll-behavior: auto; } }

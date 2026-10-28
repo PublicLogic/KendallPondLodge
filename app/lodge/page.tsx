@@ -17,10 +17,11 @@ const photos = {
   arrival: lodgePhoto(7),
   living: lodgePhoto(5),
   kitchen: lodgePhoto(17),
+  downstairs: lodgePhoto(13),
   woodBedroom: lodgePhoto(25),
   blueBedroom: lodgePhoto(23),
   bunkRoom: lodgePhoto(27),
-  grounds: lodgePhoto(42),
+  grounds: lodgePhoto(6),
   autumn: lodgePhoto(2),
 };
 const fullSize = "(max-width: 700px) calc(100vw - 36px), (max-width: 1376px) calc(100vw - 96px), 1280px";
@@ -58,7 +59,7 @@ export default function LodgePage() {
         <dl className={styles.facts} aria-label="The house at a glance">
           <div><dt>Guests</dt><dd>Up to {stay.maxGuests}</dd></div><div><dt>Bedrooms</dt><dd>{stay.bedrooms} bedrooms</dd></div><div><dt>Bathrooms</dt><dd>{stay.bathrooms} full baths</dd></div><div><dt>Your stay</dt><dd>The whole house</dd></div>
         </dl>
-        <nav className={styles.jumpNav} aria-label="On this page"><a href="#living">Living spaces</a><a href="#sleeping">Bedrooms</a><a href="#outside">Outside</a><a href="#house-details">House details</a></nav>
+        <nav className={styles.jumpNav} aria-label="On this page"><a href="#living">Living spaces</a><a href="#downstairs">Downstairs</a><a href="#sleeping">Bedrooms</a><a href="#outside">Outside</a><a href="#house-details">House details</a></nav>
       </section>
 
       <section id="living" className={`${styles.container} ${styles.section}`} aria-labelledby="living-title">
@@ -69,11 +70,23 @@ export default function LodgePage() {
         </div>
       </section>
 
+      <section id="downstairs" className={`${styles.container} ${styles.section} ${styles.downstairs}`} aria-labelledby="downstairs-title">
+        <div className={styles.downstairsGrid}>
+          <div className={styles.downstairsCopy}>
+            <p className={styles.eyebrow}>02 / Downstairs</p>
+            <h2 id="downstairs-title">Another place<br />to settle in.</h2>
+            <p>The lower level adds a second lounge, another fireplace, and lake-facing doors to the covered walkout patio.</p>
+            <p className={styles.smallNote}>It gives a full group somewhere else to spread out without losing the connection to the yard and water.</p>
+          </div>
+          <Photograph photo={photos.downstairs} caption="The downstairs lounge" detail="Second fireplace · walkout patio" sizes="(max-width: 700px) calc(100vw - 36px), (max-width: 1376px) 60vw, 760px" />
+        </div>
+      </section>
+
       <section id="sleeping" className={styles.sleeping} aria-labelledby="sleeping-title">
         <div className={styles.container}>
           <div className={styles.roomLead}>
             <Photograph photo={photos.woodBedroom} caption="The wood-floor bedroom" detail="White bedding · folded towels" sizes="(max-width: 900px) calc(100vw - 36px), (max-width: 1376px) 58vw, 770px" />
-            <div className={styles.roomCopy}><p className={styles.eyebrow}>02 / Turn in</p><h2 id="sleeping-title">Three bedrooms.<br />Your own space.</h2><p>A king bedroom, a queen bedroom, and a twin-over-full bunk room. A queen sleeper sofa gives your group another way to arrange the night.</p><p className={styles.smallNote}>Eight overnight guests maximum. The sofa is additional sleeping space, not a fourth bedroom.</p><a className={styles.textLink} href="#sleeping-plan">See the sleeping plan <span aria-hidden="true">↓</span></a></div>
+            <div className={styles.roomCopy}><p className={styles.eyebrow}>03 / Turn in</p><h2 id="sleeping-title">Three bedrooms.<br />Your own space.</h2><p>A king bedroom, a queen bedroom, and a twin-over-full bunk room. A queen sleeper sofa gives your group another way to arrange the night.</p><p className={styles.smallNote}>Eight overnight guests maximum. The sofa is additional sleeping space, not a fourth bedroom.</p><a className={styles.textLink} href="#sleeping-plan">See the sleeping plan <span aria-hidden="true">↓</span></a></div>
           </div>
           <div className={styles.roomPair}>
             <Photograph photo={photos.blueBedroom} caption="The blue-throw bedroom" detail="White bedding · tiled floor" />
@@ -84,7 +97,7 @@ export default function LodgePage() {
       </section>
 
       <section id="outside" className={`${styles.container} ${styles.section}`} aria-labelledby="outside-title">
-        <div className={styles.sectionHead}><div><p className={styles.eyebrow}>03 / Just outside</p><h2 id="outside-title">From the deck<br />to the water.</h2></div><div><p>The upper deck for outdoor dining. A covered patio and hot tub below. Then the lawn, firepit, and private shoreline.</p><Link className={styles.textLink} href="/grounds">Explore the waterfront <span aria-hidden="true">→</span></Link></div></div>
+        <div className={styles.sectionHead}><div><p className={styles.eyebrow}>04 / Just outside</p><h2 id="outside-title">From the deck<br />to the water.</h2></div><div><p>The upper deck for outdoor dining. A covered patio and hot tub below. Then the lawn, firepit, and private shoreline.</p><Link className={styles.textLink} href="/grounds">Explore the waterfront <span aria-hidden="true">→</span></Link></div></div>
         <div className={styles.outsideGrid}>
           <Photograph photo={photos.grounds} caption="The lawn, dock & waterfront seating" />
           <Photograph photo={photos.autumn} caption="Autumn at the water’s edge" />

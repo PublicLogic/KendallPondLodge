@@ -7,6 +7,8 @@ type Scene = {
   src: string;
   alt: string;
   position: string;
+  videoSrc?: string;
+  poster?: string;
 };
 
 type Props = {
@@ -62,6 +64,20 @@ export function RetreatHero({ directEnabled, airbnbHref, scenes }: Props) {
               sizes={index === 0 ? "(max-width: 800px) 100vw, 61vw" : "(max-width: 800px) 50vw, 31vw"}
               style={{ objectPosition: scene.position }}
             />
+            {scene.videoSrc && (
+              <video
+                className={styles.motionVideo}
+                src={scene.videoSrc}
+                poster={scene.poster}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-hidden="true"
+                style={{ objectPosition: scene.position }}
+              />
+            )}
             <span className={styles.caption}><span>{scene.caption}</span><span aria-hidden="true">↗</span></span>
           </Link>
         ))}
