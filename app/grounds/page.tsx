@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { lodgePhoto } from "@/app/_data/lodge-photos";
 import { InfoCard, Notice, SectionHeading } from "@/app/_components/Content";
 import { PageHero } from "@/app/_components/PageHero";
 import { PhotoCard } from "@/app/_components/PhotoCard";
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function GroundsPage() {
+  const firepit = lodgePhoto(6);
   return (
     <main id="main-content">
       <PageHero
@@ -35,7 +37,7 @@ export default function GroundsPage() {
         <SectionHeading eyebrow="Outside the house" title="Deck, patio, and firepit." />
         <div className="photo-grid photo-grid-two">
           <PhotoCard src="/images/kpl/website-top-50/01-Hero/04-kendall-pond-lodge-hot-tub-with-pond-view.jpg" alt="Hot tub overlooking Kendall Pond" title="Hot tub" note="Covered patio · pond view" wide />
-          <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/40-kendall-pond-lodge-summer-firepit-and-shoreline.jpg" alt="Firepit by Kendall Pond" title="Firepit" note="A few steps from the water" />
+          <PhotoCard src={firepit.src} alt={firepit.alt} title="Firepit" note="A few steps from the water" />
         </div>
         <div className="info-grid info-grid-three">
           <InfoCard title="Deck"><p>Outdoor dining and seating with a view of the pond.</p></InfoCard>

@@ -61,22 +61,30 @@
     {
       "order": 6,
       "category": "02-Exterior",
-      "src": "/images/kpl/website-top-50/02-Exterior/06-kendall-pond-lodge-summer-lodge-front.jpg",
-      "alt": "Pond-facing lodge exterior with balcony and covered patio",
-      "width": 2560,
-      "height": 1920,
-      "captureDate": "2026-06-04",
-      "recommendedUse": "Property gallery"
+      "src": "/images/kpl/2026-10-28/kendall-pond-lodge-summer-lawn-premium.webp",
+      "alt": "The Lodge, stone firepit, lawn and shoreline lounge chair in summer",
+      "width": 2048,
+      "height": 1536,
+      "recommendedUse": "Property gallery",
+      "sourceFile": "IMG_7111.jpeg",
+      "replaces": "/images/kpl/website-top-50/02-Exterior/06-kendall-pond-lodge-summer-lodge-front.jpg",
+      "treatment": "Non-generative Adobe tonal correction; WebP export. No objects, architecture or furnishings generated.",
+      "sha256": "fb8377c4126b14ae6d6733e46e4b185dcd3ed053e96acc27199006949140d0f3",
+      "bytes": 1146708
     },
     {
       "order": 7,
       "category": "02-Exterior",
-      "src": "/images/kpl/website-top-50/02-Exterior/07-kendall-pond-lodge-autumn-lodge-and-yard.jpg",
-      "alt": "Lodge and lawn beneath colorful autumn trees",
-      "width": 2560,
-      "height": 1920,
-      "captureDate": "2026-10-09",
-      "recommendedUse": "Property gallery"
+      "src": "/images/kpl/2026-10-28/kendall-pond-lodge-autumn-lawn-premium.webp",
+      "alt": "Autumn trees framing the Lodge, lawn and stone firepit",
+      "width": 2048,
+      "height": 1536,
+      "recommendedUse": "Property gallery",
+      "sourceFile": "IMG_0124.jpeg",
+      "replaces": "/images/kpl/website-top-50/02-Exterior/07-kendall-pond-lodge-autumn-lodge-and-yard.jpg",
+      "treatment": "Non-generative Adobe tonal correction; WebP export. No objects, architecture or furnishings generated.",
+      "sha256": "f160450f9b423ce362838c4ec43d8a92c59d8b36e48a20c51d43c7371aa62d39",
+      "bytes": 1343928
     },
     {
       "order": 8,
@@ -231,12 +239,16 @@
     {
       "order": 23,
       "category": "05-Bedrooms",
-      "src": "/images/kpl/website-top-50/05-Bedrooms/23-kendall-pond-lodge-tiled-bedroom-guest-ready.jpg",
-      "alt": "Guest bedroom with a light blue throw and folded towels",
-      "width": 2560,
-      "height": 1920,
-      "captureDate": "2026-06-16",
-      "recommendedUse": "Property gallery"
+      "src": "/images/kpl/2026-10-28/kendall-pond-lodge-tiled-bedroom-premium.webp",
+      "alt": "Tiled-floor bedroom with white bedding, pale blue throw and folded towels",
+      "width": 1897,
+      "height": 1423,
+      "recommendedUse": "Property gallery",
+      "sourceFile": "IMG_7402.jpeg",
+      "replaces": "/images/kpl/website-top-50/05-Bedrooms/23-kendall-pond-lodge-tiled-bedroom-guest-ready.jpg",
+      "treatment": "Non-generative Adobe tonal correction, perspective correction; WebP export. No objects, architecture or furnishings generated.",
+      "sha256": "6aaf4844ec6ad2c42ea88f82ade445934b0de3acd7a1607b77037a4eea9f23b6",
+      "bytes": 275014
     },
     {
       "order": 24,
@@ -251,12 +263,16 @@
     {
       "order": 25,
       "category": "05-Bedrooms",
-      "src": "/images/kpl/website-top-50/05-Bedrooms/25-kendall-pond-lodge-wood-floor-bedroom-wide.jpg",
-      "alt": "Wide view of the wood-floor bedroom and landscape artwork",
-      "width": 2560,
-      "height": 1920,
-      "captureDate": "2026-06-03",
-      "recommendedUse": "Property gallery"
+      "src": "/images/kpl/2026-10-28/kendall-pond-lodge-wood-bedroom-premium.webp",
+      "alt": "Wood-floor bedroom with white bedding, tan throw, folded towels and sailboat artwork",
+      "width": 2020,
+      "height": 1515,
+      "recommendedUse": "Property gallery",
+      "sourceFile": "IMG_7093.jpeg",
+      "replaces": "/images/kpl/website-top-50/05-Bedrooms/25-kendall-pond-lodge-wood-floor-bedroom-wide.jpg",
+      "treatment": "Non-generative Adobe tonal correction, perspective correction; WebP export. No objects, architecture or furnishings generated.",
+      "sha256": "066ea05eb890ff55133d54b0f077973b216bf1f1c6dbb6146ffc3e4829938075",
+      "bytes": 209800
     },
     {
       "order": 26,
@@ -271,12 +287,16 @@
     {
       "order": 27,
       "category": "05-Bedrooms",
-      "src": "/images/kpl/website-top-50/05-Bedrooms/27-kendall-pond-lodge-bunk-room-alternate.jpg",
-      "alt": "Alternate view of the bunk beds and blue rug",
-      "width": 2560,
-      "height": 1920,
-      "captureDate": "2026-06-01",
-      "recommendedUse": "Property gallery"
+      "src": "/images/kpl/2026-10-28/kendall-pond-lodge-bunk-room-premium.webp",
+      "alt": "White twin-over-full bunk bed, blue rug, window and writing table",
+      "width": 2035,
+      "height": 1526,
+      "recommendedUse": "Property gallery",
+      "sourceFile": "IMG_6996.jpeg",
+      "replaces": "/images/kpl/website-top-50/05-Bedrooms/27-kendall-pond-lodge-bunk-room-alternate.jpg",
+      "treatment": "Non-generative Adobe tonal correction, perspective correction; WebP export. No objects, architecture or furnishings generated.",
+      "sha256": "9dd6c7547e24b6b97a94050293244d493fc620527a6fae30aa9f6efe44f5384e",
+      "bytes": 248020
     },
     {
       "order": 28,
