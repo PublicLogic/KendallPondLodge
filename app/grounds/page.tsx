@@ -3,6 +3,7 @@ import Link from "next/link";
 import { lodgePhoto } from "@/app/_data/lodge-photos";
 import { InfoCard, Notice, SectionHeading } from "@/app/_components/Content";
 import { PageHero } from "@/app/_components/PageHero";
+import { PondScenery } from "@/app/_components/PondScenery";
 import { PhotoCard } from "@/app/_components/PhotoCard";
 
 export const metadata: Metadata = {
@@ -23,6 +24,16 @@ export default function GroundsPage() {
         imagePosition="center 55%"
         primaryAction={{ href: "/book", label: "Check dates" }}
         secondaryAction={{ href: "/lodge", label: "See inside" }}
+      />
+
+      <PondScenery
+        scene="waterfront"
+        eyebrow="The wider view"
+        title="One shoreline. A whole pond."
+        description="The Lodge has its own dock and shoreline. Beyond that, Kendall Pond opens into wooded edges and quiet corners."
+        actionHref="/book"
+        actionLabel="Check your dates"
+        compact
       />
 
       <section className="content-section">
