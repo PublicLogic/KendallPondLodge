@@ -1,37 +1,60 @@
 import { NextResponse } from 'next/server';
-import { bookingClient } from '@/lib/booking-db';
+import { bookingClient, BookingServiceError } from '@/lib/booking-db';
 
 export const dynamic = 'force-dynamic';
 
+function safeError(error: unknown) {
+  return error instanceof BookingServiceError
+    ? { status: error.status, code: error.code }
+    : { status: 503, code: 'unknown' };
+}
+
 export async function GET() {
+  let client;
   try {
-    const client = bookingClient();
-    const [instant, messages] = await Promise.all([
-      client.instantSettings(),
-      client.messageStatus(),
-    ]);
-    return NextResponse.json({
-      instant: {
-        configured: instant?.configured === true,
-        enabled: instant?.enabled === true,
-        base_nightly_cents: instant?.base_nightly_cents ?? null,
-        weekend_nightly_cents: instant?.weekend_nightly_cents ?? null,
-        cleaning_cents: instant?.cleaning_cents ?? null,
-        pet_fee_cents: instant?.pet_fee_cents ?? null,
-        pet_fee_mode: instant?.pet_fee_mode ?? null,
-        tax_basis_points: instant?.tax_basis_points ?? null,
-        taxable_fees: instant?.taxable_fees ?? null,
-        airbnb_channel_guarded: instant?.airbnb_channel_guarded ?? null,
-        deposit_percent: instant?.deposit_percent ?? null,
-        min_nights: instant?.min_nights ?? null,
-        booking_window_days: instant?.booking_window_days ?? null,
-        hold_minutes: instant?.hold_minutes ?? null,
-        cancellation_terms: instant?.cancellation_terms ?? null,
-        balance_terms: instant?.balance_terms ?? null,
-      },
-      messaging: messages?.readiness ?? null,
-    }, { headers: { 'Cache-Control': 'no-store' } });
-  } catch {
-    return NextResponse.json({ error: 'unavailable' }, { status: 503 });
+    client = bookingClient();
+  } catch (error) {
+    return NextResponse.json({ client: safeError(error) }, { status: 503 });
   }
+
+  let instant: unknown = null;
+  let instantError: unknown = null;
+  let messaging: unknown = null;
+  let messagingError: unknown = null;
+
+  try {
+    const value = await client.instantSettings();
+    instant = {
+      configured: value?.configured === true,
+      enabled: value?.enabled === true,
+      base_nightly_cents: value?.base_nightly_cents ?? null,
+      weekend_nightly_cents: value?.weekend_nightly_cents ?? null,
+      cleaning_cents: value?.cleaning_cents ?? null,
+      pet_fee_cents: value?.pet_fee_cents ?? null,
+      pet_fee_mode: value?.pet_fee_mode ?? null,
+      tax_basis_points: value?.tax_basis_points ?? null,
+      taxable_fees: value?.taxable_fees ?? null,
+      airbnb_channel_guarded: value?.airbnb_channel_guarded ?? null,
+      deposit_percent: value?.deposit_percent ?? null,
+      min_nights: value?.min_nights ?? null,
+      booking_window_days: value?.booking_window_days ?? null,
+      hold_minutes: value?.hold_minutes ?? null,
+      cancellation_terms: value?.cancellation_terms ?? null,
+      balance_terms: value?.balance_terms ?? null,
+    };
+  } catch (error) {
+    instantError = safeError(error);
+  }
+
+  try {
+    const value = await client.messageStatus();
+    messaging = value?.readiness ?? null;
+  } catch (error) {
+    messagingError = safeError(error);
+  }
+
+  return NextResponse.json(
+    { instant, instantError, messaging, messagingError },
+    { headers: { 'Cache-Control': 'no-store' } },
+  );
 }
