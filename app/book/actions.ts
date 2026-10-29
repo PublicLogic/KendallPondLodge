@@ -127,6 +127,18 @@ export async function requestStay(form: FormData) {
       if (instant?.enabled === true) {
         const priced = await client.autoPrice(created.id);
         if (priced?.quote_token) {
+          // The browser continues immediately. Email is a recovery copy of
+          // the same private Review & book link, never a manual approval gate.
+          try {
+            await client.sendQuote(created.id);
+          } catch (emailError) {
+            const emailCode =
+              emailError instanceof BookingServiceError
+                ? emailError.code
+                : 'message_unavailable';
+            console.error('Booking link email deferred:', emailCode);
+          }
+
           return {
             received: true as const,
             instant_path: `/book/quote/${priced.quote_token}`,
