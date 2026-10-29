@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { InfoCard, SectionHeading } from "@/app/_components/Content";
 import { PageHero } from "@/app/_components/PageHero";
+import { PondScenery } from "@/app/_components/PondScenery";
 import { PhotoCard } from "@/app/_components/PhotoCard";
 
 export const metadata: Metadata = {
@@ -55,6 +56,16 @@ export default function ExplorePage() {
           </InfoCard>
         </div>
       </section>
+
+      <PondScenery
+        scene="explore"
+        eyebrow="Start at the pond"
+        title="Stay in. Head out. Come back to the water."
+        description="A few days in Gardner leave room for a morning at Wachusett, dinner in town, and an evening back by the shoreline."
+        actionHref="/book"
+        actionLabel="Check dates"
+        compact
+      />
 
       <section className="content-section">
         <div className="booking-cta-panel">
