@@ -26,17 +26,8 @@ export default function GroundsPage() {
         secondaryAction={{ href: "/lodge", label: "See inside" }}
       />
 
-      <PondScenery
-        scene="waterfront"
-        eyebrow="The wider view"
-        title="One shoreline. A whole pond."
-        description="The Lodge has its own dock and shoreline. Beyond that, Kendall Pond opens into wooded edges and quiet corners."
-        actionHref="/book"
-        actionLabel="Check your dates"
-        compact
-      />
-
-      <section className="content-section">
+      <section className="content-section kpl-pond-ambient">
+        <PondScenery scene="waterfront" />
         <SectionHeading eyebrow="Shoreline" title="Down by the dock." />
         <div className="photo-grid photo-grid-two">
           <PhotoCard src="/images/kpl/website-top-50/09-Waterfront-and-Grounds/50-kendall-pond-lodge-firepit-and-dock-from-deck.jpg" alt="Elevated view of the firepit, shoreline and dock" title="From the lawn to the water" note="Firepit · shoreline · dock" wide />
