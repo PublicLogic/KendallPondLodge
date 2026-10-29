@@ -10,9 +10,9 @@ The owner shared three aerial photographs of Kendall Pond on October 29, 2026. T
 
 | Supplied image | Destination (in `public/images/kpl/pond-aerials/`) | Use |
 | --- | --- | --- |
-| `KP3.webp` | `kp3-autumn-wide.webp` | Home: full-width scenic interlude |
-| `KP2.webp` | `kp2-autumn-shoreline.webp` | Waterfront: scenic interlude |
-| `KENDALL-POND.webp` | `kendall-pond-autumn-overlook.webp` | Explore: scenic interlude |
+| `KP3.webp` | `kp3-autumn-wide.webp` | Home: faint decorative texture behind the existing bottom booking call-to-action |
+| `KP2.webp` | `kp2-autumn-shoreline.webp` | Waterfront: faint decorative texture behind the existing shoreline information |
+| `KENDALL-POND.webp` | `kendall-pond-autumn-overlook.webp` | Explore: faint decorative texture behind the existing booking call-to-action |
 
 Use the WebP originals or optimized derivatives only after rights have been documented. Keep source/photographer and applicable license terms in the asset record; apply any required credit.
 
@@ -28,4 +28,8 @@ Until all of the above, the component serves existing KPL-owned photographs as s
 
 ## Placement rule
 
-Treat aerials as atmospheric backgrounds and geographically broad context, not as evidence of private property limits, guest amenities, or the Lodge's exact location. They do not enter the 50-image property gallery or the listing hero.
+Treat aerials as low-opacity, cropped edge textures behind **existing** content, not as evidence of property limits, amenities, or the Lodge's exact location.
+
+**Hierarchy requirement:** the Lodge's actual photos (house, deck, hot tub, private dock and interiors), its story, and the booking controls are the visual centerpiece. The supplied aerials must **not** appear as hero images, full-width scenic interludes, foreground cards, photo-gallery items, or prominent marketing images. The ambient component must not add height, headings, buttons, or other sections.
+
+Opacity is capped at 14% desktop / 8.5% mobile with edge masking. Any future edit making these images prominent requires a separate review.
