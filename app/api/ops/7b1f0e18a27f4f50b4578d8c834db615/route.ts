@@ -53,8 +53,25 @@ export async function GET() {
     messagingError = safeError(error);
   }
 
+  let list: unknown = null;
+  let listError: unknown = null;
+  try {
+    const value = await client.list(1);
+    list = { ok: Array.isArray(value) };
+  } catch (error) {
+    listError = safeError(error);
+  }
+
   return NextResponse.json(
-    { instant, instantError, messaging, messagingError },
+    {
+      backend: client.base,
+      instant,
+      instantError,
+      messaging,
+      messagingError,
+      list,
+      listError,
+    },
     { headers: { 'Cache-Control': 'no-store' } },
   );
 }
