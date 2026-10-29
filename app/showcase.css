@@ -392,6 +392,17 @@
   font-weight: 730;
 }
 
+/* Subtle, rights-gated pond textures behind existing content only. */
+.kpl-pond-ambient {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.kpl-pond-ambient > :not([data-pond-scenery]) {
+  position: relative;
+  z-index: 1;
+}
+
 /* The pond story */
 .showcase-water-story {
   display: grid;
