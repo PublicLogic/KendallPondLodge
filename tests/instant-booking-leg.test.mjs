@@ -29,6 +29,8 @@ test("public submission automatically prices when PJ instant booking is active",
   const actions = read("app/book/actions.ts");
   assert.match(actions, /instantSettings/);
   assert.match(actions, /autoPrice/);
+  assert.match(actions, /sendQuote/);
+  assert.match(actions, /Booking link email deferred/);
   assert.match(actions, /book\/quote/);
 });
 
