@@ -19,6 +19,7 @@ import {
 
 import { beginGuestCheckout } from '@/lib/kpl-booking-core.mjs';
 import { stripeRequest } from '@/lib/booking-stripe';
+import { buildDirectBookingCalendar } from '@/lib/direct-calendar.mjs';
 
 export const dynamic = 'force-dynamic';
 
@@ -150,6 +151,18 @@ export async function POST(request: Request) {
       const priced = await client.autoPrice(testBooking.id);
       if (!priced?.quote_token) throw new Error('test_not_priced');
 
+      const activeBookings = await client.list(100) as Booking[];
+      const outboundIcs = buildDirectBookingCalendar(activeBookings);
+      const expectedStart = dates.checkIn.replaceAll('-', '');
+      const expectedEnd = dates.checkOut.replaceAll('-', '');
+      if (
+        !outboundIcs.includes(`UID:${testBooking.id}@kendallpondlodge.com`) ||
+        !outboundIcs.includes(`DTSTART;VALUE=DATE:${expectedStart}`) ||
+        !outboundIcs.includes(`DTEND;VALUE=DATE:${expectedEnd}`)
+      ) {
+        throw new Error('airbnb_feed_missing_hold');
+      }
+
       const sent = await client.sendQuote(testBooking.id);
       if (sent?.provider_accepted !== true || sent?.status !== 'sent') {
         throw new Error('email_not_accepted');
@@ -196,6 +209,11 @@ export async function POST(request: Request) {
           hold_minutes: saved?.hold_minutes ?? null,
         },
         messaging: readiness,
+        calendar_test: {
+          outbound_feed_contains_hold: true,
+          check_in: dates.checkIn,
+          check_out: dates.checkOut,
+        },
         email_test: {
           provider_accepted: true,
           released: true,
