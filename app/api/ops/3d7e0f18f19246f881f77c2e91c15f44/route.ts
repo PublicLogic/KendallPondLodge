@@ -17,6 +17,9 @@ import {
   propertyToday,
 } from '@/lib/booking.mjs';
 
+import { beginGuestCheckout } from '@/lib/kpl-booking-core.mjs';
+import { stripeRequest } from '@/lib/booking-stripe';
+
 export const dynamic = 'force-dynamic';
 
 function authorized(request: Request): boolean {
@@ -152,6 +155,28 @@ export async function POST(request: Request) {
         throw new Error('email_not_accepted');
       }
 
+      await beginGuestCheckout({
+        token: priced.quote_token,
+        accepted: true,
+        pj: client,
+        stripe: stripeRequest,
+        origin: process.env.KPL_BOOKING_ORIGIN ?? '',
+      });
+
+      const checkoutBooking = await client.get(testBooking.id) as Booking | null;
+      const sessionId = checkoutBooking?.stripe_session_id ?? '';
+      if (!/^cs_(?:test|live)_[A-Za-z0-9]{8,200}$/.test(sessionId)) {
+        throw new Error('stripe_session_not_attached');
+      }
+
+      const expired = await stripeRequest<Record<string, unknown>>(
+        `checkout/sessions/${encodeURIComponent(sessionId)}/expire`,
+        new URLSearchParams(),
+      );
+      if (expired?.status !== 'expired') {
+        throw new Error('stripe_session_not_expired');
+      }
+
       await client.release(testBooking.id);
 
       return NextResponse.json({
@@ -176,6 +201,12 @@ export async function POST(request: Request) {
           released: true,
           check_in: dates.checkIn,
           check_out: dates.checkOut,
+        },
+        checkout_test: {
+          created: true,
+          attached: true,
+          expired: true,
+          charged: false,
         },
       }, { headers: { 'Cache-Control': 'no-store' } });
     } catch (testError) {
