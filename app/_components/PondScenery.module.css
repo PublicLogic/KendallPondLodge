@@ -1,108 +1,27 @@
-/* Scenic atmosphere only: property photos and booking controls stay primary. */
-.scene {
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  align-items: center;
-  min-height: clamp(430px, 48vw, 640px);
-  overflow: hidden;
-  padding: clamp(4.2rem, 8vw, 7rem) clamp(1.4rem, 8vw, 8rem);
-  background: #1a3e34;
-  color: #fffaf0;
-}
-.compact { min-height: clamp(370px, 36vw, 510px); }
-.photograph,
-.tint { position: absolute; inset: 0; pointer-events: none; }
-.photograph { z-index: 0; }
-.photograph img { object-fit: cover; }
-.tint {
-  z-index: 1;
-  background:
-    linear-gradient(90deg, rgba(8, 29, 25, .91) 0%, rgba(9, 34, 29, .79) 34%, rgba(9, 34, 29, .28) 78%, rgba(9, 34, 29, .14) 100%),
-    linear-gradient(0deg, rgba(6, 25, 21, .56), transparent 33%);
-}
-.content { position: relative; z-index: 2; max-width: 680px; padding-bottom: .6rem; }
-.eyebrow {
-  margin: 0 0 1.2rem;
-  color: #f1d4a4;
-  font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: .74rem;
-  font-weight: 700;
-  letter-spacing: .15em;
-  line-height: 1.5;
-  text-transform: uppercase;
-}
-.content h2 {
-  margin: 0;
-  max-width: 13ch;
-  color: #fffaf0;
-  font-family: var(--font-serif), Georgia, serif;
-  font-size: clamp(3rem, 5.5vw, 6rem);
-  font-weight: 400;
-  letter-spacing: -.052em;
-  line-height: 1.05;
-  text-wrap: balance;
-}
-.description {
-  max-width: 44ch;
-  margin: 1.4rem 0 0;
-  color: #f4f1e6;
-  font-size: clamp(.96rem, 1.22vw, 1.12rem);
-  line-height: 1.7;
-  text-wrap: pretty;
-}
-.action {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  min-height: 50px;
-  margin-top: 2rem;
-  padding: .8rem 1.15rem;
-  border: 1px solid #f9f3e6;
-  border-radius: 2px;
-  background: #f9f3e6;
-  color: #193e32;
-  font-size: .84rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: background-color 150ms ease, border-color 150ms ease;
-}
-.action:hover { background: #efdba9; border-color: #efdba9; color: #16382f; }
-.action:focus-visible { outline: 3px solid #ffe1a6; outline-offset: 4px; }
-.caption {
+/* A discreet atmospheric edge, never the centerpiece of the section.
+   Aerials are background-only; guests see the Lodge's own photos first. */
+.ambient {
   position: absolute;
-  z-index: 2;
-  right: clamp(1.25rem, 3vw, 3.25rem);
-  bottom: 1.25rem;
-  margin: 0;
-  color: #f7f0df;
-  font-size: .69rem;
-  font-weight: 600;
-  letter-spacing: .035em;
-  text-shadow: 0 1px 12px #061d18;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(58%, 800px);
+  overflow: hidden;
+  pointer-events: none;
+  opacity: .14;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.38) 46%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.38) 46%, #000 100%);
+}
+.ambient img {
+  object-fit: cover;
+  filter: saturate(.58) contrast(.85);
 }
 @media (max-width: 760px) {
-  .scene {
-    min-height: 510px;
-    align-items: end;
-    padding: 4.5rem 1.5rem 4.8rem;
+  .ambient {
+    width: 100%;
+    opacity: .085;
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.75) 0%, transparent 88%);
+    mask-image: linear-gradient(180deg, rgba(0,0,0,.75) 0%, transparent 88%);
   }
-  .compact { min-height: 470px; }
-  .tint {
-    background: linear-gradient(0deg, rgba(8, 29, 25, .97) 0%, rgba(8, 29, 25, .80) 47%, rgba(8, 29, 25, .28) 100%);
-  }
-  .content h2 { max-width: 12ch; font-size: clamp(2.8rem, 10vw, 4.5rem); }
-  .eyebrow { margin-bottom: .9rem; }
-  .description { margin-top: 1rem; font-size: .99rem; line-height: 1.6; }
-  .action { margin-top: 1.4rem; }
-  .caption { left: 1.5rem; right: 1.5rem; bottom: 1.1rem; font-size: .62rem; }
-}
-@media (max-width: 390px) {
-  .scene { padding-inline: 1.25rem; }
-  .content h2 { font-size: 2.65rem; }
-  .caption { left: 1.25rem; right: 1.25rem; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .action { transition: none; }
 }
