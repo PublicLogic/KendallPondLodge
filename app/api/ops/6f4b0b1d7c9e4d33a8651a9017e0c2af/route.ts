@@ -1,12 +1,21 @@
 import { NextResponse } from 'next/server';
 import { bookingClient } from '@/lib/booking-db';
+import { BookingServiceError } from '@/lib/pj-booking-client.mjs';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
+  let client;
   try {
-    const settings = await bookingClient().instantSettings();
+    client = bookingClient();
+  } catch {
+    return NextResponse.json({ backend: null, error: 'client_not_configured' }, { status: 503 });
+  }
+
+  try {
+    const settings = await client.instantSettings();
     return NextResponse.json({
+      backend: client.base,
       configured: settings?.configured === true,
       enabled: settings?.enabled === true,
       base_nightly_cents: settings?.base_nightly_cents ?? null,
@@ -24,7 +33,10 @@ export async function GET() {
       cancellation_terms: settings?.cancellation_terms ?? null,
       balance_terms: settings?.balance_terms ?? null,
     }, { headers: { 'Cache-Control': 'no-store' } });
-  } catch {
-    return NextResponse.json({ error: 'unavailable' }, { status: 503 });
+  } catch (error) {
+    const safe = error instanceof BookingServiceError
+      ? { status: error.status, code: error.code }
+      : { status: 503, code: 'unknown' };
+    return NextResponse.json({ backend: client.base, error: safe }, { status: safe.status });
   }
 }
