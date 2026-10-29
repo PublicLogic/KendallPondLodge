@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { RetreatHero } from "@/app/_components/RetreatHero";
+import { PondScenery } from "@/app/_components/PondScenery";
 import { lodgePhoto } from "@/app/_data/lodge-photos";
 import { BookingSteps, GuestReviewEvidence, StayFAQ } from "@/app/_components/StayInformation";
 import { directBookingEnabled, hostContactHref } from "@/lib/booking-db";
@@ -54,6 +55,14 @@ export default function HomePage() {
           })}
         </div>
       </section>
+      <PondScenery
+        scene="home"
+        eyebrow="A little perspective"
+        title="Out here, the water sets the pace."
+        description="Our private stretch of shoreline is one small part of a much bigger scene: Kendall Pond, the woods, and the seasons all around it."
+        actionHref="/grounds"
+        actionLabel="See the waterfront"
+      />
       <section className="guest-house-story" aria-labelledby="house-story-title">
         <div className="guest-house-photo"><Image src={house.src} alt={house.alt} fill sizes="(max-width: 800px) 100vw, 55vw" /></div>
         <div className="guest-house-copy">
