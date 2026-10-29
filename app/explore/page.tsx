@@ -57,18 +57,9 @@ export default function ExplorePage() {
         </div>
       </section>
 
-      <PondScenery
-        scene="explore"
-        eyebrow="Start at the pond"
-        title="Stay in. Head out. Come back to the water."
-        description="A few days in Gardner leave room for a morning at Wachusett, dinner in town, and an evening back by the shoreline."
-        actionHref="/book"
-        actionLabel="Check dates"
-        compact
-      />
-
       <section className="content-section">
-        <div className="booking-cta-panel">
+        <div className="booking-cta-panel kpl-pond-ambient">
+          <PondScenery scene="explore" />
           <div><p className="eyebrow">Have a few days in mind?</p><h2>See which nights work.</h2><p>Send your dates and group size. We’ll check availability and send the full quote before you pay.</p></div>
           <Link className="button button-primary" href="/book">Check dates →</Link>
         </div>
