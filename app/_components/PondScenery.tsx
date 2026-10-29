@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import styles from "./PondScenery.module.css";
 
 type SceneKey = "home" | "waterfront" | "explore";
@@ -22,62 +21,28 @@ const images: Record<SceneKey, { candidate: string; fallback: string; position: 
   },
 };
 
-type Props = {
-  scene: SceneKey;
-  eyebrow: string;
-  title: string;
-  description: string;
-  actionHref: string;
-  actionLabel: string;
-  compact?: boolean;
-};
-
 /**
- * A scenic interlude, never a representation of the private rental footprint.
+ * A low-opacity background texture inside existing content surfaces, not
+ * a new hero, scenic interlude, large photo tile or substitute for actual
+ * Lodge photography.
  *
- * The supplied aerial images are not yet licensed for commercial use. This
- * component deliberately falls back to existing KPL media until their rights
- * and upload are verified. See docs/POND-AERIAL-PHOTO-RELEASE.md.
+ * The supplied aerials are not owned by KPL and must remain unpublished
+ * until their commercial-use rights are verified and licensed originals
+ * have been added to the mapped paths.
  */
-export function PondScenery({
-  scene,
-  eyebrow,
-  title,
-  description,
-  actionHref,
-  actionLabel,
-  compact = false,
-}: Props) {
-  const rightsCleared = process.env.KPL_POND_AERIAL_RIGHTS_CLEARED === "true";
+export function PondScenery({ scene }: { scene: SceneKey }) {
   const image = images[scene];
-
+  const licensed = process.env.KPL_POND_AERIAL_RIGHTS_CLEARED === "true";
   return (
-    <section
-      className={`${styles.scene} ${compact ? styles.compact : ""}`}
-      aria-label={eyebrow}
-      data-pond-scenery={scene}
-    >
-      <div className={styles.photograph} aria-hidden="true">
-        <Image
-          src={rightsCleared ? image.candidate : image.fallback}
-          alt=""
-          fill
-          sizes="100vw"
-          style={{ objectPosition: image.position }}
-        />
-      </div>
-      <div className={styles.tint} aria-hidden="true" />
-      <div className={styles.content}>
-        <p className={styles.eyebrow}>{eyebrow}</p>
-        <h2>{title}</h2>
-        <p className={styles.description}>{description}</p>
-        <Link className={styles.action} href={actionHref}>
-          {actionLabel} <span aria-hidden="true">↗</span>
-        </Link>
-      </div>
-      <p className={styles.caption}>
-        Kendall Pond · Gardner, Massachusetts{rightsCleared ? " · Aerial view" : ""}
-      </p>
-    </section>
+    <div className={styles.ambient} aria-hidden="true" data-pond-scenery={scene}>
+      <Image
+        alt=""
+        src={licensed ? image.candidate : image.fallback}
+        fill
+        sizes="(max-width: 760px) 100vw, 50vw"
+        style={{ objectPosition: image.position }}
+        loading="lazy"
+      />
+    </div>
   );
 }
