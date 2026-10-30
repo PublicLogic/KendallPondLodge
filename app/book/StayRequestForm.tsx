@@ -612,8 +612,9 @@ export function StayRequestForm({
         />
 
         <span>
-          This is a request, not a reservation. Nate or Allie may
-          contact me about the stay.
+          {instant
+            ? 'The next step shows your exact price and booking terms. Nothing is charged until you continue to Stripe.'
+            : 'This is a request, not a reservation. Nate or Allie may contact me about the stay.'}
         </span>
       </label>
 

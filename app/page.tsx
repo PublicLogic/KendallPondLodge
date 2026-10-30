@@ -71,7 +71,7 @@ export default function HomePage() {
         <PondScenery scene="home" />
         <div><p className="showcase-eyebrow">Hosted by Nate &amp; Allie</p><h2 id="showcase-close-title">Come stay with us.</h2>
           <p>{enabled ? "Check your dates and review the full price and terms before you pay." : "Find available nights and the full price on Airbnb."}</p></div>
-        <div className="showcase-close-actions"><BookingAction enabled={enabled} className="showcase-button showcase-button-dark">{enabled ? "Request your dates" : "View dates on Airbnb"}<span aria-hidden="true">↗</span></BookingAction>
+        <div className="showcase-close-actions"><BookingAction enabled={enabled} className="showcase-button showcase-button-dark">{enabled ? "Check dates & price" : "View dates on Airbnb"}<span aria-hidden="true">↗</span></BookingAction>
           <Link className="showcase-inline-link" href="/explore">Around Gardner &amp; Wachusett <span aria-hidden="true">→</span></Link></div>
       </section>
     </main>

@@ -20,9 +20,9 @@ export function SleepPlan() {
 export function BookingSteps({ enabled = true, instant = false }: { enabled?: boolean; instant?: boolean }) {
   const steps = instant
     ? [
-        { title: 'Choose your dates', body: 'PJ checks Airbnb availability and existing direct holds before anything is offered.' },
-        { title: 'Review the full price', body: 'Eligible stays are priced from the property policy and held while you review the itemized total and terms.' },
-        { title: 'Pay to confirm', body: 'Complete secure Stripe Checkout. The stay becomes confirmed only after the signed payment result is verified.' },
+        { title: 'Choose your dates', body: 'We check live Airbnb availability and existing checkouts before showing a bookable price.' },
+        { title: 'Review the full price', body: 'Eligible stays are priced automatically. Review the itemized total and terms before continuing.' },
+        { title: 'Pay to confirm', body: 'Continue to secure Stripe Checkout. A short inventory lock starts at checkout, and the stay is confirmed after payment is verified.' },
       ]
     : stay.bookingSteps;
 

@@ -3,14 +3,14 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 const read = p => readFileSync(new URL("../"+p, import.meta.url), "utf8");
 
-test("KPL exposes a private Airbnb-import calendar backed by PJ holds", () => {
+test("KPL exports only checkout and confirmed inventory to Airbnb", () => {
   const route = read("app/calendar/[token]/route.ts");
   const cal = read("lib/direct-calendar.mjs");
   assert.match(route, /KPL_AIRBNB_IMPORT_TOKEN/);
   assert.match(route, /bookingClient\(\)\.list\(100\)/);
   assert.match(route, /text\/calendar/);
   assert.match(route, /no-store/);
-  assert.match(cal, /quoted/);
+  assert.doesNotMatch(cal, /'quoted'/);
   assert.match(cal, /checkout/);
   assert.match(cal, /confirmed/);
   assert.doesNotMatch(cal, /guest_name|guest_email/);

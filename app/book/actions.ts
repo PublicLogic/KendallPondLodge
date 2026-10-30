@@ -1,6 +1,7 @@
 'use server';
 
 import { redirect } from 'next/navigation';
+import { after } from 'next/server';
 
 import {
   bookingClient,
@@ -25,7 +26,6 @@ import {
 } from '@/lib/kpl-booking-core.mjs';
 
 const BLOCKING_DIRECT_STATUSES = new Set([
-  'quoted',
   'checkout',
   'confirmed',
 ]);
@@ -127,17 +127,19 @@ export async function requestStay(form: FormData) {
       if (instant?.enabled === true) {
         const priced = await client.autoPrice(created.id);
         if (priced?.quote_token) {
-          // The browser continues immediately. Email is a recovery copy of
-          // the same private Review & book link, never a manual approval gate.
-          try {
-            await client.sendQuote(created.id);
-          } catch (emailError) {
-            const emailCode =
-              emailError instanceof BookingServiceError
-                ? emailError.code
-                : 'message_unavailable';
-            console.error('Booking link email deferred:', emailCode);
-          }
+          // The browser moves to the price/payment page immediately. Email is
+          // a recovery copy of the same private payment link, never a gate.
+          after(async () => {
+            try {
+              await client.sendQuote(created.id);
+            } catch (emailError) {
+              const emailCode =
+                emailError instanceof BookingServiceError
+                  ? emailError.code
+                  : 'message_unavailable';
+              console.error('Booking link email deferred:', emailCode);
+            }
+          });
 
           return {
             received: true as const,
