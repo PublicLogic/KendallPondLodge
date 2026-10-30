@@ -30,11 +30,11 @@ export function WachusettRail({ transit }: { transit: PjTransit | null }) {
     <section className={styles.rail} id="train" aria-labelledby="rail-title">
       <div className={styles.railCopy}>
         <p className={styles.eyebrow}>Getting here &amp; getting around</p>
-        <h2 id="rail-title">There's a train to Boston.</h2>
+        <h2 id="rail-title">There&apos;s a train to Boston.</h2>
         <p>
           The Fitchburg Line connects Wachusett Station in Fitchburg with
-          Boston's North Station. The station is at 55 Authority Drive,
-          not at the Lodge. You'll need to arrange your own ride between
+          Boston&apos;s North Station. The station is at 55 Authority Drive,
+          not at the Lodge. You&apos;ll need to arrange your own ride between
           the house and the station.
         </p>
         <div className={styles.railLinks}>
