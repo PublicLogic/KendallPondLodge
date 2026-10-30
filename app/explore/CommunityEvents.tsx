@@ -23,7 +23,7 @@ export function CommunityEvents({ feed }: { feed: PjExplore | null }) {
             <h2 id="city-events-title">What’s going on.</h2>
           </div>
           <p>
-            Concerts, markets, and whatever else is happening around town. Check the details before you head out.
+            Want to know what's on while you're here? These are the local listings we can pull in. Check with the organizer for times and changes.
           </p>
         </header>
         {events.length ? (
@@ -46,15 +46,15 @@ export function CommunityEvents({ feed }: { feed: PjExplore | null }) {
           <p className={styles.eventEmpty}>
             {feed
               ? verified
-                ? "No upcoming events listed at the moment. Check the calendars below for more."
-                : "The City calendar isn&apos;t updating here right now. Use the calendars below."
-              : "Events aren&apos;t loading here right now. Check the calendars below."}
+                ? "Nothing coming up in the latest listings. The City and Chamber calendars are below."
+                : "We can't reach the City calendar right now. Try the links below."
+              : "Events aren't loading right now. The City and Chamber calendars are below."}
           </p>
         )}
         {events.length > 0 && !verified && (
           <p className={styles.eventNote}>
-            The City calendar is temporarily unavailable. These listings
-            come from other local sources; confirm details with the organizer.
+            The City calendar couldn't be refreshed. These other listings may still
+            be useful, but check with the organizer before you go.
           </p>
         )}
         <div className={styles.eventLinks}>
