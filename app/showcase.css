@@ -392,6 +392,17 @@
   font-weight: 730;
 }
 
+/* Subtle, rights-gated pond textures behind existing content only. */
+.kpl-pond-ambient {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.kpl-pond-ambient > :not([data-pond-scenery]) {
+  position: relative;
+  z-index: 1;
+}
+
 /* The pond story */
 .showcase-water-story {
   display: grid;
@@ -746,5 +757,275 @@
   }
   .booking-panel-direct .booking-brand img {
     width: 82px !important;
+  }
+}
+
+
+/* KPL navigation: quiet, image-led and unmistakably the Lodge.
+   Keep the established forest/ivory palette; remove stacked pills, gloss and
+   hovering cards. Navigation should be typography, not a second hero. */
+.hospitality-header {
+  position: sticky;
+  top: 0;
+  z-index: 140;
+  border-bottom: 1px solid rgba(42, 69, 56, .12);
+  background: rgba(250, 249, 245, .96);
+  box-shadow: none;
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  backdrop-filter: blur(16px) saturate(120%);
+}
+.hospitality-header .experience-header-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1440px;
+  min-height: 80px;
+  gap: clamp(1.3rem, 3vw, 3rem);
+  padding-inline: clamp(1.2rem, 3.8vw, 3.25rem);
+  flex-wrap: nowrap;
+}
+.hospitality-header .kpl-brand-image {
+  flex: none;
+  width: clamp(188px, 16vw, 204px);
+  max-width: 204px;
+}
+.hospitality-header .kpl-brand-lockup {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: filter 340ms ease;
+}
+.hospitality-header .hospitality-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 2.2vw, 2.2rem);
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.hospitality-header .hospitality-nav a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: .7rem 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #46564e !important;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: .82rem !important;
+  font-weight: 610 !important;
+  line-height: 1.3;
+  letter-spacing: .005em;
+  text-decoration: none !important;
+  transition: color 320ms ease;
+}
+.hospitality-header .hospitality-nav a::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: .34rem;
+  left: 0;
+  right: 0;
+  height: 1px;
+  border: 0;
+  border-radius: 0;
+  background: currentColor;
+  opacity: 0;
+  transform: scaleX(.35);
+  transform-origin: left;
+  transition: opacity 240ms ease, transform 320ms cubic-bezier(.22, 1, .36, 1);
+}
+.hospitality-header .hospitality-nav a:hover,
+.hospitality-header .hospitality-nav a[aria-current="page"] {
+  background: transparent;
+  color: #164734 !important;
+  text-decoration: none !important;
+}
+.hospitality-header .hospitality-nav a:hover::after,
+.hospitality-header .hospitality-nav a[aria-current="page"]::after {
+  opacity: .85;
+  transform: scaleX(1);
+}
+.hospitality-header .hospitality-book-button {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px !important;
+  margin-left: 0;
+  padding: .72rem 1.16rem !important;
+  border: 1px solid #21483d !important;
+  border-radius: 7px !important;
+  background: #21483d !important;
+  box-shadow: none !important;
+  color: #fff !important;
+  font-size: .79rem !important;
+  font-weight: 715 !important;
+  letter-spacing: 0;
+  white-space: nowrap;
+  transform: none !important;
+  transition: background-color 320ms ease, border-color 320ms ease, color 320ms ease;
+}
+.hospitality-header .hospitality-book-button::after { content: none; }
+.hospitality-header .hospitality-book-button:hover {
+  border-color: #15352d !important;
+  background: #15352d !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* The page photo is the backdrop for the navigation, not a separate strip.
+   Layer opacities are animatable; switching a gradient to a solid background
+   directly would cause a visible flash. */
+.hospitality-header.hospitality-header-immersive {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 140;
+  width: 100%;
+  border-bottom-color: rgba(255,255,255,.22);
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  transition: border-color 360ms ease;
+}
+.hospitality-header.hospitality-header-immersive::before,
+.hospitality-header.hospitality-header-immersive::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity 360ms cubic-bezier(.22, 1, .36, 1);
+}
+.hospitality-header.hospitality-header-immersive::before {
+  background: linear-gradient(180deg, rgba(8,28,21,.57), rgba(8,28,21,.13));
+  opacity: 1;
+}
+.hospitality-header.hospitality-header-immersive::after {
+  background: rgba(250, 249, 245, .96);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  backdrop-filter: blur(16px) saturate(120%);
+  opacity: 0;
+}
+.hospitality-header.hospitality-header-immersive.hospitality-header-scrolled {
+  border-bottom-color: rgba(42, 69, 56, .12);
+}
+.hospitality-header.hospitality-header-immersive.hospitality-header-scrolled::before { opacity: 0; }
+.hospitality-header.hospitality-header-immersive.hospitality-header-scrolled::after { opacity: 1; }
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .kpl-brand-lockup {
+  filter: brightness(0) invert(1);
+}
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-nav a {
+  color: #fff8ed !important;
+}
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-nav a:hover,
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-nav a[aria-current="page"] {
+  color: #fff !important;
+}
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-book-button {
+  border-color: #f8f1e4 !important;
+  background: #f8f1e4 !important;
+  color: #1e4938 !important;
+}
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-book-button:hover {
+  border-color: #ecd7ae !important;
+  background: #ecd7ae !important;
+  color: #1e4938 !important;
+}
+
+/* Simple, familiar mobile menu: no chip treatment, no oversized shadow. */
+@media (max-width: 1000px) {
+  .hospitality-header .experience-header-inner { gap: .9rem; }
+  .hospitality-header .kpl-brand-image { width: 177px; }
+  .hospitality-header .hospitality-nav { gap: 1rem; }
+  .hospitality-header .hospitality-nav a { font-size: .76rem !important; }
+}
+@media (max-width: 760px) {
+  .hospitality-header .experience-header-inner {
+    min-height: 68px;
+    padding-inline: 1rem;
+    gap: .65rem;
+  }
+  .hospitality-header .kpl-brand-image {
+    width: clamp(125px, 35vw, 160px);
+    max-width: none;
+  }
+  .hospitality-header .hospitality-nav { display: none; }
+  .hospitality-header .hospitality-menu {
+    display: block;
+    margin-left: auto;
+  }
+  .hospitality-header .hospitality-menu summary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    min-height: 44px;
+    padding: .6rem .2rem;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    color: #294c3c;
+    font-size: .77rem;
+    font-weight: 650;
+    list-style: none;
+    transition: color 320ms ease;
+  }
+  .hospitality-header .hospitality-menu summary::-webkit-details-marker { display: none; }
+  .hospitality-header .hospitality-menu summary::after {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 10px;
+    border-top: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    opacity: .8;
+  }
+  .hospitality-header .hospitality-menu[open] nav {
+    right: 0;
+    width: min(255px, calc(100vw - 1.5rem));
+    margin-top: .45rem;
+    padding: .45rem;
+    border: 1px solid #c9d5cb;
+    border-radius: 9px;
+    background: #fcfbf7;
+    box-shadow: 0 12px 28px rgba(9,28,18,.12);
+  }
+  .hospitality-header .hospitality-menu nav a {
+    min-height: 46px;
+    padding-inline: .75rem;
+    border-radius: 4px;
+    font-size: .86rem;
+  }
+  .hospitality-header .hospitality-book-button {
+    min-height: 44px !important;
+    padding: .65rem .8rem !important;
+    border-radius: 6px !important;
+    font-size: .74rem !important;
+  }
+  .hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-menu summary {
+    color: #fff9ed;
+  }
+  .hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-menu[open] nav {
+    background: #fcfbf7;
+  }
+}
+@media (max-width: 370px) {
+  .hospitality-header .experience-header-inner { padding-inline: .65rem; gap: .4rem; }
+  .hospitality-header .kpl-brand-image { width: 124px; }
+  .hospitality-header .hospitality-menu summary { gap: .35rem; padding-inline: .1rem; }
+  .hospitality-header .hospitality-book-button { padding-inline: .65rem !important; font-size: .7rem !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hospitality-header *,
+  .hospitality-header::before,
+  .hospitality-header::after {
+    transition: none !important;
+    scroll-behavior: auto !important;
   }
 }

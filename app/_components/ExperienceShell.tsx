@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import { publicNavigation } from "@/app/_data/navigation";
 import { Brand } from "./Brand";
@@ -25,6 +25,30 @@ function PublicHeader({
   bookEnabled: boolean;
 }) {
   const pathname = usePathname();
+  const onHome = pathname === "/";
+  const [pastHero, setPastHero] = useState(false);
+
+  useEffect(() => {
+    if (!onHome) {
+      setPastHero(false);
+      return;
+    }
+
+    const hero = document.querySelector<HTMLElement>("[data-retreat-hero]");
+    if (!hero) return;
+
+    // Crossfade close to the bottom of the opening image, rather than
+    // swapping colors halfway through the photograph.
+    const transitionLine = 128;
+    setPastHero(hero.getBoundingClientRect().bottom <= transitionLine);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setPastHero(!entry.isIntersecting),
+      { rootMargin: `-${transitionLine}px 0px 0px 0px`, threshold: 0 }
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, [onHome]);
 
   const current = (href: string) =>
     pathname === href ||
@@ -36,7 +60,11 @@ function PublicHeader({
         Skip to content
       </a>
 
-      <header className="experience-header experience-header-booking hospitality-header">
+      <header className={[
+        "experience-header experience-header-booking hospitality-header",
+        onHome ? "hospitality-header-immersive" : "",
+        onHome && pastHero ? "hospitality-header-scrolled" : "",
+      ].filter(Boolean).join(" ")}>
         <div className="experience-header-inner">
           <Brand />
 
