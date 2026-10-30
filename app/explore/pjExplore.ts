@@ -145,7 +145,9 @@ function parseEvents(raw: unknown): PjExploreEvent[] {
     .flatMap((item): PjExploreEvent[] => {
       if (item.type !== "event" || !/^\d{4}-\d{2}-\d{2}$/.test(text(item.date, 10))) return [];
       const date = text(item.date, 10);
-      if (date < today) return [];
+      const calendarDay = new Date(date + "T12:00:00Z");
+      if (!Number.isFinite(calendarDay.getTime()) ||
+        calendarDay.toISOString().slice(0, 10) !== date || date < today) return [];
       if (validDateTime(item.expiresAt) && Date.parse(item.expiresAt) <= now) return [];
       const url = safePublicLink(item.href);
       const title = text(item.title, 150);
