@@ -9,10 +9,10 @@ export default async function OwnerPage() {
   await requireKplOwner();
   return <main id="main-content" className="content-section booking-page">
     <BookingBrand owner /><p className="eyebrow">Lodge at Kendall Pond</p><h1>Your booking desk.</h1>
-    <p>Review requests, prepare exact quotes, and follow payments through to a recorded stay.</p>
+    <p>Track direct bookings from price through checkout and confirmation.</p>
     <div className="booking-grid">
-      <section className="booking-panel"><h2>Requests & bookings</h2><p>Price each stay, verify the Airbnb block, and share the guest’s private quote.</p><Link className="button button-primary" href="/owner/bookings">Open bookings</Link></section>
-      <section className="booking-panel"><h2>Booking setup</h2><p>See connection status and how the booking process works. Rates and terms are entered on each quote.</p><Link className="button button-secondary" href="/owner/settings">Open booking setup</Link></section>
+      <section className="booking-panel"><h2>Direct bookings</h2><p>See who is ready to pay, who is in checkout, and anything that actually needs your attention.</p><Link className="button button-primary" href="/owner/bookings">Open bookings</Link></section>
+      <section className="booking-panel"><h2>Booking setup</h2><p>See connection status, pricing policy, payment settings, and calendar safeguards.</p><Link className="button button-secondary" href="/owner/settings">Open booking setup</Link></section>
     </div>
     <form action={lockOwner}><button className="button button-secondary" type="submit">Sign out</button></form>
   </main>;
