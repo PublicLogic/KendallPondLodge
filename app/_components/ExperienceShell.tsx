@@ -26,10 +26,13 @@ function PublicHeader({
 }) {
   const pathname = usePathname();
   const onHome = pathname === "/";
+  const onLodge = pathname === "/lodge";
+  const onPhotos = pathname === "/photos";
+  const hasPhotoOpening = onHome || onLodge || onPhotos;
   const [pastHero, setPastHero] = useState(false);
 
   useEffect(() => {
-    if (!onHome) {
+    if (!hasPhotoOpening) {
       setPastHero(false);
       return;
     }
@@ -48,7 +51,7 @@ function PublicHeader({
     );
     observer.observe(hero);
     return () => observer.disconnect();
-  }, [onHome]);
+  }, [pathname, hasPhotoOpening]);
 
   const current = (href: string) =>
     pathname === href ||
@@ -62,8 +65,8 @@ function PublicHeader({
 
       <header className={[
         "experience-header experience-header-booking hospitality-header",
-        onHome ? "hospitality-header-immersive" : "",
-        onHome && pastHero ? "hospitality-header-scrolled" : "",
+        hasPhotoOpening ? "hospitality-header-immersive" : "",
+        hasPhotoOpening && pastHero ? "hospitality-header-scrolled" : "",
       ].filter(Boolean).join(" ")}>
         <div className="experience-header-inner">
           <Brand />

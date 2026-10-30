@@ -33,3 +33,37 @@ test('Lodge photography has one priority image and responsive intrinsic sizing',
   assert.match(page,/loading=\{priority \? "eager" : "lazy"\}/);
   assert.match(page,/lodge\.module\.css/);
 });
+
+
+test("The Lodge opens on its own property photo, beneath the same smooth site header", () => {
+  const css = read("app/lodge/lodge.module.css");
+  const shell = read("app/_components/ExperienceShell.tsx");
+  assert.match(page, /data-lodge-cover/);
+  assert.match(page, /data-retreat-hero/);
+  assert.match(page, /photo=\{photos\.arrival\}/);
+  assert.match(page, /sizes="100vw"/);
+  assert.match(css, /\.coverPhotograph img/);
+  assert.match(css, /\.coverShade/);
+  assert.match(css, /#213f32/);
+  assert.match(shell, /const onLodge = pathname === "\/lodge"/);
+  assert.match(shell, /const hasPhotoOpening = onHome \|\| onLodge/);
+  assert.match(shell, /hasPhotoOpening \? "hospitality-header-immersive"/);
+  assert.match(shell, /data-retreat-hero/);
+});
+
+test("The Lodge tour includes dining, deck, and covered hot tub without borrowed aerials", () => {
+  for (const order of [19,31,37]) assert.match(page, new RegExp("lodgePhoto\\(" + order + "\\)"));
+  for (const label of ["The kitchen", "The dining room", "The upper deck", "The covered hot tub"]) {
+    assert.ok(page.includes(label), "Missing Lodge tour image: " + label);
+  }
+  assert.doesNotMatch(page, /KP3|KP2|KENDALL-POND|pond-aerials|unsplash|pexels/i);
+});
+
+test("The Lodge booking copy does not promise a manual quote", () => {
+  assert.match(page, /review the full price and terms/i);
+  assert.doesNotMatch(page, /send the full quote|send your dates|we.ll check availability/i);
+  assert.match(page, /href="\/book"/);
+  assert.match(page, /href="\/grounds"/);
+  assert.match(page, /href="\/photos"/);
+  assert.match(page, /href="\/guidebook"/);
+});
