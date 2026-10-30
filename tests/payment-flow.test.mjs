@@ -8,6 +8,26 @@ const event = () => ({ id: 'evt_test_1', livemode: false, type: 'checkout.sessio
 function signed(e, config = env) { const body = JSON.stringify(e), t = Math.floor(Date.now() / 1000), signature = `t=${t},v1=${createHmac('sha256', config.STRIPE_WEBHOOK_SECRET).update(`${t}.${body}`).digest('hex')}`; return { body, signature, env: config }; }
 for (const result of [{ ok: true }, { ok: false, refund_required: true, reason: 'paid_conflict' }, { ok: false, rejected: 'amount_mismatch' }, { ok: false }])
     test(`durable 200 PJ result acknowledged: ${JSON.stringify(result)}`, async () => { let called = 0; const r = await handlePaymentWebhook({ ...signed(event()), pj: { confirmPayment: async (...a) => { called++; assert.deepEqual(a, [id, sid, 12345]); return result; } } }); assert.equal(r.status, 200); assert.equal(called, 1); assert.equal(r.outcome, result.ok ? 'confirmed' : result.refund_required ? 'refund_required' : result.rejected ? 'rejected' : 'unmatched'); });
+test('expired Stripe Checkout releases the PJ inventory lock', async () => {
+    const e = event();
+    e.type = 'checkout.session.expired';
+    e.data.object.payment_status = 'unpaid';
+    let released = 0;
+    const r = await handlePaymentWebhook({
+        ...signed(e),
+        pj: {
+            release: async bookingId => {
+                released++;
+                assert.equal(bookingId, id);
+                return { ok: true };
+            },
+            confirmPayment: async () => assert.fail('expired session must not confirm payment'),
+        },
+    });
+    assert.equal(r.status, 200);
+    assert.equal(r.outcome, 'released');
+    assert.equal(released, 1);
+});
 test('PJ throw asks Stripe to retry', async () => { assert.equal((await handlePaymentWebhook({ ...signed(event()), pj: { confirmPayment: async () => { throw new Error('unreachable'); } } })).status, 503); });
 test('forged signature fails before any PJ mutation', async () => { let called = 0; assert.equal((await handlePaymentWebhook({ ...signed(event()), signature: 't=1,v1=' + '0'.repeat(64), pj: { confirmPayment: async () => { called++; } } })).status, 400); assert.equal(called, 0); });
 test('unrelated/unpaid events acknowledged without mutation', async () => { for (const change of [e => { e.type = 'other'; }, e => { e.data.object.metadata = {}; }, e => { e.data.object.payment_status = 'unpaid'; }]) {
