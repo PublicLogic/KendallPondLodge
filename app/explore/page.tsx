@@ -32,14 +32,13 @@ export default async function ExplorePage() {
       <section className={styles.opening} aria-labelledby="explore-title">
         <div className={styles.openingCopy}>
           <p className={styles.eyebrow}>Gardner &amp; Wachusett · Local guide</p>
-          <h1 id="explore-title">Around Gardner.</h1>
+          <h1 id="explore-title">Get out and see a little.</h1>
           <p className={styles.openingIntro}>
-            Breakfast downtown, Wachusett trails, museums and restaurants.
-            Here are places to try, plus the train and local events calendars.
+            Good food, a mountain worth climbing, and a few places we keep coming back to. Here’s where we’d send you.
           </p>
           <nav className={styles.openingNav} aria-label="Explore this guide">
-            <a href="#days">Day ideas</a>
-            <a href="#local-picks">Places</a>
+            <a href="#days">Make a day of it</a>
+            <a href="#local-picks">Our picks</a>
             <a href="#train">Train</a>
             <a href="#city-events">Events</a>
             <a href="#around-town">Chamber</a>
