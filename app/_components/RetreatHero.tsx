@@ -53,10 +53,10 @@ export function RetreatHero({ directEnabled, airbnbHref, scenes }: Props) {
         <div className={styles.copy} data-pond-copy>
           <p className={styles.location}>The Lodge at Kendall Pond <span>Gardner, Massachusetts</span></p>
           <div className={styles.story}>
-            <p className={styles.eyebrow}>Your place by the water</p>
+            <p className={styles.eyebrow}>A whole house on the water</p>
             <h1 id="showcase-title"><span>Down by</span> <span>the pond.</span></h1>
-            <p className={styles.intro}>Coffee on the deck. A long afternoon at the dock. A fire by the water when the day winds down.</p>
-            <p className={styles.welcome}>The whole waterfront house, three bedrooms, a hot tub, and room for eight. Hosted by Nate &amp; Allie.</p>
+            <p className={styles.intro}>The dock is just down the lawn, and the hot tub is tucked under the deck. You get the whole house for your stay.</p>
+            <p className={styles.welcome}>Three bedrooms, two full baths, and room for eight overnight guests. Hosted nearby by Nate &amp; Allie.</p>
             <div className={styles.actions}>
               {directEnabled ? (
                 <Link className={styles.primary} href="/book">{action}</Link>
