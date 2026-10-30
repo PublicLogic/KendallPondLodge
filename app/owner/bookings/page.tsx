@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 const legacyWorkflow = ["New", "Quote", "Airbnb", "Send", "Paying", "Confirmed"] as const;
-const instantWorkflow = ["New", "Held", "Paying", "Confirmed"] as const;
+const instantWorkflow = ["New", "Ready", "Checkout", "Confirmed"] as const;
 
 function quoteSent(
   message: BookingMessageState | null | undefined,
@@ -67,12 +67,12 @@ function statusLabel(
   if (request.status === "requested") return "New";
 
   if (request.status === "quoted") {
-    if (instant) return "Held";
+    if (instant) return "Ready to pay";
     if (stayStatus !== "owner-blocked") return "Waiting for Airbnb block";
     return quoteSent(quoteMessage) ? "Sent" : "Quote ready";
   }
 
-  if (request.status === "checkout") return "Paying";
+  if (request.status === "checkout") return instant ? "Checkout" : "Paying";
   if (request.status === "confirmed") return "Confirmed";
   if (request.status === "expired") return "Expired";
   return "Declined";
