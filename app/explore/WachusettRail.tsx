@@ -32,9 +32,9 @@ export function WachusettRail({ transit }: { transit: PjTransit | null }) {
         <p className={styles.eyebrow}>By train</p>
         <h2 id="rail-title">Take the train.</h2>
         <p>
-          Wachusett Station is at 55 Authority Drive in Fitchburg. It&apos;s
-          on the MBTA Fitchburg Line to Boston&apos;s North Station. You&apos;ll
-          need a ride between the station and the Lodge.
+          Catch the Fitchburg Line toward Boston&apos;s North Station at Wachusett
+          Station, 55 Authority Drive in Fitchburg. You&apos;ll need a ride
+          between the station and the Lodge.
         </p>
         <div className={styles.railLinks}>
           <a href={localResourceLinks.fitchburgLine} target="_blank" rel="noopener noreferrer">
@@ -70,16 +70,16 @@ export function WachusettRail({ transit }: { transit: PjTransit | null }) {
         ) : (
           <p className={styles.railUnavailable}>
             {fresh
-              ? "No upcoming departures in the latest update. Check MBTA for your travel date."
-              : "Departure times aren&apos;t loading here. Check the MBTA schedule."}
+              ? "Nothing heading toward Boston in this update. Check the full MBTA timetable."
+              : "Train times aren&apos;t coming through right now. Use the MBTA schedule above."}
           </p>
         )}
         {fresh && (
           <p className={styles.railFine}>
             Updated {easternDate(transit!.checkedAt, {
               hour: "numeric", minute: "2-digit", timeZoneName: "short",
-            })}. Predicted times appear when MBTA provides them; otherwise
-            scheduled times are shown. Check alerts before traveling.
+            })}. We show MBTA predictions when available, or the scheduled time
+            otherwise. Check service alerts before you leave.
           </p>
         )}
         {alerts.length > 0 && (
@@ -96,9 +96,9 @@ export function WachusettRail({ transit }: { transit: PjTransit | null }) {
         <div className={styles.mart}>
           <p className={styles.martName}>Gardner connection · MART</p>
           <p>
-            MART runs a fare-free weekday shuttle between Gardner and
-            Wachusett Station, excluding holidays. Stops include City Hall
-            and the Intermodal Center. It doesn&apos;t stop at the Lodge.
+            MART also has a free weekday shuttle from Gardner to Wachusett Station
+            (except holidays). It stops at City Hall and the Intermodal
+            Center, not at the Lodge.
           </p>
           <a href={localResourceLinks.martShuttle} target="_blank" rel="noopener noreferrer">
             MART shuttle timetable <span aria-hidden="true">↗</span>
