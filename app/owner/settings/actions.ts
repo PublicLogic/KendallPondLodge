@@ -73,7 +73,7 @@ export async function saveInstantBookingPolicy(form: FormData): Promise<void> {
       deposit_percent: wholeNumber(form, "deposit_percent", 1, 100),
       min_nights: wholeNumber(form, "min_nights", 1, 30),
       booking_window_days: wholeNumber(form, "booking_window_days", 1, 730),
-      hold_minutes: wholeNumber(form, "hold_minutes", 90, 360),
+      hold_minutes: wholeNumber(form, "hold_minutes", 60, 10_080),
       cancellation_terms: String(form.get("cancellation_terms") ?? "").trim(),
       balance_terms: String(form.get("balance_terms") ?? "").trim(),
     });
