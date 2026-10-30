@@ -14,7 +14,7 @@ const manifest = JSON.parse(read("public/images/kpl/website-top-50/manifest.json
 
 test("Explore has authentic Lodge photography, editorial day plans and distinct guide navigation", () => {
   assert.match(page, /data-curated-explore/);
-  assert.match(page, /<h1 id="explore-title">Around Gardner\.<\/h1>/);
+  assert.match(page, /<h1 id="explore-title">Get out and see a little\.<\/h1>/);
   assert.match(page, /id="days"/);
   assert.match(page, /id="local-picks"/);
   assert.match(page, /id="around-town"/);
