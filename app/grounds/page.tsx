@@ -190,7 +190,7 @@ export default function GroundsPage() {
         <div className={styles.sectionHead}>
           <div>
             <p className={styles.eyebrow}>Across the lawn</p>
-            <h2 id="firepit-title">The firepit is<br />near the shore.</h2>
+            <h2 id="firepit-title">There's a firepit<br />by the shore.</h2>
           </div>
           <p>
             There are chairs around the stone firepit near the shoreline,
