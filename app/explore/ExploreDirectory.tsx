@@ -36,13 +36,10 @@ export function ExploreDirectory() {
         Showing {visible.length} {visible.length === 1 ? "place" : "places"}
       </p>
       <div className={styles.directory} id="explore-picks">
-        {visible.map((place, index) => (
+        {visible.map((place) => (
           <article className={styles.pick} key={place.slug}>
-            <div className={styles.pickNumber} aria-hidden="true">
-              {String(index + 1).padStart(2, "0")}
-            </div>
             <div className={styles.pickBody}>
-              <p className={styles.pickCategory}>{place.bestFor} <span>· {place.location}</span></p>
+              <p className={styles.pickCategory}>{place.location} <span>· {place.bestFor}</span></p>
               <h3>{place.name}</h3>
               <p>{place.detail}</p>
             </div>
