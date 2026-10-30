@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -21,13 +20,14 @@ import {
 
 import { requestStay } from './actions';
 import { BookingSteps } from '@/app/_components/StayInformation';
-import { StayRequestForm, StayRequestReceipt } from './StayRequestForm';
+import { StayRequestForm } from './StayRequestForm';
+import styles from './book.module.css';
 
 export const metadata: Metadata = {
-  title: 'Request a stay',
+  title: 'Book the Lodge | Dates & Availability',
   alternates: { canonical: '/book' },
   description:
-    'Choose your dates and request a direct stay at the Lodge at Kendall Pond.',
+    'Check dates and full pricing for The Lodge at Kendall Pond in Gardner, Massachusetts. Book direct when available or continue through Airbnb.',
 };
 
 export const dynamic = 'force-dynamic';
@@ -97,60 +97,55 @@ export default async function BookPage({
     }
   }
 
+  const readyToBook = bookable && availabilityReady;
+
   return (
     <main
       id="main-content"
-      className="booking-page booking-page-direct"
+      className={"booking-page booking-page-direct " + styles.page}
+      data-booking-editorial
     >
-      <section className="booking-above-fold">
-        <div className="booking-intro">
-          <div className="booking-intro-copy">
-            <p className="eyebrow">Direct with Nate & Allie</p>
+      <section className={styles.frame} aria-labelledby="booking-title">
+        <div className={styles.intro}>
+          <p className={styles.eyebrow}>The Lodge at Kendall Pond · Direct booking</p>
+          <h1 id="booking-title">Book the Lodge.</h1>
+          <p className={styles.lede}>
+            {readyToBook
+              ? "Choose your dates, see the full price, and review the terms before you pay. Nate and Allie host the house and live nearby."
+              : enabled
+                ? "Instant direct booking is being set up. For now, Airbnb has the current calendar and secure checkout."
+                : "Direct booking is paused for now. You can check available dates and reserve the Lodge through Airbnb."}
+          </p>
 
-            <h1>{bookable ? "A stay worth slowing down for." : "Check available dates."}</h1>
+          <dl className={styles.facts} aria-label="The Lodge at a glance">
+            <div><dt>Overnight guests</dt><dd>Up to 8</dd></div>
+            <div><dt>Bedrooms</dt><dd>3 bedrooms</dd></div>
+            <div><dt>Bathrooms</dt><dd>2 full baths</dd></div>
+            <div><dt>Waterfront</dt><dd>Private shoreline</dd></div>
+          </dl>
 
-            <p>
-              {bookable
-                ? "Coffee on the deck. A long soak in the hot tub. Choose your dates to see the complete direct price and book securely."
-                : enabled
-                  ? "Instant direct booking is being set up. For now, check current availability and book through Airbnb."
-                  : "Direct booking is closed for now. You can check dates and book through Airbnb."}
-            </p>
+          <nav className={styles.related} aria-label="More about the Lodge">
+            <Link href="/lodge">Inside the house ↗</Link>
+            <Link href="/grounds">Dock &amp; waterfront ↗</Link>
+            <Link href="/photos">Photos ↗</Link>
+          </nav>
 
-            <div className="booking-intro-facts">
-              <span>8 guests</span>
-              <span>3 bedrooms</span>
-              <span>2 baths</span>
-              <span>Private shoreline</span>
-            </div>
-
-            <p className="booking-intro-links">
-              <Link href="/lodge">See inside</Link>
-              <Link href="/grounds">Waterfront</Link>
-
-              <a
-                href={airbnb}
-                rel="noreferrer"
-                target="_blank"
-              >
-                Airbnb ↗
-              </a>
-            </p>
-          </div>
-
-          <figure className="booking-intro-photo">
-            <Image
-              alt="Cushioned upper-deck seating overlooking Kendall Pond"
-              fill
-              priority
-              sizes="(max-width: 900px) 100vw, 42vw"
-              src="/images/kpl/2026-10-28/kendall-pond-lodge-deck-lounge-autumn.webp"
-            />
-          </figure>
+          <p className={styles.hostNote}>
+            <strong>Hosted by Nate &amp; Allie.</strong>
+            We own the Lodge and live locally. You can reach us if you have questions about the stay.
+          </p>
         </div>
 
-        <div className="booking-panel booking-panel-direct">
-          <h2>Your stay.</h2>
+        <section className={"booking-panel booking-panel-direct " + styles.panel} aria-labelledby="booking-form-heading">
+          <div className={styles.panelHeading}>
+            <p className={styles.panelEyebrow}>{readyToBook ? "Check availability" : "Reservations"}</p>
+            <h2 id="booking-form-heading">{readyToBook ? "Choose your nights." : "Booking options."}</h2>
+            <p>
+              {readyToBook
+                ? "Start with check-in and checkout, then tell us who's coming. Your full price and terms come next."
+                : "Direct booking isn't available here at the moment. You can still check current dates and pricing on Airbnb."}
+            </p>
+          </div>
 
           {status && status !== 'received' && (!enabled || !availabilityReady) && (
             <p className="booking-alert" role="alert">
@@ -159,26 +154,24 @@ export default async function BookPage({
           )}
 
           {!bookable ? (
-            <p className="booking-alert">
-              {enabled ? 'Instant direct booking is being set up. ' : 'Direct booking is closed right now. '}
-              <a href={airbnb}>Book on Airbnb instead.</a>
-            </p>
+            <div className={styles.fallback}>
+              <p className="booking-alert" role="status">
+                {enabled
+                  ? 'Instant direct booking is being set up. Please use Airbnb to reserve for now.'
+                  : 'Direct booking is closed right now. Please use Airbnb to reserve for now.'}
+              </p>
+              <a className={styles.fallbackButton} href={airbnb} target="_blank" rel="noopener noreferrer">
+                Check dates on Airbnb <span aria-hidden="true">↗</span>
+              </a>
+            </div>
           ) : !availabilityReady ? (
-            <div>
+            <div className={styles.fallback}>
               <p className="booking-alert" role="alert">
-                We can’t verify the live calendar right now, so
-                direct date requests are temporarily paused.
+                We can’t verify the live calendar right now, so direct date requests are temporarily paused.
               </p>
-
-              <p className="booking-guest-link">
-                <a
-                  href={airbnb}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  Check live availability on Airbnb ↗
-                </a>
-              </p>
+              <a className={styles.fallbackButton} href={airbnb} target="_blank" rel="noopener noreferrer">
+                Check dates on Airbnb <span aria-hidden="true">↗</span>
+              </a>
             </div>
           ) : (
             <StayRequestForm
@@ -190,17 +183,17 @@ export default async function BookPage({
               unavailableDates={[...unavailable].sort()}
             />
           )}
-        </div>
+        </section>
       </section>
 
-      <section className="booking-direct-foot">
+      <section className={styles.foot} aria-label="Booking information">
         <p>
-          {bookable
-            ? "Eligible dates are priced and held automatically while you review the complete price and terms. Payment is handled securely through Stripe."
-            : "Instant direct booking is paused; visit Airbnb for current availability."}
+          {readyToBook
+            ? "Eligible stays are checked against the live calendar. Review your total and the terms before you pay securely through Stripe."
+            : "Direct booking is not available right now. The Airbnb listing has its own availability, prices, and checkout terms."}
         </p>
       </section>
-      {bookable && <BookingSteps instant />}
+      {readyToBook && <BookingSteps instant />}
     </main>
   );
 }
