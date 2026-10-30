@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: { absolute: "Things to Do in Gardner & Wachusett | The Lodge at Kendall Pond" },
   alternates: { canonical: "/explore" },
   description:
-    "A local guide from the Lodge at Kendall Pond: Gardner restaurants and coffee, Wachusett hiking and skiing, museums, Red Apple Farm, chamber events, and train connections to Boston.",
+    "Our local notes from the Lodge at Kendall Pond: where to eat in Gardner, Wachusett trails, Red Apple Farm, museums, train connections and events.",
 };
 
 const pondPhoto = lodgePhoto(49);
@@ -31,15 +31,16 @@ export default async function ExplorePage() {
     <main id="main-content" className={styles.page} data-curated-explore>
       <section className={styles.opening} aria-labelledby="explore-title">
         <div className={styles.openingCopy}>
-          <p className={styles.eyebrow}>Gardner &amp; Wachusett · Local guide</p>
-          <h1 id="explore-title">Around Gardner.</h1>
+          <p className={styles.eyebrow}>Gardner &amp; the Wachusett area</p>
+          <h1 id="explore-title">Worth leaving the dock for.</h1>
           <p className={styles.openingIntro}>
-            Breakfast downtown, Wachusett trails, museums and restaurants.
-            Here are places to try, plus the train and local events calendars.
+            Breakfast at the Blue Moon. Wachusett when the weather&apos;s good.
+            Cider donuts on the way back. We live nearby, so we put our
+            local notes in one place.
           </p>
           <nav className={styles.openingNav} aria-label="Explore this guide">
-            <a href="#days">Day ideas</a>
-            <a href="#local-picks">Places</a>
+            <a href="#days">A day out</a>
+            <a href="#local-picks">Our list</a>
             <a href="#train">Train</a>
             <a href="#city-events">Events</a>
             <a href="#around-town">Chamber</a>
@@ -55,52 +56,52 @@ export default async function ExplorePage() {
       <section className={styles.days} id="days" aria-labelledby="days-title">
         <header className={styles.sectionHeader}>
           <div>
-            <p className={styles.eyebrow}>A few outing ideas</p>
-            <h2 id="days-title">Ideas for a day out.</h2>
+            <p className={styles.eyebrow}>If you want to get out</p>
+            <h2 id="days-title">Make a day of it.</h2>
           </div>
-          <p>We&apos;ve grouped places that fit together. Check each venue&apos;s hours before going.</p>
+          <p>Stay in Gardner, head toward the mountain, or dodge the rain. Borrow whichever stops sound good.</p>
         </header>
         <div className={styles.dayGrid}>
           <article className={styles.day}>
             <p className={styles.dayArea}>Gardner</p>
-            <h3>Breakfast, history &amp; dinner</h3>
+            <h3>In town all day.</h3>
             <ol>
-              <li><span>Morning</span><p>Breakfast at <a href="https://business.gardnerma.com/list/member/blue-moon-diner-1363" target="_blank" rel="noopener noreferrer">Blue Moon Diner ↗</a>.</p></li>
-              <li><span>Midday</span><p>Visit <a href="https://www.gardnermuseuminc.com/home/hours" target="_blank" rel="noopener noreferrer">the Gardner Museum ↗</a> if it&apos;s open.</p></li>
-              <li><span>Evening</span><p>Dinner at <a href="https://www.moonhillbrewing.com/" target="_blank" rel="noopener noreferrer">Gardner Ale House ↗</a> downtown.</p></li>
+              <li><span>Morning</span><p>Start at <a href="https://business.gardnerma.com/list/member/blue-moon-diner-1363" target="_blank" rel="noopener noreferrer">Blue Moon Diner ↗</a> for breakfast.</p></li>
+              <li><span>Midday</span><p>Get a little furniture-town history at <a href="https://www.gardnermuseuminc.com/home/hours" target="_blank" rel="noopener noreferrer">the Gardner Museum ↗</a>. Check open days.</p></li>
+              <li><span>Evening</span><p>Head downtown for dinner at <a href="https://www.moonhillbrewing.com/" target="_blank" rel="noopener noreferrer">Gardner Ale House ↗</a>.</p></li>
             </ol>
           </article>
           <article className={styles.day}>
             <p className={styles.dayArea}>Wachusett &amp; Phillipston</p>
-            <h3>Wachusett &amp; Red Apple Farm</h3>
+            <h3>A hike and a cider donut.</h3>
             <ol>
-              <li><span>Morning</span><p>Choose a trail at <a href="https://www.mass.gov/locations/wachusett-mountain-state-reservation" target="_blank" rel="noopener noreferrer">Wachusett Mountain ↗</a>.</p></li>
-              <li><span>Afternoon</span><p>Stop at <a href="https://www.redapplefarm.com/" target="_blank" rel="noopener noreferrer">Red Apple Farm ↗</a> for cider donuts or seasonal farm activities.</p></li>
-              <li><span>Evening</span><p>Head back to the Lodge for dinner.</p></li>
+              <li><span>Morning</span><p>Pick a trail at <a href="https://www.mass.gov/locations/wachusett-mountain-state-reservation" target="_blank" rel="noopener noreferrer">Wachusett Mountain ↗</a>. Check the trail map first.</p></li>
+              <li><span>Afternoon</span><p>Make the donut stop at <a href="https://www.redapplefarm.com/" target="_blank" rel="noopener noreferrer">Red Apple Farm ↗</a>. The farm calendar changes with the season.</p></li>
+              <li><span>Evening</span><p>Back to the Lodge for dinner. You&apos;ve earned it.</p></li>
             </ol>
           </article>
           <article className={styles.day}>
             <p className={styles.dayArea}>Fitchburg &amp; Gardner</p>
-            <h3>Rainy-day stops</h3>
+            <h3>One for a rainy day.</h3>
             <ol>
-              <li><span>First stop</span><p>See an exhibition at the <a href="https://fitchburgartmuseum.org/visit/" target="_blank" rel="noopener noreferrer">Fitchburg Art Museum ↗</a>.</p></li>
-              <li><span>Later</span><p>Check <a href="https://gardnercinemas.com/" target="_blank" rel="noopener noreferrer">Gardner Cinemas ↗</a> for a film.</p></li>
-              <li><span>Dinner</span><p>Get takeout from <a href="https://www.sawaasiancuisine.com/" target="_blank" rel="noopener noreferrer">Sawa ↗</a> and stay in.</p></li>
+              <li><span>First stop</span><p>See what&apos;s hanging at the <a href="https://fitchburgartmuseum.org/visit/" target="_blank" rel="noopener noreferrer">Fitchburg Art Museum ↗</a>.</p></li>
+              <li><span>Later</span><p>Catch a movie at <a href="https://gardnercinemas.com/" target="_blank" rel="noopener noreferrer">Gardner Cinemas ↗</a> if something good is playing.</p></li>
+              <li><span>Dinner</span><p>Bring <a href="https://www.sawaasiancuisine.com/" target="_blank" rel="noopener noreferrer">Sawa ↗</a> takeout home. No more going out.</p></li>
             </ol>
           </article>
         </div>
         <p className={styles.planNote}>
-          Hours and trail access change. Check the linked sites before heading out.
+          Check hours and trail conditions first. Farm activities and ski days are seasonal.
         </p>
       </section>
 
       <section className={styles.picks} id="local-picks" aria-labelledby="picks-title">
         <header className={styles.sectionHeader}>
           <div>
-            <p className={styles.eyebrow}>Restaurants, trails &amp; more</p>
-            <h2 id="picks-title">Places around town.</h2>
+            <p className={styles.eyebrow}>Food, trails &amp; rainy days</p>
+            <h2 id="picks-title">Keep these handy.</h2>
           </div>
-          <p>Food, walks, museums and a few seasonal stops. Use the filters to narrow the {explorePicks.length} listings.</p>
+          <p>A diner, mountain trails, dinner options, and a few reasons to leave the house. Filter the {explorePicks.length} places by what you&apos;re after.</p>
         </header>
         <ExploreDirectory />
       </section>
@@ -112,11 +113,11 @@ export default async function ExplorePage() {
         <div className={styles.chamberInner}>
           <div className={styles.chamberIntro}>
             <p className={styles.eyebrow}>Greater Gardner Chamber</p>
-            <h2 id="chamber-title">The Chamber directory.</h2>
+            <h2 id="chamber-title">Don&apos;t stop at our list.</h2>
             <p>
-              The Greater Gardner Chamber lists local events, places to eat and
-              area businesses. Check its calendar for what&apos;s happening
-              during your stay.
+              Need another dinner option or something happening this weekend?
+              The Greater Gardner Chamber has the longer list of local
+              businesses and events.
             </p>
           </div>
           <div className={styles.chamberLinks}>
@@ -129,7 +130,7 @@ export default async function ExplorePage() {
             <a href={localResourceLinks.chamberDirectory} target="_blank" rel="noopener noreferrer">
               <span><small>Around town</small><strong>Greater Gardner business directory</strong></span><span aria-hidden="true">↗</span>
             </a>
-            <p className={styles.chamberNote}>The Chamber maintains these listings. Event details can change.</p>
+            <p className={styles.chamberNote}>These are Chamber listings. Check with the business or organizer for current details.</p>
           </div>
         </div>
       </section>
@@ -139,11 +140,12 @@ export default async function ExplorePage() {
           <Image src={deckPhoto.src} alt={deckPhoto.alt} fill sizes="(max-width: 840px) 100vw, 47vw" />
         </div>
         <div className={styles.backCopy}>
-          <p className={styles.eyebrow}>The Lodge at Kendall Pond</p>
-          <h2 id="back-title">Stay at the Lodge.</h2>
+          <p className={styles.eyebrow}>Or don&apos;t go anywhere</p>
+          <h2 id="back-title">Staying in works too.</h2>
           <p>
-            The house sleeps up to eight and has a full kitchen, hot tub and
-            waterfront yard. Check dates or take a look inside.
+            Bring dinner home. There&apos;s a full kitchen, a hot tub, and
+            a yard that runs right down to the water. Nobody says you
+            have to go anywhere.
           </p>
           <div className={styles.backLinks}>
             <Link href={bookingHref}>Check your dates <span aria-hidden="true">↗</span></Link>
