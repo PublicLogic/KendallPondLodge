@@ -5,7 +5,7 @@ const home = readFileSync(new URL("../app/page.tsx", import.meta.url), "utf8");
 const hero = readFileSync(new URL("../app/_components/RetreatHero.tsx", import.meta.url), "utf8");
 test("homepage is a sampler of sleep, yard and living space while keeping the pond-led header", () => {
   for (const photo of [25, 6, 17]) assert.ok(home.includes("photo: " + photo));
-  assert.match(home, /The house\. The yard\. The pond\./);
+  assert.match(home, /There's more here than the view\./);
   assert.match(home, /A whole house, right on the water\./);
   assert.match(home, /href: "\/lodge#sleeping"/);
   assert.match(home, /href: "\/grounds"/);
