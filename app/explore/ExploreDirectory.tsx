@@ -21,7 +21,7 @@ function PlacePhoto({ place }: { place: ExplorePick }) {
         href={place.url}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={"Visit " + place.name + "'s website (opens a new tab)"}
+        aria-label={"Open " + place.name + " details (opens a new tab)"}
       >
         <div className={styles.placeImage}>
           <div className={styles.placeImageFallback} aria-hidden="true">
