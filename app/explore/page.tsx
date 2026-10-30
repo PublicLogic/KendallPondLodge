@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 
 const pondPhoto = lodgePhoto(49);
 const deckPhoto = lodgePhoto(35);
+const lodgeScenes = [lodgePhoto(35), lodgePhoto(49), lodgePhoto(25)];
 
 export const dynamic = "force-dynamic";
 
@@ -34,16 +35,13 @@ export default async function ExplorePage() {
           <p className={styles.eyebrow}>Gardner &amp; the Wachusett area</p>
           <h1 id="explore-title">Worth leaving the dock for.</h1>
           <p className={styles.openingIntro}>
-            Breakfast at the Blue Moon. Wachusett when the weather&apos;s good.
-            Cider donuts on the way back. We live nearby, so we put our
-            local notes in one place.
+            Good food. Mountain air. A few favorite stops.
           </p>
           <nav className={styles.openingNav} aria-label="Explore this guide">
-            <a href="#days">A day out</a>
-            <a href="#local-picks">Our list</a>
+            <a href="#days">Day trips</a>
+            <a href="#local-picks">Places</a>
             <a href="#train">Train</a>
             <a href="#city-events">Events</a>
-            <a href="#around-town">Chamber</a>
           </nav>
         </div>
         <figure className={styles.openingPhoto}>
@@ -53,13 +51,22 @@ export default async function ExplorePage() {
         </figure>
       </section>
 
+      <div className={styles.sceneStrip} aria-label="Scenes from Kendall Pond Lodge">
+        {lodgeScenes.map((photo, index) => (
+          <figure key={photo.src} className={styles.scene}>
+            <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 600px) 85vw, 33vw" />
+            <figcaption>{["Back at the Lodge", "By the water", "Make yourself at home"][index]}</figcaption>
+          </figure>
+        ))}
+      </div>
+
       <section className={styles.days} id="days" aria-labelledby="days-title">
         <header className={styles.sectionHeader}>
           <div>
             <p className={styles.eyebrow}>If you want to get out</p>
             <h2 id="days-title">Make a day of it.</h2>
           </div>
-          <p>Stay in Gardner, head toward the mountain, or dodge the rain. Take the whole route or just one stop.</p>
+          <p>Three easy ways to spend a day.</p>
         </header>
         <div className={styles.dayGrid}>
           <article className={styles.day}>
@@ -91,7 +98,7 @@ export default async function ExplorePage() {
           </article>
         </div>
         <p className={styles.planNote}>
-          Check hours and trail conditions first. Farm activities and ski days are seasonal.
+          Check hours and conditions before heading out.
         </p>
       </section>
 
@@ -101,7 +108,7 @@ export default async function ExplorePage() {
             <p className={styles.eyebrow}>Food, trails &amp; rainy days</p>
             <h2 id="picks-title">Keep these handy.</h2>
           </div>
-          <p>Everything from a diner booth to a mountain trail. Pick a category from the {explorePicks.length} places below.</p>
+          <p>Our favorite nearby stops.</p>
         </header>
         <ExploreDirectory />
       </section>
@@ -115,9 +122,7 @@ export default async function ExplorePage() {
             <p className={styles.eyebrow}>Greater Gardner Chamber</p>
             <h2 id="chamber-title">Don&apos;t stop at our list.</h2>
             <p>
-              Need another dinner option or something happening this weekend?
-              The Greater Gardner Chamber has the longer list of local
-              businesses and events.
+              More local places, restaurants and events.
             </p>
           </div>
           <div className={styles.chamberLinks}>
@@ -143,8 +148,7 @@ export default async function ExplorePage() {
           <p className={styles.eyebrow}>Or don&apos;t go anywhere</p>
           <h2 id="back-title">Staying in works too.</h2>
           <p>
-            Bring dinner home. The kitchen&apos;s yours, the deck looks out
-            over the water, and there&apos;s no need to make another plan.
+            Take dinner to the deck. Stay awhile.
           </p>
           <div className={styles.backLinks}>
             <Link href={bookingHref}>Check your dates <span aria-hidden="true">↗</span></Link>
