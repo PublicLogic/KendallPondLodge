@@ -7,7 +7,7 @@ import { publicBookingState } from '@/lib/kpl-booking-core.mjs';
 import { BookingBrand } from '@/app/_components/BookingBrand';
 import { payDeposit } from '@/app/book/actions';
 
-export const metadata: Metadata = { title: 'Review & book your stay', robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: 'Complete your booking', robots: { index: false, follow: false } };
 export const dynamic = 'force-dynamic';
 
 export default async function QuotePage({ params, searchParams }: {
@@ -29,9 +29,9 @@ export default async function QuotePage({ params, searchParams }: {
   const deposit = quote.deposit_cents ?? 0;
   return <main id="main-content" className="content-section booking-page booking-quote">
     <BookingBrand /><p className="eyebrow">Direct booking</p>
-    <h1>Your stay at Kendall Pond.</h1>
+    <h1>Complete your Kendall Pond booking.</h1>
     <p>{quote.check_in} to {quote.check_out} · {nights} {nights === 1 ? 'night' : 'nights'} · {quote.guests} guests · {quote.pets} pets</p>
-    <p>Review the complete price and terms for these dates, then continue to secure Stripe checkout. Keep this link private.</p>
+    <p>Review the complete price and terms, then continue to secure Stripe checkout. We recheck availability when you continue. Keep this link private.</p>
     {state === 'confirmed' && (
       <section
         className="booking-confirmed-panel"
@@ -72,9 +72,9 @@ export default async function QuotePage({ params, searchParams }: {
     {state === 'refund_review' && <p className="booking-alert" role="alert">Your payment needs refund review. These dates are not confirmed. Do not pay again; contact your hosts for the next step.</p>}
     {state === 'needs_attention' && <p className="booking-alert" role="alert">Your payment is recorded, but the stay needs host attention before we can confirm it. Please contact your hosts; do not pay again.</p>}
     {payment && !['return', 'cancel'].includes(payment) && <p className="booking-alert" role="alert">{publicError(payment)}</p>}
-    {state === 'expired' && <p className="booking-alert">This booking hold is no longer open for payment. Choose your dates again or contact your hosts.</p>}
+    {state === 'expired' && <p className="booking-alert">This payment link has expired. Choose your dates again or contact Nate & Allie.</p>}
     <div className="booking-grid">
-      <section className="booking-panel"><h2>Complete price</h2>
+      <section className="booking-panel"><h2>Your complete price</h2>
         <dl className="booking-totals">
           <div><dt>{nights} nights × {usd(quote.nightly_cents ?? 0)}</dt><dd>{usd(nights * (quote.nightly_cents ?? 0))}</dd></div>
           <div><dt>Cleaning</dt><dd>{usd(quote.cleaning_cents ?? 0)}</dd></div>
@@ -91,11 +91,11 @@ export default async function QuotePage({ params, searchParams }: {
         <h3>Cancellation and refunds</h3><p className="booking-terms">{quote.cancellation_terms}</p>
         <h3>Remaining balance</h3><p className="booking-terms">{quote.balance_terms}</p>
         <h3>Stay rules</h3><p>Check-in after 3 PM; checkout before 11 AM. Self check-in uses a lockbox. Quiet hours are 10 PM–7 AM. No smoking. Up to two pets are welcome. The exterior Ring doorbell camera faces the entrance.</p>
-        <p>Quote valid until {quote.quote_expires ? new Date(quote.quote_expires).toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'medium', timeStyle: 'short' }) : '—'} ET, subject to the date hold.</p>
+        <p>Payment link valid until {quote.quote_expires ? new Date(quote.quote_expires).toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'medium', timeStyle: 'short' }) : '—'} ET. Availability is rechecked when you continue to payment.</p>
         {open && directBookingEnabled() && paymentConfigured() && (state === 'quote' || resume) && <form action={payDeposit} className="booking-form">
           <input type="hidden" name="token" value={token} />
           <label className="booking-check"><input type="checkbox" name="accepted" value="yes" required /> I agree to the quoted price, balance due, cancellation and refund terms, and stay rules above.</label>
-          <button className="button button-primary" type="submit">{resume ? 'Check or resume your existing payment' : `Pay ${usd(deposit)} deposit with Stripe`}</button>
+          <button className="button button-primary" type="submit">{resume ? 'Resume secure payment' : `Continue to Stripe · ${usd(deposit)} deposit`}</button>
         </form>}
       </section>
     </div>
