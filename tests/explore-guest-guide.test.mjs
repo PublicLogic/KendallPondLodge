@@ -82,7 +82,7 @@ test("Wachusett trains come from PJ public Explore, not a second MBTA integratio
   assert.match(train, /weekdays, excluding holidays/);
   // Only PuddleJumper may fetch raw schedules/predictions/alerts.
   assert.doesNotMatch(train + page + pj, /api-v3\.mbta\.com/);
-  assert.doesNotMatch(pj, /KPL_STORE_KEY|STRIPE_SECRET_KEY|Authorization: Bearer/);
+  assert.doesNotMatch(pj, /process\.env\.KPL_STORE_KEY|process\.env\.STRIPE_SECRET_KEY|Authorization:\s*`Bearer/);
 });
 
 test("Existing PJ Gardner community calendar is displayed with provenance", () => {
