@@ -19,11 +19,11 @@ test('STAY sits after the calendar legend and before guest details', () => {
 });
 test('gallery has balanced real photos, rather than the narrow hot-tub strip', () => {
   const page = read('app/photos/page.tsx');
-  const css = read('app/guest-ready.css');
-  assert.match(page, /gallery-retreat/);
+  const css = read('app/photos/photos.module.css');
+  assert.match(page, /data-gallery-cover/);
   assert.match(page, /lodgePhoto\(7\)/);
   assert.match(page, /lodgePhoto\(25\)/);
-  assert.match(css, /\.gallery-retreat \.gallery-intro-visual/);
+  assert.match(css, /\.coverImage/);
 });
 test('active calendar weekday and legend text retain readable contrast', () => {
   const css = read('app/guest-ready.css');

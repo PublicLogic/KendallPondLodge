@@ -80,11 +80,12 @@ export default function GroundsPage() {
             <span>Gardner, Massachusetts</span>
           </div>
           <div className={styles.coverStory}>
-            <p className={styles.eyebrow}>The waterfront</p>
-            <h1 id="waterfront-title">The pond is<br /><em>right out back.</em></h1>
+            <p className={styles.eyebrow}>Outside at the Lodge</p>
+            <h1 id="waterfront-title">From the deck<br /><em>to the dock.</em></h1>
             <p>
-              Upstairs, a deck overlooking the water. Down below, a covered
-              hot tub. Walk across the lawn to the firepit and our dock.
+              The deck looks out over Kendall Pond. Walk across the lawn to
+              the firepit and our private dock. The hot tub is tucked under
+              the deck.
             </p>
             <div className={styles.coverActions}>
               <Link className={styles.primaryAction} href={bookingHref}>
@@ -116,7 +117,7 @@ export default function GroundsPage() {
         <div className={styles.sectionHead}>
           <div>
             <p className={styles.eyebrow}>At the water's edge</p>
-            <h2 id="shoreline-title">Our own stretch<br />of shoreline.</h2>
+            <h2 id="shoreline-title">A place to sit<br />by the water.</h2>
           </div>
           <p>
             The lawn runs down to the Lodge's private dock, with places to
@@ -189,7 +190,7 @@ export default function GroundsPage() {
         <div className={styles.sectionHead}>
           <div>
             <p className={styles.eyebrow}>Across the lawn</p>
-            <h2 id="firepit-title">A fire down<br />by the pond.</h2>
+            <h2 id="firepit-title">There's a firepit<br />by the shore.</h2>
           </div>
           <p>
             There are chairs around the stone firepit near the shoreline,
@@ -215,7 +216,7 @@ export default function GroundsPage() {
         <div className={styles.conditionsInner}>
           <div className={styles.conditionsIntro}>
             <p className={styles.eyebrow}>Before you head outside</p>
-            <h2 id="conditions-title">A few things<br />worth knowing.</h2>
+            <h2 id="conditions-title">Waterfront<br />basics.</h2>
             <p>
               The pond changes with the season, and so does what you can
               use on it. If a particular outdoor amenity matters to your
@@ -246,7 +247,7 @@ export default function GroundsPage() {
         <div className={styles.closeInner}>
           <div>
             <p className={styles.eyebrow}>See you at the pond</p>
-            <h2 id="waterfront-book-title">Got a few nights<br />in mind?</h2>
+            <h2 id="waterfront-book-title">Come stay<br />by the water.</h2>
             <p>
               Check your dates and review the full price and terms before
               you decide.
