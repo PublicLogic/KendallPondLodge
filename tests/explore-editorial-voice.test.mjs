@@ -11,7 +11,7 @@ const events = read("app/explore/CommunityEvents.tsx");
 const styles = read("app/explore/explore.module.css");
 
 test("Explore leads with Gardner and useful details, not a generic brand slogan", () => {
-  assert.match(page, /<h1 id="explore-title">Around Gardner\.<\/h1>/);
+  assert.match(page, /<h1 id="explore-title">Get out and see a little\.<\/h1>/);
   assert.match(page, /Wachusett/);
   assert.match(page, /href="#train"/);
   assert.match(page, /href="#city-events"/);
