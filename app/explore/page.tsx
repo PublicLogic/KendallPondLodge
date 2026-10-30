@@ -34,7 +34,7 @@ export default async function ExplorePage() {
           <p className={styles.eyebrow}>Your guide to Gardner &amp; Wachusett</p>
           <h1 id="explore-title">Get out and see a little.</h1>
           <p className={styles.openingIntro}>
-            A diner downtown. Trails on Wachusett. Cider doughnuts in Phillipston. Here's what we'd tell a friend to check out.
+            A diner downtown. Trails on Wachusett. Cider doughnuts in Phillipston. Here&apos;s what we&apos;d tell a friend to check out.
           </p>
           <nav className={styles.openingNav} aria-label="Explore this guide">
             <a href="#days">Make a day of it</a>
@@ -83,7 +83,7 @@ export default async function ExplorePage() {
             <h3>When it rains</h3>
             <ol>
               <li><span>First stop</span><p>Head inside the <a href="https://fitchburgartmuseum.org/visit/" target="_blank" rel="noopener noreferrer">Fitchburg Art Museum ↗</a>.</p></li>
-              <li><span>Later</span><p>See what's playing at <a href="https://gardnercinemas.com/" target="_blank" rel="noopener noreferrer">Gardner Cinemas ↗</a> for a film.</p></li>
+              <li><span>Later</span><p>See what&apos;s playing at <a href="https://gardnercinemas.com/" target="_blank" rel="noopener noreferrer">Gardner Cinemas ↗</a> for a film.</p></li>
               <li><span>Dinner</span><p>Bring home takeout from <a href="https://www.sawaasiancuisine.com/" target="_blank" rel="noopener noreferrer">Sawa ↗</a> and stay in.</p></li>
             </ol>
           </article>
@@ -97,9 +97,9 @@ export default async function ExplorePage() {
         <header className={styles.sectionHeader}>
           <div>
             <p className={styles.eyebrow}>Our favorites around here</p>
-            <h2 id="picks-title">Where we'd send you.</h2>
+            <h2 id="picks-title">Where we&apos;d send you.</h2>
           </div>
-          <p>From breakfast in Gardner to the top of Wachusett. Pick what sounds good, and we'll point you there.</p>
+          <p>From breakfast in Gardner to the top of Wachusett. Pick what sounds good, and we&apos;ll point you there.</p>
         </header>
         <ExploreDirectory />
       </section>
@@ -111,16 +111,16 @@ export default async function ExplorePage() {
         <div className={styles.chamberInner}>
           <div className={styles.chamberIntro}>
             <p className={styles.eyebrow}>Greater Gardner Chamber</p>
-            <h2 id="chamber-title">The Chamber's got more.</h2>
+            <h2 id="chamber-title">The Chamber&apos;s got more.</h2>
             <p>
-              We haven't listed every restaurant, shop, or event. The Greater
+              We haven&apos;t listed every restaurant, shop, or event. The Greater
               Gardner Chamber keeps a business directory and a calendar.
               Start there if you want to keep looking.
             </p>
           </div>
           <div className={styles.chamberLinks}>
             <a href={localResourceLinks.chamberEvents} target="_blank" rel="noopener noreferrer">
-              <span><small>What's on</small><strong>Community &amp; Chamber events</strong></span><span aria-hidden="true">↗</span>
+              <span><small>What&apos;s on</small><strong>Community &amp; Chamber events</strong></span><span aria-hidden="true">↗</span>
             </a>
             <a href={localResourceLinks.chamberRestaurants} target="_blank" rel="noopener noreferrer">
               <span><small>Where to eat</small><strong>Local restaurants &amp; cafés</strong></span><span aria-hidden="true">↗</span>
@@ -138,7 +138,7 @@ export default async function ExplorePage() {
           <Image src={deckPhoto.src} alt={deckPhoto.alt} fill sizes="(max-width: 840px) 100vw, 47vw" />
         </div>
         <div className={styles.backCopy}>
-          <p className={styles.eyebrow}>When you're ready to come back</p>
+          <p className={styles.eyebrow}>When you&apos;re ready to come back</p>
           <h2 id="back-title">Then back to the pond.</h2>
           <p>
             Spend an hour out or stay gone all day. The deck, the kitchen, and
