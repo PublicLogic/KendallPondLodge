@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { RetreatHero } from "@/app/_components/RetreatHero";
+import { PondScenery } from "@/app/_components/PondScenery";
 import { lodgePhoto } from "@/app/_data/lodge-photos";
 import { BookingSteps, GuestReviewEvidence, StayFAQ } from "@/app/_components/StayInformation";
 import { directBookingEnabled, hostContactHref } from "@/lib/booking-db";
@@ -66,7 +67,8 @@ export default function HomePage() {
       </section>
       {enabled && <BookingSteps />}
       <StayFAQ contactHref={hostContactHref()} />
-      <section className="showcase-close" aria-labelledby="showcase-close-title">
+      <section className="showcase-close kpl-pond-ambient" aria-labelledby="showcase-close-title">
+        <PondScenery scene="home" />
         <div><p className="showcase-eyebrow">See you at the pond</p><h2 id="showcase-close-title">Got a weekend in mind?</h2>
           <p>{enabled ? "Send us your dates. We’ll check availability and send the full price before asking for payment." : "Find available nights and the full price on Airbnb."}</p></div>
         <div className="showcase-close-actions"><BookingAction enabled={enabled} className="showcase-button showcase-button-dark">{enabled ? "Request your dates" : "View dates on Airbnb"}<span aria-hidden="true">↗</span></BookingAction>
