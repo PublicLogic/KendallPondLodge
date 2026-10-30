@@ -71,7 +71,7 @@ export function WachusettRail({ transit }: { transit: PjTransit | null }) {
           <p className={styles.railUnavailable}>
             {fresh
               ? "No trains showing soon. Check MBTA for later departures."
-              : "Train times aren&apos;t coming through. Use the MBTA timetable."}
+              : "Train times aren't coming through. Use the MBTA timetable."}
           </p>
         )}
         {fresh && (
