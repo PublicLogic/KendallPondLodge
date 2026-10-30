@@ -112,9 +112,11 @@ export default async function BookPage({
           <p className={styles.lede}>
             {readyToBook
               ? "Choose your dates, see the full price, and review the terms before you pay. Nate and Allie host the house and live nearby."
-              : enabled
-                ? "Instant direct booking is being set up. For now, Airbnb has the current calendar and secure checkout."
-                : "Direct booking is paused for now. You can check available dates and reserve the Lodge through Airbnb."}
+              : !enabled
+                ? "We're not taking direct bookings right now. Airbnb has the available nights and checkout."
+                : !instant
+                  ? "We're finishing our direct booking setup. For now, Airbnb has the current calendar and checkout."
+                  : "We can't verify the direct calendar right now. You can still check dates on Airbnb."}
           </p>
 
           <dl className={styles.facts} aria-label="The Lodge at a glance">
@@ -157,8 +159,8 @@ export default async function BookPage({
             <div className={styles.fallback}>
               <p className="booking-alert" role="status">
                 {enabled
-                  ? 'Instant direct booking is being set up. Please use Airbnb to reserve for now.'
-                  : 'Direct booking is closed right now. Please use Airbnb to reserve for now.'}
+                  ? 'Direct reservations aren’t open here yet. You can book through Airbnb for now.'
+                  : 'Direct reservations are paused. You can book through Airbnb for now.'}
               </p>
               <a className={styles.fallbackButton} href={airbnb} target="_blank" rel="noopener noreferrer">
                 Check dates on Airbnb <span aria-hidden="true">↗</span>
