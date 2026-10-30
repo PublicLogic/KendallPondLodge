@@ -14,8 +14,8 @@ test("instant guest flow says book and review price, not request a quote", () =>
 
 test("private price page is presented as booking review, not an owner quote", () => {
   const page = read("app/book/quote/[token]/page.tsx");
-  assert.match(page, /Review & book your stay/);
-  assert.match(page, /Complete price/);
+  assert.match(page, /Complete your booking/);
+  assert.match(page, /Your complete price/);
   assert.doesNotMatch(page, /Private direct booking quote|This quote is for the dates above only/);
 });
 
@@ -23,7 +23,7 @@ test("owner instant mode uses a four-stage CRM workflow and hides routine manual
   const page = read("app/owner/bookings/page.tsx");
   assert.match(page, /bookingClient/);
   assert.match(page, /instantEnabled/);
-  assert.match(page, /\["New", "Held", "Paying", "Confirmed"\]/);
+  assert.match(page, /\["New", "Ready", "Checkout", "Confirmed"\]/);
   assert.match(page, /Apply booking policy/);
   assert.match(page, /autoPriceRequest/);
   assert.match(page, /!instantEnabled &&/);
