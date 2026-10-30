@@ -91,7 +91,7 @@ test("Existing PJ Gardner community calendar is displayed with provenance", () =
   assert.match(pj, /item\.type !== "event"/);
   assert.match(pj, /expiresAt/);
   assert.match(city, /id="city-events"/);
-  assert.match(city, /feed\.events/);
+  assert.match(city, /feed\?\.events/);
   assert.match(city, /event\.sourceName/);
   assert.match(city, /event\.date/);
   assert.match(city, /gardnerCalendarStatus/);
