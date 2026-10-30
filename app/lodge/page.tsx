@@ -28,7 +28,6 @@ const photos = {
   grounds: lodgePhoto(6),
   autumn: lodgePhoto(2),
 };
-const fullSize = "(max-width: 700px) calc(100vw - 36px), (max-width: 1376px) calc(100vw - 96px), 1280px";
 const halfSize = "(max-width: 700px) calc(100vw - 36px), (max-width: 1376px) calc((100vw - 128px) / 2), 624px";
 
 function Photograph({ photo, caption, detail, sizes = halfSize, priority = false, className = "" }: {
