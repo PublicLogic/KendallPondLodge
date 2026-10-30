@@ -35,8 +35,8 @@ export default async function ExplorePage() {
           <h1 id="explore-title">Worth leaving the dock for.</h1>
           <p className={styles.openingIntro}>
             Breakfast at the Blue Moon. Wachusett when the weather&apos;s good.
-            Cider donuts on the way back. We live nearby, so we put our
-            local notes in one place.
+            Cider donuts in Phillipston. We live nearby, so these are
+            the places we'd tell you about.
           </p>
           <nav className={styles.openingNav} aria-label="Explore this guide">
             <a href="#days">A day out</a>
@@ -59,7 +59,7 @@ export default async function ExplorePage() {
             <p className={styles.eyebrow}>If you want to get out</p>
             <h2 id="days-title">Make a day of it.</h2>
           </div>
-          <p>Stay in Gardner, head toward the mountain, or dodge the rain. Take the whole route or just one stop.</p>
+          <p>Stay around Gardner, make a trip up Wachusett, or find something indoors. Do all three stops or just one.</p>
         </header>
         <div className={styles.dayGrid}>
           <article className={styles.day}>
@@ -67,7 +67,7 @@ export default async function ExplorePage() {
             <h3>In town all day.</h3>
             <ol>
               <li><span>Morning</span><p>Start at <a href="https://business.gardnerma.com/list/member/blue-moon-diner-1363" target="_blank" rel="noopener noreferrer">Blue Moon Diner ↗</a> for breakfast.</p></li>
-              <li><span>Midday</span><p>Get a little furniture-town history at <a href="https://www.gardnermuseuminc.com/home/hours" target="_blank" rel="noopener noreferrer">the Gardner Museum ↗</a>. Check open days.</p></li>
+              <li><span>Midday</span><p>Find out why Gardner is called the Chair City at <a href="https://www.gardnermuseuminc.com/home/hours" target="_blank" rel="noopener noreferrer">the Gardner Museum ↗</a>. Check open days.</p></li>
               <li><span>Evening</span><p>Head downtown for dinner at <a href="https://www.moonhillbrewing.com/" target="_blank" rel="noopener noreferrer">Gardner Ale House ↗</a>.</p></li>
             </ol>
           </article>
@@ -101,7 +101,7 @@ export default async function ExplorePage() {
             <p className={styles.eyebrow}>Food, trails &amp; rainy days</p>
             <h2 id="picks-title">Keep these handy.</h2>
           </div>
-          <p>Everything from a diner booth to a mountain trail. Pick a category from the {explorePicks.length} places below.</p>
+          <p>Breakfast, dinner, a short walk, or a hike up Wachusett. Pick what sounds good from the {explorePicks.length} places below.</p>
         </header>
         <ExploreDirectory />
       </section>
@@ -122,7 +122,7 @@ export default async function ExplorePage() {
           </div>
           <div className={styles.chamberLinks}>
             <a href={localResourceLinks.chamberEvents} target="_blank" rel="noopener noreferrer">
-              <span><small>What's on</small><strong>Community &amp; Chamber events</strong></span><span aria-hidden="true">↗</span>
+              <span><small>What&apos;s on</small><strong>Community &amp; Chamber events</strong></span><span aria-hidden="true">↗</span>
             </a>
             <a href={localResourceLinks.chamberRestaurants} target="_blank" rel="noopener noreferrer">
               <span><small>Where to eat</small><strong>Local restaurants &amp; cafés</strong></span><span aria-hidden="true">↗</span>
