@@ -47,8 +47,8 @@ export default function PhotosPage() {
             <span>Gardner, Massachusetts</span>
           </div>
           <div className={styles.coverCopy}>
-            <p className={styles.eyebrow}>The place, in pictures</p>
-            <h1 id="gallery-title">Take a look<br /><em>around.</em></h1>
+            <p className={styles.eyebrow}>The real Lodge, in photos</p>
+            <h1 id="gallery-title">See it<br /><em>for yourself.</em></h1>
             <p>Inside the house, out on the deck, and down by the water. All {lodgePhotos.length} photos, so you can see the place before you book.</p>
             <div className={styles.coverActions}>
               <a className={styles.primaryAction} href="#all-photos">
@@ -74,7 +74,7 @@ export default function PhotosPage() {
         <div className={styles.sectionTop}>
           <div>
             <p className={styles.eyebrow}>Around the Lodge</p>
-            <h2 id="highlights-title">A closer look at the Lodge.</h2>
+            <h2 id="highlights-title">Start with the house.</h2>
           </div>
           <Link href="/lodge" className={styles.inlineLink}>See the full Lodge walkthrough <span aria-hidden="true">→</span></Link>
         </div>
@@ -106,7 +106,7 @@ export default function PhotosPage() {
         <div className={styles.collectionHead}>
           <div>
             <p className={styles.eyebrow}>All {lodgePhotos.length} photographs</p>
-            <h2 id="gallery-browse-title">Browse the photos.</h2>
+            <h2 id="gallery-browse-title">The complete gallery.</h2>
             <p>Choose an area, or scroll through the whole house and grounds.</p>
           </div>
           <Link href="/lodge" className={styles.inlineLink}>
@@ -121,7 +121,7 @@ export default function PhotosPage() {
         <div className={styles.closeInner}>
           <div>
             <p className={styles.eyebrow}>Hosted locally by Nate &amp; Allie</p>
-            <h2 id="gallery-close-title">Got a weekend<br />in mind?</h2>
+            <h2 id="gallery-close-title">Want to stay<br />a few nights?</h2>
             <p>{bookEnabled
               ? "Choose your dates, check availability, and review the full price and terms before you book."
               : "Take a look at available dates and pricing on our Airbnb listing."}</p>
