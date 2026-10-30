@@ -1,0 +1,568 @@
+/* The Lodge at Kendall Pond / Photos
+   Real property photography, the existing forest/ivory palette, and quiet
+   typography. The images do the talking; no stock/borrowed aerial assets. */
+.page {
+  --gallery-forest: #213f32;
+  --gallery-ink: #203d31;
+  --gallery-paper: #f7f3eb;
+  --gallery-muted: #536257;
+  --gallery-rule: #d5dbce;
+  color: var(--gallery-ink);
+  background: var(--gallery-paper);
+  overflow: clip;
+}
+.page :is(h1, h2) {
+  margin: 0;
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -.052em;
+}
+.page a:focus-visible,
+.page button:focus-visible {
+  outline: 3px solid #dcb777;
+  outline-offset: 4px;
+}
+.eyebrow {
+  margin: 0 0 1.1rem;
+  color: #536257;
+  font-size: .69rem;
+  line-height: 1.45;
+  letter-spacing: .145em;
+  font-weight: 650;
+  text-transform: uppercase;
+}
+
+/* The gallery arrives as a photograph, matching the Lodge cover and header. */
+.cover {
+  position: relative;
+  isolation: isolate;
+  min-height: clamp(710px, 92svh, 970px);
+  display: flex;
+  overflow: hidden;
+  background: var(--gallery-forest);
+  color: #fff9ec;
+}
+.coverImage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.coverShade {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(8, 29, 22, .89) 0%, rgba(8, 29, 22, .73) 32%, rgba(8, 29, 22, .12) 76%),
+    linear-gradient(180deg, rgba(7, 27, 19, .63) 0%, transparent 38%),
+    linear-gradient(0deg, rgba(6, 23, 18, .85), rgba(6, 23, 18, .14) 43%, transparent 70%);
+}
+.coverInner {
+  position: relative;
+  z-index: 2;
+  width: min(1280px, calc(100% - 96px));
+  min-height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(2rem, 6vh, 4.5rem);
+  margin: 0 auto;
+  padding: clamp(135px, 14svh, 170px) 0 clamp(1.3rem, 3vw, 2.6rem);
+}
+.location {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6rem 1rem;
+  color: #fff9ec;
+  font-size: .67rem;
+  font-weight: 650;
+  line-height: 1.45;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.location span:nth-child(2) {
+  padding-left: 1rem;
+  border-left: 1px solid rgba(255, 249, 236, .45);
+  opacity: .79;
+}
+.coverCopy {
+  max-width: 730px;
+  margin-block: auto;
+  padding-block: clamp(2rem, 6vh, 5rem);
+}
+.cover .eyebrow { color: #f0d9ae; }
+.page .cover h1 {
+  color: #fff9ec;
+  font-size: clamp(4rem, 7vw, 7.5rem);
+  line-height: .98;
+  text-wrap: balance;
+}
+.page .cover h1 em { color: #f0d9ae; font-style: normal; }
+.coverCopy > p:not(.eyebrow) {
+  max-width: 43ch;
+  margin: 1.5rem 0 0;
+  color: #fbf6ec;
+  font-size: clamp(1.04rem, 1.35vw, 1.2rem);
+  line-height: 1.68;
+}
+.coverActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .8rem 1.6rem;
+  margin-top: 1.85rem;
+}
+.primaryAction,
+.secondaryAction,
+.inlineLink,
+.closeButton,
+.closeLink {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.4rem;
+  text-decoration: none;
+  font-size: .86rem;
+  font-weight: 670;
+}
+.primaryAction {
+  min-height: 52px;
+  padding: .86rem 1.25rem;
+  border: 1px solid #f5ecd9;
+  border-radius: 6px;
+  background: #f5ecd9;
+  color: #213f32;
+}
+.primaryAction:hover { background: #e9d9b5; color: #213f32; border-color: #e9d9b5; }
+.secondaryAction {
+  min-height: 48px;
+  color: #fff9ec;
+  border-bottom: 1px solid rgba(255, 249, 236, .47);
+}
+.secondaryAction:hover { color: #fff; border-color: #fff; }
+.coverFoot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .5rem 1rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 249, 236, .36);
+  color: rgba(255,249,236,.85);
+  font-size: .71rem;
+  line-height: 1.5;
+  letter-spacing: .02em;
+}
+
+/* A small editorial overture: the actual house, bedroom, hot tub. */
+.highlights,
+.collection,
+.closeInner {
+  width: min(1280px, calc(100% - 96px));
+  margin-inline: auto;
+}
+.highlights {
+  padding: clamp(4.5rem, 8vw, 7rem) 0 clamp(5rem, 9vw, 8rem);
+}
+.sectionTop,
+.collectionHead {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem 3rem;
+  margin-bottom: clamp(1.8rem, 3vw, 2.7rem);
+}
+.sectionTop h2,
+.collectionHead h2 {
+  max-width: 17ch;
+  color: var(--gallery-ink);
+  font-size: clamp(2.65rem, 4.4vw, 4.7rem);
+}
+.inlineLink {
+  min-height: 42px;
+  padding-bottom: .23rem;
+  border-bottom: 1px solid #708d7a;
+  color: var(--gallery-ink);
+  font-size: .82rem;
+}
+.inlineLink:hover { color: #315340; border-color: #315340; }
+.highlightsGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.17fr) minmax(0, .83fr);
+  gap: 12px;
+  min-height: clamp(470px, 52vw, 710px);
+}
+.highlightsSide {
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  min-height: 0;
+}
+.highlightLarge,
+.highlightSmall {
+  position: relative;
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  color: #fff9ec;
+  background: #21483d;
+  text-decoration: none;
+}
+.highlightImage,
+.highlightImage::after {
+  position: absolute;
+  inset: 0;
+}
+.highlightImage { display: block; }
+.highlightImage img {
+  object-fit: cover;
+  transition: transform 520ms cubic-bezier(.22, 1, .36, 1);
+}
+.highlightImage::after {
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(5, 25, 17, .81), rgba(5,25,17,.06) 45%, transparent 70%);
+}
+.highlightLarge:hover .highlightImage img,
+.highlightSmall:hover .highlightImage img { transform: scale(1.017); }
+.highlightCaption {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.1rem;
+  left: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1.5rem;
+  color: #fffaf0;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(1.35rem, 2.15vw, 2.2rem);
+  line-height: 1.1;
+  letter-spacing: -.025em;
+}
+.highlightCaption > span:last-child {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+.highlightSmall .highlightCaption { font-size: clamp(1.2rem, 1.7vw, 1.7rem); }
+
+/* The archive: refined controls and varied photography, no card clutter. */
+.collection {
+  padding: clamp(4.5rem, 8vw, 7rem) 0 clamp(5rem, 9vw, 8rem);
+  scroll-margin-top: 92px;
+  border-top: 1px solid var(--gallery-rule);
+}
+.collectionHead {
+  margin-bottom: 2.1rem;
+}
+.collectionHead h2 { max-width: 13ch; }
+.collectionHead p:not(.eyebrow) {
+  max-width: 50ch;
+  margin: 1rem 0 0;
+  color: var(--gallery-muted);
+  font-size: .97rem;
+  line-height: 1.7;
+}
+.collection :global(.gallery-filter-row) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem clamp(.85rem, 2vw, 1.65rem);
+  align-items: center;
+  padding: 0 0 .45rem;
+  border-bottom: 1px solid var(--gallery-rule);
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.collection :global(.gallery-filter) {
+  position: relative;
+  flex: none;
+  min-height: 49px;
+  padding: .68rem 0;
+  border: 0;
+  border-bottom: 1.5px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: var(--gallery-muted);
+  font-size: .81rem;
+  font-weight: 590;
+  letter-spacing: 0;
+  white-space: nowrap;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+.collection :global(.gallery-filter[aria-pressed="true"]) {
+  border: 0;
+  border-bottom: 1.5px solid var(--gallery-ink);
+  background: transparent;
+  color: var(--gallery-ink);
+  font-weight: 720;
+}
+.collection :global(.gallery-filter:hover:not([aria-pressed="true"])) {
+  border-color: #315340;
+  background: transparent;
+  color: var(--gallery-ink);
+}
+.collection :global(.gallery-filter-count) {
+  padding-left: .32rem;
+  color: #668071;
+  font-size: .64rem;
+  font-weight: 550;
+  font-variant-numeric: tabular-nums;
+}
+.collection :global(.gallery-filter[aria-pressed="true"] .gallery-filter-count) { color: #47644f; }
+.collection :global(.gallery-count) {
+  margin: 1.3rem 0 1rem;
+  color: var(--gallery-muted);
+  font-size: .75rem;
+}
+.collection :global(.gallery-grid) {
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(.6rem, 1.1vw, 1rem);
+}
+.collection :global(.gallery-photo-card) {
+  min-width: 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  color: var(--gallery-ink);
+  text-align: left;
+}
+.collection :global(.gallery-photo-card:nth-child(12n+1)) { grid-column: span 2; }
+.collection :global(.gallery-photo-frame) {
+  aspect-ratio: 4 / 3;
+  background: #dbe0d9;
+}
+.collection :global(.gallery-photo-card:nth-child(12n+1) .gallery-photo-frame) { aspect-ratio: 1.86 / 1; }
+.collection :global(.gallery-photo-frame img) {
+  object-fit: cover;
+  transition: transform 430ms cubic-bezier(.22, 1, .36, 1);
+}
+.collection :global(.gallery-photo-card:hover .gallery-photo-frame img) { transform: scale(1.015); }
+.collection :global(.gallery-photo-caption) {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: .75rem;
+  min-height: 60px;
+  padding: .68rem .12rem .75rem;
+  color: #294335;
+  font-size: .78rem;
+  line-height: 1.46;
+}
+.collection :global(.gallery-photo-caption > span:first-child) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.collection :global(.gallery-photo-caption > span:last-child) { color: #315340; }
+
+/* Keep the existing native, keyboard-accessible dialog; lighten its controls. */
+.collection :global(.gallery-lightbox) {
+  width: min(1280px, calc(100vw - 1.4rem));
+  max-width: 1280px;
+  max-height: calc(100dvh - 1rem);
+  border: 1px solid #587365;
+  border-radius: 8px;
+  background: #13271f;
+}
+.collection :global(.gallery-lightbox-inner) { height: min(95dvh, 920px); }
+.collection :global(.gallery-lightbox-header),
+.collection :global(.gallery-lightbox-footer) {
+  min-height: 54px;
+  padding: .65rem 1rem;
+}
+.collection :global(.gallery-lightbox-header button),
+.collection :global(.gallery-lightbox-footer button) {
+  min-height: 44px;
+  padding: .48rem .67rem;
+  border: 1px solid rgba(240, 246, 236, .24);
+  border-radius: 5px;
+  background: transparent;
+  color: #fff9ec;
+  font-size: .78rem;
+}
+.collection :global(.gallery-lightbox button:focus-visible) {
+  outline: 3px solid #f0d9ae;
+  outline-offset: 2px;
+}
+.collection :global(.gallery-lightbox-image) {
+  min-height: 0;
+  touch-action: pan-y;
+}
+.collection :global(.gallery-lightbox-image img) { max-height: 100%; object-fit: contain; }
+.collection :global(.gallery-lightbox-footer p) {
+  min-width: 0;
+  font-size: .79rem;
+  color: #fff9ec;
+  line-height: 1.35;
+}
+.collection :global(.gallery-lightbox-footer p span) { color: #d3dfd3; }
+.seasonNote {
+  max-width: 80ch;
+  margin: 2rem 0 0;
+  color: var(--gallery-muted);
+  font-size: .79rem;
+  line-height: 1.7;
+}
+
+/* A warm close, identical in intent to the Lodge booking close. */
+.close {
+  background: var(--gallery-forest);
+  color: #f7f3eb;
+  padding-block: clamp(4rem, 7vw, 6.5rem);
+}
+.closeInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem 4rem;
+}
+.close .eyebrow { color: #f0d9ae; }
+.close h2 {
+  color: #f7f3eb;
+  font-size: clamp(2.8rem, 4.8vw, 5.3rem);
+}
+.close h2 + p {
+  max-width: 51ch;
+  margin: 1.3rem 0 0;
+  color: #dce5d5;
+  font-size: .94rem;
+  line-height: 1.75;
+}
+.closeActions {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: .9rem;
+}
+.closeButton {
+  min-height: 50px;
+  min-width: 220px;
+  padding: .75rem 1.2rem;
+  border: 1px solid #f5ecd9;
+  border-radius: 6px;
+  background: #f5ecd9;
+  color: #213f32;
+}
+.closeButton:hover { background: #e9d9b5; color: #213f32; border-color: #e9d9b5; }
+.closeLink {
+  padding-block: .35rem;
+  border-bottom: 1px solid rgba(250,246,234,.42);
+  color: #f7f3eb;
+  font-size: .8rem;
+}
+.closeLink:hover { border-color: #fff9ec; color: #fff; }
+
+@media (max-width: 1050px) {
+  .coverShade {
+    background:
+      linear-gradient(90deg, rgba(8,29,22,.83), rgba(8,29,22,.53) 56%, rgba(8,29,22,.12)),
+      linear-gradient(0deg, rgba(6,23,18,.76), transparent 54%);
+  }
+  .sectionTop h2,
+  .collectionHead h2 { font-size: clamp(2.5rem, 5vw, 3.75rem); }
+}
+@media (max-width: 800px) {
+  .cover { min-height: max(760px, 95svh); }
+  .coverInner {
+    width: calc(100% - 2.5rem);
+    padding-top: 122px;
+    padding-bottom: 1.3rem;
+  }
+  .coverShade {
+    background:
+      linear-gradient(180deg, rgba(8,29,22,.80) 0%, rgba(8,29,22,.3) 25%, rgba(8,29,22,.60) 52%, rgba(6,23,18,.95) 100%),
+      linear-gradient(90deg, rgba(8,29,22,.58), rgba(8,29,22,.11));
+  }
+  .page .cover h1 { font-size: clamp(3.7rem, 10vw, 6.4rem); }
+  .coverCopy > p:not(.eyebrow) { font-size: 1rem; line-height: 1.65; }
+  .highlights,
+  .collection,
+  .closeInner { width: calc(100% - 2.5rem); }
+  .highlights { padding-block: 4.5rem; }
+  .highlightsGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .highlightLarge { min-height: 410px; }
+  .highlightsSide {
+    min-height: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+    gap: 10px;
+  }
+  .highlightSmall { min-height: 285px; }
+  .highlightSmall .highlightCaption { font-size: 1.2rem; }
+  .collection { padding-block: 4.5rem; }
+  .collection :global(.gallery-grid) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .collection :global(.gallery-photo-card:nth-child(12n+1) .gallery-photo-frame) { aspect-ratio: 1.8; }
+  .closeInner { align-items: start; flex-direction: column; }
+}
+@media (max-width: 560px) {
+  .cover { min-height: max(735px, 100svh); }
+  .coverInner { width: calc(100% - 2.25rem); padding-top: 113px; padding-bottom: 1.15rem; }
+  .location { display: block; font-size: .62rem; }
+  .location span:nth-child(2) { display: block; padding: .15rem 0 0; border: 0; }
+  .page .cover h1 { font-size: clamp(3.15rem, 11.3vw, 4.5rem); }
+  .coverCopy { padding-block: 1.4rem; }
+  .coverActions { gap: .4rem 1rem; margin-top: 1.4rem; }
+  .primaryAction { min-height: 49px; padding: .75rem 1rem; }
+  .secondaryAction { min-height: 44px; }
+  .coverFoot { font-size: .66rem; }
+  .coverFoot span:last-child { display: none; }
+  .highlights,
+  .collection,
+  .closeInner { width: calc(100% - 2.25rem); }
+  .highlights { padding-block: 3.8rem 4.5rem; }
+  .sectionTop,
+  .collectionHead { align-items: start; flex-direction: column; gap: .85rem; }
+  .sectionTop h2,
+  .collectionHead h2 { font-size: clamp(2.4rem, 9vw, 3.4rem); }
+  .highlightLarge { min-height: 340px; }
+  .highlightsSide { grid-template-columns: 1fr; gap: 10px; }
+  .highlightSmall { min-height: 245px; }
+  .highlightCaption { left: .95rem; right: .95rem; bottom: .9rem; }
+  .collection { padding-block: 4rem; }
+  .collection :global(.gallery-filter-row) {
+    flex-wrap: nowrap;
+    gap: 1.15rem;
+    margin-right: -1.12rem;
+    padding-right: 1.12rem;
+    scrollbar-width: thin;
+    scroll-snap-type: x proximity;
+  }
+  .collection :global(.gallery-filter) { scroll-snap-align: start; }
+  .collection :global(.gallery-grid) { gap: .65rem; }
+  .collection :global(.gallery-photo-card:nth-child(12n+1) .gallery-photo-frame) { aspect-ratio: 1.76; }
+  .collection :global(.gallery-photo-caption) { min-height: 73px; padding: .55rem .08rem .6rem; font-size: .7rem; }
+  .collection :global(.gallery-lightbox) { width: calc(100vw - .35rem); max-height: calc(100dvh - .35rem); }
+  .collection :global(.gallery-lightbox-inner) { height: calc(100dvh - .5rem); }
+  .collection :global(.gallery-lightbox-header) { font-size: .57rem; }
+  .collection :global(.gallery-lightbox-footer) { padding-inline: .4rem; gap: .3rem; }
+  .collection :global(.gallery-lightbox-footer p) { font-size: .7rem; }
+  .collection :global(.gallery-lightbox-footer button) { padding: .55rem .4rem; font-size: .72rem; }
+  .close { padding-block: 4rem; }
+  .closeActions { width: 100%; }
+  .closeButton { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .highlightImage img,
+  .collection :global(.gallery-photo-frame img) {
+    transition: none;
+  }
+  .highlightLarge:hover .highlightImage img,
+  .highlightSmall:hover .highlightImage img,
+  .collection :global(.gallery-photo-card:hover .gallery-photo-frame img) {
+    transform: none;
+  }
+}
