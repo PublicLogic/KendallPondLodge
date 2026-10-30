@@ -759,3 +759,138 @@
     width: 82px !important;
   }
 }
+
+
+/* KPL premium navigation: editorial restraint, clear booking priority. */
+.hospitality-header {
+  position: sticky;
+  top: 0;
+  z-index: 120;
+  border-bottom: 1px solid rgba(42, 69, 56, .12);
+  background: rgba(250, 249, 245, .91);
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  backdrop-filter: blur(22px) saturate(135%);
+  box-shadow: 0 8px 28px rgba(20, 43, 32, .055);
+}
+.hospitality-header .experience-header-inner {
+  min-height: 84px;
+  max-width: 1440px;
+  gap: clamp(1rem, 2vw, 2.5rem);
+  padding-inline: clamp(1.2rem, 4vw, 3.5rem);
+}
+.hospitality-header .kpl-brand-image { width: clamp(190px, 17vw, 218px); max-width: 218px; }
+.hospitality-header .hospitality-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(.18rem, .5vw, .65rem);
+  margin-left: auto;
+  padding: .28rem;
+  border: 1px solid rgba(34, 69, 52, .085);
+  border-radius: 999px;
+  background: rgba(238, 241, 232, .72);
+}
+.hospitality-header .hospitality-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 39px;
+  padding: .55rem clamp(.72rem, 1.15vw, 1.13rem);
+  border-radius: 999px;
+  color: #43534a !important;
+  font-size: .79rem !important;
+  font-weight: 650 !important;
+  text-decoration: none !important;
+  text-underline-offset: 0;
+  transition: background-color .18s ease, color .18s ease;
+}
+.hospitality-header .hospitality-nav a:hover {
+  background: rgba(255,255,255,.76);
+  color: #204638 !important;
+}
+.hospitality-header .hospitality-nav a[aria-current="page"] {
+  background: #fff;
+  color: #1d4937 !important;
+  box-shadow: 0 1px 6px rgba(31, 60, 44, .08);
+}
+.hospitality-header .hospitality-nav a::after { display: none !important; }
+.hospitality-header .hospitality-book-button {
+  min-height: 48px !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .72rem 1.3rem !important;
+  border: 1px solid rgba(20, 53, 39, .25) !important;
+  border-radius: 999px !important;
+  background: #204b3d !important;
+  color: #fff !important;
+  font-size: .79rem !important;
+  font-weight: 730 !important;
+  box-shadow: 0 5px 16px rgba(26, 65, 46, .14);
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+}
+.hospitality-header .hospitality-book-button::after {
+  content: "↗";
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 500;
+}
+.hospitality-header .hospitality-book-button:hover {
+  background: #153b2d !important;
+  box-shadow: 0 8px 20px rgba(26, 65, 46, .20);
+  transform: translateY(-1px);
+}
+@media (max-width: 1050px) {
+  .hospitality-header .experience-header-inner { gap: .75rem; }
+  .hospitality-header .kpl-brand-image { width: 180px; }
+  .hospitality-header .hospitality-nav { gap: 0; }
+  .hospitality-header .hospitality-nav a { padding-inline: .72rem; font-size: .75rem !important; }
+}
+@media (max-width: 760px) {
+  .hospitality-header .experience-header-inner {
+    min-height: 72px;
+    padding-inline: 1rem;
+    gap: .6rem;
+  }
+  .hospitality-header .kpl-brand-image { width: clamp(130px, 36vw, 166px); }
+  .hospitality-header .hospitality-nav { display: none; }
+  .hospitality-header .hospitality-menu { margin-left: auto; }
+  .hospitality-header .hospitality-menu summary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: .62rem .85rem;
+    border: 1px solid #d5dfd5;
+    border-radius: 999px;
+    background: #fff;
+    color: #234638;
+    font-size: .76rem;
+    font-weight: 700;
+    box-shadow: 0 1px 5px rgba(30, 59, 43, .045);
+  }
+  .hospitality-header .hospitality-menu[open] nav {
+    margin-top: .7rem;
+    padding: .45rem;
+    border-radius: 16px;
+    background: #fcfbf7;
+    box-shadow: 0 16px 42px rgba(15, 37, 25, .16);
+  }
+  .hospitality-header .hospitality-menu nav a {
+    border-radius: 9px;
+    padding-inline: .75rem;
+  }
+  .hospitality-header .hospitality-book-button {
+    min-height: 44px !important;
+    padding: .65rem .9rem !important;
+    font-size: .73rem !important;
+    gap: .45rem;
+  }
+}
+@media (max-width: 370px) {
+  .hospitality-header .experience-header-inner { padding-inline: .65rem; gap: .35rem; }
+  .hospitality-header .kpl-brand-image { width: 126px; }
+  .hospitality-header .hospitality-menu summary { padding-inline: .6rem; }
+  .hospitality-header .hospitality-book-button { padding-inline: .65rem !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hospitality-header .hospitality-book-button:hover { transform: none; }
+}
