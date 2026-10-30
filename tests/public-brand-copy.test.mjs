@@ -25,7 +25,7 @@ test("guest copy clearly distinguishes instant booking from reservation truth", 
   assert.match(booking, /Exact price and terms next|priced and held automatically|Instant direct booking is being set up/);
   assert.doesNotMatch(booking, /Start with your dates and we’ll send the full quote/);
   assert.match(rates, /not a reservation/);
-  assert.match(home, /full price before asking for payment/);
+  assert.match(home, /review the full price and terms before you pay/);
 });
 
 test("public-facing pages omit removed generic marketing filler", () => {
