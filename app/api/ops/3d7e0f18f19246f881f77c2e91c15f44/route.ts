@@ -57,7 +57,7 @@ async function findTestStay(client: ReturnType<typeof bookingClient>, minNights:
 
   const existing = (await client.list(100)) as Booking[];
   for (const booking of existing) {
-    if (!['quoted', 'checkout', 'confirmed'].includes(booking.status)) continue;
+    if (!['checkout', 'confirmed'].includes(booking.status)) continue;
     for (const night of nightsBetween(booking.check_in, booking.check_out)) {
       blocked.add(night);
     }
@@ -136,7 +136,7 @@ export async function POST(request: Request) {
       deposit_percent: int(body.deposit_percent, 'deposit_percent', 1, 100),
       min_nights: int(body.min_nights, 'min_nights', 1, 30),
       booking_window_days: int(body.booking_window_days, 'booking_window_days', 1, 730),
-      hold_minutes: int(body.hold_minutes, 'hold_minutes', 90, 360),
+      hold_minutes: int(body.hold_minutes, 'hold_minutes', 60, 10_080),
       cancellation_terms: text(body.cancellation_terms, 'cancellation_terms'),
       balance_terms: text(body.balance_terms, 'balance_terms'),
     };
@@ -162,16 +162,10 @@ export async function POST(request: Request) {
       const priced = await client.autoPrice(testBooking.id);
       if (!priced?.quote_token) throw new Error('test_not_priced');
 
-      const activeBookings = await client.list(100) as Booking[];
-      const outboundIcs = buildDirectBookingCalendar(activeBookings);
-      const expectedStart = dates.checkIn.replaceAll('-', '');
-      const expectedEnd = dates.checkOut.replaceAll('-', '');
-      if (
-        !outboundIcs.includes(`UID:${testBooking.id}@kendallpondlodge.com`) ||
-        !outboundIcs.includes(`DTSTART;VALUE=DATE:${expectedStart}`) ||
-        !outboundIcs.includes(`DTEND;VALUE=DATE:${expectedEnd}`)
-      ) {
-        throw new Error('airbnb_feed_missing_hold');
+      const pricedBookings = await client.list(100) as Booking[];
+      const quotedIcs = buildDirectBookingCalendar(pricedBookings);
+      if (quotedIcs.includes(`UID:${testBooking.id}@kendallpondlodge.com`)) {
+        throw new Error('quote_unexpectedly_holds_inventory');
       }
 
       const sent = await client.sendQuote(testBooking.id);
@@ -191,6 +185,18 @@ export async function POST(request: Request) {
       const sessionId = checkoutBooking?.stripe_session_id ?? '';
       if (!/^cs_(?:test|live)_[A-Za-z0-9]{8,200}$/.test(sessionId)) {
         throw new Error('stripe_session_not_attached');
+      }
+
+      const checkoutBookings = await client.list(100) as Booking[];
+      const checkoutIcs = buildDirectBookingCalendar(checkoutBookings);
+      const expectedStart = dates.checkIn.replaceAll('-', '');
+      const expectedEnd = dates.checkOut.replaceAll('-', '');
+      if (
+        !checkoutIcs.includes(`UID:${testBooking.id}@kendallpondlodge.com`) ||
+        !checkoutIcs.includes(`DTSTART;VALUE=DATE:${expectedStart}`) ||
+        !checkoutIcs.includes(`DTEND;VALUE=DATE:${expectedEnd}`)
+      ) {
+        throw new Error('checkout_hold_missing_from_airbnb_feed');
       }
 
       const expired = await stripeRequest<Record<string, unknown>>(
@@ -221,7 +227,8 @@ export async function POST(request: Request) {
         },
         messaging: readiness,
         calendar_test: {
-          outbound_feed_contains_hold: true,
+          quote_does_not_hold_inventory: true,
+          checkout_hold_in_outbound_feed: true,
           check_in: dates.checkIn,
           check_out: dates.checkOut,
         },
