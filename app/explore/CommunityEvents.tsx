@@ -19,13 +19,13 @@ export function CommunityEvents({ feed }: { feed: PjExplore | null }) {
       <div className={styles.communityInner}>
         <header className={styles.sectionHeader}>
           <div>
-            <p className={styles.eyebrow}>Local events · PuddleJumper</p>
-            <h2 id="city-events-title">What&apos;s on in Gardner.</h2>
+            <p className={styles.eyebrow}>Local events</p>
+            <h2 id="city-events-title">On the calendar.</h2>
           </div>
           <p>
-            PJ brings together the public Gardner event calendar and the
-            Lodge's sourced local listings. Check event details with each
-            organizer before heading out.
+            Upcoming events from Gardner&apos;s city calendar and other
+            local sources. Dates and details can change; check with
+            the organizer before going.
           </p>
         </header>
         {events.length ? (
@@ -48,16 +48,15 @@ export function CommunityEvents({ feed }: { feed: PjExplore | null }) {
           <p className={styles.eventEmpty}>
             {feed
               ? verified
-                ? "There are no upcoming events in PJ's current listing. Check the official calendars for more."
-                : "PJ's Gardner calendar isn't available right now. Use the official event calendars for your dates."
-              : "PJ's event feed isn't available here right now. You can still find current listings on the official calendars."}
+                ? "No upcoming events listed at the moment. Check the calendars below for more."
+                : "The City calendar isn&apos;t updating here right now. Use the calendars below."
+              : "Events aren&apos;t loading here right now. Check the calendars below."}
           </p>
         )}
         {events.length > 0 && !verified && (
           <p className={styles.eventNote}>
-            The City calendar refresh is currently unavailable; these are the
-            separately sourced events PJ still has on record. Confirm details
-            with the organizer.
+            The City calendar is temporarily unavailable. These listings
+            come from other local sources; confirm details with the organizer.
           </p>
         )}
         <div className={styles.eventLinks}>
