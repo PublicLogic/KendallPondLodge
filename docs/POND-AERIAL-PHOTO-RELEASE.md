@@ -10,9 +10,9 @@ The owner shared three aerial photographs of Kendall Pond on October 29, 2026. T
 
 | Supplied image | Destination (in `public/images/kpl/pond-aerials/`) | Use |
 | --- | --- | --- |
-| `KP3.webp` | `kp3-autumn-wide.webp` | Home: faint decorative texture behind the existing bottom booking call-to-action |
-| `KP2.webp` | `kp2-autumn-shoreline.webp` | Waterfront: faint decorative texture behind the existing shoreline information |
-| `KENDALL-POND.webp` | `kendall-pond-autumn-overlook.webp` | Explore: faint decorative texture behind the existing booking call-to-action |
+| `KP3.webp` | `kp3-autumn-wide.webp` | Home: visible-but-secondary decorative texture behind the existing bottom booking call-to-action |
+| `KP2.webp` | `kp2-autumn-shoreline.webp` | Waterfront: visible-but-secondary decorative texture behind the existing shoreline information |
+| `KENDALL-POND.webp` | `kendall-pond-autumn-overlook.webp` | Explore: visible-but-secondary decorative texture behind the existing booking call-to-action |
 
 Use the WebP originals or optimized derivatives only after rights have been documented. Keep source/photographer and applicable license terms in the asset record; apply any required credit.
 
@@ -32,4 +32,4 @@ Treat aerials as low-opacity, cropped edge textures behind **existing** content,
 
 **Hierarchy requirement:** the Lodge's actual photos (house, deck, hot tub, private dock and interiors), its story, and the booking controls are the visual centerpiece. The supplied aerials must **not** appear as hero images, full-width scenic interludes, foreground cards, photo-gallery items, or prominent marketing images. The ambient component must not add height, headings, buttons, or other sections.
 
-Opacity is capped at 14% desktop / 8.5% mobile with edge masking. Any future edit making these images prominent requires a separate review.
+The revised preview uses 31% image opacity on desktop / 20% on mobile, but an edge-gradient mask reduces the effective coverage and keeps the image behind existing content. No new hero, standalone scene or additional page height. Any future edit making these images prominent requires a separate review.
