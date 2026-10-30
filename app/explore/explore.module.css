@@ -27,9 +27,9 @@
   color: var(--explore-muted);
   font-size: .69rem;
   line-height: 1.5;
-  letter-spacing: .145em;
+  letter-spacing: .075em;
   text-transform: uppercase;
-  font-weight: 680;
+  font-weight: 650;
 }
 
 /* Different from Lodge and Photos: open with a useful invitation, not an
@@ -49,14 +49,13 @@
   padding: clamp(3.5rem, 6vw, 6.5rem) clamp(2rem, 6vw, 7rem);
 }
 .opening h1 {
-  max-width: 12ch;
+  max-width: 14ch;
   color: var(--explore-ink);
-  font-size: clamp(3.4rem, 5.6vw, 6.1rem);
+  font-size: clamp(3.4rem, 5.2vw, 5.7rem);
   line-height: 1.025;
   letter-spacing: -.057em;
   text-wrap: balance;
 }
-.opening h1 em { font-style: normal; color: #71816e; }
 .openingIntro {
   max-width: 48ch;
   margin: 1.55rem 0 0;
@@ -147,17 +146,13 @@
   border-top: 1px solid #9eaea0;
   padding-top: 1.25rem;
 }
-.dayNumber {
-  display: flex;
-  align-items: center;
-  gap: .9rem;
+.dayArea {
   margin: 0;
-  font-size: .68rem;
-  font-weight: 740;
-  color: #49674e;
-  letter-spacing: .09em;
+  color: #536957;
+  font-size: .72rem;
+  font-weight: 675;
+  line-height: 1.5;
 }
-.dayNumber span { font-weight: 610; letter-spacing: .01em; color: var(--explore-muted); }
 .day h3 {
   margin: .7rem 0 1.25rem;
   color: var(--explore-ink);
@@ -234,18 +229,11 @@
 }
 .pick {
   display: grid;
-  grid-template-columns: 2.2rem minmax(0,1fr);
-  gap: .25rem .9rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .25rem;
   align-content: start;
   border-bottom: 1px solid #bfccbd;
   padding: 1.35rem 0 1.55rem;
-}
-.pickNumber {
-  color: #5c7965;
-  font-size: .72rem;
-  line-height: 1.6;
-  letter-spacing: .04em;
-  font-variant-numeric: tabular-nums;
 }
 .pickBody { min-width: 0; }
 .pickCategory {
@@ -270,7 +258,7 @@
 }
 .pickLink {
   display: inline-flex;
-  grid-column: 2;
+  grid-column: 1;
   align-items: center;
   justify-content: space-between;
   justify-self: start;
