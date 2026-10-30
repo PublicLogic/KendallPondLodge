@@ -6,6 +6,8 @@ import { lodgePhoto } from "@/app/_data/lodge-photos";
 import { directBookingEnabled } from "@/lib/booking-db";
 import { ExploreDirectory } from "./ExploreDirectory";
 import { WachusettRail } from "./WachusettRail";
+import { CommunityEvents } from "./CommunityEvents";
+import { loadPjExplore } from "./pjExplore";
 import { explorePicks, localResourceLinks } from "./guide-data";
 import styles from "./explore.module.css";
 
@@ -19,9 +21,10 @@ export const metadata: Metadata = {
 const pondPhoto = lodgePhoto(49);
 const deckPhoto = lodgePhoto(35);
 
-export const revalidate = 120;
+export const dynamic = "force-dynamic";
 
-export default function ExplorePage() {
+export default async function ExplorePage() {
+  const feed = await loadPjExplore();
   const bookingHref = directBookingEnabled() ? "/book" : "/rates";
 
   return (
@@ -39,7 +42,8 @@ export default function ExplorePage() {
             <a href="#days">Plan a day <span aria-hidden="true">↘</span></a>
             <a href="#local-picks">Local favorites <span aria-hidden="true">↘</span></a>
             <a href="#train">The train <span aria-hidden="true">↘</span></a>
-            <a href="#around-town">Local events <span aria-hidden="true">↘</span></a>
+            <a href="#city-events">Local events <span aria-hidden="true">↘</span></a>
+            <a href="#around-town">Chamber <span aria-hidden="true">↘</span></a>
           </nav>
         </div>
         <figure className={styles.openingPhoto}>
@@ -102,7 +106,8 @@ export default function ExplorePage() {
         <ExploreDirectory />
       </section>
 
-      <WachusettRail />
+      <WachusettRail transit={feed?.transit ?? null} />
+      <CommunityEvents feed={feed} />
 
       <section id="around-town" className={styles.chamber} aria-labelledby="chamber-title">
         <div className={styles.chamberInner}>
