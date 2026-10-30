@@ -23,7 +23,7 @@ export function CommunityEvents({ feed }: { feed: PjExplore | null }) {
             <h2 id="city-events-title">What’s going on.</h2>
           </div>
           <p>
-            Want to know what's on while you're here? These are the local listings we can pull in. Check with the organizer for times and changes.
+            Want to know what&apos;s on while you&apos;re here? These are the local listings we can pull in. Check with the organizer for times and changes.
           </p>
         </header>
         {events.length ? (
@@ -53,7 +53,7 @@ export function CommunityEvents({ feed }: { feed: PjExplore | null }) {
         )}
         {events.length > 0 && !verified && (
           <p className={styles.eventNote}>
-            The City calendar couldn't be refreshed. These other listings may still
+            The City calendar couldn&apos;t be refreshed. These other listings may still
             be useful, but check with the organizer before you go.
           </p>
         )}
