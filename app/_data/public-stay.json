@@ -12,9 +12,9 @@
   "sleepingNote": "Eight overnight guests maximum. The sleeper sofa is additional sleeping space, not a fourth bedroom. Choose the bed arrangement that works for your group; the guest limit stays at eight.",
   "reviewSnapshot": { "rating": "4.83", "count": 30, "checkedOn": "2026-10-27", "checkedLabel": "October 27, 2026", "url": "https://www.airbnb.com/rooms/1667597913565948713#reviews" },
   "bookingSteps": [
-    { "title": "Send your dates", "body": "Choose your nights and group size. This is a request, not a reservation, and there is no charge to ask." },
-    { "title": "Review your quote", "body": "Nate or Allie checks availability and sends the full price, including fees and taxes, plus the deposit, balance and cancellation terms." },
-    { "title": "Pay to confirm", "body": "Accept your quote and pay the required deposit through Stripe. Your stay is confirmed only after payment is verified; sending a request alone does not hold dates." }
+    { "title": "Choose your dates", "body": "Pick your nights and group size. We check live availability before showing a bookable price." },
+    { "title": "See the exact price", "body": "Review the full stay total, deposit, balance and cancellation terms before you pay." },
+    { "title": "Pay to confirm", "body": "Continue to secure Stripe checkout. Availability is rechecked as checkout starts, and your stay is confirmed after payment is verified." }
   ],
   "faq": [
     { "id": "arrival", "question": "When can we arrive and check out?", "answer": "Standard check-in is 3 p.m. and checkout is 11 a.m. Self check-in details are sent privately. Early arrival or late departure needs advance agreement and depends on the calendar." },
