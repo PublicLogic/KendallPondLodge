@@ -21,7 +21,7 @@ test("Explore leads with Gardner and useful details, not a generic brand slogan"
 
 test("Day suggestions are named places, not numbered experiences", () => {
   assert.match(page, /Wachusett &amp; Red Apple Farm/);
-  assert.match(page, /Breakfast at/);
+  assert.match(page, /breakfast at/i);
   assert.match(page, /Fitchburg Art Museum/);
   assert.doesNotMatch(page, /className=\{styles\.dayNumber\}|>01 <span|>02 <span|>03 <span/);
   assert.doesNotMatch(styles, /\.pickNumber/);
@@ -31,6 +31,10 @@ test("Local recommendations use facts instead of generic 'good choice' filler", 
   assert.match(guide, /Blue Moon Diner/);
   assert.match(guide, /Gardner Ale House/);
   assert.match(guide, /Red Apple Farm/);
+  assert.match(guide, /A Worcester Lunch Car right on Main Street/);
+  assert.match(guide, /Cider doughnuts, the farm store/);
+  assert.match(page, /Where we&apos;d send you/);
+  assert.match(page, /The Chamber&apos;s got more/);
   assert.doesNotMatch(guide, /Good choice when|An easy stop|A useful choice|A strong indoor choice|A simple movie-night option|The outing can be as simple/);
   assert.doesNotMatch(directory, /styles\.pickNumber|String\(index \+ 1\)/);
   assert.match(directory, /aria-pressed/);
@@ -44,4 +48,6 @@ test("Guest-facing transit and event messages do not mention platform plumbing",
   assert.match(rail, /Scheduled departure/);
   assert.match(events, /feed\?\.events/);
   assert.match(events, /City of Gardner calendar/);
+  assert.match(rail, /MBTA train schedule/);
+  assert.doesNotMatch(page + guide, /curated experiences|hidden gems|unforgettable getaway|make memories|discover the magic/i);
 });
