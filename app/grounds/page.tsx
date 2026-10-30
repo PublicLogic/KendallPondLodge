@@ -193,8 +193,7 @@ export default function GroundsPage() {
           </div>
           <p>
             There are chairs around the stone firepit near the shoreline,
-            and a lawn between the house and the water. Plenty of room to
-            be outside without everyone doing the same thing.
+            with lawn between the house and the water and space to spread out.
           </p>
         </div>
         <div className={styles.firepitGrid}>
