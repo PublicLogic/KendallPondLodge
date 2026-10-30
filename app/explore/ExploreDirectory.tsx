@@ -87,7 +87,7 @@ export function ExploreDirectory() {
         })}
       </div>
       <p className={styles.count} role="status" aria-live="polite">
-        Showing {visible.length} {visible.length === 1 ? "place" : "places"}
+        {visible.length} {visible.length === 1 ? "place" : "places"} on the list
       </p>
       <div className={styles.directory} id="explore-picks">
         {visible.map((place) => (
