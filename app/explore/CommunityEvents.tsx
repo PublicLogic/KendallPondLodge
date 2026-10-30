@@ -20,7 +20,7 @@ export function CommunityEvents({ feed }: { feed: PjExplore | null }) {
         <header className={styles.sectionHeader}>
           <div>
             <p className={styles.eyebrow}>Local events · PuddleJumper</p>
-            <h2 id="city-events-title">What's on in Gardner.</h2>
+            <h2 id="city-events-title">What&apos;s on in Gardner.</h2>
           </div>
           <p>
             PJ brings together the public Gardner event calendar and the
