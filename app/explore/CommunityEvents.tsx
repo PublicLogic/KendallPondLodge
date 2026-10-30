@@ -49,7 +49,7 @@ export function CommunityEvents({ feed }: { feed: PjExplore | null }) {
             {feed
               ? verified
                 ? "Nothing coming up in the current listing. The calendars below may have more."
-                : "The City calendar isn&apos;t coming through. Try the links below."
+                : "The City calendar isn't coming through. Try the links below."
               : "No event listings are loading. The official calendars are linked below."}
           </p>
         )}
