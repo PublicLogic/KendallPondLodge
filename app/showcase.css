@@ -894,3 +894,85 @@
 @media (prefers-reduced-motion: reduce) {
   .hospitality-header .hospitality-book-button:hover { transform: none; }
 }
+
+
+/* === IMMERSIVE PHOTO HEADER / KPL ===
+   Homepage floats on the actual Lodge photo, then resolves to readable ivory
+   navigation when the guest scrolls. Every other page keeps the normal header.
+   Booking controls and owner/guidebook shells are unchanged. */
+.hospitality-header.hospitality-header-immersive {
+  position: fixed;
+  z-index: 140;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: 1px solid rgba(255,255,255,.22);
+  background: linear-gradient(180deg, rgba(8,28,21,.57), rgba(8,28,21,.13));
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  transition: background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .kpl-brand-lockup {
+  filter: brightness(0) invert(1);
+}
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-nav {
+  border-color: rgba(255,255,255,.19);
+  background: rgba(13,35,28,.17);
+}
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-nav a {
+  color: #fff8ed !important;
+}
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-nav a:hover {
+  color: #fff !important;
+  background: rgba(255,255,255,.16);
+}
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-nav a[aria-current="page"] {
+  color: #fff !important;
+  background: rgba(255,255,255,.22);
+  box-shadow: none;
+}
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-book-button {
+  border-color: rgba(255,249,236,.9) !important;
+  background: #f8f1e4 !important;
+  color: #1e4938 !important;
+  box-shadow: 0 8px 22px rgba(9,29,21,.2);
+}
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-book-button:hover {
+  background: #ecd7ae !important;
+}
+.hospitality-header.hospitality-header-immersive.hospitality-header-scrolled {
+  border-bottom-color: rgba(42,69,56,.13);
+  background: rgba(251,250,247,.96);
+  -webkit-backdrop-filter: blur(20px) saturate(135%);
+  backdrop-filter: blur(20px) saturate(135%);
+  box-shadow: 0 9px 30px rgba(19,44,31,.08);
+}
+.hospitality-header.hospitality-header-immersive.hospitality-header-scrolled .kpl-brand-lockup {
+  filter: none;
+}
+@media (max-width: 760px) {
+  .hospitality-header.hospitality-header-immersive .experience-header-inner {
+    min-height: 69px;
+  }
+  .hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-menu summary {
+    color: #fff9ed;
+    border-color: rgba(255,255,255,.46);
+    background: rgba(12,34,25,.26);
+    box-shadow: none;
+    -webkit-backdrop-filter: blur(7px);
+    backdrop-filter: blur(7px);
+  }
+  .hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-menu[open] nav {
+    border-color: rgba(224,230,219,.95);
+    background: #fcfbf7;
+  }
+  .hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .hospitality-book-button {
+    min-height: 44px !important;
+    padding-inline: .9rem !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hospitality-header.hospitality-header-immersive { transition: none; }
+}
