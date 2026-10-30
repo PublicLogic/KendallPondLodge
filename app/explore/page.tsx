@@ -36,7 +36,7 @@ export default async function ExplorePage() {
           <p className={styles.openingIntro}>
             Breakfast at the Blue Moon. Wachusett when the weather&apos;s good.
             Cider donuts in Phillipston. We live nearby, so these are
-            the places we'd tell you about.
+            the places we&apos;d tell you about.
           </p>
           <nav className={styles.openingNav} aria-label="Explore this guide">
             <a href="#days">A day out</a>
