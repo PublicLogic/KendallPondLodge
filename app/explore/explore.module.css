@@ -473,3 +473,124 @@
 @media (prefers-reduced-motion: reduce) {
   .page *, .page *::before, .page *::after { transition: none !important; scroll-behavior: auto !important; }
 }
+
+
+/* PJ-sourced municipal events and MBTA alerts. Public records are source-
+   linked; never mimic live transport or imply an event has been booked. */
+.railAlerts {
+  margin-top: 1.3rem;
+  padding-block: 1.05rem;
+  border-top: 1px solid #cfd9cb;
+}
+.railAlerts a {
+  display: inline-flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+  min-height: 43px;
+  border-bottom: 1px solid #dde5da;
+  color: #24573d;
+  font-size: .79rem;
+  font-weight: 660;
+  line-height: 1.5;
+  text-decoration: none;
+}
+.railAlerts a:hover { color: #173a29; }
+.community {
+  padding: clamp(5rem, 8vw, 7.5rem) 0;
+  background: #f7f3eb;
+  border-bottom: 1px solid #d5dbce;
+}
+.communityInner {
+  width: min(1280px, calc(100% - 96px));
+  margin-inline: auto;
+}
+.eventGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2.75rem);
+}
+.event {
+  border-top: 1px solid #b6c6b4;
+  min-width: 0;
+  padding: 1.1rem 0 1.2rem;
+}
+.event time {
+  color: #5b765e;
+  display: block;
+  font-size: .72rem;
+  font-weight: 725;
+  letter-spacing: .06em;
+}
+.event h3 {
+  margin: .7rem 0 .6rem;
+  color: #203d31;
+  font-size: clamp(1.55rem, 2vw, 2.25rem);
+}
+.event > p {
+  min-height: 2rem;
+  margin: 0;
+  color: #526658;
+  font-size: .85rem;
+  line-height: 1.7;
+}
+.eventMeta {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .4rem .85rem;
+  margin-top: 1rem;
+  padding-top: .75rem;
+  border-top: 1px solid #e0e6d9;
+  font-size: .7rem;
+  color: #617468;
+}
+.eventMeta a {
+  color: #24573c;
+  font-weight: 690;
+  text-decoration: none;
+  border-bottom: 1px solid #87a08c;
+}
+.eventMeta a:hover { border-color: #24573c; }
+.eventEmpty {
+  max-width: 65ch;
+  margin: 0;
+  padding: 1.5rem 0;
+  border-block: 1px solid #cdd8ca;
+  color: #506455;
+  font-size: .92rem;
+  line-height: 1.78;
+}
+.eventNote { margin: 1.2rem 0 0; font-size: .75rem; color: #657766; line-height: 1.65; }
+.eventLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem 1.75rem;
+  margin-top: 1.4rem;
+}
+.eventLinks a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  min-height: 44px;
+  border-bottom: 1px solid #8da18e;
+  color: #24513b;
+  text-decoration: none;
+  font-size: .81rem;
+  font-weight: 680;
+}
+.eventLinks a:hover { border-color: #24513b; }
+@media (max-width: 900px) {
+  .eventGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .community { padding-block: 3.85rem; }
+  .communityInner { width: calc(100% - 2.3rem); }
+  .eventGrid { grid-template-columns: 1fr; }
+  .event { padding-block: 1rem; }
+  .event h3 { font-size: 1.9rem; }
+  .event > p { min-height: 0; }
+}
