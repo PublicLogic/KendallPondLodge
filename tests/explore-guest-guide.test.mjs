@@ -55,7 +55,7 @@ test("Chamber feeds remain first-party and event details are not hard-coded stal
   assert.match(page, /localResourceLinks\.chamberEvents/);
   assert.match(page, /localResourceLinks\.chamberDirectory/);
   assert.match(page, /localResourceLinks\.chamberRestaurants/);
-  assert.match(page, /The Chamber maintains these listings/);
+  assert.match(page, /Gardner Chamber keeps a business directory/);
   assert.doesNotMatch(page, /2026 Women in Business|November 12|Oct 30, 2026/);
 });
 
@@ -76,7 +76,7 @@ test("Wachusett trains come from PJ public Explore, not a second MBTA integratio
   assert.match(train, /10 \* 60_000/);
   assert.match(train, /MBTA predicted departure/);
   assert.match(train, /Scheduled departure/);
-  assert.match(train, /Departure times aren&apos;t loading here/);
+  assert.match(train, /Train times aren&apos;t coming through right now/);
   assert.match(train, /localResourceLinks\.fitchburgLine/);
   assert.match(train, /localResourceLinks\.martShuttle/);
   assert.match(train, /weekday shuttle/);
@@ -98,7 +98,7 @@ test("Existing PJ Gardner community calendar is displayed with provenance", () =
   assert.match(city, /gardnerCalendarStatus/);
   assert.match(city, /City of Gardner calendar/);
   assert.match(city, /localResourceLinks\.chamberEvents/);
-  assert.match(city, /Events aren&apos;t loading here/);
+  assert.match(city, /Events aren't loading right now/);
 });
 
 test("Explore routes guests back to the established booking and property system", () => {
