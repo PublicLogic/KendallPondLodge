@@ -30,7 +30,7 @@ export function WachusettRail({ transit }: { transit: PjTransit | null }) {
     <section className={styles.rail} id="train" aria-labelledby="rail-title">
       <div className={styles.railCopy}>
         <p className={styles.eyebrow}>By train</p>
-        <h2 id="rail-title">Wachusett Station.</h2>
+        <h2 id="rail-title">Take the train.</h2>
         <p>
           Wachusett Station is at 55 Authority Drive in Fitchburg. It&apos;s
           on the MBTA Fitchburg Line to Boston&apos;s North Station. You&apos;ll
@@ -50,7 +50,7 @@ export function WachusettRail({ transit }: { transit: PjTransit | null }) {
           <span>Wachusett → North Station</span>
           <span>Fitchburg Line</span>
         </div>
-        <h3>Next trains toward Boston</h3>
+        <h3>Heading into Boston?</h3>
         {departures.length ? (
           <ol className={styles.departures}>
             {departures.map(train => {
