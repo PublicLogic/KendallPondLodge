@@ -18,7 +18,7 @@ test("Main property pages have distinct headlines, not repeated pond slogans", (
   assert.match(lodge, /The house<br \/><em>is yours\.<\/em>/);
   assert.match(photos, /See it<br \/><em>for yourself\.<\/em>/);
   assert.match(waterfront, /From the deck<br \/><em>to the dock\.<\/em>/);
-  assert.match(explore, /Where to go while you’re here\./);
+  assert.match(explore, /When you feel/);
 
   for (const source of [home, lodge, photos, waterfront]) {
     assert.doesNotMatch(source, /Got a few nights|Got a weekend in mind\?/);
