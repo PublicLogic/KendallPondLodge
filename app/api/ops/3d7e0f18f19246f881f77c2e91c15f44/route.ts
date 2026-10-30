@@ -95,6 +95,17 @@ export async function POST(request: Request) {
   try {
     const client = bookingClient();
 
+    const airbnbSource = process.env.KPL_AIRBNB_ICAL_URL?.trim() ?? '';
+    if (!/^https:\/\/[^\s]+$/i.test(airbnbSource)) {
+      return NextResponse.json({ ok: false, error: 'airbnb_source_not_ready' }, { status: 409 });
+    }
+
+    await client.registerCalendar(airbnbSource);
+    const contentStatus = await client.contentStatus();
+    if (contentStatus?.calendarConfigured !== true) {
+      return NextResponse.json({ ok: false, error: 'airbnb_source_not_registered' }, { status: 409 });
+    }
+
     // Email must be operational before instant booking can be switched on.
     const messages = await client.messageStatus();
     const readiness = messages?.readiness;
