@@ -36,7 +36,6 @@ const airbnb =
   'https://www.airbnb.com/rooms/1667597913565948713';
 
 const BLOCKING_DIRECT_STATUSES = new Set([
-  'quoted',
   'checkout',
   'confirmed',
 ]);
