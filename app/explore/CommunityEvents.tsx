@@ -19,13 +19,13 @@ export function CommunityEvents({ feed }: { feed: PjExplore | null }) {
       <div className={styles.communityInner}>
         <header className={styles.sectionHeader}>
           <div>
-            <p className={styles.eyebrow}>Local events</p>
-            <h2 id="city-events-title">On the calendar.</h2>
+            <p className={styles.eyebrow}>Gardner&apos;s calendar</p>
+            <h2 id="city-events-title">What&apos;s on around town.</h2>
           </div>
           <p>
-            Upcoming events from Gardner&apos;s city calendar and other
-            local sources. Dates and details can change; check with
-            the organizer before going.
+            Gardner&apos;s public calendar and other local event listings.
+            See something you like? Check the details with the organizer
+            before you head out.
           </p>
         </header>
         {events.length ? (
@@ -48,15 +48,15 @@ export function CommunityEvents({ feed }: { feed: PjExplore | null }) {
           <p className={styles.eventEmpty}>
             {feed
               ? verified
-                ? "No upcoming events listed at the moment. Check the calendars below for more."
-                : "The City calendar isn&apos;t updating here right now. Use the calendars below."
-              : "Events aren&apos;t loading here right now. Check the calendars below."}
+                ? "Nothing coming up in the current listing. The calendars below may have more."
+                : "The City calendar isn't coming through. Try the links below."
+              : "No event listings are loading. The official calendars are linked below."}
           </p>
         )}
         {events.length > 0 && !verified && (
           <p className={styles.eventNote}>
-            The City calendar is temporarily unavailable. These listings
-            come from other local sources; confirm details with the organizer.
+            The City feed isn&apos;t updating, but these other local listings
+            are still available. Check the dates with the organizer.
           </p>
         )}
         <div className={styles.eventLinks}>

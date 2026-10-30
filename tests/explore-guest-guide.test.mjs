@@ -14,7 +14,7 @@ const manifest = JSON.parse(read("public/images/kpl/website-top-50/manifest.json
 
 test("Explore has authentic Lodge photography, editorial day plans and distinct guide navigation", () => {
   assert.match(page, /data-curated-explore/);
-  assert.match(page, /<h1 id="explore-title">Around Gardner\.<\/h1>/);
+  assert.match(page, /<h1 id="explore-title">Worth leaving the dock for\.<\/h1>/);
   assert.match(page, /id="days"/);
   assert.match(page, /id="local-picks"/);
   assert.match(page, /id="around-town"/);
@@ -55,7 +55,7 @@ test("Chamber feeds remain first-party and event details are not hard-coded stal
   assert.match(page, /localResourceLinks\.chamberEvents/);
   assert.match(page, /localResourceLinks\.chamberDirectory/);
   assert.match(page, /localResourceLinks\.chamberRestaurants/);
-  assert.match(page, /The Chamber maintains these listings/);
+  assert.match(page, /These are Chamber listings/);
   assert.doesNotMatch(page, /2026 Women in Business|November 12|Oct 30, 2026/);
 });
 
@@ -76,11 +76,11 @@ test("Wachusett trains come from PJ public Explore, not a second MBTA integratio
   assert.match(train, /10 \* 60_000/);
   assert.match(train, /MBTA predicted departure/);
   assert.match(train, /Scheduled departure/);
-  assert.match(train, /Departure times aren&apos;t loading here/);
+  assert.match(train, /Train times aren't coming through/);
   assert.match(train, /localResourceLinks\.fitchburgLine/);
   assert.match(train, /localResourceLinks\.martShuttle/);
   assert.match(train, /weekday shuttle/);
-  assert.match(train, /excluding holidays/);
+  assert.match(train, /except on holidays/);
   // Only PuddleJumper may fetch raw schedules/predictions/alerts.
   assert.doesNotMatch(train + page + pj, /api-v3\.mbta\.com/);
   assert.doesNotMatch(pj, /process\.env\.KPL_STORE_KEY|process\.env\.STRIPE_SECRET_KEY|Authorization:\s*`Bearer/);
@@ -98,7 +98,7 @@ test("Existing PJ Gardner community calendar is displayed with provenance", () =
   assert.match(city, /gardnerCalendarStatus/);
   assert.match(city, /City of Gardner calendar/);
   assert.match(city, /localResourceLinks\.chamberEvents/);
-  assert.match(city, /Events aren&apos;t loading here/);
+  assert.match(city, /No event listings are loading/);
 });
 
 test("Explore routes guests back to the established booking and property system", () => {
