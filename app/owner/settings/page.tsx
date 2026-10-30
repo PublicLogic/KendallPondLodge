@@ -226,7 +226,7 @@ export default async function BookingSettings({
             <CalendarSyncControl action={syncAirbnbCalendar}>Sync Airbnb calendar</CalendarSyncControl>
 
             <p>
-              Fresh validation runs again when quoting and before checkout.
+              Fresh validation runs again when pricing and when checkout starts.
               Registration alone is never proof that dates are available.
             </p>
           </div>
@@ -254,8 +254,8 @@ export default async function BookingSettings({
               <dd>Policy percentage</dd>
             </div>
             <div>
-              <dt>Direct hold</dt>
-              <dd>90–360 minutes</dd>
+              <dt>Payment link</dt>
+              <dd>1 hour–7 days</dd>
             </div>
             <div>
               <dt>Airbnb</dt>
@@ -293,7 +293,7 @@ export default async function BookingSettings({
             <strong>Airbnb import calendar</strong>
             <p>
               {importCalendarReady
-                ? 'Ready to connect in Airbnb. Held, paying, and confirmed direct stays publish without guest details.'
+                ? 'Ready to connect in Airbnb. Checkout and confirmed direct stays publish without guest details.'
                 : 'Create the private outbound calendar token before connecting Airbnb.'}
             </p>
             {importCalendarReady && <code className="owner-calendar-url">{importCalendarUrl}</code>}
@@ -309,7 +309,7 @@ export default async function BookingSettings({
             <strong>Pricing policy</strong>
             <p>
               {instantSettings?.enabled
-                ? 'PJ prices and holds eligible stays automatically.'
+                ? 'PJ prices eligible stays automatically. Inventory locks only when the guest starts checkout.'
                 : instantSettings
                   ? 'Save the property policy below, then enable instant booking when the terms are ready.'
                   : 'PJ backend update is still required. The current request flow remains safe until it is deployed.'}
@@ -337,7 +337,7 @@ export default async function BookingSettings({
               <label>Deposit % <input name="deposit_percent" type="number" min="1" max="100" step="1" required defaultValue={instantSettings.deposit_percent ?? ''} /></label>
               <label>Minimum nights <input name="min_nights" type="number" min="1" max="30" step="1" required defaultValue={instantSettings.min_nights ?? ''} /></label>
               <label>Booking window · days <input name="booking_window_days" type="number" min="1" max="730" step="1" required defaultValue={instantSettings.booking_window_days ?? ''} /></label>
-              <label>Checkout hold · minutes <input name="hold_minutes" type="number" min="90" max="360" step="1" required defaultValue={instantSettings.hold_minutes ?? ''} /></label>
+              <label>Payment link · minutes <input name="hold_minutes" type="number" min="60" max="10080" step="1" required defaultValue={instantSettings.hold_minutes ?? ''} /></label>
             </div>
             <label className="booking-check"><input type="checkbox" name="taxable_fees" value="yes" defaultChecked={instantSettings.taxable_fees === true} /> Tax cleaning and pet fees too</label>
             <label>Cancellation / refund terms<textarea name="cancellation_terms" minLength={20} maxLength={4000} required defaultValue={instantSettings.cancellation_terms ?? ''} /></label>
@@ -386,7 +386,7 @@ export default async function BookingSettings({
             code.
           </p>
           <p>
-            Unpaid holds may be released here. Paid cancellations and refunds
+            Unpaid payment links and checkouts may be released here. Paid cancellations and refunds
             remain explicit operator actions.
           </p>
         </section>
