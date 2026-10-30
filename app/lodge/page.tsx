@@ -75,7 +75,7 @@ export default function LodgePage() {
           <div className={styles.coverStory}>
             <p className={styles.eyebrow}>Inside the Lodge</p>
             <h1 id="lodge-title">The house<br /><em>is yours.</em></h1>
-            <p className={styles.coverIntro}>Three bedrooms, two full baths, and room for eight. The kitchen, two lounges, deck, and covered patio are all part of your stay.</p>
+            <p className={styles.coverIntro}>Three bedrooms and two full baths, with room for eight. There's a full kitchen, a lounge on each level, an upper deck, and a covered patio.</p>
             <div className={styles.actions}>
               <Link className={styles.button} href="/book">Check your dates <span aria-hidden="true">↗</span></Link>
               <a className={styles.coverTextLink} href="#living">Come inside <span aria-hidden="true">↓</span></a>
