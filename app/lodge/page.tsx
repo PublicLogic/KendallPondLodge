@@ -73,9 +73,9 @@ export default function LodgePage() {
         <div className={styles.container + " " + styles.coverInner}>
           <p className={styles.coverLocation}>The Lodge at Kendall Pond <span>Gardner, Massachusetts</span></p>
           <div className={styles.coverStory}>
-            <p className={styles.eyebrow}>The entire waterfront home</p>
-            <h1 id="lodge-title">The whole house.<br /><em>Right on the pond.</em></h1>
-            <p className={styles.coverIntro}>Three bedrooms, two full baths, a deck above the lawn, and a private dock at the water. Room for eight, with space to be together or spread out.</p>
+            <p className={styles.eyebrow}>Inside the Lodge</p>
+            <h1 id="lodge-title">The house<br /><em>is yours.</em></h1>
+            <p className={styles.coverIntro}>Three bedrooms, two full baths, and room for eight. The kitchen, two lounges, deck, and covered patio are all part of your stay.</p>
             <div className={styles.actions}>
               <Link className={styles.button} href="/book">Check your dates <span aria-hidden="true">↗</span></Link>
               <a className={styles.coverTextLink} href="#living">Come inside <span aria-hidden="true">↓</span></a>
@@ -125,7 +125,7 @@ export default function LodgePage() {
         <div className={styles.downstairsGrid}>
           <div className={styles.downstairsCopy}>
             <p className={styles.eyebrow}>The lower level</p>
-            <h2 id="downstairs-title">Another place<br />to settle in.</h2>
+            <h2 id="downstairs-title">Downstairs has<br />its own lounge.</h2>
             <p>Downstairs has a second lounge, another fireplace, and doors that open toward the covered patio and the pond.</p>
             <p className={styles.smallNote}>A little more room when everyone doesn't want to do the same thing.</p>
           </div>
@@ -155,7 +155,7 @@ export default function LodgePage() {
 
       <section id="outside" className={styles.container + " " + styles.section} aria-labelledby="outside-title">
         <div className={styles.sectionHead}>
-          <div><p className={styles.eyebrow}>The deck, patio &amp; shoreline</p><h2 id="outside-title">Step outside.<br />Stay a while.</h2></div>
+          <div><p className={styles.eyebrow}>The deck, patio &amp; shoreline</p><h2 id="outside-title">The deck and<br />the hot tub.</h2></div>
           <div><p>Outdoor dining on the deck. A covered hot tub downstairs. Then the lawn, firepit, dock, and private shoreline.</p><Link className={styles.textLink} href="/grounds">Explore the waterfront <span aria-hidden="true">→</span></Link></div>
         </div>
         <div className={styles.outsideGrid}>
@@ -185,7 +185,7 @@ export default function LodgePage() {
 
       <section className={styles.close} aria-labelledby="dates-title">
         <div className={styles.container + " " + styles.closeInner}>
-          <div><p className={styles.eyebrow}>Hosted by Nate &amp; Allie</p><h2 id="dates-title">Got a few nights<br />in mind?</h2><p>Choose your dates, check what is available, and review the full price and terms before you decide.</p></div>
+          <div><p className={styles.eyebrow}>Hosted by Nate &amp; Allie</p><h2 id="dates-title">Find a few<br />nights that work.</h2><p>Choose your dates, check what is available, and review the full price and terms before you decide.</p></div>
           <div className={styles.closeActions}>
             <Link className={styles.button} href="/book">Check your dates <span aria-hidden="true">↗</span></Link>
             <Link className={styles.textLink} href="/photos">See all the Lodge photos <span aria-hidden="true">→</span></Link>
