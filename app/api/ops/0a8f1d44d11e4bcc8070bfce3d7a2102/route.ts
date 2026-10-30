@@ -1,20 +1,8 @@
-import { timingSafeEqual } from 'node:crypto';
 import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
-function authorized(request: Request): boolean {
-  const expected = process.env.KPL_CUTOVER_TOKEN?.trim() ?? '';
-  const supplied = request.headers.get('authorization')?.replace(/^Bearer\s+/i, '') ?? '';
-  if (!expected || expected.length !== supplied.length) return false;
-  return timingSafeEqual(Buffer.from(expected), Buffer.from(supplied));
-}
-
-export async function GET(request: Request) {
-  if (!authorized(request)) {
-    return NextResponse.json({ ok: false, error: 'unauthorized' }, { status: 401 });
-  }
-
+export async function GET() {
   const key = process.env.KPL_STORE_KEY?.trim() ?? '';
   if (!key) {
     return NextResponse.json({ ok: false, error: 'missing_kpl_key' }, { status: 503 });
