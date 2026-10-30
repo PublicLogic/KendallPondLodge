@@ -28,7 +28,8 @@ function PublicHeader({
   const onHome = pathname === "/";
   const onLodge = pathname === "/lodge";
   const onPhotos = pathname === "/photos";
-  const hasPhotoOpening = onHome || onLodge || onPhotos;
+  const onWaterfront = pathname === "/grounds";
+  const hasPhotoOpening = onHome || onLodge || onPhotos || onWaterfront;
   const [pastHero, setPastHero] = useState(false);
 
   useEffect(() => {
