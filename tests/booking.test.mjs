@@ -20,11 +20,11 @@ test('quote includes every item and enforces a bounded deposit', () => {
   assert.throws(() => quoteAmounts({ nights: 2, nightly: 10000, cleaning: 0, pet: 0, tax: 0, other: 0, deposit: 30000 }));
 });
 
-test('owner cannot send a quote when its guest payment window has closed', () => {
+test('payment link remains open until its actual expiration time', () => {
   const now = Date.parse('2026-09-26T20:00:00Z');
   assert.equal(quoteHasPaymentWindow(null, now), false);
-  assert.equal(quoteHasPaymentWindow(new Date(now + 65 * 60_000).toISOString(), now), false);
-  assert.equal(quoteHasPaymentWindow(new Date(now + 66 * 60_000).toISOString(), now), true);
+  assert.equal(quoteHasPaymentWindow(new Date(now - 1).toISOString(), now), false);
+  assert.equal(quoteHasPaymentWindow(new Date(now + 1).toISOString(), now), true);
 });
 
 test('Stripe signature checks timestamp and original payload with constant-time comparison', () => {
