@@ -16,7 +16,7 @@ export default function ExplorePage() {
     <main id="main-content">
       <PageHero
         eyebrow="Around Gardner"
-        title="A few days around Gardner."
+        title="Where to go while you’re here."
         intro="Breakfast in town, a walk at Wachusett, and dinner back at the house. Here are a few local places to help you plan your stay."
         image="/images/kpl/2026-10-28/kendall-pond-lodge-dawn-mist.webp"
         imageAlt="Morning mist over still water at Kendall Pond"
@@ -26,7 +26,7 @@ export default function ExplorePage() {
       />
 
       <section className="content-section">
-        <SectionHeading eyebrow="Make a little room in the week" title="Three ways to spend your stay." />
+        <SectionHeading eyebrow="Nearby and around town" title="A few ways to spend the day." />
         <div className="info-grid info-grid-three">
           <InfoCard title="A quiet midweek">
             <p>Start with breakfast at <a href="https://cafeedesia.toast.site/">Cafe Edesia in Gardner</a>, then head back for an afternoon at the house.</p>
@@ -44,7 +44,7 @@ export default function ExplorePage() {
       </section>
 
       <section className="content-section surface-section">
-        <SectionHeading eyebrow="Keep the season in mind" title="A different plan for a different day." intro="Use the official links for current hours, access, and conditions." />
+        <SectionHeading eyebrow="Depending on the weather" title="Some days call for a different plan." intro="Check the official links for current hours, access, and conditions." />
         <div className="info-grid info-grid-two">
           <InfoCard title="When it is cold or rainy">
             <p><a href="https://fitchburgartmuseum.org/visit/">Fitchburg Art Museum</a> is an indoor option for an afternoon out. Look at the exhibitions and visitor information before you go; the museum is not open every day.</p>
@@ -60,7 +60,7 @@ export default function ExplorePage() {
       <section className="content-section">
         <div className="booking-cta-panel kpl-pond-ambient">
           <PondScenery scene="explore" />
-          <div><p className="eyebrow">Have a few days in mind?</p><h2>See which nights work.</h2><p>Send your dates and group size. We’ll check availability and send the full quote before you pay.</p></div>
+          <div><p className="eyebrow">Staying at the Lodge</p><h2>Check your dates.</h2><p>See what’s available and review the full price and terms before you book.</p></div>
           <Link className="button button-primary" href="/book">Check dates →</Link>
         </div>
       </section>
