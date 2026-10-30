@@ -42,7 +42,7 @@ export default function HomePage() {
       <GuestReviewEvidence />
       <section className="showcase-moments guest-spaces" aria-labelledby="spaces-title">
         <div className="showcase-section-head">
-          <div><p className="showcase-eyebrow">The stay</p><h2 id="spaces-title">The house. The yard. The pond.</h2></div>
+          <div><p className="showcase-eyebrow">A look at the place</p><h2 id="spaces-title">There's more here than the view.</h2></div>
           <Link className="showcase-inline-link" href="/photos">See all 50 photos <span aria-hidden="true">→</span></Link>
         </div>
         <div className="guest-spaces-grid">
@@ -69,8 +69,8 @@ export default function HomePage() {
       <StayFAQ contactHref={hostContactHref()} />
       <section className="showcase-close kpl-pond-ambient" aria-labelledby="showcase-close-title">
         <PondScenery scene="home" />
-        <div><p className="showcase-eyebrow">See you at the pond</p><h2 id="showcase-close-title">Got a weekend in mind?</h2>
-          <p>{enabled ? "Send us your dates. We’ll check availability and send the full price before asking for payment." : "Find available nights and the full price on Airbnb."}</p></div>
+        <div><p className="showcase-eyebrow">Hosted by Nate &amp; Allie</p><h2 id="showcase-close-title">Come stay with us.</h2>
+          <p>{enabled ? "Check your dates and review the full price and terms before you pay." : "Find available nights and the full price on Airbnb."}</p></div>
         <div className="showcase-close-actions"><BookingAction enabled={enabled} className="showcase-button showcase-button-dark">{enabled ? "Request your dates" : "View dates on Airbnb"}<span aria-hidden="true">↗</span></BookingAction>
           <Link className="showcase-inline-link" href="/explore">Around Gardner &amp; Wachusett <span aria-hidden="true">→</span></Link></div>
       </section>
