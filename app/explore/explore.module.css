@@ -1,0 +1,584 @@
+/* KPL Explore: an editorial local guide, not a travel-directory dashboard.
+   All imagery is the Lodge's own. Same forest, cream and warm-gold palette. */
+.page {
+  --explore-ink: #203d31;
+  --explore-muted: #536257;
+  --explore-paper: #f7f3eb;
+  --explore-rule: #d5dbce;
+  background: var(--explore-paper);
+  color: var(--explore-ink);
+  overflow: clip;
+}
+.page :is(h1, h2, h3) {
+  margin: 0;
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -.046em;
+  line-height: 1.1;
+}
+.page a:focus-visible,
+.page button:focus-visible {
+  outline: 3px solid #b68c53;
+  outline-offset: 4px;
+}
+.page section[id] { scroll-margin-top: 108px; }
+.eyebrow {
+  margin: 0 0 1.15rem;
+  color: var(--explore-muted);
+  font-size: .69rem;
+  line-height: 1.5;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+  font-weight: 650;
+}
+
+/* Different from Lodge and Photos: open with a useful invitation, not an
+   oversized full-screen image. The image is honestly captioned as KPL. */
+.opening {
+  display: grid;
+  grid-template-columns: minmax(0, 1.07fr) minmax(0, .93fr);
+  min-height: clamp(590px, 77svh, 790px);
+  background: var(--explore-paper);
+}
+.openingCopy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  max-width: 850px;
+  padding: clamp(3.5rem, 6vw, 6.5rem) clamp(2rem, 6vw, 7rem);
+}
+.opening h1 {
+  max-width: 14ch;
+  color: var(--explore-ink);
+  font-size: clamp(3.4rem, 5.2vw, 5.7rem);
+  line-height: 1.025;
+  letter-spacing: -.057em;
+  text-wrap: balance;
+}
+.openingIntro {
+  max-width: 48ch;
+  margin: 1.55rem 0 0;
+  color: var(--explore-muted);
+  font-size: clamp(.99rem, 1.14vw, 1.08rem);
+  line-height: 1.76;
+}
+.openingNav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .3rem 1.4rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--explore-rule);
+  padding-top: 1.25rem;
+}
+.openingNav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .65rem;
+  min-height: 42px;
+  color: #28533d;
+  font-size: .79rem;
+  font-weight: 665;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.openingNav a:hover { border-color: currentColor; }
+.openingPhoto {
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #244538;
+}
+.openingPhoto img { object-fit: cover; object-position: center 45%; }
+.openingPhoto::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 30%;
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(6,26,18,.6), transparent);
+}
+.openingPhoto figcaption {
+  position: absolute;
+  z-index: 1;
+  bottom: 1.4rem;
+  left: 1.65rem;
+  color: #fff9ec;
+  font-size: .74rem;
+  line-height: 1.5;
+  letter-spacing: .02em;
+}
+
+/* Hinata's strongest idea interpreted for the actual Lodge:
+   guests can picture a morning, afternoon and evening, without invented
+   experiences, locations or travel times. */
+.days {
+  width: min(1280px, calc(100% - 96px));
+  margin-inline: auto;
+  padding-block: clamp(5.5rem, 9vw, 8rem);
+}
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 1.7rem 3.5rem;
+  margin-bottom: clamp(2.1rem, 4vw, 3.1rem);
+}
+.sectionHeader h2 {
+  max-width: 15ch;
+  color: var(--explore-ink);
+  font-size: clamp(2.7rem, 4.5vw, 4.9rem);
+}
+.sectionHeader > p {
+  max-width: 43ch;
+  margin: 0;
+  color: var(--explore-muted);
+  font-size: .94rem;
+  line-height: 1.75;
+}
+.dayGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.25rem, 3vw, 3.4rem); }
+.day {
+  min-width: 0;
+  border-top: 1px solid #9eaea0;
+  padding-top: 1.25rem;
+}
+.dayArea {
+  margin: 0;
+  color: #536957;
+  font-size: .72rem;
+  font-weight: 675;
+  line-height: 1.5;
+}
+.day h3 {
+  margin: .7rem 0 1.25rem;
+  color: var(--explore-ink);
+  font-size: clamp(1.78rem, 2.4vw, 2.5rem);
+}
+.day ol { margin: 0; padding: 0; list-style: none; }
+.day li { border-top: 1px solid #dde2d7; padding: .85rem 0 .95rem; }
+.day li > span {
+  display: block;
+  margin-bottom: .3rem;
+  color: #617366;
+  font-size: .68rem;
+  font-weight: 660;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+.day li p {
+  margin: 0;
+  color: #435a4c;
+  font-size: .87rem;
+  line-height: 1.66;
+}
+.day li a { color: #24573c; font-weight: 675; text-underline-offset: .21em; }
+.day li a:hover { color: #183c2b; }
+.planNote {
+  max-width: 82ch;
+  margin: 1.35rem 0 0;
+  color: #687669;
+  font-size: .77rem;
+  line-height: 1.65;
+}
+
+/* Useful directory. Text-driven with good rhythm, not 11 identical
+   marketing cards and not a stale "top 10" ranking. */
+.picks {
+  padding: clamp(5rem, 8vw, 7rem) max(1.5rem, calc((100vw - 1280px) / 2));
+  background: #e9eee4;
+}
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem clamp(.9rem, 2.15vw, 2rem);
+  border-bottom: 1px solid #bdcbba;
+  padding-bottom: .3rem;
+}
+.filters button {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  flex: none;
+  min-height: 48px;
+  padding: .6rem 0;
+  border: 0;
+  border-bottom: 1.5px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: #536658;
+  font: inherit;
+  font-size: .8rem;
+  font-weight: 630;
+  cursor: pointer;
+  transition: color 170ms ease, border-color 170ms ease;
+}
+.filters button:hover,
+.filters button[aria-pressed="true"] { color: var(--explore-ink); border-color: var(--explore-ink); }
+.filters button[aria-pressed="true"] { font-weight: 730; }
+.filters button span { color: #708577; font-size: .66rem; font-variant-numeric: tabular-nums; }
+.count { margin: 1.15rem 0 .75rem; color: #617466; font-size: .75rem; line-height: 1.6; }
+.directory {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(2rem, 5vw, 6.5rem);
+}
+.pick {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .25rem;
+  align-content: start;
+  border-bottom: 1px solid #bfccbd;
+  padding: 1.35rem 0 1.55rem;
+}
+.pickBody { min-width: 0; }
+.pickCategory {
+  margin: 0 0 .4rem;
+  color: #4a6b54;
+  font-size: .69rem;
+  font-weight: 720;
+  line-height: 1.5;
+}
+.pickCategory span { color: #6f8072; font-weight: 560; }
+.pick h3 {
+  color: var(--explore-ink);
+  font-size: clamp(1.38rem, 2vw, 1.95rem);
+  line-height: 1.18;
+}
+.pickBody > p:last-child {
+  max-width: 53ch;
+  margin: .55rem 0 0;
+  color: #4b5f50;
+  font-size: .84rem;
+  line-height: 1.65;
+}
+.pickLink {
+  display: inline-flex;
+  grid-column: 1;
+  align-items: center;
+  justify-content: space-between;
+  justify-self: start;
+  min-height: 37px;
+  gap: 1rem;
+  color: #22533a;
+  border-bottom: 1px solid #809a83;
+  font-size: .75rem;
+  font-weight: 685;
+  text-decoration: none;
+}
+.pickLink:hover { border-color: currentColor; }
+
+/* MBTA information is a transport helper, not a fabricated live widget.
+   The board only displays actual API data when retrieved successfully. */
+.rail {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  gap: clamp(3rem, 6vw, 7rem);
+  padding: clamp(5.5rem, 8vw, 8rem) max(1.5rem, calc((100vw - 1280px) / 2));
+  background: #1d3d30;
+  color: #fff9ee;
+}
+.railCopy { padding-top: 1.25rem; }
+.rail .eyebrow { color: #dddeb9; }
+.rail h2 {
+  max-width: 13ch;
+  color: #fff9ee;
+  font-size: clamp(2.8rem, 4.5vw, 4.9rem);
+}
+.railCopy > p:not(.eyebrow) {
+  max-width: 49ch;
+  margin: 1.35rem 0 0;
+  color: #d7e6d7;
+  font-size: .95rem;
+  line-height: 1.78;
+}
+.railLinks { display: flex; flex-wrap: wrap; gap: .3rem 1.5rem; margin-top: 1.45rem; }
+.railLinks a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  gap: .75rem;
+  border-bottom: 1px solid rgba(241,244,222,.52);
+  color: #fff9ee;
+  font-size: .8rem;
+  font-weight: 675;
+  text-decoration: none;
+}
+.railLinks a:hover { border-color: #fff9ee; }
+.railBoard {
+  min-width: 0;
+  align-self: start;
+  padding: clamp(1.4rem, 3vw, 2.5rem);
+  background: #f7f3eb;
+  color: #203d31;
+  border: 1px solid #e0e3d7;
+}
+.boardTitle { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; font-size: .66rem; letter-spacing: .075em; text-transform: uppercase; font-weight: 680; color: #5f755e; }
+.railBoard h3 { margin: 1.4rem 0 1.2rem; color: #203d31; font-size: clamp(1.55rem, 2vw, 2.25rem); }
+.departures { margin: 0; padding: 0; list-style: none; border-top: 1px solid #cfd9cb; }
+.departures li { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .4rem 1rem; padding: .8rem 0; border-bottom: 1px solid #cfd9cb; }
+.departures time { color: #244737; font-family: var(--font-serif), Georgia, serif; font-size: 1.45rem; font-variant-numeric: tabular-nums; }
+.departures li span { color: #657b67; font-size: .7rem; line-height: 1.45; }
+.railUnavailable {
+  margin: 0;
+  padding: 1.15rem 0;
+  border-block: 1px solid #cfd9cb;
+  color: #516b57;
+  font-size: .87rem;
+  line-height: 1.7;
+}
+.railFine { max-width: 65ch; margin: 1rem 0 0; color: #657467; font-size: .71rem; line-height: 1.65; }
+.mart { border-top: 1px solid #cfd9cb; padding-top: 1.35rem; margin-top: 1.5rem; }
+.martName { margin: 0 0 .45rem !important; font-size: .7rem; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+.mart p:not(.martName) { margin: 0; color: #4c6352; font-size: .82rem; line-height: 1.68; }
+.mart a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .7rem;
+  min-height: 42px;
+  margin-top: .8rem;
+  border-bottom: 1px solid #78957c;
+  color: #24573d;
+  font-size: .76rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.mart a:hover { border-color: currentColor; }
+
+/* Chamber is the live source for businesses and events; avoid copying an
+   event list that will go stale within a few days. */
+.chamber {
+  padding: clamp(5.5rem, 8vw, 8rem) max(1.5rem, calc((100vw - 1280px) / 2));
+  background: var(--explore-paper);
+}
+.chamberInner {
+  display: grid;
+  grid-template-columns: minmax(0,.83fr) minmax(0,1.17fr);
+  gap: clamp(2.5rem, 7vw, 7rem);
+}
+.chamberIntro h2 {
+  max-width: 14ch;
+  color: var(--explore-ink);
+  font-size: clamp(2.65rem, 4.4vw, 4.8rem);
+}
+.chamberIntro > p:not(.eyebrow) {
+  max-width: 50ch;
+  margin: 1.35rem 0 0;
+  color: var(--explore-muted);
+  font-size: .96rem;
+  line-height: 1.75;
+}
+.chamberLinks { border-top: 1px solid #c4d0c2; }
+.chamberLinks a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.3rem;
+  padding: 1.1rem 0 1.2rem;
+  min-height: 93px;
+  border-bottom: 1px solid #c4d0c2;
+  color: #203d31;
+  text-decoration: none;
+}
+.chamberLinks a:hover strong { text-decoration: underline; text-underline-offset: .2em; }
+.chamberLinks a > span:first-child { display: flex; flex-direction: column; gap: .4rem; }
+.chamberLinks small { color: #587466; font-size: .7rem; font-weight: 630; line-height: 1.3; }
+.chamberLinks strong { color: #203d31; font-family: var(--font-serif), Georgia, serif; font-size: clamp(1.25rem, 1.65vw, 1.75rem); font-weight: 400; line-height: 1.22; }
+.chamberLinks a > span:last-child { font-size: 1.1rem; }
+.chamberNote { max-width: 65ch; margin: 1.3rem 0 0; color: #708071; font-size: .76rem; line-height: 1.62; }
+
+/* The final KPL photo is unmistakably the house, never the places above. */
+.back { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 495px; background: #213f32; color: #f7f3eb; }
+.backPhoto { position: relative; min-height: 495px; overflow: hidden; }
+.backPhoto img { object-fit: cover; object-position: center 55%; }
+.backCopy { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: clamp(3rem, 6vw, 6.5rem); }
+.back .eyebrow { color: #dfe0ba; }
+.back h2 { max-width: 12ch; color: #f7f3eb; font-size: clamp(2.75rem, 4.25vw, 4.75rem); }
+.backCopy > p:not(.eyebrow) { max-width: 43ch; margin: 1.25rem 0 0; color: #d9e6d7; font-size: .93rem; line-height: 1.72; }
+.backLinks { display: flex; flex-wrap: wrap; gap: .35rem 1.4rem; margin-top: 1.6rem; }
+.backLinks a { display: inline-flex; gap: .65rem; align-items: center; justify-content: space-between; min-height: 44px; border-bottom: 1px solid #99b0a0; color: #fff9ee; text-decoration: none; font-size: .79rem; font-weight: 675; }
+.backLinks a:first-child { min-height: 49px; padding: .7rem 1.05rem; border: 1px solid #f5ecd9; border-radius: 6px; background: #f5ecd9; color: #213f32; }
+.backLinks a:first-child:hover { background: #e9d9b5; }
+.backLinks a:not(:first-child):hover { border-color: #fff9ee; }
+
+@media (max-width: 1050px) {
+  .openingCopy { padding-inline: clamp(1.7rem, 4vw, 4rem); }
+  .opening h1 { font-size: clamp(3.1rem, 5.4vw, 5rem); }
+  .rail { gap: 3rem; }
+}
+@media (max-width: 840px) {
+  .opening { grid-template-columns: 1fr; }
+  .openingCopy { padding: 3.5rem 1.4rem 2.5rem; }
+  .opening h1 { font-size: clamp(3.5rem, 8vw, 5.4rem); }
+  .openingPhoto { min-height: 350px; }
+  .days { width: calc(100% - 2.8rem); padding-block: 4.7rem; }
+  .dayGrid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .sectionHeader h2 { font-size: clamp(2.5rem, 6vw, 3.9rem); }
+  .rail { grid-template-columns: 1fr; padding-block: 4.5rem; }
+  .rail h2 { max-width: none; }
+  .railCopy { padding-top: 0; }
+  .chamberInner { grid-template-columns: 1fr; gap: 2rem; }
+  .back { grid-template-columns: 1fr; }
+  .backPhoto { min-height: 330px; }
+  .backCopy { padding: 3.5rem 2.5rem; }
+}
+@media (max-width: 600px) {
+  .openingCopy { padding: 2.8rem 1.15rem 2.2rem; }
+  .opening h1 { font-size: clamp(2.95rem, 11vw, 4.2rem); }
+  .openingIntro { margin-top: 1rem; font-size: .97rem; }
+  .openingNav { gap: .1rem 1rem; margin-top: 1.3rem; }
+  .openingNav a { min-height: 42px; font-size: .75rem; }
+  .openingPhoto { min-height: 295px; }
+  .openingPhoto figcaption { bottom: .8rem; left: 1rem; font-size: .69rem; }
+  .days { width: calc(100% - 2.3rem); padding-block: 3.8rem; }
+  .dayGrid { grid-template-columns: 1fr; gap: 2rem; }
+  .day h3 { font-size: 2rem; margin: .6rem 0 .9rem; }
+  .sectionHeader { gap: .95rem; margin-bottom: 1.7rem; }
+  .sectionHeader h2 { font-size: clamp(2.45rem, 9.3vw, 3.4rem); }
+  .sectionHeader > p { font-size: .88rem; }
+  .picks { padding: 3.8rem 1.15rem; }
+  .filters { flex-wrap: nowrap; overflow-x: auto; gap: 1.2rem; scrollbar-width: thin; }
+  .filters button { white-space: nowrap; }
+  .directory { grid-template-columns: 1fr; }
+  .pick { padding-block: 1.15rem; }
+  .rail { padding: 4rem 1.15rem; }
+  .rail h2 { font-size: clamp(2.65rem, 9vw, 3.7rem); }
+  .railBoard { padding: 1.25rem .95rem; }
+  .departures time { font-size: 1.2rem; }
+  .chamber { padding: 4rem 1.15rem; }
+  .chamberIntro h2 { font-size: clamp(2.5rem, 9vw, 3.7rem); }
+  .chamberLinks a { min-height: 80px; }
+  .backPhoto { min-height: 260px; }
+  .backCopy { padding: 3.3rem 1.15rem; }
+  .back h2 { font-size: clamp(2.5rem, 9vw, 3.55rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page *, .page *::before, .page *::after { transition: none !important; scroll-behavior: auto !important; }
+}
+
+
+/* PJ-sourced municipal events and MBTA alerts. Public records are source-
+   linked; never mimic live transport or imply an event has been booked. */
+.railAlerts {
+  margin-top: 1.3rem;
+  padding-block: 1.05rem;
+  border-top: 1px solid #cfd9cb;
+}
+.railAlerts a {
+  display: inline-flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+  min-height: 43px;
+  border-bottom: 1px solid #dde5da;
+  color: #24573d;
+  font-size: .79rem;
+  font-weight: 660;
+  line-height: 1.5;
+  text-decoration: none;
+}
+.railAlerts a:hover { color: #173a29; }
+.community {
+  padding: clamp(5rem, 8vw, 7.5rem) 0;
+  background: #f7f3eb;
+  border-bottom: 1px solid #d5dbce;
+}
+.communityInner {
+  width: min(1280px, calc(100% - 96px));
+  margin-inline: auto;
+}
+.eventGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2.75rem);
+}
+.event {
+  border-top: 1px solid #b6c6b4;
+  min-width: 0;
+  padding: 1.1rem 0 1.2rem;
+}
+.event time {
+  color: #5b765e;
+  display: block;
+  font-size: .72rem;
+  font-weight: 725;
+  letter-spacing: .06em;
+}
+.event h3 {
+  margin: .7rem 0 .6rem;
+  color: #203d31;
+  font-size: clamp(1.55rem, 2vw, 2.25rem);
+}
+.event > p {
+  min-height: 2rem;
+  margin: 0;
+  color: #526658;
+  font-size: .85rem;
+  line-height: 1.7;
+}
+.eventMeta {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .4rem .85rem;
+  margin-top: 1rem;
+  padding-top: .75rem;
+  border-top: 1px solid #e0e6d9;
+  font-size: .7rem;
+  color: #617468;
+}
+.eventMeta a {
+  color: #24573c;
+  font-weight: 690;
+  text-decoration: none;
+  border-bottom: 1px solid #87a08c;
+}
+.eventMeta a:hover { border-color: #24573c; }
+.eventEmpty {
+  max-width: 65ch;
+  margin: 0;
+  padding: 1.5rem 0;
+  border-block: 1px solid #cdd8ca;
+  color: #506455;
+  font-size: .92rem;
+  line-height: 1.78;
+}
+.eventNote { margin: 1.2rem 0 0; font-size: .75rem; color: #657766; line-height: 1.65; }
+.eventLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem 1.75rem;
+  margin-top: 1.4rem;
+}
+.eventLinks a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  min-height: 44px;
+  border-bottom: 1px solid #8da18e;
+  color: #24513b;
+  text-decoration: none;
+  font-size: .81rem;
+  font-weight: 680;
+}
+.eventLinks a:hover { border-color: #24513b; }
+@media (max-width: 900px) {
+  .eventGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .community { padding-block: 3.85rem; }
+  .communityInner { width: calc(100% - 2.3rem); }
+  .eventGrid { grid-template-columns: 1fr; }
+  .event { padding-block: 1rem; }
+  .event h3 { font-size: 1.9rem; }
+  .event > p { min-height: 0; }
+}

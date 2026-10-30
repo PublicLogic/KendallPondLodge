@@ -1,0 +1,245 @@
+{
+  "collection": "Kendall Pond Lodge — Autumn Morning Media",
+  "preparedDate": "2026-10-28",
+  "preview": "/media/autumn-2026-10-28.html",
+  "notes": [
+    "Additive asset collection; the existing Website Top 50 and page selections are unchanged.",
+    "The three principal stills are AI-assisted retouched derivatives. Fine details may be reconstructed; these are not untouched documentary originals.",
+    "Principal stills include high-quality JPEG, full-size WebP, and 800-pixel WebP. JPEG and WebP exports use sRGB and omit EXIF/GPS.",
+    "Source video copies are 910 x 512. Generated still dimensions do not establish recovered original photographic detail.",
+    "Video cuts preserve original timing and scenes at native 910 x 512 / 30 fps, contain no audio, and are not seamless loops.",
+    "Video posters are native first frames from the finished encoded cuts, with no additional grade.",
+    "Capture dates are not verified; preparedDate is the preparation date."
+  ],
+  "photos": [
+    {
+      "order": 1,
+      "category": "Pond",
+      "src": "/images/kpl/2026-10-28/kendall-pond-lodge-dawn-mist.jpg",
+      "width": 1672,
+      "height": 941,
+      "bytes": 550490,
+      "sha256": "eadae35ce6b65f6c0ccf4a324116a0810c1dfdd0a33d78e7db1cbef335e995dd",
+      "alt": "Morning mist above still water and reflected trees on Kendall Pond",
+      "captureDate": null,
+      "recommendedUse": "Hero / wide atmospheric banner",
+      "aiAssisted": true,
+      "treatment": "Refined natural dawn tones, clearer midtones, restrained warmth; AI-assisted reconstruction of fine detail.",
+      "source": {
+        "filename": "IMG_0559.mp4",
+        "sha256": "0ff9a9d741f70c742e43f665a50cea1c42b54bc3286e52a315b6471f35e03435",
+        "width": 910,
+        "height": 512,
+        "frameSeconds": 14.2
+      },
+      "retouchedMasterSha256": "ce1bcc0a99746809171f3a37b366310300e70462ea4786b3f3a23799e384cb9e",
+      "renditions": [
+        {
+          "src": "/images/kpl/2026-10-28/kendall-pond-lodge-dawn-mist.webp",
+          "width": 1672,
+          "height": 941,
+          "bytes": 222706,
+          "sha256": "baea2f3f680a1dcd8e9b1b4c8832cae41fc1108c9d87c1ef2872296e7cacddf1"
+        },
+        {
+          "src": "/images/kpl/2026-10-28/kendall-pond-lodge-dawn-mist-800.webp",
+          "width": 800,
+          "height": 450,
+          "bytes": 67332,
+          "sha256": "1e591470ce2109bfa30f156949a5f4a227ce616db007085db00a3e9761f2ee21"
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "category": "Exterior",
+      "src": "/images/kpl/2026-10-28/kendall-pond-lodge-exterior-autumn.jpg",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 978584,
+      "sha256": "95f3031cd59784b4902fdb2fac390846fd538ff009760dde92193c57972598b7",
+      "alt": "The yellow lodge, brown deck, and covered hot tub framed by autumn trees",
+      "captureDate": null,
+      "recommendedUse": "Lodge introduction / property gallery",
+      "aiAssisted": true,
+      "treatment": "Exposure and color finishing; loose hose and white bucket removed; AI-assisted retouch.",
+      "source": {
+        "filename": "IMG_0557.jpeg",
+        "sha256": "038db3e4de48069d75171ba7e3324733c4c1998a1f4a531654a4e73ba90b3140",
+        "width": 1536,
+        "height": 1152
+      },
+      "retouchedMasterSha256": "5b199761d7e7932a8e82766feadd3f25f095e05cbba44bf5956e0b625b131537",
+      "renditions": [
+        {
+          "src": "/images/kpl/2026-10-28/kendall-pond-lodge-exterior-autumn.webp",
+          "width": 1448,
+          "height": 1086,
+          "bytes": 520160,
+          "sha256": "4d61a9e856a19b152c3a714605d667ae33fef3b0d66bc522a2264ab50cce9ef7"
+        },
+        {
+          "src": "/images/kpl/2026-10-28/kendall-pond-lodge-exterior-autumn-800.webp",
+          "width": 800,
+          "height": 600,
+          "bytes": 174400,
+          "sha256": "42b92229da3f5c6048bf93d79488d59791d3eb11b50133366084aa1fa2e0c4d5"
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "category": "Deck",
+      "src": "/images/kpl/2026-10-28/kendall-pond-lodge-deck-lounge-autumn.jpg",
+      "width": 1672,
+      "height": 941,
+      "bytes": 779874,
+      "sha256": "6b548ba6289199e37da2a8d3ffe2a62d1e7830ad50e6e290627951d6a0dcc4a8",
+      "alt": "Cushioned deck seating overlooking autumn trees and mist on the pond",
+      "captureDate": null,
+      "recommendedUse": "Outdoor living / editorial section",
+      "aiAssisted": true,
+      "treatment": "Lifted seating exposure, warm neutral color and small leaf cleanup; AI-assisted reconstruction of fine detail.",
+      "source": {
+        "filename": "IMG_0579.mp4",
+        "sha256": "c446385984b838ca901d1813328e891b519b617b96d2c3b800a22fd5011be09d",
+        "width": 910,
+        "height": 512,
+        "frameSeconds": 10.2
+      },
+      "retouchedMasterSha256": "bc38908b5bad9472e1b211a128976caca88f40408e8ce02e8b20770957a4f3ef",
+      "renditions": [
+        {
+          "src": "/images/kpl/2026-10-28/kendall-pond-lodge-deck-lounge-autumn.webp",
+          "width": 1672,
+          "height": 941,
+          "bytes": 385102,
+          "sha256": "786dc9aacf72ac4dd48703ff21dc32cc4a3fbaae854fab10d028ddf4f11903f1"
+        },
+        {
+          "src": "/images/kpl/2026-10-28/kendall-pond-lodge-deck-lounge-autumn-800.webp",
+          "width": 800,
+          "height": 450,
+          "bytes": 107808,
+          "sha256": "e921cda39fa327a5d83b80ddd7be1def58ad2ec2d9c37ff506e15511bed597ee"
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "src": "/videos/kpl/2026-10-28/kendall-pond-dawn-autumn.mp4",
+      "width": 910,
+      "height": 512,
+      "durationSeconds": 1.6,
+      "frameRate": 30,
+      "frameCount": 48,
+      "bytes": 668066,
+      "sha256": "651f2120a5fef6031a209cbed0616b43ff2234dd5ce17e33a1789a1d31ed27e9",
+      "audio": false,
+      "codec": "h264",
+      "pixelFormat": "yuv420p",
+      "fastStart": true,
+      "seamlessLoop": false,
+      "generatedFrames": false,
+      "source": {
+        "filename": "IMG_0559.mp4",
+        "sha256": "0ff9a9d741f70c742e43f665a50cea1c42b54bc3286e52a315b6471f35e03435",
+        "width": 910,
+        "height": 512,
+        "startSeconds": 13.4,
+        "endSecondsExclusive": 15.0
+      },
+      "treatment": {
+        "filter": "trim=start_frame=402:end_frame=450,setpts=PTS-STARTPTS,eq=contrast=1.035:brightness=0.006:saturation=1.06:gamma=1.015,format=yuv420p",
+        "upscaled": false,
+        "cropped": false,
+        "stabilized": false,
+        "speedMultiplier": 1
+      },
+      "poster": {
+        "src": "/images/kpl/2026-10-28/kendall-pond-dawn-autumn-poster.jpg",
+        "width": 910,
+        "height": 512,
+        "bytes": 98214,
+        "sha256": "d696f1d925c9132e10ffa70e727c894c564113cc0781e5ff8ea4dbe25971d2d2"
+      }
+    },
+    {
+      "src": "/videos/kpl/2026-10-28/kendall-pond-deck-lounge-autumn.mp4",
+      "width": 910,
+      "height": 512,
+      "durationSeconds": 3.0,
+      "frameRate": 30,
+      "frameCount": 90,
+      "bytes": 1245964,
+      "sha256": "eb60c8c296aa6ecba4900c575914c7e0c8d3f6dff295167aff850c4198f81aaf",
+      "audio": false,
+      "codec": "h264",
+      "pixelFormat": "yuv420p",
+      "fastStart": true,
+      "seamlessLoop": false,
+      "generatedFrames": false,
+      "source": {
+        "filename": "IMG_0579.mp4",
+        "sha256": "c446385984b838ca901d1813328e891b519b617b96d2c3b800a22fd5011be09d",
+        "width": 910,
+        "height": 512,
+        "startSeconds": 9.5,
+        "endSecondsExclusive": 12.5
+      },
+      "treatment": {
+        "filter": "trim=start_frame=285:end_frame=375,setpts=PTS-STARTPTS,eq=contrast=1.025:brightness=0.004:saturation=1.08:gamma=1.06,format=yuv420p",
+        "upscaled": false,
+        "cropped": false,
+        "stabilized": false,
+        "speedMultiplier": 1
+      },
+      "poster": {
+        "src": "/images/kpl/2026-10-28/kendall-pond-deck-lounge-autumn-poster.jpg",
+        "width": 910,
+        "height": 512,
+        "bytes": 132788,
+        "sha256": "74e1c2c796b4a3d61f321e601dc1a2616f0ed081bf6ed9866123271924f62bd2"
+      }
+    },
+    {
+      "src": "/videos/kpl/2026-10-28/kendall-pond-outdoor-fireplace-autumn.mp4",
+      "width": 910,
+      "height": 512,
+      "durationSeconds": 3.0,
+      "frameRate": 30,
+      "frameCount": 90,
+      "bytes": 1450375,
+      "sha256": "1666aec298d4a36478e26e4741474c059114bcec1785715a8cccb3da671fbb18",
+      "audio": false,
+      "codec": "h264",
+      "pixelFormat": "yuv420p",
+      "fastStart": true,
+      "seamlessLoop": false,
+      "generatedFrames": false,
+      "source": {
+        "filename": "IMG_0580.mp4",
+        "sha256": "ce175967944c9202a00c20f858ee42c442552be30ee273a363a4cea3960ea2ba",
+        "width": 910,
+        "height": 512,
+        "startSeconds": 1.5,
+        "endSecondsExclusive": 4.5
+      },
+      "treatment": {
+        "filter": "trim=start_frame=45:end_frame=135,setpts=PTS-STARTPTS,eq=contrast=1.035:brightness=0.004:saturation=1.06:gamma=1.02,format=yuv420p",
+        "upscaled": false,
+        "cropped": false,
+        "stabilized": false,
+        "speedMultiplier": 1
+      },
+      "poster": {
+        "src": "/images/kpl/2026-10-28/kendall-pond-outdoor-fireplace-autumn-poster.jpg",
+        "width": 910,
+        "height": 512,
+        "bytes": 179966,
+        "sha256": "ce56f5be2175dc15e95bf39533fd5064d1e065d7e6a2ea4d61475d9a14999c2a"
+      }
+    }
+  ]
+}

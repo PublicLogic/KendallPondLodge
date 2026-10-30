@@ -1,0 +1,532 @@
+{
+  "collection": "Kendall Pond Lodge - Website Top 50",
+  "preparedDate": "2026-10-26",
+  "notes": [
+    "Photos 1-5 are recommended feature images; remaining photos are grouped by subject, not quality rank.",
+    "JPEG copies use sRGB color, a maximum 2560-pixel long edge and no EXIF/GPS metadata.",
+    "Full-resolution originals and private source metadata are not included.",
+    "Confirm current furnishings and commercial usage rights before publishing."
+  ],
+  "photos": [
+    {
+      "order": 1,
+      "category": "01-Hero",
+      "src": "/images/kpl/website-top-50/01-Hero/01-kendall-pond-lodge-autumn-lodge-exterior.jpg",
+      "alt": "The Lodge at Kendall Pond framed by autumn trees",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-05",
+      "recommendedUse": "Homepage / feature image"
+    },
+    {
+      "order": 2,
+      "category": "01-Hero",
+      "src": "/images/kpl/website-top-50/01-Hero/02-kendall-pond-lodge-autumn-waterfront.jpg",
+      "alt": "Autumn reflections above the private shoreline and firepit",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-19",
+      "recommendedUse": "Homepage / feature image"
+    },
+    {
+      "order": 3,
+      "category": "01-Hero",
+      "src": "/images/kpl/website-top-50/01-Hero/03-kendall-pond-lodge-lakeview-deck.jpg",
+      "alt": "Outdoor lounge and dining deck overlooking Kendall Pond",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-01",
+      "recommendedUse": "Homepage / feature image"
+    },
+    {
+      "order": 4,
+      "category": "01-Hero",
+      "src": "/images/kpl/website-top-50/01-Hero/04-kendall-pond-lodge-hot-tub-with-pond-view.jpg",
+      "alt": "Bubbling hot tub overlooking the pond in autumn",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-23",
+      "recommendedUse": "Homepage / feature image"
+    },
+    {
+      "order": 5,
+      "category": "01-Hero",
+      "src": "/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg",
+      "alt": "Great room with sectional seating and fireplace",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-12",
+      "recommendedUse": "Homepage / feature image"
+    },
+    {
+      "order": 6,
+      "category": "02-Exterior",
+      "src": "/images/kpl/2026-10-28/kendall-pond-lodge-summer-lawn-premium.webp",
+      "alt": "The Lodge, stone firepit, lawn and shoreline lounge chair in summer",
+      "width": 2048,
+      "height": 1536,
+      "recommendedUse": "Property gallery",
+      "sourceFile": "IMG_7111.jpeg",
+      "replaces": "/images/kpl/website-top-50/02-Exterior/06-kendall-pond-lodge-summer-lodge-front.jpg",
+      "treatment": "Non-generative Adobe tonal correction; WebP export. No objects, architecture or furnishings generated.",
+      "sha256": "fb8377c4126b14ae6d6733e46e4b185dcd3ed053e96acc27199006949140d0f3",
+      "bytes": 1146708
+    },
+    {
+      "order": 7,
+      "category": "02-Exterior",
+      "src": "/images/kpl/2026-10-28/kendall-pond-lodge-autumn-lawn-premium.webp",
+      "alt": "Autumn trees framing the Lodge, lawn and stone firepit",
+      "width": 2048,
+      "height": 1536,
+      "recommendedUse": "Property gallery",
+      "sourceFile": "IMG_0124.jpeg",
+      "replaces": "/images/kpl/website-top-50/02-Exterior/07-kendall-pond-lodge-autumn-lodge-and-yard.jpg",
+      "treatment": "Non-generative Adobe tonal correction; WebP export. No objects, architecture or furnishings generated.",
+      "sha256": "f160450f9b423ce362838c4ec43d8a92c59d8b36e48a20c51d43c7371aa62d39",
+      "bytes": 1343928
+    },
+    {
+      "order": 8,
+      "category": "02-Exterior",
+      "src": "/images/kpl/website-top-50/02-Exterior/08-kendall-pond-lodge-autumn-lodge-from-shoreline.jpg",
+      "alt": "Lodge exterior seen from the autumn shoreline and firepit",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-05",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 9,
+      "category": "02-Exterior",
+      "src": "/images/kpl/website-top-50/02-Exterior/09-kendall-pond-lodge-lodge-from-firepit.jpg",
+      "alt": "Lodge exterior seen across the stone firepit area",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-05-27",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 10,
+      "category": "02-Exterior",
+      "src": "/images/kpl/website-top-50/02-Exterior/10-kendall-pond-lodge-balcony-and-lodge-facade.jpg",
+      "alt": "Upper deck dining area beside the lodge facade",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-05-27",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 11,
+      "category": "03-Living-Spaces",
+      "src": "/images/kpl/website-top-50/03-Living-Spaces/11-kendall-pond-lodge-great-room-seating.jpg",
+      "alt": "Sectional sofa and lake-facing doors in the great room",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-03",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 12,
+      "category": "03-Living-Spaces",
+      "src": "/images/kpl/website-top-50/03-Living-Spaces/12-kendall-pond-lodge-fireplace-and-lake-doors.jpg",
+      "alt": "Fireplace and French doors leading toward the lake",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-03",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 13,
+      "category": "03-Living-Spaces",
+      "src": "/images/kpl/website-top-50/03-Living-Spaces/13-kendall-pond-lodge-lower-lounge-seating.jpg",
+      "alt": "Lower-level lounge seating beside the lake-facing doors",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-12",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 14,
+      "category": "03-Living-Spaces",
+      "src": "/images/kpl/website-top-50/03-Living-Spaces/14-kendall-pond-lodge-lower-lounge-lake-access.jpg",
+      "alt": "Lower-level lounge with sliding doors to the covered patio",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-12",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 15,
+      "category": "03-Living-Spaces",
+      "src": "/images/kpl/website-top-50/03-Living-Spaces/15-kendall-pond-lodge-great-room-overlook.jpg",
+      "alt": "Great room beneath the lodge's tall windows",
+      "width": 1920,
+      "height": 2560,
+      "captureDate": "2026-10-23",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 16,
+      "category": "03-Living-Spaces",
+      "src": "/images/kpl/website-top-50/03-Living-Spaces/16-kendall-pond-lodge-fireplace-detail.jpg",
+      "alt": "White mantel and fireplace in the great room",
+      "width": 1920,
+      "height": 2560,
+      "captureDate": "2026-10-23",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 17,
+      "category": "04-Kitchen-and-Dining",
+      "src": "/images/kpl/website-top-50/04-Kitchen-and-Dining/17-kendall-pond-lodge-kitchen-and-breakfast-bar.jpg",
+      "alt": "Kitchen and breakfast bar beside the dining area",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-16",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 18,
+      "category": "04-Kitchen-and-Dining",
+      "src": "/images/kpl/website-top-50/04-Kitchen-and-Dining/18-kendall-pond-lodge-kitchen-cabinets-and-island.jpg",
+      "alt": "White kitchen cabinets and dark island countertop",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-03",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 19,
+      "category": "04-Kitchen-and-Dining",
+      "src": "/images/kpl/website-top-50/04-Kitchen-and-Dining/19-kendall-pond-lodge-dining-room-and-kitchen.jpg",
+      "alt": "Dining table with a view into the kitchen",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-03",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 20,
+      "category": "04-Kitchen-and-Dining",
+      "src": "/images/kpl/website-top-50/04-Kitchen-and-Dining/20-kendall-pond-lodge-dining-toward-great-room.jpg",
+      "alt": "Dining table looking toward the fireplace and great room",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-03",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 21,
+      "category": "04-Kitchen-and-Dining",
+      "src": "/images/kpl/website-top-50/04-Kitchen-and-Dining/21-kendall-pond-lodge-dining-and-island.jpg",
+      "alt": "Dining area and kitchen island with bar seating",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-12",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 22,
+      "category": "04-Kitchen-and-Dining",
+      "src": "/images/kpl/website-top-50/04-Kitchen-and-Dining/22-kendall-pond-lodge-welcome-basket.jpg",
+      "alt": "Guest welcome basket on the dining table",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-04",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 23,
+      "category": "05-Bedrooms",
+      "src": "/images/kpl/2026-10-28/kendall-pond-lodge-tiled-bedroom-premium.webp",
+      "alt": "Tiled-floor bedroom with white bedding, pale blue throw and folded towels",
+      "width": 1897,
+      "height": 1423,
+      "recommendedUse": "Property gallery",
+      "sourceFile": "IMG_7402.jpeg",
+      "replaces": "/images/kpl/website-top-50/05-Bedrooms/23-kendall-pond-lodge-tiled-bedroom-guest-ready.jpg",
+      "treatment": "Non-generative Adobe tonal correction, perspective correction; WebP export. No objects, architecture or furnishings generated.",
+      "sha256": "6aaf4844ec6ad2c42ea88f82ade445934b0de3acd7a1607b77037a4eea9f23b6",
+      "bytes": 275014
+    },
+    {
+      "order": 24,
+      "category": "05-Bedrooms",
+      "src": "/images/kpl/website-top-50/05-Bedrooms/24-kendall-pond-lodge-wood-floor-bedroom-guest-ready.jpg",
+      "alt": "Wood-floor bedroom prepared with fresh towels",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-16",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 25,
+      "category": "05-Bedrooms",
+      "src": "/images/kpl/2026-10-28/kendall-pond-lodge-wood-bedroom-premium.webp",
+      "alt": "Wood-floor bedroom with white bedding, tan throw, folded towels and sailboat artwork",
+      "width": 2020,
+      "height": 1515,
+      "recommendedUse": "Property gallery",
+      "sourceFile": "IMG_7093.jpeg",
+      "replaces": "/images/kpl/website-top-50/05-Bedrooms/25-kendall-pond-lodge-wood-floor-bedroom-wide.jpg",
+      "treatment": "Non-generative Adobe tonal correction, perspective correction; WebP export. No objects, architecture or furnishings generated.",
+      "sha256": "066ea05eb890ff55133d54b0f077973b216bf1f1c6dbb6146ffc3e4829938075",
+      "bytes": 209800
+    },
+    {
+      "order": 26,
+      "category": "05-Bedrooms",
+      "src": "/images/kpl/website-top-50/05-Bedrooms/26-kendall-pond-lodge-bunk-room-wide.jpg",
+      "alt": "Bunk room with blue rug and double closet",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-03",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 27,
+      "category": "05-Bedrooms",
+      "src": "/images/kpl/2026-10-28/kendall-pond-lodge-bunk-room-premium.webp",
+      "alt": "White twin-over-full bunk bed, blue rug, window and writing table",
+      "width": 2035,
+      "height": 1526,
+      "recommendedUse": "Property gallery",
+      "sourceFile": "IMG_6996.jpeg",
+      "replaces": "/images/kpl/website-top-50/05-Bedrooms/27-kendall-pond-lodge-bunk-room-alternate.jpg",
+      "treatment": "Non-generative Adobe tonal correction, perspective correction; WebP export. No objects, architecture or furnishings generated.",
+      "sha256": "9dd6c7547e24b6b97a94050293244d493fc620527a6fae30aa9f6efe44f5384e",
+      "bytes": 248020
+    },
+    {
+      "order": 28,
+      "category": "05-Bedrooms",
+      "src": "/images/kpl/website-top-50/05-Bedrooms/28-kendall-pond-lodge-wood-floor-bedroom-front.jpg",
+      "alt": "Front view of the wood-floor bedroom and end-of-bed bench",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-05-12",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 29,
+      "category": "06-Bathrooms",
+      "src": "/images/kpl/website-top-50/06-Bathrooms/29-kendall-pond-lodge-bathroom-vanity.jpg",
+      "alt": "Bathroom vanity with oval mirror and light blue walls",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-12",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 30,
+      "category": "06-Bathrooms",
+      "src": "/images/kpl/website-top-50/06-Bathrooms/30-kendall-pond-lodge-shower-and-towels.jpg",
+      "alt": "Shower and towels beside the bathroom entrance",
+      "width": 1920,
+      "height": 2560,
+      "captureDate": "2026-06-03",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 31,
+      "category": "07-Deck-and-Outdoor-Living",
+      "src": "/images/kpl/website-top-50/07-Deck-and-Outdoor-Living/31-kendall-pond-lodge-summer-deck-dining.jpg",
+      "alt": "Outdoor dining table and lounge seating overlooking the pond",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-01",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 32,
+      "category": "07-Deck-and-Outdoor-Living",
+      "src": "/images/kpl/website-top-50/07-Deck-and-Outdoor-Living/32-kendall-pond-lodge-deck-grill-and-dining.jpg",
+      "alt": "Grill and dining table on the lakeview deck",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-01",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 33,
+      "category": "07-Deck-and-Outdoor-Living",
+      "src": "/images/kpl/website-top-50/07-Deck-and-Outdoor-Living/33-kendall-pond-lodge-deck-lounge-seating.jpg",
+      "alt": "Outdoor sectional and wicker chairs on the upper deck",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-03",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 34,
+      "category": "07-Deck-and-Outdoor-Living",
+      "src": "/images/kpl/website-top-50/07-Deck-and-Outdoor-Living/34-kendall-pond-lodge-deck-sectional-front.jpg",
+      "alt": "Front view of the outdoor sectional and coffee table",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-05-27",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 35,
+      "category": "07-Deck-and-Outdoor-Living",
+      "src": "/images/kpl/website-top-50/07-Deck-and-Outdoor-Living/35-kendall-pond-lodge-autumn-deck-lounge.jpg",
+      "alt": "Sunlit deck lounge overlooking autumn foliage and the pond",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-19",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 36,
+      "category": "07-Deck-and-Outdoor-Living",
+      "src": "/images/kpl/website-top-50/07-Deck-and-Outdoor-Living/36-kendall-pond-lodge-autumn-deck-dining.jpg",
+      "alt": "Glass dining table on the deck above the autumn shoreline",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-19",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 37,
+      "category": "08-Hot-Tub",
+      "src": "/images/kpl/website-top-50/08-Hot-Tub/37-kendall-pond-lodge-covered-patio-hot-tub.jpg",
+      "alt": "Hot tub beneath the covered deck",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-23",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 38,
+      "category": "08-Hot-Tub",
+      "src": "/images/kpl/website-top-50/08-Hot-Tub/38-kendall-pond-lodge-hot-tub-seating-detail.jpg",
+      "alt": "Open hot tub and seating beneath the covered deck",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-04",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 39,
+      "category": "08-Hot-Tub",
+      "src": "/images/kpl/website-top-50/08-Hot-Tub/39-kendall-pond-lodge-autumn-hot-tub-side-view.jpg",
+      "alt": "Hot tub beside the covered patio with an autumn pond view",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-23",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 40,
+      "category": "09-Waterfront-and-Grounds",
+      "src": "/images/kpl/website-top-50/09-Waterfront-and-Grounds/40-kendall-pond-lodge-summer-firepit-and-shoreline.jpg",
+      "alt": "Stone firepit and chairs above the summer shoreline",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-03",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 41,
+      "category": "09-Waterfront-and-Grounds",
+      "src": "/images/kpl/website-top-50/09-Waterfront-and-Grounds/41-kendall-pond-lodge-summer-lawn-and-pond.jpg",
+      "alt": "Shaded lawn and firepit beside Kendall Pond",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-05-26",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 42,
+      "category": "09-Waterfront-and-Grounds",
+      "src": "/images/kpl/website-top-50/09-Waterfront-and-Grounds/42-kendall-pond-lodge-dock-and-waterfront-seating.jpg",
+      "alt": "Private dock and waterfront seating from the lawn",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-04",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 43,
+      "category": "09-Waterfront-and-Grounds",
+      "src": "/images/kpl/website-top-50/09-Waterfront-and-Grounds/43-kendall-pond-lodge-private-dock.jpg",
+      "alt": "Private dock extending into Kendall Pond",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-04",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 44,
+      "category": "09-Waterfront-and-Grounds",
+      "src": "/images/kpl/website-top-50/09-Waterfront-and-Grounds/44-kendall-pond-lodge-shoreline-lounger.jpg",
+      "alt": "Lounge chair beside the shoreline and private dock",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-04",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 45,
+      "category": "09-Waterfront-and-Grounds",
+      "src": "/images/kpl/website-top-50/09-Waterfront-and-Grounds/45-kendall-pond-lodge-waterside-bench.jpg",
+      "alt": "Bench and chair facing the pond",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-04",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 46,
+      "category": "09-Waterfront-and-Grounds",
+      "src": "/images/kpl/website-top-50/09-Waterfront-and-Grounds/46-kendall-pond-lodge-autumn-pond-and-dock.jpg",
+      "alt": "Kendall Pond and the dock beneath autumn foliage",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-14",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 47,
+      "category": "09-Waterfront-and-Grounds",
+      "src": "/images/kpl/website-top-50/09-Waterfront-and-Grounds/47-kendall-pond-lodge-late-autumn-firepit.jpg",
+      "alt": "Firepit and waterside chairs in late autumn",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-23",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 48,
+      "category": "09-Waterfront-and-Grounds",
+      "src": "/images/kpl/website-top-50/09-Waterfront-and-Grounds/48-kendall-pond-lodge-autumn-lawn.jpg",
+      "alt": "Sunny autumn lawn beside the pond",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-05",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 49,
+      "category": "09-Waterfront-and-Grounds",
+      "src": "/images/kpl/website-top-50/09-Waterfront-and-Grounds/49-kendall-pond-lodge-autumn-waterfront-bench.jpg",
+      "alt": "Waterfront bench beneath colorful autumn trees",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-10-09",
+      "recommendedUse": "Property gallery"
+    },
+    {
+      "order": 50,
+      "category": "09-Waterfront-and-Grounds",
+      "src": "/images/kpl/website-top-50/09-Waterfront-and-Grounds/50-kendall-pond-lodge-firepit-and-dock-from-deck.jpg",
+      "alt": "Elevated view of the firepit, shoreline and dock",
+      "width": 2560,
+      "height": 1920,
+      "captureDate": "2026-06-03",
+      "recommendedUse": "Property gallery"
+    }
+  ]
+}

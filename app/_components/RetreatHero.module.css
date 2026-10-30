@@ -1,0 +1,293 @@
+/* KPL opening: the real Lodge photographs and booking action share one canvas.
+   Guests choose the view themselves; no autoplay, external image or video. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: clamp(750px, 100svh, 1040px);
+  overflow: hidden;
+  background: #102c25;
+  color: #fff9ec;
+}
+.photographs {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+}
+.photograph {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  background: #26483c;
+  transition: opacity 650ms ease, visibility 650ms;
+}
+.leadPhoto {
+  opacity: 1;
+  visibility: visible;
+}
+.photograph img { object-fit: cover; }
+.hero:has(.sceneInput[value="1"]:checked) .leadPhoto,
+.hero:has(.sceneInput[value="2"]:checked) .leadPhoto {
+  opacity: 0;
+  visibility: hidden;
+}
+.hero:has(.sceneInput[value="1"]:checked) .photograph:nth-child(2),
+.hero:has(.sceneInput[value="2"]:checked) .photograph:nth-child(3) {
+  opacity: 1;
+  visibility: visible;
+}
+.overlay {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(7,27,21,.86) 0%, rgba(8,28,23,.72) 31%, rgba(10,30,25,.19) 69%, rgba(8,29,25,.11) 100%),
+    linear-gradient(180deg, rgba(5,22,17,.64) 0%, rgba(7,25,20,.12) 31%, transparent 52%),
+    linear-gradient(0deg, rgba(5,24,18,.93) 0%, rgba(6,28,20,.48) 23%, transparent 52%);
+}
+.inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem;
+  width: 100%;
+  max-width: 1600px;
+  min-height: inherit;
+  margin: 0 auto;
+  padding: clamp(135px, 14vh, 180px) clamp(1.6rem, 6.1vw, 7.5rem) clamp(1.4rem, 3.1vw, 3rem);
+}
+.copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(3.5rem, 8vh, 7rem);
+  flex: 1;
+  max-width: 880px;
+}
+.location {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin: 0;
+  color: rgba(255,250,237,.84);
+  font-size: .68rem;
+  line-height: 1.5;
+  letter-spacing: .13em;
+  font-weight: 690;
+  text-transform: uppercase;
+}
+.location span {
+  padding-left: 1rem;
+  border-left: 1px solid rgba(255,245,228,.42);
+  color: rgba(255,250,237,.66);
+}
+.story { max-width: 730px; padding-bottom: clamp(1rem, 4vh, 4rem); }
+.eyebrow {
+  margin: 0 0 1rem;
+  color: #f3d8aa;
+  font-size: .73rem;
+  line-height: 1.55;
+  font-weight: 730;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.hero h1 {
+  max-width: 12ch;
+  margin: 0;
+  color: #fff9ee;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(4.3rem, 7.3vw, 8.5rem);
+  line-height: .96;
+  letter-spacing: -.067em;
+  font-weight: 400;
+  text-wrap: balance;
+  text-shadow: 0 4px 32px rgba(3,18,12,.15);
+}
+.hero h1 span { display: block; }
+.hero h1 span:last-child { color: #f0d9ae; }
+.intro {
+  max-width: 39ch;
+  margin: 1.35rem 0 0;
+  color: #fff9ee;
+  font-family: var(--font-sans), sans-serif;
+  font-size: clamp(1.02rem, 1.45vw, 1.3rem);
+  line-height: 1.65;
+  font-weight: 480;
+}
+.welcome {
+  max-width: 52ch;
+  margin: .75rem 0 0;
+  color: rgba(255,251,238,.8);
+  font-size: .88rem;
+  line-height: 1.72;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.6rem;
+  margin-top: 1.75rem;
+}
+.primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  min-height: 54px;
+  padding: .85rem 1.35rem;
+  border: 1px solid #fbf5e9;
+  border-radius: 99px;
+  background: #fbf5e9;
+  color: #1a4435;
+  font-size: .84rem;
+  line-height: 1.3;
+  font-weight: 760;
+  text-decoration: none;
+  box-shadow: 0 8px 27px rgba(3,20,14,.14);
+  transition: background-color .2s ease, transform .2s ease;
+}
+.primary:hover { background: #ecd5a5; border-color: #ecd5a5; color: #173e30; transform: translateY(-1px); }
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: .85rem;
+  min-height: 48px;
+  color: #fffaf0;
+  font-size: .84rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.secondary:hover { text-decoration: underline; text-underline-offset: .35rem; }
+.bottom {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255,250,238,.33);
+}
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1.5rem;
+  margin: 0;
+  padding-bottom: .65rem;
+  color: rgba(255,249,232,.81);
+  font-size: .72rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.details span:not(:first-child)::before { content: "·"; margin-right: 1.25rem; opacity: .75; }
+.photoChoices {
+  display: flex;
+  align-items: end;
+  gap: .55rem;
+  flex: none;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.sceneOption {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  min-width: 0;
+  width: clamp(124px, 12vw, 174px);
+  padding: .38rem;
+  border: 1px solid rgba(255,255,255,.27);
+  border-radius: 9px;
+  background: rgba(12,29,23,.38);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.sceneOption:hover { background: rgba(17,45,33,.68); transform: translateY(-2px); }
+.sceneOption:has(.sceneInput:checked) { border-color: rgba(255,245,219,.95); background: rgba(20,52,38,.79); }
+.sceneOption:focus-within { outline: 3px solid #f5d08b; outline-offset: 2px; }
+.sceneInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  left: .4rem;
+  bottom: .4rem;
+}
+.sceneThumb {
+  position: relative;
+  flex: 0 0 53px;
+  width: 53px;
+  height: 55px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #4b6250;
+}
+.sceneThumb img { object-fit: cover; }
+.sceneLabel {
+  display: flex;
+  flex-direction: column;
+  gap: .23rem;
+  min-width: 0;
+  color: #fff9ed;
+  font-size: .68rem;
+  font-weight: 690;
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+.sceneLabel small { color: rgba(255,244,218,.68); font-size: .62rem; letter-spacing: .09em; }
+.hero a:focus-visible { outline: 3px solid #f5d08b; outline-offset: 4px; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+@media (max-width: 1100px) {
+  .inner { padding-inline: clamp(1.5rem, 4vw, 3.25rem); }
+  .hero h1 { font-size: clamp(4.1rem, 7.6vw, 7rem); }
+  .sceneOption { width: 120px; gap: .45rem; }
+  .sceneThumb { flex-basis: 42px; width: 42px; height: 52px; }
+}
+@media (max-width: 800px) {
+  .hero { min-height: max(770px, 100svh); }
+  .inner {
+    min-height: inherit;
+    padding: 125px 1.3rem 1.2rem;
+    gap: 2.1rem;
+  }
+  .overlay {
+    background:
+      linear-gradient(180deg, rgba(6,25,19,.78) 0%, rgba(8,27,20,.3) 30%, rgba(8,27,21,.55) 53%, rgba(5,22,17,.94) 100%),
+      linear-gradient(90deg, rgba(6,23,17,.7), rgba(6,23,17,.08) 85%);
+  }
+  .copy { gap: 3rem; }
+  .location { display: block; font-size: .62rem; }
+  .location span { display: block; border: 0; padding: .2rem 0 0; }
+  .story { max-width: 600px; padding-bottom: 0; }
+  .hero h1 { font-size: clamp(3.6rem, 11.8vw, 6.5rem); }
+  .intro { margin-top: 1rem; font-size: 1.04rem; line-height: 1.6; }
+  .welcome { font-size: .81rem; line-height: 1.6; }
+  .bottom { flex-direction: column; align-items: stretch; gap: 1.1rem; padding-top: 1.1rem; }
+  .details { gap: .5rem 1rem; padding: 0; font-size: .68rem; }
+  .details span:not(:first-child)::before { margin-right: .8rem; }
+  .photoChoices { display: grid; width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .55rem; }
+  .sceneOption { width: auto; padding: .35rem; gap: .4rem; }
+  .sceneThumb { flex-basis: 42px; width: 42px; height: 49px; }
+  .sceneLabel { font-size: .63rem; }
+}
+@media (max-width: 390px) {
+  .inner { padding-inline: 1rem; }
+  .hero h1 { font-size: 3.45rem; }
+  .sceneOption { flex-direction: column; align-items: stretch; gap: .4rem; }
+  .sceneThumb { flex-basis: auto; width: 100%; height: 44px; }
+  .sceneLabel { padding-inline: .2rem; font-size: .63rem; }
+  .sceneLabel small { display: none; }
+  .primary { padding-inline: 1.05rem; gap: 1.2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .photograph, .sceneOption, .primary { transition: none; }
+  .sceneOption:hover, .primary:hover { transform: none; }
+}
