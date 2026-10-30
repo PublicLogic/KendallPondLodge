@@ -59,7 +59,7 @@ export default async function ExplorePage() {
             <p className={styles.eyebrow}>If you want to get out</p>
             <h2 id="days-title">Make a day of it.</h2>
           </div>
-          <p>Stay in Gardner, head toward the mountain, or dodge the rain. Borrow whichever stops sound good.</p>
+          <p>Stay in Gardner, head toward the mountain, or dodge the rain. Take the whole route or just one stop.</p>
         </header>
         <div className={styles.dayGrid}>
           <article className={styles.day}>
@@ -77,7 +77,7 @@ export default async function ExplorePage() {
             <ol>
               <li><span>Morning</span><p>Pick a trail at <a href="https://www.mass.gov/locations/wachusett-mountain-state-reservation" target="_blank" rel="noopener noreferrer">Wachusett Mountain ↗</a>. Check the trail map first.</p></li>
               <li><span>Afternoon</span><p>Make the donut stop at <a href="https://www.redapplefarm.com/" target="_blank" rel="noopener noreferrer">Red Apple Farm ↗</a>. The farm calendar changes with the season.</p></li>
-              <li><span>Evening</span><p>Back to the Lodge for dinner. You&apos;ve earned it.</p></li>
+              <li><span>Evening</span><p>Back to the Lodge. No schedule for the rest of the night.</p></li>
             </ol>
           </article>
           <article className={styles.day}>
@@ -101,7 +101,7 @@ export default async function ExplorePage() {
             <p className={styles.eyebrow}>Food, trails &amp; rainy days</p>
             <h2 id="picks-title">Keep these handy.</h2>
           </div>
-          <p>A diner, mountain trails, dinner options, and a few reasons to leave the house. Filter the {explorePicks.length} places by what you&apos;re after.</p>
+          <p>Everything from a diner booth to a mountain trail. Pick a category from the {explorePicks.length} places below.</p>
         </header>
         <ExploreDirectory />
       </section>
@@ -143,9 +143,8 @@ export default async function ExplorePage() {
           <p className={styles.eyebrow}>Or don&apos;t go anywhere</p>
           <h2 id="back-title">Staying in works too.</h2>
           <p>
-            Bring dinner home. There&apos;s a full kitchen, a hot tub, and
-            a yard that runs right down to the water. Nobody says you
-            have to go anywhere.
+            Bring dinner home. The kitchen&apos;s yours, the deck looks out
+            over the water, and there&apos;s no need to make another plan.
           </p>
           <div className={styles.backLinks}>
             <Link href={bookingHref}>Check your dates <span aria-hidden="true">↗</span></Link>
