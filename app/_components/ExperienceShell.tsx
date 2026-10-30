@@ -29,17 +29,25 @@ function PublicHeader({
   const [pastHero, setPastHero] = useState(false);
 
   useEffect(() => {
-    if (!onHome) return;
-    const updateHeader = () => {
-      setPastHero(window.scrollY > Math.max(240, window.innerHeight * 0.6));
-    };
-    updateHeader();
-    window.addEventListener("scroll", updateHeader, { passive: true });
-    window.addEventListener("resize", updateHeader);
-    return () => {
-      window.removeEventListener("scroll", updateHeader);
-      window.removeEventListener("resize", updateHeader);
-    };
+    if (!onHome) {
+      setPastHero(false);
+      return;
+    }
+
+    const hero = document.querySelector<HTMLElement>("[data-retreat-hero]");
+    if (!hero) return;
+
+    // Crossfade close to the bottom of the opening image, rather than
+    // swapping colors halfway through the photograph.
+    const transitionLine = 128;
+    setPastHero(hero.getBoundingClientRect().bottom <= transitionLine);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setPastHero(!entry.isIntersecting),
+      { rootMargin: `-${transitionLine}px 0px 0px 0px`, threshold: 0 }
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, [onHome]);
 
   const current = (href: string) =>
