@@ -13,14 +13,18 @@ export const metadata: Metadata = {
   description: "Explore the whole house at Kendall Pond: three bedrooms, two full baths, a kitchen, fireplaces, an upper deck and a private waterfront yard. Room for up to eight guests.",
 };
 
+// All photographs come from the Lodge's curated property collection.
 const photos = {
   arrival: lodgePhoto(7),
   living: lodgePhoto(5),
   kitchen: lodgePhoto(17),
+  dining: lodgePhoto(19),
   downstairs: lodgePhoto(13),
   woodBedroom: lodgePhoto(25),
   blueBedroom: lodgePhoto(23),
   bunkRoom: lodgePhoto(27),
+  deck: lodgePhoto(31),
+  hotTub: lodgePhoto(37),
   grounds: lodgePhoto(6),
   autumn: lodgePhoto(2),
 };
@@ -36,10 +40,20 @@ function Photograph({ photo, caption, detail, sizes = halfSize, priority = false
   className?: string;
 }) {
   return (
-    <figure className={`${styles.photo} ${className}`}>
-      <Image src={photo.src} alt={photo.alt} width={photo.width} height={photo.height}
-        sizes={sizes} priority={priority} loading={priority ? "eager" : "lazy"} />
-      <figcaption><span>{caption}</span>{detail && <span className={styles.captionDetail}>{detail}</span>}</figcaption>
+    <figure className={styles.photo + (className ? " " + className : "")}>
+      <Image
+        src={photo.src}
+        alt={photo.alt}
+        width={photo.width}
+        height={photo.height}
+        sizes={sizes}
+        priority={priority}
+        loading={priority ? "eager" : "lazy"}
+      />
+      <figcaption>
+        <span>{caption}</span>
+        {detail && <span className={styles.captionDetail}>{detail}</span>}
+      </figcaption>
     </figure>
   );
 }
@@ -47,36 +61,74 @@ function Photograph({ photo, caption, detail, sizes = halfSize, priority = false
 export default function LodgePage() {
   return (
     <main id="main-content" className={styles.page} data-lodge-editorial>
-      <section className={styles.container} aria-labelledby="lodge-title">
-        <div className={styles.intro}>
-          <div><p className={styles.eyebrow}>The Lodge at Kendall Pond</p><h1 id="lodge-title">The house<br /><em>by the pond.</em></h1></div>
-          <div className={styles.introCopy}>
-            <p>Three bedrooms, two full baths, and a waterfront yard. The whole house, with room for up to eight.</p>
-            <div className={styles.actions}><Link className={styles.button} href="/book">Check your dates <span aria-hidden="true">↗</span></Link><a className={styles.textLink} href="#sleeping">See the bedrooms <span aria-hidden="true">↓</span></a></div>
+      <section className={styles.cover} aria-labelledby="lodge-title" data-retreat-hero data-lodge-cover>
+        <Photograph
+          photo={photos.arrival}
+          caption="The Lodge, from the waterfront lawn"
+          detail="Gardner, Massachusetts"
+          sizes="100vw"
+          priority
+          className={styles.coverPhotograph}
+        />
+        <div className={styles.coverShade} aria-hidden="true" />
+        <div className={styles.container + " " + styles.coverInner}>
+          <p className={styles.coverLocation}>The Lodge at Kendall Pond <span>Gardner, Massachusetts</span></p>
+          <div className={styles.coverStory}>
+            <p className={styles.eyebrow}>The entire waterfront home</p>
+            <h1 id="lodge-title">The whole house.<br /><em>Right on the pond.</em></h1>
+            <p className={styles.coverIntro}>Three bedrooms, two full baths, a deck above the lawn, and a private dock at the water. Room for eight, with space to be together or spread out.</p>
+            <div className={styles.actions}>
+              <Link className={styles.button} href="/book">Check your dates <span aria-hidden="true">↗</span></Link>
+              <a className={styles.coverTextLink} href="#living">Come inside <span aria-hidden="true">↓</span></a>
+            </div>
+          </div>
+          <div className={styles.coverFoot}><span>Hosted locally by Nate &amp; Allie</span><span>The house. The yard. The waterfront.</span></div>
+        </div>
+      </section>
+
+      <section className={styles.container + " " + styles.overview} aria-label="The house at a glance">
+        <dl className={styles.facts}>
+          <div><dt>Guests</dt><dd>Up to {stay.maxGuests}</dd></div>
+          <div><dt>Bedrooms</dt><dd>{stay.bedrooms} bedrooms</dd></div>
+          <div><dt>Bathrooms</dt><dd>{stay.bathrooms} full baths</dd></div>
+          <div><dt>Your stay</dt><dd>The whole house</dd></div>
+        </dl>
+        <nav className={styles.jumpNav} aria-label="Explore the Lodge">
+          <a href="#living">Living &amp; dining</a>
+          <a href="#downstairs">Downstairs</a>
+          <a href="#sleeping">Bedrooms</a>
+          <a href="#outside">Deck &amp; waterfront</a>
+          <a href="#house-details">House details</a>
+        </nav>
+      </section>
+
+      <section id="living" className={styles.container + " " + styles.section} aria-labelledby="living-title">
+        <div className={styles.sectionHead}>
+          <div><p className={styles.eyebrow}>The main level</p><h2 id="living-title">Dinner together.<br />Fireplace after.</h2></div>
+          <p>The kitchen, dining area, and great room open into one another. Tall windows, a cathedral ceiling, and plenty of room around the fireplace.</p>
+        </div>
+        <div className={styles.livingGrid}>
+          <Photograph
+            photo={photos.living}
+            caption="The great room"
+            detail="Cathedral ceiling · fireplace"
+            sizes="(max-width: 700px) calc(100vw - 36px), (max-width: 1376px) 53vw, 710px"
+            className={styles.livingLead}
+          />
+          <div className={styles.livingStack}>
+            <Photograph photo={photos.kitchen} caption="The kitchen" detail="Breakfast bar · room to cook" sizes="(max-width: 700px) calc(100vw - 36px), 38vw" />
+            <Photograph photo={photos.dining} caption="The dining room" detail="Table beside the kitchen" sizes="(max-width: 700px) calc(100vw - 36px), 38vw" />
           </div>
         </div>
-        <Photograph photo={photos.arrival} caption="The Lodge, from the waterfront lawn" detail="Gardner, Massachusetts" sizes={fullSize} priority className={styles.arrival} />
-        <dl className={styles.facts} aria-label="The house at a glance">
-          <div><dt>Guests</dt><dd>Up to {stay.maxGuests}</dd></div><div><dt>Bedrooms</dt><dd>{stay.bedrooms} bedrooms</dd></div><div><dt>Bathrooms</dt><dd>{stay.bathrooms} full baths</dd></div><div><dt>Your stay</dt><dd>The whole house</dd></div>
-        </dl>
-        <nav className={styles.jumpNav} aria-label="On this page"><a href="#living">Living spaces</a><a href="#downstairs">Downstairs</a><a href="#sleeping">Bedrooms</a><a href="#outside">Outside</a><a href="#house-details">House details</a></nav>
       </section>
 
-      <section id="living" className={`${styles.container} ${styles.section}`} aria-labelledby="living-title">
-        <div className={styles.sectionHead}><div><p className={styles.eyebrow}>01 / Together</p><h2 id="living-title">Dinner together.<br />Fireplace after.</h2></div><p>The kitchen, dining area, and great room connect on the main level. Tall windows, a cathedral ceiling, and seating around the fireplace.</p></div>
-        <div className={styles.livingGrid}>
-          <Photograph photo={photos.living} caption="The great room" detail="Cathedral ceiling · fireplace" sizes="(max-width: 700px) calc(100vw - 36px), (max-width: 1376px) 54vw, 730px" />
-          <Photograph photo={photos.kitchen} caption="Kitchen & dining" detail="Breakfast bar · room to cook" sizes="(max-width: 700px) calc(100vw - 36px), (max-width: 1376px) 38vw, 518px" />
-        </div>
-      </section>
-
-      <section id="downstairs" className={`${styles.container} ${styles.section} ${styles.downstairs}`} aria-labelledby="downstairs-title">
+      <section id="downstairs" className={styles.container + " " + styles.section + " " + styles.downstairs} aria-labelledby="downstairs-title">
         <div className={styles.downstairsGrid}>
           <div className={styles.downstairsCopy}>
-            <p className={styles.eyebrow}>02 / Downstairs</p>
+            <p className={styles.eyebrow}>The lower level</p>
             <h2 id="downstairs-title">Another place<br />to settle in.</h2>
-            <p>The lower level adds a second lounge, another fireplace, and lake-facing doors to the covered walkout patio.</p>
-            <p className={styles.smallNote}>It gives a full group somewhere else to spread out without losing the connection to the yard and water.</p>
+            <p>Downstairs has a second lounge, another fireplace, and doors that open toward the covered patio and the pond.</p>
+            <p className={styles.smallNote}>A little more room when everyone doesn't want to do the same thing.</p>
           </div>
           <Photograph photo={photos.downstairs} caption="The downstairs lounge" detail="Second fireplace · walkout patio" sizes="(max-width: 700px) calc(100vw - 36px), (max-width: 1376px) 60vw, 760px" />
         </div>
@@ -86,7 +138,13 @@ export default function LodgePage() {
         <div className={styles.container}>
           <div className={styles.roomLead}>
             <Photograph photo={photos.woodBedroom} caption="The wood-floor bedroom" detail="White bedding · folded towels" sizes="(max-width: 900px) calc(100vw - 36px), (max-width: 1376px) 58vw, 770px" />
-            <div className={styles.roomCopy}><p className={styles.eyebrow}>03 / Turn in</p><h2 id="sleeping-title">Three bedrooms.<br />Your own space.</h2><p>A king bedroom, a queen bedroom, and a twin-over-full bunk room. A queen sleeper sofa gives your group another way to arrange the night.</p><p className={styles.smallNote}>Eight overnight guests maximum. The sofa is additional sleeping space, not a fourth bedroom.</p><a className={styles.textLink} href="#sleeping-plan">See the sleeping plan <span aria-hidden="true">↓</span></a></div>
+            <div className={styles.roomCopy}>
+              <p className={styles.eyebrow}>The bedrooms</p>
+              <h2 id="sleeping-title">Three bedrooms.<br />Room for eight.</h2>
+              <p>A king bedroom, a queen bedroom, and a twin-over-full bunk room. There is also a queen sleeper sofa for groups who need another sleeping arrangement.</p>
+              <p className={styles.smallNote}>Eight overnight guests maximum. The sofa is additional sleeping space, not a fourth bedroom.</p>
+              <a className={styles.textLink} href="#sleeping-plan">See the sleeping plan <span aria-hidden="true">↓</span></a>
+            </div>
           </div>
           <div className={styles.roomPair}>
             <Photograph photo={photos.blueBedroom} caption="The blue-throw bedroom" detail="White bedding · tiled floor" />
@@ -96,29 +154,46 @@ export default function LodgePage() {
         </div>
       </section>
 
-      <section id="outside" className={`${styles.container} ${styles.section}`} aria-labelledby="outside-title">
-        <div className={styles.sectionHead}><div><p className={styles.eyebrow}>04 / Just outside</p><h2 id="outside-title">From the deck<br />to the water.</h2></div><div><p>The upper deck for outdoor dining. A covered patio and hot tub below. Then the lawn, firepit, and private shoreline.</p><Link className={styles.textLink} href="/grounds">Explore the waterfront <span aria-hidden="true">→</span></Link></div></div>
+      <section id="outside" className={styles.container + " " + styles.section} aria-labelledby="outside-title">
+        <div className={styles.sectionHead}>
+          <div><p className={styles.eyebrow}>The deck, patio &amp; shoreline</p><h2 id="outside-title">Step outside.<br />Stay a while.</h2></div>
+          <div><p>Outdoor dining on the deck. A covered hot tub downstairs. Then the lawn, firepit, dock, and private shoreline.</p><Link className={styles.textLink} href="/grounds">Explore the waterfront <span aria-hidden="true">→</span></Link></div>
+        </div>
         <div className={styles.outsideGrid}>
-          <Photograph photo={photos.grounds} caption="The lawn, dock & waterfront seating" />
-          <Photograph photo={photos.autumn} caption="Autumn at the water’s edge" />
+          <Photograph photo={photos.deck} caption="The upper deck" detail="Outdoor dining · pond view" />
+          <Photograph photo={photos.hotTub} caption="The covered hot tub" detail="Downstairs · patio" />
+          <Photograph photo={photos.grounds} caption="The lawn and shoreline" detail="Firepit · dock" />
+          <Photograph photo={photos.autumn} caption="Autumn by the water" detail="Private waterfront" />
         </div>
         <p className={styles.smallNote}>Dock use and outdoor equipment depend on the season and conditions. Children and pets need close supervision by the water.</p>
       </section>
 
-      <section id="house-details" className={`${styles.container} ${styles.details}`} aria-labelledby="details-title">
-        <div><p className={styles.eyebrow}>A few practical things</p><h2 id="details-title">Know the house<br />before you arrive.</h2><a className={styles.textLink} href={hostContactHref()}>Ask Nate &amp; Allie <span aria-hidden="true">↗</span></a></div>
+      <section id="house-details" className={styles.container + " " + styles.details} aria-labelledby="details-title">
+        <div>
+          <p className={styles.eyebrow}>The practical stuff</p>
+          <h2 id="details-title">Good to know<br />before you book.</h2>
+          <a className={styles.textLink} href={hostContactHref()}>Ask Nate &amp; Allie <span aria-hidden="true">↗</span></a>
+        </div>
         <dl className={styles.detailsList}>
-          <div><dt>Two full bathrooms</dt><dd>Both have bathing facilities. Ask us about the layout when bathroom access matters for your group.</dd></div>
-          <div><dt>Space on two levels</dt><dd>A great room upstairs, another lounge downstairs, an upper deck, and a walkout patio. There are stairs; contact us about mobility needs before booking.</dd></div>
-          <div><dt>Kitchen & laundry</dt><dd>A full kitchen, indoor and outdoor dining areas, and laundry at the house.</dd></div>
+          <div><dt>Two full bathrooms</dt><dd>Both have bathing facilities. Ask about the layout if access matters for your group.</dd></div>
+          <div><dt>Two levels</dt><dd>There is a main level and a lower walkout level, plus stairs. Contact us about mobility needs before booking.</dd></div>
+          <div><dt>Kitchen &amp; laundry</dt><dd>A full kitchen, indoor and outdoor dining areas, and laundry at the house.</dd></div>
           <div><dt>Two fireplaces</dt><dd>One upstairs and one downstairs.</dd></div>
+          <div><dt>Parking</dt><dd>Free parking in the driveway. Let us know if your group is bringing multiple vehicles.</dd></div>
+          <div><dt>Pets</dt><dd>Up to {stay.maxPets} pets. Include them when booking so the correct terms and any fees are shown.</dd></div>
         </dl>
       </section>
 
-      <section className={styles.close} aria-labelledby="dates-title"><div className={`${styles.container} ${styles.closeInner}`}>
-        <div><p className={styles.eyebrow}>Hosted by Nate &amp; Allie</p><h2 id="dates-title">Got a few nights<br />in mind?</h2><p>Send your dates. We’ll check availability and send the full quote before payment.</p></div>
-        <div className={styles.closeActions}><Link className={styles.button} href="/book">Check your dates <span aria-hidden="true">↗</span></Link><Link className={styles.textLink} href="/photos">See the photo gallery <span aria-hidden="true">→</span></Link><p>Already booked? <Link href="/guidebook">Open the Guest Guide</Link>.</p></div>
-      </div></section>
+      <section className={styles.close} aria-labelledby="dates-title">
+        <div className={styles.container + " " + styles.closeInner}>
+          <div><p className={styles.eyebrow}>Hosted by Nate &amp; Allie</p><h2 id="dates-title">Got a few nights<br />in mind?</h2><p>Choose your dates, check what is available, and review the full price and terms before you decide.</p></div>
+          <div className={styles.closeActions}>
+            <Link className={styles.button} href="/book">Check your dates <span aria-hidden="true">↗</span></Link>
+            <Link className={styles.textLink} href="/photos">See all the Lodge photos <span aria-hidden="true">→</span></Link>
+            <p>Already booked? <Link href="/guidebook">Open the Guest Guide</Link>.</p>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
