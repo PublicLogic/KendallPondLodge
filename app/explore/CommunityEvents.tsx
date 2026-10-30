@@ -20,12 +20,10 @@ export function CommunityEvents({ feed }: { feed: PjExplore | null }) {
         <header className={styles.sectionHeader}>
           <div>
             <p className={styles.eyebrow}>Local events</p>
-            <h2 id="city-events-title">On the calendar.</h2>
+            <h2 id="city-events-title">What’s going on.</h2>
           </div>
           <p>
-            Upcoming events from Gardner&apos;s city calendar and other
-            local sources. Dates and details can change; check with
-            the organizer before going.
+            Concerts, markets, and whatever else is happening around town. Check the details before you head out.
           </p>
         </header>
         {events.length ? (
