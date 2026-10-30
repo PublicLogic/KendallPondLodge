@@ -42,7 +42,7 @@ export default function HomePage() {
       <GuestReviewEvidence />
       <section className="showcase-moments guest-spaces" aria-labelledby="spaces-title">
         <div className="showcase-section-head">
-          <div><p className="showcase-eyebrow">A look at the place</p><h2 id="spaces-title">There's more here than the view.</h2></div>
+          <div><p className="showcase-eyebrow">A look at the place</p><h2 id="spaces-title">Here's the rest of the place.</h2></div>
           <Link className="showcase-inline-link" href="/photos">See all 50 photos <span aria-hidden="true">→</span></Link>
         </div>
         <div className="guest-spaces-grid">
