@@ -22,8 +22,8 @@ test("premium photography is used across public marketing surfaces", () => {
   assert.match(pages.events, /kendall-pond-lodge-exterior-autumn\.webp/);
   assert.match(pages.events, /19-kendall-pond-lodge-dining-room-and-kitchen\.jpg/);
   assert.match(pages.events, /kendall-pond-lodge-deck-lounge-autumn\.webp/);
-  assert.match(pages.explore, /kendall-pond-lodge-dawn-mist\.webp/);
-  assert.match(pages.explore, /kendall-pond-lodge-autumn-lawn-premium\.webp/);
+  assert.match(pages.explore, /lodgePhoto\(49\)/);
+  assert.match(pages.explore, /lodgePhoto\(35\)/);
   assert.match(pages.grounds, /lodgePhoto\(50\)/);
   assert.match(pages.grounds, /lodgePhoto\(43\)/);
   assert.match(pages.grounds, /data-waterfront-cover/);
