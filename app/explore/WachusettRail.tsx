@@ -29,13 +29,12 @@ export function WachusettRail({ transit }: { transit: PjTransit | null }) {
   return (
     <section className={styles.rail} id="train" aria-labelledby="rail-title">
       <div className={styles.railCopy}>
-        <p className={styles.eyebrow}>Getting here &amp; getting around</p>
-        <h2 id="rail-title">There&apos;s a train to Boston.</h2>
+        <p className={styles.eyebrow}>By train</p>
+        <h2 id="rail-title">Wachusett Station.</h2>
         <p>
-          The Fitchburg Line connects Wachusett Station in Fitchburg with
-          Boston&apos;s North Station. The station is at 55 Authority Drive,
-          not at the Lodge. You&apos;ll need to arrange your own ride between
-          the house and the station.
+          Wachusett Station is at 55 Authority Drive in Fitchburg. It&apos;s
+          on the MBTA Fitchburg Line to Boston&apos;s North Station. You&apos;ll
+          need a ride between the station and the Lodge.
         </p>
         <div className={styles.railLinks}>
           <a href={localResourceLinks.fitchburgLine} target="_blank" rel="noopener noreferrer">
@@ -71,21 +70,21 @@ export function WachusettRail({ transit }: { transit: PjTransit | null }) {
         ) : (
           <p className={styles.railUnavailable}>
             {fresh
-              ? "No upcoming departures in PJ's current feed. Check MBTA for a later trip."
-              : "PuddleJumper's verified train feed isn't available here right now. Check MBTA directly for current times."}
+              ? "No upcoming departures in the latest update. Check MBTA for your travel date."
+              : "Departure times aren&apos;t loading here. Check the MBTA schedule."}
           </p>
         )}
-        <p className={styles.railFine}>
-          {fresh
-            ? <>PuddleJumper checked the MBTA feed {easternDate(transit!.checkedAt, {
-                hour: "numeric", minute: "2-digit", timeZoneName: "short",
-              })}. The board uses MBTA predictions when available and scheduled
-              times otherwise. Check service alerts before traveling.</>
-            : "Train times are intentionally hidden when PJ's feed is unavailable or stale; no times are estimated by the Lodge."}
-        </p>
+        {fresh && (
+          <p className={styles.railFine}>
+            Updated {easternDate(transit!.checkedAt, {
+              hour: "numeric", minute: "2-digit", timeZoneName: "short",
+            })}. Predicted times appear when MBTA provides them; otherwise
+            scheduled times are shown. Check alerts before traveling.
+          </p>
+        )}
         {alerts.length > 0 && (
           <div className={styles.railAlerts}>
-            <p className={styles.martName}>MBTA service notices</p>
+            <p className={styles.martName}>Service alerts</p>
             {alerts.map(alert => (
               <a key={alert.id || alert.url} href={alert.url}
                 target="_blank" rel="noopener noreferrer">
@@ -97,12 +96,12 @@ export function WachusettRail({ transit }: { transit: PjTransit | null }) {
         <div className={styles.mart}>
           <p className={styles.martName}>Gardner connection · MART</p>
           <p>
-            MART also runs a fare-free Gardner–Wachusett commuter shuttle
-            on weekdays, excluding holidays. It serves Gardner City Hall
-            and the Gardner Intermodal Center, <em>not the Lodge</em>.
+            MART runs a fare-free weekday shuttle between Gardner and
+            Wachusett Station, excluding holidays. Stops include City Hall
+            and the Intermodal Center. It doesn&apos;t stop at the Lodge.
           </p>
           <a href={localResourceLinks.martShuttle} target="_blank" rel="noopener noreferrer">
-            MART shuttle schedule and pickup details <span aria-hidden="true">↗</span>
+            MART shuttle timetable <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
