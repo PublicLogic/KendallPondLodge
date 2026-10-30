@@ -74,7 +74,7 @@ export default function PhotosPage() {
         <div className={styles.sectionTop}>
           <div>
             <p className={styles.eyebrow}>Around the Lodge</p>
-            <h2 id="highlights-title">The house. The rooms. The water.</h2>
+            <h2 id="highlights-title">A closer look at the Lodge.</h2>
           </div>
           <Link href="/lodge" className={styles.inlineLink}>See the full Lodge walkthrough <span aria-hidden="true">→</span></Link>
         </div>
@@ -106,7 +106,7 @@ export default function PhotosPage() {
         <div className={styles.collectionHead}>
           <div>
             <p className={styles.eyebrow}>All {lodgePhotos.length} photographs</p>
-            <h2 id="gallery-browse-title">See every corner.</h2>
+            <h2 id="gallery-browse-title">Browse the photos.</h2>
             <p>Choose an area, or scroll through the whole house and grounds.</p>
           </div>
           <Link href="/lodge" className={styles.inlineLink}>
