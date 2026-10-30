@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import { publicNavigation } from "@/app/_data/navigation";
 import { Brand } from "./Brand";
@@ -25,6 +25,22 @@ function PublicHeader({
   bookEnabled: boolean;
 }) {
   const pathname = usePathname();
+  const onHome = pathname === "/";
+  const [pastHero, setPastHero] = useState(false);
+
+  useEffect(() => {
+    if (!onHome) return;
+    const updateHeader = () => {
+      setPastHero(window.scrollY > Math.max(240, window.innerHeight * 0.6));
+    };
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    window.addEventListener("resize", updateHeader);
+    return () => {
+      window.removeEventListener("scroll", updateHeader);
+      window.removeEventListener("resize", updateHeader);
+    };
+  }, [onHome]);
 
   const current = (href: string) =>
     pathname === href ||
@@ -36,7 +52,11 @@ function PublicHeader({
         Skip to content
       </a>
 
-      <header className="experience-header experience-header-booking hospitality-header">
+      <header className={[
+        "experience-header experience-header-booking hospitality-header",
+        onHome ? "hospitality-header-immersive" : "",
+        onHome && pastHero ? "hospitality-header-scrolled" : "",
+      ].filter(Boolean).join(" ")}>
         <div className="experience-header-inner">
           <Brand />
 
