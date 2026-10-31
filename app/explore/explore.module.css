@@ -762,3 +762,17 @@
 .mapPending { display:grid; place-items:center; min-height:435px; padding:2rem; color:#43604d; background:#e4ebe0; text-align:center; font-size:.95rem; line-height:1.6; }
 
 .mapPending { display:grid; place-items:center; min-height:435px; padding:2rem; color:#43604d; background:#e4ebe0; text-align:center; font-size:.95rem; line-height:1.6; }
+
+/* Self-contained geographic overview: no tile servers, iframe, API key or CDN. */
+.tileFreeMap{position:relative;min-height:435px;flex:1;overflow:hidden;background:#dbe5d8;isolation:isolate}
+.mapTerrain{position:absolute;inset:0;opacity:.9;background:
+ linear-gradient(132deg,transparent 28%,#c5d7b9 28.3%,#c5d7b9 31%,transparent 31.4%),
+ linear-gradient(30deg,transparent 59%,#c0d4b6 59.4%,#c0d4b6 62%,transparent 62.4%),
+ repeating-linear-gradient(24deg,transparent 0 50px,rgba(255,255,255,.45) 51px 54px,transparent 55px 95px),
+ repeating-linear-gradient(105deg,transparent 0 70px,rgba(255,255,255,.42) 71px 74px,transparent 75px 130px),
+ #dbe6d7}
+.mapTown{position:absolute;z-index:1;font-family:var(--font-serif),Georgia,serif;font-size:clamp(1rem,1.6vw,1.5rem);color:#65806b;pointer-events:none}
+.mapDot{position:absolute;z-index:2;display:grid;place-items:center;min-width:31px;min-height:31px;transform:translate(-50%,-50%);border:2px solid #fff;border-radius:50%;background:#214f39;color:#fff;font-size:.76rem;font-weight:750;box-shadow:0 3px 10px #1e392b50;cursor:pointer}
+.mapDot:hover,.mapDot[aria-pressed=true]{z-index:3;background:#b98a43;scale:1.17}
+.mapLegend{position:absolute;bottom:.85rem;left:1rem;z-index:1;padding:.35rem .6rem;border-radius:4px;background:#f7f3ebdd;color:#385944;font-size:.69rem;font-weight:650}
+.tileFreeMap .mapPending{position:relative;z-index:3;min-height:435px;background:#e4ebe0dd}
