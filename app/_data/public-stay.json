@@ -60,7 +60,7 @@
     {
       "id": "pets",
       "question": "Can we bring our pets?",
-      "answer": "Yes, up to two pets. Include them with your group so any pet fee and terms are included in the price you see. Please supervise pets near the pond and follow the pet rules for your stay."
+      "answer": "Yes, up to two pets. Pet fees are separate from the stay price and will appear in your total if you bring pets. Please supervise them near the pond and follow the pet rules for your stay."
     },
     {
       "id": "parking",
@@ -80,7 +80,7 @@
     {
       "id": "price",
       "question": "What will our stay cost?",
-      "answer": "Check your dates and guest count to see the itemized total: nightly charges, cleaning, any pet fees, taxes and payment terms. Choosing dates is not a reservation, and checking a price doesn't charge you. Airbnb prices and policies are shown on Airbnb."
+      "answer": "Cleaning is included in the stay price rather than added as a separate line. Any pet fee is shown separately, along with applicable taxes and the full total. Check your dates and guest count before deciding; checking the price does not charge you or reserve the Lodge."
     },
     {
       "id": "cancellation",
