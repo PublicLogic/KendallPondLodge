@@ -65,18 +65,6 @@ export function ExploreDirectory() {
           </a>
         ))}
       </div>
-            <a
-              className={styles.pickLink}
-              href={place.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={place.linkLabel + ": " + place.name + " (opens new tab)"}
-            >
-              {place.linkLabel} <span aria-hidden="true">↗</span>
-            </a>
-          </article>
-        ))}
-      </div>
     </>
   );
 }
