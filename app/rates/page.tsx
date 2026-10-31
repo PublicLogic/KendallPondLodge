@@ -47,7 +47,7 @@ export default function RatesPage() {
             <p className="eyebrow">Reservations</p>
             <h2>{directEnabled ? "Your stay starts with the dates." : "Reserve through Airbnb."}</h2>
             <p>{directEnabled
-              ? "Check the dates and total here, or book through Airbnb if you prefer."
+              ? "Cleaning is included in the stay price. Pet fees, if applicable, and taxes are shown before payment. Compare the full total with Airbnb before deciding."
               : "Our Airbnb listing has current availability and checkout details."}</p>
           </div>
           <div>
