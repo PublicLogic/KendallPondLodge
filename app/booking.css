@@ -781,3 +781,29 @@
     transition:none;
   }
 }
+
+/* Small owner-only check for a genuinely lower direct-booking guest total. */
+.owner-rate-check {
+  margin-top: 1.25rem;
+  padding: 1.1rem;
+  border: 1px solid #b9cfbb;
+  border-radius: 10px;
+  background: #f2f6ef;
+}
+.owner-rate-check-head { display:flex; align-items:start; justify-content:space-between; gap:1.5rem; }
+.owner-rate-check-head h3 { margin:.3rem 0 .55rem; font-size:clamp(1.2rem,2vw,1.6rem); }
+.owner-rate-check-head>p { max-width:39ch; font-size:.79rem; line-height:1.55; color:#49614f; }
+.owner-rate-check-fields { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.65rem; margin:1rem 0; }
+.owner-rate-check-fields label { display:grid; gap:.35rem; min-width:0; font-weight:650; font-size:.75rem; color:#274937; }
+.owner-rate-check-fields input { width:100%; min-width:0; padding:.65rem .7rem; border:1px solid #abbfaa; border-radius:5px; background:#fff; color:#19392b; }
+.owner-rate-check-result { display:flex; flex-wrap:wrap; gap:.65rem 1.5rem; align-items:center; padding:.9rem 0; border-block:1px solid #d0decf; }
+.owner-rate-check-result>div { display:grid; gap:.15rem; }
+.owner-rate-check-result span { color:#526959; font-size:.72rem; }
+.owner-rate-check-result strong { color:#193d2d; font-size:1.12rem; }
+.owner-rate-check-result>div:nth-child(4) strong { font-size:1.4rem; }
+.owner-rate-check-result>p { width:100%; margin:.45rem 0 0; color:#264d38; font-size:.85rem; font-weight:650; }
+.owner-rate-check .owner-card-footnote { margin:.85rem 0 0; font-size:.71rem; line-height:1.5; }
+@media(max-width:780px) {
+  .owner-rate-check-head { flex-direction:column; gap:.3rem; }
+  .owner-rate-check-fields { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
