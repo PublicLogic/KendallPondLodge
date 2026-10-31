@@ -9,7 +9,7 @@ export function Brand({ header = false }: { header?: boolean }) {
     return (
       <Link className="kpl-brand-image kpl-header-brand" href="/" aria-label="The Lodge at Kendall Pond — home">
         <Image
-          src="/images/kpl/lodge-seal.png"
+          src="/brand/kpl/lodge-mark.svg"
           alt=""
           width={512}
           height={512}
