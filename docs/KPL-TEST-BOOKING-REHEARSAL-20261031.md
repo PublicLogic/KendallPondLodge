@@ -13,14 +13,21 @@ Use a Vercel **preview** created from current main, connected to a **separate PJ
 - When any prerequisite cannot be proven, mark BLOCKED; do not simulate successful checkout or claimed email delivery.
 
 ## Three customer paths
-1. **Question without dates:** use Ask Nate & Allie; the current website uses the configured contact email via the visitor's mail client. It is not a hosted message form and does not independently prove receipt.
+1. **Question without dates:** use the new Lodge `/ask` form. KPL submits server-side to the PJ inquiry API; it must return a saved inquiry before the website acknowledges receipt. Confirm one CaseSpace and a truthful host-notification state. If the endpoint is unavailable, show a direct contact fallback instead of pretending it worked.
 2. **Dates inquiry without payment:** choose dates and enter contact information, then select `Ask about these dates · no payment`. PJ records a request for owner follow-up. No quote, checkout, inventory hold or confirmed reservation.
 3. **Book:** choose dates, select `See price & book`, review exact amounts and terms, accept them and complete Stripe **test** Checkout. Confirm status only after PJ processes the signed test webhook.
 
+## Pricing and tax policy
+- **Stay price includes cleaning.** The public checkout combines lodging, the internal cleaning component, and any weekend adjustment into one displayed stay line. It does not silently change the authoritative PJ total.
+- **Pet fees are extra.** If pets are included, their fee appears on a separate line, followed by taxes.
+- **Direct should be cheaper than Airbnb all-in** for the same dates, guest count and pets. Owner Settings has a calculator that accepts the actual Airbnb checkout total; it must report a positive saving before any specific savings claim is published. There is no approved live Airbnb rate API in this flow.
+- **Massachusetts tax:** Mandatory cleaning, even when included in the room price, is generally part of taxable rent. See https://www.mass.gov/info-details/room-occupancy-excise-tax . Do not reduce or omit tax merely because cleaning is bundled.
+
 ## Acceptance checklist
-- No-payment inquiry yields exactly one owner-visible request and no Stripe session.
+- No-payment dates inquiry yields exactly one owner-visible request and no Stripe session.
+- General question without dates creates a scoped inquiry and confirms storage; unreachable PJ reports failure and provides a contact alternative.
 - Retry unchanged request idempotently; changed request gets a different identity.
-- Payment path shows the full total, fees, deposit and balance, and returns from test Checkout.
+- Payment path shows the full total, cleaning-inclusive stay price, separate pet fees, taxes, deposit and balance, then returns from test Checkout.
 - Valid signed webhook confirms once; replay does not duplicate the booking, Case, email or payment.
 - Invalid signature/mode, unavailable calendar, abandoned checkout and unavailable messaging fail honestly.
 - A normal user cannot access owner-only pages or secret server configuration.
