@@ -10,6 +10,11 @@ On October 31, 2026, the KPL Vercel project received **branch-scoped preview ove
 
 These overrides do **not** prove the inherited preview scope key belongs to a disposable PJ property, the preview calendar is synthetic, or the registered Stripe **test webhook** targets this branch. Do not attempt a successful paid test until all three are proven.
 
+## Verified infrastructure blocker (October 31)
+The connected Fly account reports `publiclogic-puddlejumper-staging` **suspended**, with its only Machine **stopped**. The connected Fly tools are read-only and cannot resume it. `publiclogic-kpl-store` is deployed, but is **not** a safe substitute for the isolated staging backend: do not re-point this test copy at a live booking store.
+
+Before continuing an actual guest or Stripe test, restore the staging Fly app and verify its runtime, isolated scope/key, test calendar and messaging. Then separately confirm the Stripe test account and webhook for this preview.
+
 ## Safe setup checks
 - Confirm the exact preview deployment and KPL commit.
 - Confirm the PJ backend is staging and the bearer key identifies the test property.
