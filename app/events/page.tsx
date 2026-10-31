@@ -16,9 +16,9 @@ export default function EventsPage() {
     <main id="main-content">
       <PageHero
         eyebrow="Wedding weekends"
-        title="Stay together for the wedding weekend."
-        intro="Coming to a wedding in Gardner? Share a waterfront house with three bedrooms, two full bathrooms, and room for up to eight overnight guests."
-        image="/images/kpl/2026-10-28/kendall-pond-lodge-exterior-autumn.webp"
+        title="A house for the wedding weekend."
+        intro="If you're coming to a wedding nearby, we'd love to host your group. There are three bedrooms, two bathrooms, and room for eight overnight guests."
+        image="/images/kpl/website-top-50/02-Exterior/07-kendall-pond-lodge-autumn-lodge-and-yard.jpg"
         imageAlt="The Lodge and upper deck framed by autumn trees"
         imagePosition="center"
         primaryAction={{ href: "/book", label: "Check dates" }}
@@ -51,13 +51,13 @@ export default function EventsPage() {
         <div className="photo-grid">
           <PhotoCard src="/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg" alt="The Lodge great room" title="Great room" note="Fireplace and seating" wide />
           <PhotoCard src="/images/kpl/website-top-50/04-Kitchen-and-Dining/19-kendall-pond-lodge-dining-room-and-kitchen.jpg" alt="Kitchen and dining area at the Lodge" title="Kitchen & dining" note="Breakfast together · full kitchen" />
-          <PhotoCard src="/images/kpl/2026-10-28/kendall-pond-lodge-deck-lounge-autumn.webp" alt="Cushioned deck seating overlooking autumn trees and Kendall Pond" title="Upper deck" note="Outdoor seating · pond view" />
+          <PhotoCard src="/images/kpl/website-top-50/07-Deck-and-Outdoor-Living/35-kendall-pond-lodge-autumn-deck-lounge.jpg" alt="Sunlit deck lounge overlooking autumn foliage and the pond" title="Upper deck" note="Outdoor seating · pond view" />
         </div>
       </section>
 
       <section className="content-section">
         <div className="booking-cta-panel">
-          <div><p className="eyebrow">Coming for a wedding?</p><h2>Ask about your dates.</h2><p>Send the nights and number of overnight guests. We’ll check availability and send the full price and terms before you pay. Your request alone does not reserve the house.</p></div>
+          <div><p className="eyebrow">Coming for a wedding?</p><h2>See if your weekend is open.</h2><p>Check your dates and group size, then review the price and terms before paying. Choosing dates alone doesn't reserve the house.</p></div>
           <Link className="button button-primary" href="/book">Check dates →</Link>
         </div>
       </section>
