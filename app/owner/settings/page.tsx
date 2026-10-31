@@ -341,6 +341,7 @@ export default async function BookingSettings({
               <label>Payment link · minutes <input name="hold_minutes" type="number" min="60" max="10080" step="1" required defaultValue={instantSettings.hold_minutes ?? ''} /></label>
             </div>
             <label className="booking-check"><input type="checkbox" name="taxable_fees" value="yes" defaultChecked={instantSettings.taxable_fees === true} /> Include applicable cleaning and pet fees in the taxable amount</label>
+            <p className="owner-card-footnote">Massachusetts generally taxes cleaning as rent even when bundled into a stay price. Confirm the full applicable occupancy tax and fee treatment before saving. <a href="https://www.mass.gov/info-details/room-occupancy-excise-tax" target="_blank" rel="noopener noreferrer">Massachusetts DOR guidance</a>.</p>
             <label>Cancellation / refund terms<textarea name="cancellation_terms" minLength={20} maxLength={4000} required defaultValue={instantSettings.cancellation_terms ?? ''} /></label>
             <label>Remaining balance terms<textarea name="balance_terms" minLength={20} maxLength={4000} required defaultValue={instantSettings.balance_terms ?? ''} /></label>
             <label className="booking-check">
