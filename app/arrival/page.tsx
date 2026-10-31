@@ -8,18 +8,18 @@ export default function ArrivalPage() {
     <div className="guide-section-page">
       <header className="guide-section-header">
         <p className="guide-dashboard-eyebrow">Arrival & entry</p>
-        <h2>Start with the latest reservation message.</h2>
-        <p>Your reservation thread is still the source for the address, directions, entry instructions, access code, Wi-Fi details, and confirmed arrival timing.</p>
+        <h2>Welcome to the Lodge.</h2>
+        <p>Your latest message from us has the directions, arrival time, and entry details. Keep it handy when you arrive.</p>
       </header>
 
       <section className="guide-section-stack">
-        <SectionHeading eyebrow="First few minutes" title="Arrive, orient, settle in." />
+        <SectionHeading eyebrow="First few minutes" title="Get settled." />
         <div className="step-grid">
           <InfoCard title="1. Open the latest message"><p>Use the most recent host message for directions and entry. It replaces old screenshots, forwarded details, and earlier instructions.</p></InfoCard>
           <InfoCard title="2. Get oriented"><p>Locate exits, extinguishers, life jackets, the first-aid kit, and this stay panel before settling in.</p></InfoCard>
           <InfoCard title="3. Tell us about a problem"><p>If something is missing, damaged, unsafe, or not working, message the hosts in the booking app so it can be handled.</p></InfoCard>
         </div>
-        <Notice tone="warm"><strong>Public-safe by design:</strong> This site never displays your address, access code, Wi-Fi password, reservation dates, or host phone numbers.</Notice>
+        <Notice tone="warm"><strong>For your privacy:</strong> Your address, access code, and Wi-Fi password are shared privately in your reservation message.</Notice>
       </section>
 
       <section className="guide-section-stack guide-section-surface">
