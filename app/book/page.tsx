@@ -133,7 +133,7 @@ export default async function BookPage({
 
           <p className={styles.hostNote}>
             <strong>Hosted by Nate &amp; Allie.</strong>
-            We live nearby. If you have a question about the bedrooms, the waterfront, or your plans, we're happy to help.
+            We live nearby. If you have a question about the bedrooms, the waterfront, or your plans, we&apos;re happy to help.
           </p>
         </div>
 
