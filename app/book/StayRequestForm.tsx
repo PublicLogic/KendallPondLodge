@@ -6,7 +6,7 @@ import { useFormStatus } from 'react-dom';
 import { BookingBrand } from '@/app/_components/BookingBrand';
 import { clearGuestRequestKey, createGuestRequestKeyManager } from '@/lib/guest-request-key.mjs';
 
-type ServerAction = (formData: FormData) => Promise<{ received: true; instant_path?: string }>;
+type ServerAction = (formData: FormData) => Promise<{ received: true; instant_path?: string; inquiry?: true }>;
 
 type Props = {
   action: ServerAction;
@@ -24,13 +24,13 @@ type Month = {
 
 const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-export function StayRequestReceipt({ onNewRequest }: { onNewRequest?: () => void }) {
+export function StayRequestReceipt({ onNewRequest, inquiry = false }: { onNewRequest?: () => void; inquiry?: boolean }) {
   return (
     <div>
       <p className="booking-alert" role="status">
-        Request received. Sending a request does not reserve the dates or charge you.
+        {inquiry ? 'Inquiry sent. No payment was taken and your dates are not reserved.' : 'Request received. Sending a request does not reserve the dates or charge you.'}
       </p>
-      <p>We’ll review your dates and send the full quote before you pay.</p>
+      <p>{inquiry ? 'We have your dates and message. We’ll follow up with you directly.' : 'We’ll follow up about your dates.'}</p>
       <Link className="button button-secondary" href="/book" onClick={onNewRequest}>Request another stay</Link>
     </div>
   );
@@ -51,6 +51,7 @@ function RequestSubmit({ ready, nights, instant }: { ready: boolean; nights: num
           : instant ? 'See price & book' : 'Request these dates'}
       </button>
 
+      <button className="button button-secondary" type="submit" name="intent" value="inquiry" disabled={!ready || pending}>Ask about these dates · no payment</button>
       <small role="status" aria-live="polite">
         {pending
           ? instant ? 'Checking availability and your exact price…' : 'Sending your dates. Please keep this page open.'
@@ -308,6 +309,7 @@ export function StayRequestForm({
   const [checkOut, setCheckOut] = useState<string | null>(null);
   const [hover, setHover] = useState<string | null>(null);
   const [received, setReceived] = useState(false);
+  const [inquirySent, setInquirySent] = useState(false);
   const [viewMonth, setViewMonth] = useState<Month>(
     monthFromIso(today),
   );
@@ -393,12 +395,13 @@ export function StayRequestForm({
         window.location.assign(result.instant_path);
         return;
       }
+      setInquirySent(result.inquiry === true);
       setReceived(true);
     }
   }
 
   if (received) {
-    return <StayRequestReceipt onNewRequest={() => {
+    return <StayRequestReceipt inquiry={inquirySent} onNewRequest={() => {
       clearDates();
       setReceived(false);
     }} />;
