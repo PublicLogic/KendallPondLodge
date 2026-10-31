@@ -54,9 +54,9 @@ export default function HomePage() {
         <div className="guest-house-photo"><Image src={house.src} alt={house.alt} fill sizes="(max-width: 800px) 100vw, 55vw" /></div>
         <div className="guest-house-copy">
           <p className="showcase-eyebrow">The whole place</p><h2 id="house-story-title">From the kitchen to the shoreline.</h2>
-          <p>There's room to be together without doing everything together: two living areas, a full kitchen, the upper deck, and the waterfront just beyond the lawn.</p>
+          <p>There&apos;s room to be together without doing everything together: two living areas, a full kitchen, the upper deck, and the waterfront just beyond the lawn.</p>
           <Link className="showcase-inline-link" href="/lodge">See inside the Lodge <span aria-hidden="true">→</span></Link>
-          <p className="guest-host-note"><strong>Hosted by Nate &amp; Allie.</strong> We own the Lodge and live nearby. If you want to know which bedroom works best for your group or what's available on the water during your dates, just ask.</p>
+          <p className="guest-host-note"><strong>Hosted by Nate &amp; Allie.</strong> We own the Lodge and live nearby. If you want to know which bedroom works best for your group or what&apos;s available on the water during your dates, just ask.</p>
           <a className="showcase-inline-link" href={hostContactHref()}>Ask us a question <span aria-hidden="true">↗</span></a>
         </div>
       </section>
@@ -64,7 +64,7 @@ export default function HomePage() {
       <StayFAQ contactHref={hostContactHref()} />
       <section className="showcase-close kpl-pond-ambient" aria-labelledby="showcase-close-title">
         <PondScenery scene="home" />
-        <div><p className="showcase-eyebrow">Hosted by Nate &amp; Allie</p><h2 id="showcase-close-title">We'd love to host you.</h2>
+        <div><p className="showcase-eyebrow">Hosted by Nate &amp; Allie</p><h2 id="showcase-close-title">We&apos;d love to host you.</h2>
           <p>{enabled ? "Check your dates and review the full price and terms before you pay." : "Find available nights and the full price on Airbnb."}</p></div>
         <div className="showcase-close-actions"><BookingAction enabled={enabled} className="showcase-button showcase-button-dark">{enabled ? "Check dates & price" : "View dates on Airbnb"}<span aria-hidden="true">↗</span></BookingAction>
           <Link className="showcase-inline-link" href="/explore">Around Gardner &amp; Wachusett <span aria-hidden="true">→</span></Link></div>
