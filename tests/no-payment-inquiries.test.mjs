@@ -10,8 +10,8 @@ test("date inquiries enter PJ CaseSpace instead of initiating checkout",()=>{
   const inquiry=action.indexOf("form.get('intent') === 'inquiry'");
   const price=action.indexOf("await client.autoPrice(created.id)");
   assert.ok(inquiry>=0 && inquiry<create && price>create);
-  assert.match(action,/await submitGuestQuestion\\(question\\)/);
-  assert.match(action,/return \\{ received: true as const, inquiry: true as const \\}/);
+  assert.match(action,/await submitGuestQuestion\(question\)/);
+  assert.match(action,/return \{ received: true as const, inquiry: true as const \}/);
 });
 
 test("guests can choose booking or no-payment inquiry with clear consent",()=>{
