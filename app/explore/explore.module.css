@@ -758,3 +758,7 @@
   .mapList button small { font-size:.62rem; }
   .mapFooter { padding:.7rem .9rem; }
 }
+
+.mapPending { display:grid; place-items:center; min-height:435px; padding:2rem; color:#43604d; background:#e4ebe0; text-align:center; font-size:.95rem; line-height:1.6; }
+
+.mapPending { display:grid; place-items:center; min-height:435px; padding:2rem; color:#43604d; background:#e4ebe0; text-align:center; font-size:.95rem; line-height:1.6; }
