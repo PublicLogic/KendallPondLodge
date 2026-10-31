@@ -25,8 +25,8 @@ export default function WaterfrontPage() {
       </section>
 
       <section className="guide-section-stack guide-section-surface">
-        <SectionHeading eyebrow="At the shoreline" title="Slow down at the waterline." />
-        <p>Full waterfront photos are on the <Link href="/lodge">homepage gallery</Link>. This page is safety guidance, not marketing.</p>
+        <SectionHeading eyebrow="At the shoreline" title="Back at the dock." />
+        <p>Want another look at the dock and the shoreline? See the <Link href="/grounds">waterfront photos</Link> before heading outside.</p>
       </section>
     </div>
   );
