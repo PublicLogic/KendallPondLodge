@@ -8,7 +8,7 @@ import styles from "./explore.module.css";
 type FilterId = "all" | ExploreCategory;
 
 function mapDocument(places: PjExplorePlace[], selectedSlug: string) {
-  const payload = JSON.stringify(places.map(p => ({
+  const payload = JSON.stringify(places.filter(p=>p.latitude!==null && p.longitude!==null).map(p => ({
     slug:p.slug, name:p.name, lat:p.latitude, lng:p.longitude,
     location:p.location, url:p.url
   }))).replace(/</g,"\\u003c");
@@ -37,6 +37,7 @@ export function ExploreDirectory({ places }: { places: PjExplorePlace[] }) {
   const [focusedSlug,setFocusedSlug]=useState<string | null>(null);
   const visible=selected==="all"?places:places.filter(p=>p.category===selected);
   const focused=visible.find(p=>p.slug===focusedSlug)??null;
+  const mapped=visible.filter(p=>p.latitude!==null && p.longitude!==null);
   const mapSrc=useMemo(()=>mapDocument(visible,focused?.slug??""),[visible,focused?.slug]);
 
   if(!places.length) return <div className={styles.eventEmpty}>Local recommendations are being prepared. Check back for the published guide.</div>;
@@ -48,7 +49,7 @@ export function ExploreDirectory({ places }: { places: PjExplorePlace[] }) {
       </button>)}
     </div>
     <section className={styles.mapSection} aria-label="Map of local destinations">
-      <div className={styles.mapHeader}><div><span className={styles.mapKicker}>Around the Lodge</span><h3>Find your next stop.</h3></div><span className={styles.mapHelp}>All {visible.length} places on one map.</span></div>
+      <div className={styles.mapHeader}><div><span className={styles.mapKicker}>Around the Lodge</span><h3>Find your next stop.</h3></div><span className={styles.mapHelp}>{mapped.length} verified map pins · {visible.length} places.</span></div>
       <div className={styles.mapLayout}>
         <div className={styles.mapList} role="group" aria-label="Destinations">
           {visible.map(place=><button type="button" key={place.slug} aria-pressed={focused?.slug===place.slug} onClick={()=>setFocusedSlug(place.slug)}>
@@ -56,9 +57,9 @@ export function ExploreDirectory({ places }: { places: PjExplorePlace[] }) {
           </button>)}
         </div>
         <div className={styles.mapCanvas}>
-          <iframe title="Map of all local recommendations" srcDoc={mapSrc} sandbox="allow-scripts" loading="lazy" referrerPolicy="no-referrer" />
+          {mapped.length ? <iframe title="Map of all local recommendations" srcDoc={mapSrc} sandbox="allow-scripts" loading="lazy" referrerPolicy="no-referrer" /> : <div className={styles.mapPending}>Map pins will appear as locations are verified and published through PuddleJumper.</div>}
           <div className={styles.mapFooter}><span><strong>{focused?.name??"All local stops"}</strong><small>{focused?.location??"Select a place for directions"}</small></span>
-            {focused&&<a href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(focused.latitude+","+focused.longitude)}`} target="_blank" rel="noopener noreferrer">Directions ↗</a>}
+            {focused && focused.latitude !== null && focused.longitude !== null && <a href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(focused.latitude+","+focused.longitude)}`} target="_blank" rel="noopener noreferrer">Directions ↗</a>}
           </div>
         </div>
       </div>
