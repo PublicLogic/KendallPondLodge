@@ -58,7 +58,7 @@ export default function EventsPage() {
 
       <section className="content-section">
         <div className="booking-cta-panel">
-          <div><p className="eyebrow">Coming for a wedding?</p><h2>See if your weekend is open.</h2><p>Check your dates and group size, then review the price and terms before paying. Choosing dates alone doesn't reserve the house.</p></div>
+          <div><p className="eyebrow">Coming for a wedding?</p><h2>See if your weekend is open.</h2><p>Check your dates and group size, then review the price and terms before paying. Choosing dates alone doesn&apos;t reserve the house.</p></div>
           <Link className="button button-primary" href="/book">Check dates →</Link>
         </div>
       </section>
