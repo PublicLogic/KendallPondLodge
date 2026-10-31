@@ -31,7 +31,7 @@ const quickActions = [
     kicker: "Relax",
     title: "Use the hot tub",
     href: "/guidebook/outside",
-    detail: "Hot tub, fire pit, pool and outside.",
+    detail: "Hot tub, firepit, patio, and outdoor care.",
   },
   {
     icon: "water",
@@ -65,14 +65,14 @@ export default function GuidebookPage() {
       <article className="guide-command-hero">
         <div className="guide-command-copy">
           <p className="guide-dashboard-label">
-            Your stay command center
+            Your Lodge guide
           </p>
 
-          <h2>What do you need?</h2>
+          <h2>Make yourself at home.</h2>
 
           <p>
-            Find the answer quickly, then get back
-            to enjoying the Lodge.
+            Need the Wi-Fi, hot tub instructions, or checkout details?
+            Everything is here when you need it.
           </p>
         </div>
 
@@ -104,17 +104,16 @@ export default function GuidebookPage() {
       <aside className="guide-command-help">
         <div>
           <p className="guide-dashboard-label">
-            Need a person?
+            Need us?
           </p>
 
           <strong>
-            We’re here if the guide isn’t enough.
+            We're just a message away.
           </strong>
 
           <p>
-            Message Nate &amp; Allie through your
-            latest reservation message for property
-            or stay help.
+            Send us a message through your reservation if
+            something isn't working or you need a hand.
           </p>
         </div>
 
