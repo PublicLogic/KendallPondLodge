@@ -105,10 +105,10 @@ export default async function ExplorePage() {
       <section className={styles.picks} id="local-picks" aria-labelledby="picks-title">
         <header className={styles.sectionHeader}>
           <div>
-            <p className={styles.eyebrow}>Food, trails &amp; rainy days</p>
-            <h2 id="picks-title">Keep these handy.</h2>
+            <p className={styles.eyebrow}>Our corner of North County</p>
+            <h2 id="picks-title">Nate’s local picks.</h2>
           </div>
-          <p>Our favorite nearby stops.</p>
+          <p>The good stuff, just down the road.</p>
         </header>
         <ExploreDirectory />
       </section>
