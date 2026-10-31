@@ -110,7 +110,7 @@ export default async function BookPage({
           <h1 id="booking-title">Book the Lodge.</h1>
           <p className={styles.lede}>
             {readyToBook
-              ? "Choose your dates, see the full price, and review the terms before you pay. Nate and Allie host the house and live nearby."
+              ? "Choose your dates, see the full price, and review the terms before you pay."
               : !enabled
                 ? "We're not taking direct bookings right now. Airbnb has the available nights and checkout."
                 : !instant
@@ -133,7 +133,7 @@ export default async function BookPage({
 
           <p className={styles.hostNote}>
             <strong>Hosted by Nate &amp; Allie.</strong>
-            We own the Lodge and live locally. You can reach us if you have questions about the stay.
+            We live nearby. If you have a question about the bedrooms, the waterfront, or your plans, we're happy to help.
           </p>
         </div>
 
