@@ -658,3 +658,65 @@
   .dayGrid { gap: 1.3rem; }
   .day li { padding: .55rem 0; }
 }
+
+/* Venue-first editorial cards — photographs of the actual destinations. */
+.directory {
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: clamp(1rem,2vw,1.8rem);
+  margin-top: 1.4rem;
+}
+.photoPick {
+  display: block;
+  min-width: 0;
+  color: var(--explore-ink);
+  text-decoration: none;
+}
+.photoPickMedia {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 4.35;
+  overflow: hidden;
+  background-color: #aab9a2;
+  background-size: cover;
+  background-position: center;
+  transition: filter .25s ease, background-size .4s ease;
+}
+.photoPick:nth-child(3n+2) .photoPickMedia { aspect-ratio: 4 / 4.65; }
+.photoPick:nth-child(3n+3) .photoPickMedia { aspect-ratio: 4 / 3.8; }
+.photoPick:hover .photoPickMedia { filter: brightness(.9); }
+.photoPickDetails { position: relative; padding: 1rem 2.1rem 1.25rem 0; }
+.photoPickLocation {
+  display: block;
+  color: #547260;
+  font-size: .68rem;
+  font-weight: 670;
+  line-height: 1.5;
+}
+.photoPick h3 {
+  margin-top: .35rem;
+  font-size: clamp(1.45rem,2.1vw,2.4rem);
+  line-height: 1.12;
+}
+.photoPickArrow { position: absolute; right: 0; bottom: 1.3rem; font-size: 1.3rem; }
+.photoPick:hover h3 { text-decoration: underline; text-underline-offset: .13em; }
+.photoPickPlaceholder {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  padding: 2rem;
+  color: #f9f4e9;
+  background: linear-gradient(135deg,#486b57,#254737 70%);
+  font-family: var(--font-serif),Georgia,serif;
+  font-size: clamp(1.5rem,2.5vw,2.8rem);
+  font-style: italic;
+  text-align: center;
+}
+@media(max-width:900px) {
+  .directory { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:600px) {
+  .directory { grid-template-columns: repeat(2,minmax(0,1fr)); gap: .8rem; }
+  .photoPickMedia, .photoPick:nth-child(3n+2) .photoPickMedia, .photoPick:nth-child(3n+3) .photoPickMedia { aspect-ratio: 3/4; }
+  .photoPickDetails { padding: .7rem .7rem 1rem 0; }
+  .photoPickLocation { font-size: .61rem; }
+  .photoPick h3 { font-size: clamp(1.1rem,4vw,1.6rem); }
+  .photoPickArrow { right: 0; bottom: .7rem; font-size: 1rem; }
+}
