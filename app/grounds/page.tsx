@@ -194,7 +194,7 @@ export default function GroundsPage() {
           </div>
           <p>
             A few chairs surround the stone firepit near the shoreline.
-            It's a short walk back across the lawn to the house.
+            It&apos;s a short walk back across the lawn to the house.
           </p>
         </div>
         <div className={styles.firepitGrid}>
