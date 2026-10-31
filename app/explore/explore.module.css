@@ -720,3 +720,41 @@
   .photoPick h3 { font-size: clamp(1.1rem,4vw,1.6rem); }
   .photoPickArrow { right: 0; bottom: .7rem; font-size: 1rem; }
 }
+
+/* Nate's North County: useful, unmistakably local, map-first. */
+.mapSection { margin: 1.8rem 0 3rem; }
+.mapHeader { display:flex; justify-content:space-between; align-items:end; gap:1rem; margin-bottom:1.15rem; }
+.mapKicker { display:block; margin-bottom:.4rem; color:#557363; font-size:.68rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
+.mapHeader h3 { font-size:clamp(1.8rem,3vw,3.2rem); }
+.mapHelp { max-width:18rem; color:#58705e; font-size:.8rem; }
+.mapLayout { display:grid; grid-template-columns:minmax(240px,.72fr) minmax(0,1.6fr); gap:0; border:1px solid #c8d3c5; background:#f7f3eb; min-height:510px; }
+.mapList { height:510px; overflow-y:auto; overscroll-behavior:contain; scrollbar-color:#98ab9b transparent; }
+.mapList button { display:flex; align-items:center; justify-content:space-between; text-align:left; gap:1rem; width:100%; min-height:73px; padding:1rem 1.15rem; border:0; border-bottom:1px solid #d9e0d5; background:transparent; color:#254535; cursor:pointer; }
+.mapList button[aria-pressed="true"] { background:#dbe8d7; box-shadow:inset 3px 0 #28573f; }
+.mapList button:hover { background:#e7eee3; }
+.mapList button strong { display:block; font-size:.91rem; line-height:1.25; }
+.mapList button small { display:block; margin-top:.35rem; color:#587363; font-size:.69rem; }
+.mapCanvas { position:relative; display:flex; flex-direction:column; min-width:0; background:#dce7d8; }
+.mapCanvas iframe { display:block; width:100%; flex:1; min-height:435px; border:0; }
+.mapFooter { display:flex; align-items:center; justify-content:space-between; gap:1rem; min-height:75px; padding:.75rem 1.35rem; background:#f7f3eb; }
+.mapFooter strong,.mapFooter small { display:block; }
+.mapFooter strong { font-size:.93rem; }
+.mapFooter small { margin-top:.3rem; color:#6a7c6d; font-size:.72rem; }
+.mapFooter a { flex:none; text-decoration:none; border-bottom:1px solid #537761; color:#254b36; font-size:.84rem; font-weight:700; }
+@media(max-width:800px) {
+  .mapLayout { grid-template-columns:1fr; }
+  .mapCanvas { order:-1; }
+  .mapCanvas iframe { min-height:360px; flex:auto; }
+  .mapList { height:auto; max-height:240px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .mapList button { min-height:78px; }
+}
+@media(max-width:550px) {
+  .mapHeader { align-items:start; flex-direction:column; }
+  .mapHelp { font-size:.75rem; }
+  .mapCanvas iframe { min-height:315px; }
+  .mapList { grid-template-columns:1fr 1fr; max-height:240px; }
+  .mapList button { padding:.75rem; min-height:78px; }
+  .mapList button strong { font-size:.76rem; }
+  .mapList button small { font-size:.62rem; }
+  .mapFooter { padding:.7rem .9rem; }
+}
