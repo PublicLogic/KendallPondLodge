@@ -59,9 +59,8 @@ test("homepage keeps the actual pond header and samples bedroom, yard and kitche
   const home = source("app/page.tsx");
   const hero = source("app/_components/RetreatHero.tsx");
   for (const photo of [25, 6, 17]) assert.ok(home.includes("photo: " + photo));
-  for (const name of ["deck-lounge-autumn"]) {
-    assert.ok(home.includes(`kendall-pond-lodge-${name}.webp`));
-  }
+  assert.match(home, /lodgePhoto\(35\)/);
+  assert.doesNotMatch(home, /kendall-pond-lodge-deck-lounge-autumn\.webp/);
   assert.match(home, /lodgePhoto\(space.photo\)/);
   assert.match(home, /lodgePhoto\(46\)/);
   assert.match(home, /const house = lodgePhoto\(7\)/);

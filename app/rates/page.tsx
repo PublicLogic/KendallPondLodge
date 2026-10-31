@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/app/_components/PageHero";
+import { lodgePhoto } from "@/app/_data/lodge-photos";
 import { Icon } from "@/app/_components/Icons";
 import { BookingSteps, StayFAQ } from "@/app/_components/StayInformation";
 import { directBookingEnabled, hostContactHref } from "@/lib/booking-db";
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   title: "Rates & Booking",
   alternates: { canonical: "/rates" },
   description:
-    "Request a direct quote for the Lodge at Kendall Pond or book through Airbnb.",
+    "Check dates and pricing for the Lodge at Kendall Pond. Choose direct booking when available or use Airbnb.",
 };
 
 export default function RatesPage() {
@@ -22,17 +23,17 @@ export default function RatesPage() {
   return (
     <main id="main-content">
       <PageHero
-        eyebrow="Rates & booking"
-        title="Booking options."
+        eyebrow="Dates & pricing"
+        title="Find your nights."
         intro={directEnabled
-          ? "Send us a request for a direct quote, or book through Airbnb."
+          ? "See available dates and the full price before deciding. You can also book on Airbnb if you prefer."
           : "Direct requests are temporarily closed. Check availability and pricing on Airbnb."}
-        image="/images/kpl/2026-10-28/kendall-pond-lodge-deck-lounge-autumn.webp"
-        imageAlt="Cushioned upper-deck seating overlooking Kendall Pond"
+        image={lodgePhoto(31).src}
+        imageAlt={lodgePhoto(31).alt}
         imagePosition="center"
         primaryAction={
           directEnabled
-            ? { href: "/book", label: "Request a direct quote" }
+            ? { href: "/book", label: "Check dates & price" }
             : { href: airbnb, label: "Reserve on Airbnb" }
         }
         secondaryAction={{ href: "/lodge", label: "See inside" }}
@@ -44,15 +45,15 @@ export default function RatesPage() {
         <div className="booking-cta-panel">
           <div>
             <p className="eyebrow">Reservations</p>
-            <h2>{directEnabled ? "Choose how to book." : "Reserve through Airbnb."}</h2>
+            <h2>{directEnabled ? "Your stay starts with the dates." : "Reserve through Airbnb."}</h2>
             <p>{directEnabled
-              ? "Request a quote from us, or use Airbnb to reserve."
+              ? "Check the dates and total here, or book through Airbnb if you prefer."
               : "Our Airbnb listing has current availability and checkout details."}</p>
           </div>
           <div>
             {directEnabled && (
               <Link className="button button-primary" href="/book">
-                Check dates <Icon name="arrow" size={18} />
+                Check dates &amp; price <Icon name="arrow" size={18} />
               </Link>
             )}
             <p className="booking-guest-link">

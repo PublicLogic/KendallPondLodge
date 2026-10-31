@@ -15,7 +15,7 @@ export default function AreaPage() {
       <PageHero
         eyebrow="Gardner, Massachusetts"
         title="Getting to Kendall Pond."
-        intro="The Lodge is a waterfront house in Gardner. Plan your trip into town, then use the private arrival details we send for your confirmed stay."
+        intro="Gardner is easy to reach from Route 2. We’ll send the exact directions and entry details privately before your stay."
         image="/images/kpl/2026-10-28/kendall-pond-lodge-autumn-lawn-premium.webp"
         imageAlt="Autumn trees framing the Lodge, lawn and firepit"
         imagePosition="center 55%"
@@ -41,7 +41,7 @@ export default function AreaPage() {
       </section>
 
       <section className="content-section surface-section">
-        <SectionHeading eyebrow="Before you arrive" title="Plan the practical parts." />
+        <SectionHeading eyebrow="Before you arrive" title="A few things to plan ahead." />
         <div className="info-grid info-grid-two">
           <InfoCard title="Arrival and departure" href="/rates#before-you-book" linkLabel="Read the stay details">
             <p>Standard check-in is 3 p.m. and checkout is 11 a.m. Self check-in instructions are sent privately.</p>
@@ -56,7 +56,7 @@ export default function AreaPage() {
 
       <section className="content-section">
         <div className="booking-cta-panel">
-          <div><p className="eyebrow">Plan your stay</p><h2>Have your dates in mind?</h2><p>Send a request for your nights and group. We’ll confirm availability and send the full quote before payment.</p></div>
+          <div><p className="eyebrow">Plan your stay</p><h2>Know when you’d like to come?</h2><p>Check dates and see the total before paying. If you have questions about getting here, we’re happy to help.</p></div>
           <Link className="button button-primary" href="/book">Check dates →</Link>
         </div>
       </section>

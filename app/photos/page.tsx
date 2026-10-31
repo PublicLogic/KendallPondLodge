@@ -47,9 +47,9 @@ export default function PhotosPage() {
             <span>Gardner, Massachusetts</span>
           </div>
           <div className={styles.coverCopy}>
-            <p className={styles.eyebrow}>The real Lodge, in photos</p>
+            <p className={styles.eyebrow}>Inside and out</p>
             <h1 id="gallery-title">See it<br /><em>for yourself.</em></h1>
-            <p>Inside the house, out on the deck, and down by the water. All {lodgePhotos.length} photos, so you can see the place before you book.</p>
+            <p>The rooms, the deck, the dock, and the grounds. Scroll through all {lodgePhotos.length} photos before you choose your dates.</p>
             <div className={styles.coverActions}>
               <a className={styles.primaryAction} href="#all-photos">
                 Browse all {lodgePhotos.length} photos <span aria-hidden="true">↓</span>

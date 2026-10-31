@@ -12,15 +12,15 @@ const pj = read("app/explore/pjExplore.ts");
 const city = read("app/explore/CommunityEvents.tsx");
 const manifest = JSON.parse(read("public/images/kpl/website-top-50/manifest.json"));
 
-test("Explore has authentic Lodge photography, editorial day plans and distinct guide navigation", () => {
+test("Explore has authentic Lodge photography and concise local navigation", () => {
   assert.match(page, /data-curated-explore/);
   assert.match(page, /<h1 id="explore-title">Worth leaving the dock for\.<\/h1>/);
-  assert.match(page, /id="days"/);
+  assert.doesNotMatch(page, /id="days"/);
   assert.match(page, /id="local-picks"/);
   assert.match(page, /id="around-town"/);
   assert.match(page, /<WachusettRail transit=\{feed\?\.transit \?\? null\} \/>/);
   assert.match(page, /<CommunityEvents feed=\{feed\} \/>/);
-  assert.match(page, /<ExploreDirectory \/>/);
+  assert.match(page, /<ExploreDirectory places=/);
   assert.match(page, /lodgePhoto\(49\)/);
   assert.match(page, /lodgePhoto\(35\)/);
   assert.equal(manifest.photos.find(item => item.order === 49)?.category, "09-Waterfront-and-Grounds");
@@ -37,15 +37,15 @@ test("Local guide is curated, source-linked and filterable rather than a fake ra
   assert.match(data, /Gardner Ale House/);
   assert.match(data, /Red Apple Farm/);
   assert.match(data, /Fitchburg Art Museum/);
-  assert.match(data, /Wachusett Mountain State Reservation/);
+  assert.match(data, /Wachusett Mountain/);
   assert.match(data, /https:\/\/www\.mass\.gov\/locations\/dunn-state-park/);
   assert.match(data, /https:\/\/www\.wachusett\.com\//);
   assert.match(data, /https:\/\/business\.gardnerma\.com\/list/);
   assert.doesNotMatch(data, /gardnerchamber\.com|gardnerchamber\.org/);
   assert.match(directory, /useState/);
-  assert.match(directory, /aria-pressed=\{selected === option\.id\}/);
-  assert.match(directory, /aria-controls="explore-picks"/);
-  assert.match(directory, /role="status"/);
+  assert.match(directory, /aria-pressed=\{category===f\.id\}/);
+  assert.match(directory, /styles\.directory/);
+  assert.match(directory, /role="group"/);
   assert.match(directory, /target="_blank"/);
 });
 

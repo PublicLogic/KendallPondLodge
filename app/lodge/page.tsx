@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 // All photographs come from the Lodge's curated property collection.
 const photos = {
   arrival: lodgePhoto(5),
-  living: lodgePhoto(5),
+  living: lodgePhoto(11),
   kitchen: lodgePhoto(17),
   dining: lodgePhoto(19),
   downstairs: lodgePhoto(13),
@@ -125,9 +125,9 @@ export default function LodgePage() {
         <div className={styles.downstairsGrid}>
           <div className={styles.downstairsCopy}>
             <p className={styles.eyebrow}>The lower level</p>
-            <h2 id="downstairs-title">Downstairs has<br />its own lounge.</h2>
-            <p>Downstairs has a second lounge, another fireplace, and doors that open toward the covered patio and the pond.</p>
-            <p className={styles.smallNote}>A little more room when everyone doesn't want to do the same thing.</p>
+            <h2 id="downstairs-title">A second living<br />room downstairs.</h2>
+            <p>There&apos;s another fireplace down here, with doors opening onto the covered patio facing the pond.</p>
+            <p className={styles.smallNote}>Handy when part of the group wants a quiet corner.</p>
           </div>
           <Photograph photo={photos.downstairs} caption="The downstairs lounge" detail="Second fireplace · walkout patio" sizes="(max-width: 700px) calc(100vw - 36px), (max-width: 1376px) 60vw, 760px" />
         </div>
@@ -155,7 +155,7 @@ export default function LodgePage() {
 
       <section id="outside" className={styles.container + " " + styles.section} aria-labelledby="outside-title">
         <div className={styles.sectionHead}>
-          <div><p className={styles.eyebrow}>The deck, patio &amp; shoreline</p><h2 id="outside-title">The deck and<br />the hot tub.</h2></div>
+          <div><p className={styles.eyebrow}>The deck, patio &amp; shoreline</p><h2 id="outside-title">Upstairs for dinner.<br />Downstairs for a soak.</h2></div>
           <div><p>Outdoor dining on the deck. A covered hot tub downstairs. Then the lawn, firepit, dock, and private shoreline.</p><Link className={styles.textLink} href="/grounds">Explore the waterfront <span aria-hidden="true">→</span></Link></div>
         </div>
         <div className={styles.outsideGrid}>

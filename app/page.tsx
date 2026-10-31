@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 };
 const airbnb = process.env.NEXT_PUBLIC_KPL_BOOKING_URL?.trim() || "https://www.airbnb.com/rooms/1667597913565948713";
 const spaces = [
-  { photo: 25, title: "Sleep well.", copy: "Three bedrooms, two full baths, and room for up to eight overnight guests.", href: "/lodge#sleeping", link: "See the bedrooms" },
-  { photo: 6, title: "Step outside.", copy: "The lawn opens toward the firepit, shoreline, and dock, with room to spread out between them.", href: "/grounds", link: "Around the grounds" },
-  { photo: 17, title: "Cook together.", copy: "Full kitchen, breakfast bar, and dining space for the whole group.", href: "/lodge#living", link: "See the kitchen" },
+  { photo: 25, title: "The bedrooms", copy: "A king, a queen, a bunk room, and a sleeper sofa. Room for eight overnight guests.", href: "/lodge#sleeping", link: "See the bedrooms" },
+  { photo: 6, title: "Out to the water", copy: "Walk across the lawn to the firepit, private shoreline, and dock.", href: "/grounds", link: "Around the grounds" },
+  { photo: 17, title: "The kitchen & dining room", copy: "A full kitchen, breakfast bar, and a place for everyone to eat together.", href: "/lodge#living", link: "See the kitchen" },
 ];
 function BookingAction({ enabled, className, children }: { enabled: boolean; className: string; children: ReactNode }) {
   return enabled ? <Link className={className} href="/book">{children}</Link> :
@@ -28,12 +28,7 @@ export default function HomePage() {
   const heroScenes = [
     { ...lodgePhoto(46), label: "Kendall Pond", position: "center 56%" },
     { ...lodgePhoto(4), label: "In the hot tub", position: "center 55%" },
-    {
-      src: "/images/kpl/2026-10-28/kendall-pond-lodge-deck-lounge-autumn.webp",
-      alt: "Cushioned deck seating overlooking autumn trees and mist on Kendall Pond",
-      label: "On the deck",
-      position: "center 52%",
-    },
+    { ...lodgePhoto(35), label: "On the deck", position: "center 52%" },
   ] as const;
   const house = lodgePhoto(7);
   return (
@@ -42,7 +37,7 @@ export default function HomePage() {
       <GuestReviewEvidence />
       <section className="showcase-moments guest-spaces" aria-labelledby="spaces-title">
         <div className="showcase-section-head">
-          <div><p className="showcase-eyebrow">A look at the place</p><h2 id="spaces-title">Here's the rest of the place.</h2></div>
+          <div><p className="showcase-eyebrow">A look at the place</p><h2 id="spaces-title">Take a look around.</h2></div>
           <Link className="showcase-inline-link" href="/photos">See all 50 photos <span aria-hidden="true">→</span></Link>
         </div>
         <div className="guest-spaces-grid">
@@ -58,10 +53,10 @@ export default function HomePage() {
       <section className="guest-house-story" aria-labelledby="house-story-title">
         <div className="guest-house-photo"><Image src={house.src} alt={house.alt} fill sizes="(max-width: 800px) 100vw, 55vw" /></div>
         <div className="guest-house-copy">
-          <p className="showcase-eyebrow">The whole place</p><h2 id="house-story-title">A whole house, right on the water.</h2>
-          <p>Three bedrooms, two full baths, a kitchen, fireplaces, an upper deck, covered patio, hot tub, lawn, and private waterfront. Up to eight overnight guests.</p>
+          <p className="showcase-eyebrow">The whole place</p><h2 id="house-story-title">From the kitchen to the shoreline.</h2>
+          <p>There&apos;s room to be together without doing everything together: two living areas, a full kitchen, the upper deck, and the waterfront just beyond the lawn.</p>
           <Link className="showcase-inline-link" href="/lodge">See inside the Lodge <span aria-hidden="true">→</span></Link>
-          <p className="guest-host-note"><strong>Hosted by Nate &amp; Allie.</strong> We own the Lodge and live locally. Ask us about your sleeping setup, the season’s outdoor gear, or anything else that matters for your stay.</p>
+          <p className="guest-host-note"><strong>Hosted by Nate &amp; Allie.</strong> We own the Lodge and live nearby. If you want to know which bedroom works best for your group or what&apos;s available on the water during your dates, just ask.</p>
           <a className="showcase-inline-link" href={hostContactHref()}>Ask us a question <span aria-hidden="true">↗</span></a>
         </div>
       </section>
@@ -69,7 +64,7 @@ export default function HomePage() {
       <StayFAQ contactHref={hostContactHref()} />
       <section className="showcase-close kpl-pond-ambient" aria-labelledby="showcase-close-title">
         <PondScenery scene="home" />
-        <div><p className="showcase-eyebrow">Hosted by Nate &amp; Allie</p><h2 id="showcase-close-title">Come stay with us.</h2>
+        <div><p className="showcase-eyebrow">Hosted by Nate &amp; Allie</p><h2 id="showcase-close-title">We&apos;d love to host you.</h2>
           <p>{enabled ? "Check your dates and review the full price and terms before you pay." : "Find available nights and the full price on Airbnb."}</p></div>
         <div className="showcase-close-actions"><BookingAction enabled={enabled} className="showcase-button showcase-button-dark">{enabled ? "Check dates & price" : "View dates on Airbnb"}<span aria-hidden="true">↗</span></BookingAction>
           <Link className="showcase-inline-link" href="/explore">Around Gardner &amp; Wachusett <span aria-hidden="true">→</span></Link></div>

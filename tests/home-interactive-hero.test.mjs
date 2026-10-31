@@ -21,7 +21,7 @@ test("hero uses one selected real-property image, not an automatic slideshow", (
   assert.match(css, /prefers-reduced-motion: reduce/);
   assert.match(home, /lodgePhoto\(46\)/);
   assert.match(home, /lodgePhoto\(4\)/);
-  assert.match(home, /deck-lounge-autumn\.webp/);
+  assert.match(home, /lodgePhoto\(35\)/);
   assert.doesNotMatch(hero + css, /setInterval|autoPlay|<video|drone|aerial/);
 });
 

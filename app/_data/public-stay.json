@@ -4,25 +4,88 @@
   "bedrooms": 3,
   "bathrooms": 2,
   "sleeping": [
-    { "id": "king", "name": "King bedroom", "bed": "One king bed", "privateBedroom": true },
-    { "id": "queen", "name": "Queen bedroom", "bed": "One queen bed", "privateBedroom": true },
-    { "id": "bunk", "name": "Bunk room", "bed": "One twin-over-full bunk bed", "privateBedroom": true },
-    { "id": "sofa", "name": "Additional sleeping space", "bed": "One queen sleeper sofa", "privateBedroom": false }
+    {
+      "id": "king",
+      "name": "King bedroom",
+      "bed": "One king bed",
+      "privateBedroom": true
+    },
+    {
+      "id": "queen",
+      "name": "Queen bedroom",
+      "bed": "One queen bed",
+      "privateBedroom": true
+    },
+    {
+      "id": "bunk",
+      "name": "Bunk room",
+      "bed": "One twin-over-full bunk bed",
+      "privateBedroom": true
+    },
+    {
+      "id": "sofa",
+      "name": "Additional sleeping space",
+      "bed": "One queen sleeper sofa",
+      "privateBedroom": false
+    }
   ],
   "sleepingNote": "Eight overnight guests maximum. The sleeper sofa is additional sleeping space, not a fourth bedroom. Choose the bed arrangement that works for your group; the guest limit stays at eight.",
-  "reviewSnapshot": { "rating": "4.83", "count": 30, "checkedOn": "2026-10-27", "checkedLabel": "October 27, 2026", "url": "https://www.airbnb.com/rooms/1667597913565948713#reviews" },
+  "reviewSnapshot": {
+    "rating": "4.83",
+    "count": 30,
+    "checkedOn": "2026-10-27",
+    "checkedLabel": "October 27, 2026",
+    "url": "https://www.airbnb.com/rooms/1667597913565948713#reviews"
+  },
   "bookingSteps": [
-    { "title": "Choose your dates", "body": "Pick your nights and group size. We check live availability before showing a bookable price." },
-    { "title": "See the exact price", "body": "Review the full stay total, deposit, balance and cancellation terms before you pay." },
-    { "title": "Pay to confirm", "body": "Continue to secure Stripe checkout. Availability is rechecked as checkout starts, and your stay is confirmed after payment is verified." }
+    {
+      "title": "Choose your dates",
+      "body": "Pick your nights and group size. We check live availability before showing a bookable price."
+    },
+    {
+      "title": "See the exact price",
+      "body": "Review the full stay total, deposit, balance and cancellation terms before you pay."
+    },
+    {
+      "title": "Pay to confirm",
+      "body": "Continue to secure Stripe checkout. Availability is rechecked as checkout starts, and your stay is confirmed after payment is verified."
+    }
   ],
   "faq": [
-    { "id": "arrival", "question": "When can we arrive and check out?", "answer": "Standard check-in is 3 p.m. and checkout is 11 a.m. Self check-in details are sent privately. Early arrival or late departure needs advance agreement and depends on the calendar." },
-    { "id": "pets", "question": "Can we bring our pets?", "answer": "Yes, up to two pets. Include them in your request so any pet fee and terms appear in your quote. Keep pets supervised near the pond and follow the pet rules supplied with your stay." },
-    { "id": "parking", "question": "Where do we park, and are there stairs?", "answer": "Free parking is available in the driveway. The house has multiple levels, an upper deck and a lower patio. Do not assume a step-free route. Contact us before booking about mobility needs or the number of vehicles you plan to bring." },
-    { "id": "waterfront", "question": "What should we know about the waterfront?", "answer": "The property is directly on the pond, so children and pets need close supervision. Dock use, kayaks and the paddle boat depend on season and conditions. Ask about specific outdoor amenities before booking when they are important to your trip." },
-    { "id": "house-rules", "question": "What are the main house rules?", "answer": "Eight overnight guests maximum. Quiet hours are 10 p.m. to 7 a.m.; sound carries across the water. No smoking, vaping or e-cigarettes. An exterior Ring doorbell camera is disclosed on the Airbnb listing. Review the full stay rules before confirming." },
-    { "id": "price", "question": "What will our stay cost?", "answer": "Direct stays are quoted for your dates and group. Your itemized quote shows nightly charges, cleaning, any pet or other fees, taxes, the deposit and the remaining balance. There is no charge to request a quote. We do not advertise a nightly price that leaves out the rest." },
-    { "id": "cancellation", "question": "What are the payment and cancellation terms?", "answer": "The deposit, balance due date and cancellation terms are provided with your private quote before payment. Read those terms before accepting. An Airbnb reservation uses the price and policies displayed on Airbnb instead." }
+    {
+      "id": "arrival",
+      "question": "When can we arrive and check out?",
+      "answer": "Standard check-in is 3 p.m. and checkout is 11 a.m. Self check-in details are sent privately. Early arrival or late departure needs advance agreement and depends on the calendar."
+    },
+    {
+      "id": "pets",
+      "question": "Can we bring our pets?",
+      "answer": "Yes, up to two pets. Include them with your group so any pet fee and terms are included in the price you see. Please supervise pets near the pond and follow the pet rules for your stay."
+    },
+    {
+      "id": "parking",
+      "question": "Where do we park, and are there stairs?",
+      "answer": "Free parking is available in the driveway. The house has multiple levels, an upper deck and a lower patio. Do not assume a step-free route. Contact us before booking about mobility needs or the number of vehicles you plan to bring."
+    },
+    {
+      "id": "waterfront",
+      "question": "What should we know about the waterfront?",
+      "answer": "The property is directly on the pond, so children and pets need close supervision. Dock use, kayaks and the paddle boat depend on season and conditions. Ask about specific outdoor amenities before booking when they are important to your trip."
+    },
+    {
+      "id": "house-rules",
+      "question": "What are the main house rules?",
+      "answer": "Eight overnight guests maximum. Quiet hours are 10 p.m. to 7 a.m.; sound carries across the water. No smoking, vaping or e-cigarettes. An exterior Ring doorbell camera is disclosed on the Airbnb listing. Review the full stay rules before confirming."
+    },
+    {
+      "id": "price",
+      "question": "What will our stay cost?",
+      "answer": "Check your dates and guest count to see the itemized total: nightly charges, cleaning, any pet fees, taxes and payment terms. Choosing dates is not a reservation, and checking a price doesn't charge you. Airbnb prices and policies are shown on Airbnb."
+    },
+    {
+      "id": "cancellation",
+      "question": "What are the payment and cancellation terms?",
+      "answer": "You'll see the payment schedule and cancellation terms before confirming a direct booking. For Airbnb reservations, the price and policies shown on Airbnb apply."
+    }
   ]
 }

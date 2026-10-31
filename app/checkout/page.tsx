@@ -17,18 +17,18 @@ export default function CheckoutPage() {
     <div className="guide-section-page">
       <header className="guide-section-header">
         <p className="guide-dashboard-eyebrow">Before you leave</p>
-        <h2>A clean finish to the stay.</h2>
-        <p>Six straightforward checks. Your booking message remains the source for the confirmed checkout time and any reservation-specific requests.</p>
+        <h2>Before you head home.</h2>
+        <p>A few quick things before you go. Your reservation message has your confirmed checkout time and any stay-specific instructions.</p>
       </header>
 
       <section className="guide-section-stack">
-        <SectionHeading eyebrow="Checkout list" title="Leave it ready for the next quiet morning." />
+        <SectionHeading eyebrow="Checkout list" title="Thanks for taking care of the place." />
         <ol className="checkout-list">
           {checkoutItems.map(([title, copy], index) => (
             <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><strong>{title}</strong><p>{copy}</p></div></li>
           ))}
         </ol>
-        <Notice><strong>Do not guess about damage.</strong> A short, early message is the fastest way to get the right help and prepare the property safely.</Notice>
+        <Notice><strong>Something broke or spilled?</strong> Just send us a quick message so we can take care of it. Thanks for staying with us.</Notice>
       </section>
     </div>
   );

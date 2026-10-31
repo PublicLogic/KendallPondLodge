@@ -15,7 +15,7 @@ const shell = read("app/_components/ExperienceShell.tsx");
 
 test("Main property pages have distinct headlines, not repeated pond slogans", () => {
   assert.match(home, /<span>Down by<\/span>\s*<span>the pond\.<\/span>/);
-  assert.match(lodge, /The house<br \/><em>is yours\.<\/em>/);
+  assert.match(lodge, /Come in\.<br \/><em>Stay awhile\.<\/em>/);
   assert.match(photos, /See it<br \/><em>for yourself\.<\/em>/);
   assert.match(waterfront, /From the deck<br \/><em>to the dock\.<\/em>/);
   assert.match(explore, /<h1 id="explore-title">Worth leaving the dock for\.<\/h1>/);

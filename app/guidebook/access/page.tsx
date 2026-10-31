@@ -119,7 +119,7 @@ export default async function GuidebookAccessPage({
         </form>
 
         <p className="guide-access-boundary">
-          This opens guest guidance only.
+          Your guest code is in the reservation message we sent you.
         </p>
 
         <p className="booking-guest-link">

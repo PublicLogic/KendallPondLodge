@@ -39,7 +39,7 @@ function KendallForm({ embedded = false }: { embedded?: boolean }) {
   return (
     <div className={`kendall-search${embedded ? " kendall-search-embedded" : ""}`}>
       <form onSubmit={submit} className="kendall-form">
-        <label htmlFor={embedded ? "kendall-question-page" : "kendall-question-panel"}>What do you need?</label>
+        <label htmlFor={embedded ? "kendall-question-page" : "kendall-question-panel"}>Search the guide</label>
         <div className="kendall-input-row">
           <input
             ref={inputRef}
@@ -68,7 +68,7 @@ function KendallForm({ embedded = false }: { embedded?: boolean }) {
           </>
         )}
       </div>
-      <p className="kendall-note">Searches this guide only. Not AI. Nothing is saved.</p>
+      <p className="kendall-note">Searches the guide only. Questions aren&apos;t saved.</p>
     </div>
   );
 }

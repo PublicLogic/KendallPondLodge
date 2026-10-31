@@ -49,3 +49,18 @@
   .mark { gap: .7rem; }
   .logo { width: 66px; }
 }
+
+/* A quiet booking-platform credit. The Lodge and its hosts lead the public site. */
+.inverse {
+  gap: .5rem;
+  padding: .3rem .5rem;
+  border-color: #e2e6dc;
+  background: #f7f3eb;
+}
+.inverse .logo { width: 40px; }
+.inverse .copy { gap: .08rem; }
+.inverse .label { font-size: .68rem; font-weight: 680; }
+.inverse .credit { font-size: .62rem; }
+@media (max-width: 700px) {
+  .inverse .logo { width: 38px; }
+}

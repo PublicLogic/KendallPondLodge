@@ -34,8 +34,8 @@ test("authenticated Guidebook owns the viewport", () => {
     /if \(isGuidebookAccess \|\| isGuidebook\)[\s\S]*return <>\{children\}<\/>/,
   );
 
-  assert.match(guide, /Your stay command center/);
-  assert.match(guide, /What do you need\?/);
+  assert.match(guide, /Your Lodge guide/);
+  assert.match(guide, /Make yourself at home\./);
   assert.match(guide, /AskKendall embedded/);
 
   assert.match(

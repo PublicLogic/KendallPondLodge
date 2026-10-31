@@ -8,39 +8,34 @@ const guide = read("app/explore/guide-data.ts");
 const directory = read("app/explore/ExploreDirectory.tsx");
 const rail = read("app/explore/WachusettRail.tsx");
 const events = read("app/explore/CommunityEvents.tsx");
-const styles = read("app/explore/explore.module.css");
 
-test("Explore leads with Gardner and useful details, not a generic brand slogan", () => {
-  assert.match(page, /<h1 id="explore-title">Worth leaving the dock for\.<\/h1>/);
-  assert.match(page, /We live nearby/);
-  assert.match(page, /Keep these handy/);
-  assert.match(page, /Staying in works too/);
-  assert.match(page, /Wachusett/);
+test("Explore sounds like a local guest guide, not a generic marketing directory", () => {
+  assert.match(page, /Worth leaving the dock for/);
+  assert.match(page, /Gardner/);
+  assert.match(page, /Local favorites/);
   assert.match(page, /href="#train"/);
   assert.match(page, /href="#city-events"/);
-  assert.doesNotMatch(page, /When you feel|Pick a plan|Change it whenever|A shorter list, chosen with care|Good places to know|Not a ranking|The deck is still here|Ideas for a day out|Places around town|The Chamber directory/);
-  assert.doesNotMatch(page, /Kendall Pond, when you get back/);
+  assert.doesNotMatch(page, /Nate.s local picks|make memories|curated experience|perfect getaway|hidden gems/i);
 });
 
-test("Day suggestions are named places, not numbered experiences", () => {
-  assert.match(page, /A hike and a cider donut/);
-  assert.match(page, /Blue Moon Diner/);
-  assert.match(page, /Fitchburg Art Museum/);
-  assert.doesNotMatch(page, /className=\{styles\.dayNumber\}|>01 <span|>02 <span|>03 <span/);
-  assert.doesNotMatch(styles, /\.pickNumber/);
+test("Explore keeps actual local destinations and skips invented itineraries", () => {
+  for (const business of ["Smith's Country Cheese", "Priscilla Candy Shop", "Gardner Ale House", "Red Apple Farm", "Wachusett Mountain"]) {
+    assert.ok(guide.includes(business), "Missing local place: " + business);
+  }
+  assert.doesNotMatch(page, /id="days"|Three easy ways to spend a day/);
+  assert.doesNotMatch(guide, /top rated|number one|best in Massachusetts/i);
 });
 
-test("Local recommendations use facts instead of generic 'good choice' filler", () => {
-  assert.match(guide, /Blue Moon Diner/);
-  assert.match(guide, /Gardner Ale House/);
-  assert.match(guide, /Red Apple Farm/);
-  assert.doesNotMatch(guide, /Good choice when|An easy stop|A useful choice|A strong indoor choice|A simple movie-night option|The outing can be as simple/);
-  assert.doesNotMatch(directory, /styles\.pickNumber|String\(index \+ 1\)/);
+test("Local photography and the map are transparent, compact and usable", () => {
+  assert.match(directory, /curatedPhotos/);
+  assert.match(directory, /styles\.photoPick/);
+  assert.match(directory, /styles\.mapDot/);
   assert.match(directory, /aria-pressed/);
-  assert.match(directory, /place\.location/);
+  assert.match(directory, /google\.com\/maps\/search/);
+  assert.doesNotMatch(directory, /tile\.openstreetmap|arcgisonline|<iframe|srcDoc/);
 });
 
-test("Guest-facing transit and event messages do not mention platform plumbing", () => {
+test("Guest-facing live transit and events never expose backend terminology", () => {
   assert.doesNotMatch(rail, /PuddleJumper checked|PuddleJumper's verified|PJ's current feed|PJ's feed/);
   assert.doesNotMatch(events, /PJ brings together|PJ's event feed|PJ's current listing|Local events · PuddleJumper/);
   assert.match(rail, /train\.expected/);

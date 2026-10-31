@@ -15,20 +15,21 @@ The legacy `/images/kpl/Stay.OS.PNG` is not the approved current PuddleJumper ST
 
 - Write as a host who knows the house: warm, specific, direct, and unhurried.
 - Lead with real facts: Gardner, Kendall Pond, entire waterfront house, sleeps eight, three bedrooms, two baths, private dock, upper deck, firepit, hot tub, and the rooms shown in photographs.
-- Prefer natural sentences to stacks of one-word promises and slogans. Describe where things are and what a guest actually does with them.
-- Use *we* for the hosts when discussing a request or a reply. Avoid inventing emotional testimonials or promising a transformative stay.
-- Give each section one job. The hero introduces the property; room and waterfront pages describe spaces; the booking page explains the process.
+- Prefer natural sentences to stacks of one-word promises and slogans. Describe where things are and what a guest actually does with them. A little personality is welcome; canned luxury adjectives are not.
+- Use *we* for Nate and Allie when discussing hosting, directions, help, or a reply. Sound like attentive people who know the house, not a hotel brand, chatbot, or product team. Don't invent personal anecdotes, emotional testimonials, or promises of a transformative stay.
+- Give each section one job. The hero introduces the property; room and waterfront pages describe spaces; the booking page explains the process. Avoid repeating the full amenity list on every page.
 
 Avoid vague copy such as “make memories,” “exhale,” “your people,” “picture your days here,” “the pond is the point,” “curated collection,” and “not stock photos.” There is no need to tell guests that the photos or language are authentic; the details should demonstrate it.
 
 ## Trust and accuracy
 
-- A request is **not** a confirmed booking or payment. We verify availability, issue a full itemized quote, and confirm only after the required verified payment process.
+- Choosing dates is **not** a reservation. The active instant-booking path shows availability, the itemized price and terms, then sends the guest to secure checkout. Confirmation follows verified payment. If direct checkout is paused or unavailable, send guests to Airbnb instead of promising a quote or a booking. Keep legacy quote language only on legacy quote-specific surfaces.
 - Never invent nightly rates, deposit terms, review scores, distance estimates, availability, or response times.
 - Say when boating equipment is seasonal; confirm specific amenities when relevant instead of guaranteeing them for all dates.
-- Photos show the property at different times of year; furnishings and outdoor amenities may differ.
+- Photos show the property at different times of year; furnishings and outdoor amenities may differ. Prefer documented, original Lodge photographs on public selling pages. Keep AI-assisted retouched derivatives off primary guest-facing imagery when they reconstruct details.
 - Do not describe the Lodge as an event venue just because it accommodates wedding guests nearby.
 - Keep owner secrets, booking tokens, and operational details out of public copy.
+- Avoid terms like “command center,” “AI,” “backend,” “source of truth,” or “inventory locks” in guest copy. The guest should see an easy stay, not the software behind it.
 
 ## Copy maintenance
 
