@@ -57,7 +57,7 @@ export default function HomePage() {
           <p>There&apos;s room to be together without doing everything together: two living areas, a full kitchen, the upper deck, and the waterfront just beyond the lawn.</p>
           <Link className="showcase-inline-link" href="/lodge">See inside the Lodge <span aria-hidden="true">→</span></Link>
           <p className="guest-host-note"><strong>Hosted by Nate &amp; Allie.</strong> We own the Lodge and live nearby. If you want to know which bedroom works best for your group or what&apos;s available on the water during your dates, just ask.</p>
-          <a className="showcase-inline-link" href={hostContactHref()}>Ask us a question <span aria-hidden="true">↗</span></a>
+          <Link className="showcase-inline-link" href="/ask">Ask us a question <span aria-hidden="true">→</span></Link>
         </div>
       </section>
       {enabled && <BookingSteps />}
