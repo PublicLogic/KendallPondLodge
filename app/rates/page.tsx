@@ -56,6 +56,7 @@ export default function RatesPage() {
                 Check dates &amp; price <Icon name="arrow" size={18} />
               </Link>
             )}
+            <p className="booking-guest-link"><Link href="/ask">Questions? Ask Nate &amp; Allie</Link></p>
             <p className="booking-guest-link">
               <a href={airbnb} target="_blank" rel="noreferrer">{directEnabled ? "Prefer Airbnb? Reserve there ↗" : "Check dates on Airbnb ↗"}</a>
             </p>
