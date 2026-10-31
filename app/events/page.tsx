@@ -3,6 +3,7 @@ import Link from "next/link";
 import { InfoCard, SectionHeading } from "@/app/_components/Content";
 import { PageHero } from "@/app/_components/PageHero";
 import { PhotoCard } from "@/app/_components/PhotoCard";
+import { lodgePhoto } from "@/app/_data/lodge-photos";
 import { SleepPlan } from "@/app/_components/StayInformation";
 
 export const metadata: Metadata = {
@@ -18,8 +19,8 @@ export default function EventsPage() {
         eyebrow="Wedding weekends"
         title="A house for the wedding weekend."
         intro="If you're coming to a wedding nearby, we'd love to host your group. There are three bedrooms, two bathrooms, and room for eight overnight guests."
-        image="/images/kpl/website-top-50/02-Exterior/07-kendall-pond-lodge-autumn-lodge-and-yard.jpg"
-        imageAlt="The Lodge and upper deck framed by autumn trees"
+        image={lodgePhoto(7).src}
+        imageAlt={lodgePhoto(7).alt}
         imagePosition="center"
         primaryAction={{ href: "/book", label: "Check dates" }}
         secondaryAction={{ href: "/lodge", label: "See inside" }}
@@ -51,7 +52,7 @@ export default function EventsPage() {
         <div className="photo-grid">
           <PhotoCard src="/images/kpl/website-top-50/01-Hero/05-kendall-pond-lodge-great-room-fireplace.jpg" alt="The Lodge great room" title="Great room" note="Fireplace and seating" wide />
           <PhotoCard src="/images/kpl/website-top-50/04-Kitchen-and-Dining/19-kendall-pond-lodge-dining-room-and-kitchen.jpg" alt="Kitchen and dining area at the Lodge" title="Kitchen & dining" note="Breakfast together · full kitchen" />
-          <PhotoCard src="/images/kpl/website-top-50/07-Deck-and-Outdoor-Living/35-kendall-pond-lodge-autumn-deck-lounge.jpg" alt="Sunlit deck lounge overlooking autumn foliage and the pond" title="Upper deck" note="Outdoor seating · pond view" />
+          <PhotoCard src={lodgePhoto(35).src} alt={lodgePhoto(35).alt} title="Upper deck" note="Outdoor seating · pond view" />
         </div>
       </section>
 
