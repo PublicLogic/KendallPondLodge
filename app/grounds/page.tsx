@@ -193,8 +193,8 @@ export default function GroundsPage() {
             <h2 id="firepit-title">There's a firepit<br />by the shore.</h2>
           </div>
           <p>
-            There are chairs around the stone firepit near the shoreline,
-            with lawn between the house and the water and space to spread out.
+            A few chairs surround the stone firepit near the shoreline.
+            It's a short walk back across the lawn to the house.
           </p>
         </div>
         <div className={styles.firepitGrid}>
