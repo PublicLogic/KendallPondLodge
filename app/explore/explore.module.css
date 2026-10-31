@@ -804,7 +804,7 @@
 
 /* Keep all destinations on one diagram; put names in a single swipeable rail. */
 .mapSection { margin: .8rem 0 1.55rem; }
-.mapHeader { align-items: center; margin-bottom: .6rem; gap: .75rem; }
+.mapHeader { flex-direction: row; justify-content: space-between; align-items: center; margin-bottom: .6rem; gap: .75rem; }
 .mapHeader h3 { font-size: clamp(1.28rem, 1.75vw, 1.75rem); line-height: 1.15; }
 .mapHelp { max-width: none; font-size: .72rem; white-space: nowrap; }
 .mapLayout {
