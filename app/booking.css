@@ -807,3 +807,17 @@
   .owner-rate-check-head { flex-direction:column; gap:.3rem; }
   .owner-rate-check-fields { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
+
+/* This appears only when the preview's branch-scoped rehearsal flag is true. */
+.kpl-test-banner {
+  position: relative;
+  z-index: 110;
+  padding: .6rem 1rem;
+  background: #ece5c6;
+  color: #403727;
+  text-align: center;
+  font-size: .75rem;
+  font-weight: 750;
+  letter-spacing: .025em;
+  line-height: 1.45;
+}
