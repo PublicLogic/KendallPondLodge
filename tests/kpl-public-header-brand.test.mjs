@@ -7,7 +7,7 @@ const read = (path) => readFileSync(new URL("../" + path, import.meta.url), "utf
 test("public nav uses the real Lodge seal and Lodge wordmark, without duck branding", () => {
   const brand = read("app/_components/Brand.tsx");
   const shell = read("app/_components/ExperienceShell.tsx");
-  assert.match(brand, /lodge-seal\.png/);
+  assert.match(brand, /lodge-mark\\.svg/);
   assert.match(brand, /The Lodge/);
   assert.match(brand, /at Kendall Pond/);
   assert.match(brand, /by PublicLogic/);
