@@ -8,7 +8,7 @@ import { ExploreDirectory } from "./ExploreDirectory";
 import { WachusettRail } from "./WachusettRail";
 import { CommunityEvents } from "./CommunityEvents";
 import { loadPjExplore } from "./pjExplore";
-import { explorePicks, localResourceLinks } from "./guide-data";
+import { localResourceLinks } from "./guide-data";
 import styles from "./explore.module.css";
 
 export const metadata: Metadata = {
@@ -106,7 +106,7 @@ export default async function ExplorePage() {
         <header className={styles.sectionHeader}>
           <div>
             <p className={styles.eyebrow}>Our corner of North County</p>
-            <h2 id="picks-title">Nate’s local picks.</h2>
+            <h2 id="picks-title">Explore the area.</h2>
           </div>
           <p>The good stuff, just down the road.</p>
         </header>
