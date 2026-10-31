@@ -68,7 +68,7 @@ function KendallForm({ embedded = false }: { embedded?: boolean }) {
           </>
         )}
       </div>
-      <p className="kendall-note">Searches the guide only. Questions aren't saved.</p>
+      <p className="kendall-note">Searches the guide only. Questions aren&apos;t saved.</p>
     </div>
   );
 }
