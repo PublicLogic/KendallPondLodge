@@ -126,7 +126,7 @@ export default function LodgePage() {
           <div className={styles.downstairsCopy}>
             <p className={styles.eyebrow}>The lower level</p>
             <h2 id="downstairs-title">A second living<br />room downstairs.</h2>
-            <p>There's another fireplace down here, with doors opening onto the covered patio facing the pond.</p>
+            <p>There&apos;s another fireplace down here, with doors opening onto the covered patio facing the pond.</p>
             <p className={styles.smallNote}>Handy when part of the group wants a quiet corner.</p>
           </div>
           <Photograph photo={photos.downstairs} caption="The downstairs lounge" detail="Second fireplace · walkout patio" sizes="(max-width: 700px) calc(100vw - 36px), (max-width: 1376px) 60vw, 760px" />
