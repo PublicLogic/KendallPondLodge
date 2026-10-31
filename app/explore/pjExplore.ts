@@ -46,7 +46,44 @@ export type PjExploreEvent = {
   url: string;
 };
 
+export type PjExplorePlace = {
+  slug: string;
+  name: string;
+  category: "food" | "outside" | "rain" | "seasonal";
+  location: string;
+  bestFor: string;
+  url: string;
+  photoUrl: string | null;
+  latitude: number;
+  longitude: number;
+};
+
+function parsePlaces(raw: unknown): PjExplorePlace[] {
+  if (!Array.isArray(raw)) return [];
+  const seen = new Set<string>();
+  return raw.filter(validObject).flatMap((item): PjExplorePlace[] => {
+    if (item.type !== "place" || item.published !== true) return [];
+    const slug = text(item.slug, 100), name = text(item.name, 140);
+    const category = item.category;
+    const latitude = item.latitude, longitude = item.longitude;
+    if (!slug || !name || !["food","outside","rain","seasonal"].includes(String(category)) ||
+        typeof latitude !== "number" || typeof longitude !== "number" ||
+        !Number.isFinite(latitude) || !Number.isFinite(longitude) ||
+        latitude < 42 || latitude > 43.5 || longitude < -73.5 || longitude > -70.5 ||
+        seen.has(slug)) return [];
+    const url = text(item.url, 500);
+    if (!/^https:\/\/[^\s]+$/.test(url)) return [];
+    seen.add(slug);
+    const photo = text(item.photoUrl, 700);
+    return [{ slug, name, category: category as PjExplorePlace["category"],
+      location: text(item.location, 100), bestFor: text(item.bestFor, 90),
+      url, photoUrl: /^https:\/\/[^\s]+$/.test(photo) ? photo : null,
+      latitude, longitude }];
+  }).slice(0, 100);
+}
+
 export type PjExplore = {
+  places: PjExplorePlace[];
   transit: PjTransit | null;
   events: PjExploreEvent[];
   gardnerCalendarStatus: "available" | "unavailable";
@@ -195,6 +232,7 @@ export async function loadPjExplore(): Promise<PjExplore | null> {
     const gardner = calendars.find((c: unknown) => validObject(c) &&
       c.name === "Gardner Community Events") as JsonObject | undefined;
     return {
+      places: parsePlaces(payload.items),
       transit: parseTransit(payload.transit),
       events: parseEvents(payload.items),
       gardnerCalendarStatus: gardner?.status === "available" ? "available" : "unavailable",
