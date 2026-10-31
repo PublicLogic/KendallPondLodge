@@ -54,31 +54,29 @@ export type PjExplorePlace = {
   bestFor: string;
   url: string;
   photoUrl: string | null;
-  latitude: number;
-  longitude: number;
+  latitude: number | null;
+  longitude: number | null;
 };
 
 function parsePlaces(raw: unknown): PjExplorePlace[] {
   if (!Array.isArray(raw)) return [];
   const seen = new Set<string>();
   return raw.filter(validObject).flatMap((item): PjExplorePlace[] => {
-    if (item.type !== "place" || item.published !== true) return [];
-    const slug = text(item.slug, 100), name = text(item.name, 140);
+    if (item.type !== "place" || item.published === false) return [];
+    const slug = text(item.slug ?? item.id, 100), name = text(item.name ?? item.title, 140);
     const category = item.category;
     const latitude = item.latitude, longitude = item.longitude;
-    if (!slug || !name || !["food","outside","rain","seasonal"].includes(String(category)) ||
-        typeof latitude !== "number" || typeof longitude !== "number" ||
-        !Number.isFinite(latitude) || !Number.isFinite(longitude) ||
-        latitude < 42 || latitude > 43.5 || longitude < -73.5 || longitude > -70.5 ||
-        seen.has(slug)) return [];
-    const url = text(item.url, 500);
+    const group = category === "outdoors" ? "outside" : category === "family" ? "seasonal" : category === "arts" || category === "shopping" ? "rain" : category;
+    if (!slug || !name || !["food","outside","rain","seasonal"].includes(String(group)) || seen.has(slug)) return [];
+    const hasGeo = typeof latitude === "number" && typeof longitude === "number" && Number.isFinite(latitude) && Number.isFinite(longitude) && latitude >= 42 && latitude <= 43.5 && longitude >= -73.5 && longitude <= -70.5;
+    const url = text(item.url ?? item.href, 500);
     if (!/^https:\/\/[^\s]+$/.test(url)) return [];
     seen.add(slug);
     const photo = text(item.photoUrl, 700);
-    return [{ slug, name, category: category as PjExplorePlace["category"],
-      location: text(item.location, 100), bestFor: text(item.bestFor, 90),
+    return [{ slug, name, category: group as PjExplorePlace["category"],
+      location: text(item.location, 100), bestFor: text(item.bestFor ?? item.linkLabel, 90),
       url, photoUrl: /^https:\/\/[^\s]+$/.test(photo) ? photo : null,
-      latitude, longitude }];
+      latitude: hasGeo ? latitude as number : null, longitude: hasGeo ? longitude as number : null }];
   }).slice(0, 100);
 }
 
