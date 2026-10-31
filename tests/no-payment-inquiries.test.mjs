@@ -4,13 +4,14 @@ import test from "node:test";
 
 const read = path => readFileSync(new URL("../"+path,import.meta.url),"utf8");
 
-test("payment-free inquiries create an owner-visible request without checkout",()=>{
+test("date inquiries enter PJ CaseSpace instead of initiating checkout",()=>{
   const action=read("app/book/actions.ts");
   const create=action.indexOf("await client.createRequest(input)");
   const inquiry=action.indexOf("form.get('intent') === 'inquiry'");
   const price=action.indexOf("await client.autoPrice(created.id)");
-  assert.ok(create>=0 && inquiry>create && price>inquiry);
-  assert.match(action,/return \{ received: true as const, inquiry: true as const \}/);
+  assert.ok(inquiry>=0 && inquiry<create && price>create);
+  assert.match(action,/await submitGuestQuestion\\(question\\)/);
+  assert.match(action,/return \\{ received: true as const, inquiry: true as const \\}/);
 });
 
 test("guests can choose booking or no-payment inquiry with clear consent",()=>{
