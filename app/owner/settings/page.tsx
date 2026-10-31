@@ -8,6 +8,7 @@ import {
 import { requireKplOwner } from '@/lib/require-kpl-owner';
 import { airbnbCalendarConfigured } from '@/lib/airbnb-ical.mjs';
 import { CalendarSyncControl } from './CalendarSyncControl';
+import { DirectRateCheck } from './DirectRateCheck';
 import { saveInstantBookingPolicy, syncAirbnbCalendar } from './actions';
 
 export const metadata: Metadata = {
@@ -286,7 +287,7 @@ export default async function BookingSettings({
         </div>
         <p className="owner-card-lead">
           PJ owns the property pricing policy and applies it automatically to each eligible stay.
-          Owner review is for exceptions, not routine bookings.
+          Owner review is for exceptions, not routine bookings. Cleaning is included in the guest stay price; pets are separate. Check the total against Airbnb for comparable dates before claiming a saving.
         </p>
         <div className="owner-instant-grid">
           <div>
@@ -325,7 +326,7 @@ export default async function BookingSettings({
             <div className="booking-fields">
               <label>Base nightly <input name="base_nightly" type="number" min="0.01" step="0.01" required defaultValue={instantSettings.configured ? ((instantSettings.base_nightly_cents ?? 0) / 100).toFixed(2) : ''} /></label>
               <label>Fri / Sat nightly <input name="weekend_nightly" type="number" min="0.01" step="0.01" required defaultValue={instantSettings.configured ? ((instantSettings.weekend_nightly_cents ?? 0) / 100).toFixed(2) : ''} /></label>
-              <label>Cleaning <input name="cleaning" type="number" min="0" step="0.01" required defaultValue={instantSettings.configured ? ((instantSettings.cleaning_cents ?? 0) / 100).toFixed(2) : ''} /></label>
+              <label>Cleaning component · included in stay price <input name="cleaning" type="number" min="0" step="0.01" required defaultValue={instantSettings.configured ? ((instantSettings.cleaning_cents ?? 0) / 100).toFixed(2) : ''} /></label>
               <label>Pet fee <input name="pet_fee" type="number" min="0" step="0.01" required defaultValue={instantSettings.configured ? ((instantSettings.pet_fee_cents ?? 0) / 100).toFixed(2) : ''} /></label>
               <label>Pet fee applies
                 <select name="pet_fee_mode" defaultValue={instantSettings.pet_fee_mode ?? 'per_stay'}>
@@ -339,7 +340,7 @@ export default async function BookingSettings({
               <label>Booking window · days <input name="booking_window_days" type="number" min="1" max="730" step="1" required defaultValue={instantSettings.booking_window_days ?? ''} /></label>
               <label>Payment link · minutes <input name="hold_minutes" type="number" min="60" max="10080" step="1" required defaultValue={instantSettings.hold_minutes ?? ''} /></label>
             </div>
-            <label className="booking-check"><input type="checkbox" name="taxable_fees" value="yes" defaultChecked={instantSettings.taxable_fees === true} /> Tax cleaning and pet fees too</label>
+            <label className="booking-check"><input type="checkbox" name="taxable_fees" value="yes" defaultChecked={instantSettings.taxable_fees === true} /> Include applicable cleaning and pet fees in the taxable amount</label>
             <label>Cancellation / refund terms<textarea name="cancellation_terms" minLength={20} maxLength={4000} required defaultValue={instantSettings.cancellation_terms ?? ''} /></label>
             <label>Remaining balance terms<textarea name="balance_terms" minLength={20} maxLength={4000} required defaultValue={instantSettings.balance_terms ?? ''} /></label>
             <label className="booking-check">
@@ -349,6 +350,17 @@ export default async function BookingSettings({
             <label className="booking-check"><input type="checkbox" name="enabled" value="yes" defaultChecked={instantSettings.enabled === true} /> Enable instant direct booking with this policy</label>
             <button className="button button-primary" type="submit">Save booking policy</button>
           </form>
+        )}
+        {instantSettings?.configured && (
+          <DirectRateCheck pricing={{
+            base_nightly_cents: instantSettings.base_nightly_cents ?? 0,
+            weekend_nightly_cents: instantSettings.weekend_nightly_cents ?? 0,
+            cleaning_cents: instantSettings.cleaning_cents ?? 0,
+            pet_fee_cents: instantSettings.pet_fee_cents ?? 0,
+            pet_fee_mode: instantSettings.pet_fee_mode ?? 'per_stay',
+            tax_basis_points: instantSettings.tax_basis_points ?? 0,
+            taxable_fees: instantSettings.taxable_fees === true,
+          }} />
         )}
       </section>
 
@@ -372,8 +384,7 @@ export default async function BookingSettings({
           <p className="eyebrow">Terms</p>
           <h3>Each stay is explicit</h3>
           <p>
-            Nightly rates, cleaning, pets, taxes, deposit, cancellation terms,
-            and balance terms are set once as the property booking policy.
+            The guest sees one stay price including cleaning, with pet fees and taxes shown separately. Pricing, deposits, cancellation and balance terms are governed by the property policy.
           </p>
           <p>Changes stay explicit and governed; routine bookings do not need owner repricing.</p>
         </section>

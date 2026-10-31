@@ -122,6 +122,12 @@ export async function requestStay(form: FormData) {
 
     const created = await client.createRequest(input);
 
+    // Inquiry is a real owner-visible request, not a hold, checkout, or reservation.
+    // Never auto-price or start Stripe for this path.
+    if (form.get('intent') === 'inquiry') {
+      return { received: true as const, inquiry: true as const };
+    }
+
     try {
       const instant = await client.instantSettings();
       if (instant?.enabled === true) {
