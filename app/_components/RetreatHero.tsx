@@ -55,8 +55,8 @@ export function RetreatHero({ directEnabled, airbnbHref, scenes }: Props) {
           <div className={styles.story}>
             <p className={styles.eyebrow}>A whole house on the water</p>
             <h1 id="showcase-title"><span>Down by</span> <span>the pond.</span></h1>
-            <p className={styles.intro}>The dock is across the lawn, the hot tub is under the deck, and inside there's room for everyone to settle in.</p>
-            <p className={styles.welcome}>Three bedrooms, two full bathrooms, room for eight. We're Nate and Allie, and we live close by.</p>
+            <p className={styles.intro}>The dock is across the lawn, the hot tub is under the deck, and inside there&apos;s room for everyone to settle in.</p>
+            <p className={styles.welcome}>Three bedrooms, two full bathrooms, room for eight. We&apos;re Nate and Allie, and we live close by.</p>
             <div className={styles.actions}>
               {directEnabled ? (
                 <Link className={styles.primary} href="/book">{action}</Link>
