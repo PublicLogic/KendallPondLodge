@@ -81,7 +81,7 @@ export default async function QuotePage({ params, searchParams }: {
           <div><dt>Stay · {nights} {nights === 1 ? 'night' : 'nights'} (cleaning included)</dt><dd>{usd(price.stay_cents)}</dd></div>
           {quote.pets > 0 && <div><dt>Pets · {quote.pets}</dt><dd>{usd(price.pet_cents)}</dd></div>}
           {price.other_cents > 0 && <div><dt>{price.other_label}</dt><dd>{usd(price.other_cents)}</dd></div>}
-          <div><dt>Taxes</dt><dd>{usd(price.tax_cents)}</dd></div>}
+          <div><dt>Taxes</dt><dd>{usd(price.tax_cents)}</dd></div>
           <div className="booking-total"><dt>Full stay total</dt><dd>{usd(total)}</dd></div>
           <div><dt>Deposit due now</dt><dd>{usd(deposit)}</dd></div>
           <div><dt>Balance after deposit</dt><dd>{usd(total - deposit)}</dd></div>
