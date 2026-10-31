@@ -70,7 +70,7 @@ function PublicHeader({
         hasPhotoOpening && pastHero ? "hospitality-header-scrolled" : "",
       ].filter(Boolean).join(" ")}>
         <div className="experience-header-inner">
-          <Brand />
+          <Brand header />
 
           <nav
             className="experience-nav hospitality-nav"
