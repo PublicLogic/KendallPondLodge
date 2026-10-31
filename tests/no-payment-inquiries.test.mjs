@@ -24,5 +24,18 @@ test("guests can choose booking or no-payment inquiry with clear consent",()=>{
 test("site provides a question path that does not require dates",()=>{
   const page=read("app/book/page.tsx");
   assert.match(page,/Ask us a question without choosing dates/);
-  assert.match(page,/hostContactHref\(\)/);
+  assert.match(page,/href="\/ask"/);
+});
+
+test("the public question form is a server-side PJ inquiry, not a hidden checkout", () => {
+  const page = read("app/ask/page.tsx");
+  const client = read("app/ask/GuestQuestionForm.tsx");
+  const server = read("app/ask/actions.ts");
+  assert.match(page, /GuestQuestionForm/);
+  assert.match(client, /submitGuestQuestion/);
+  assert.match(client, /Send your question/);
+  assert.match(server, /\/api\/stayos\/inquiries/);
+  assert.match(server, /"X-PuddleJumper-Request": "true"/);
+  assert.match(server, /client_request_id/);
+  assert.doesNotMatch(server, /stripe|charge|paymentIntent|checkoutSession/i);
 });
