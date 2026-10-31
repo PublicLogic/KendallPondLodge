@@ -9,12 +9,12 @@ export default function OutsidePage() {
     <div className="guide-section-page">
       <header className="guide-section-header">
         <p className="guide-dashboard-eyebrow">Outside</p>
-        <h2>Relax outside. Reset it when you are done.</h2>
-        <p>Hot tub, fire pit, pool, lawn, and neighbor guidance — kept compact so the important safety points stay easy to scan.</p>
+        <h2>Enjoy the hot tub and the yard.</h2>
+        <p>A few notes on the hot tub, firepit, and outdoor spaces, including how to keep things safe and comfortable for everyone nearby.</p>
       </header>
 
       <section className="guide-section-stack" id="hot-tub">
-        <SectionHeading eyebrow="Hot tub" title="Start clean. Use the normal controls." intro="Replace and secure the cover after use. Contact the hosts if a warning, low water, unusual sound, or unsafe condition appears." />
+        <SectionHeading eyebrow="Hot tub" title="Before you get in." intro="Please replace and secure the cover afterward. If the water looks wrong, or a warning appears, send us a message before using it." />
         <div className="do-dont">
           <div><h3>Do</h3><ul><li>Shower off lotions, dirt, and sand first.</li><li>Replace and secure the cover after use.</li><li>Keep children directly supervised.</li><li>Message the hosts about warnings or unusual conditions.</li></ul></div>
           <div><h3>Do not</h3><ul><li>Force controls, caps, jets, or valves.</li><li>Add soap, oils, bath products, or chemicals.</li><li>Sit or place heavy objects on the cover.</li><li>Use the tub if the water looks unsafe.</li></ul></div>
@@ -22,7 +22,7 @@ export default function OutsidePage() {
       </section>
 
       <section className="guide-section-stack guide-section-surface" id="fire-pit">
-        <SectionHeading eyebrow="Outdoor areas" title="Fire, pool, and neighbors." />
+        <SectionHeading eyebrow="Outdoor areas" title="Firepit and outdoor care." />
         <div className="split-section split-section-photo-first">
           <PhotoCard src="/images/kpl/2026-10-28/kendall-pond-lodge-summer-lawn-premium.webp" alt="The Lodge, stone firepit, lawn and shoreline lounge chair in summer" title="Shoreline fire pit" note="Extinguish every fire fully" wide />
           <div className="stacked-cards">
