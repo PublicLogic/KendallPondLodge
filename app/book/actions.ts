@@ -21,6 +21,7 @@ import { nightsBetween, stayNights } from '@/lib/booking.mjs';
 import { guestPriceBreakdown } from '@/lib/guest-price-breakdown.mjs';
 
 import { stripeRequest } from '@/lib/booking-stripe';
+import { submitGuestQuestion } from '@/app/ask/actions';
 
 import {
   validateGuestRequest,
@@ -86,6 +87,25 @@ export async function requestStay(form: FormData) {
       Object.fromEntries(form.entries()),
     );
 
+    if (form.get('intent') === 'inquiry') {
+      // A date question is an inquiry Case, NOT a booking request. It never
+      // triggers instant-booking price/payment messaging or holds inventory.
+      const question = new FormData();
+      question.set('guest_name', input.guest_name);
+      question.set('guest_email', input.guest_email);
+      question.set('check_in', input.check_in);
+      question.set('check_out', input.check_out);
+      question.set('client_request_id', input.request_key ?? crypto.randomUUID());
+      question.set('message', [
+        'I have a question about these dates: ' + input.check_in + ' to ' + input.check_out + '.',
+        'Guests: ' + input.guests + '. Pets: ' + input.pets + '.',
+        input.note ? 'Message: ' + input.note : 'Please contact me about this stay.',
+      ].join(' '));
+      const result = await submitGuestQuestion(question);
+      if (!result.received) throw new BookingServiceError(503, 'message_unavailable');
+      return { received: true as const, inquiry: true as const };
+    }
+
     const wantedNights = nightsBetween(
       input.check_in,
       input.check_out,
@@ -123,12 +143,6 @@ export async function requestStay(form: FormData) {
     }
 
     const created = await client.createRequest(input);
-
-    // Inquiry is a real owner-visible request, not a hold, checkout, or reservation.
-    // Never auto-price or start Stripe for this path.
-    if (form.get('intent') === 'inquiry') {
-      return { received: true as const, inquiry: true as const };
-    }
 
     try {
       const instant = await client.instantSettings();
