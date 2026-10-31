@@ -31,7 +31,7 @@ test("Local photography and the map are transparent, compact and usable", () => 
   assert.match(directory, /styles\.photoPick/);
   assert.match(directory, /styles\.mapDot/);
   assert.match(directory, /aria-pressed/);
-  assert.match(directory, /Google\.com\/maps\/search/);
+  assert.match(directory, /google\.com\/maps\/search/);
   assert.doesNotMatch(directory, /tile\.openstreetmap|arcgisonline|<iframe|srcDoc/);
 });
 
