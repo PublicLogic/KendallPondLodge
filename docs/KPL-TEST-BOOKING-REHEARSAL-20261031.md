@@ -2,6 +2,14 @@
 ## Scope
 Use a Vercel **preview** created from current main, connected to a **separate PJ staging property/workspace**, a controlled test calendar and **Stripe test mode**. Keep `kendallpondlodge.com`, live payment keys, live inventory and live guest messages untouched.
 
+## Preview isolation configured
+On October 31, 2026, the KPL Vercel project received **branch-scoped preview overrides** for `feature/no-payment-inquiries-test-20261031`:
+- `KPL_STORE_URL` points to `https://publiclogic-puddlejumper-staging.fly.dev/api/stayos/booking`, not production.
+- `KPL_BOOKING_ORIGIN` points to the stable `https://kpl-git-feature-no-payment-inquiries-test-20261031-publiclogic.vercel.app` alias.
+- Production environment variables and `kendallpondlodge.com` were not changed.
+
+These overrides do **not** prove the inherited preview scope key belongs to a disposable PJ property, the preview calendar is synthetic, or the registered Stripe **test webhook** targets this branch. Do not attempt a successful paid test until all three are proven.
+
 ## Safe setup checks
 - Confirm the exact preview deployment and KPL commit.
 - Confirm the PJ backend is staging and the bearer key identifies the test property.
