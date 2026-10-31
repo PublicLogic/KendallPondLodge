@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 // All photographs come from the Lodge's curated property collection.
 const photos = {
-  arrival: lodgePhoto(7),
+  arrival: lodgePhoto(5),
   living: lodgePhoto(5),
   kitchen: lodgePhoto(17),
   dining: lodgePhoto(19),
@@ -63,7 +63,7 @@ export default function LodgePage() {
       <section className={styles.cover} aria-labelledby="lodge-title" data-retreat-hero data-lodge-cover>
         <Photograph
           photo={photos.arrival}
-          caption="The Lodge, from the waterfront lawn"
+          caption="The great room at the Lodge"
           detail="Gardner, Massachusetts"
           sizes="100vw"
           priority
@@ -73,15 +73,15 @@ export default function LodgePage() {
         <div className={styles.container + " " + styles.coverInner}>
           <p className={styles.coverLocation}>The Lodge at Kendall Pond <span>Gardner, Massachusetts</span></p>
           <div className={styles.coverStory}>
-            <p className={styles.eyebrow}>Inside the Lodge</p>
-            <h1 id="lodge-title">The house<br /><em>is yours.</em></h1>
-            <p className={styles.coverIntro}>Three bedrooms and two full baths, with room for eight. There's a full kitchen, a lounge on each level, an upper deck, and a covered patio.</p>
+            <p className={styles.eyebrow}>Your place at Kendall Pond</p>
+            <h1 id="lodge-title">Come in.<br /><em>Stay awhile.</em></h1>
+            <p className={styles.coverIntro}>A fireplace to gather around. Space to spread out. Three bedrooms, two lounges, and the whole waterfront house to yourselves.</p>
             <div className={styles.actions}>
               <Link className={styles.button} href="/book">Check your dates <span aria-hidden="true">↗</span></Link>
-              <a className={styles.coverTextLink} href="#living">Come inside <span aria-hidden="true">↓</span></a>
+              <a className={styles.coverTextLink} href="#living">Explore the house <span aria-hidden="true">↓</span></a>
             </div>
           </div>
-          <div className={styles.coverFoot}><span>Hosted locally by Nate &amp; Allie</span><span>The house. The yard. The waterfront.</span></div>
+          <div className={styles.coverFoot}><span>Hosted locally by Nate &amp; Allie</span><span>Three bedrooms · Two fireplaces · Private waterfront</span></div>
         </div>
       </section>
 
