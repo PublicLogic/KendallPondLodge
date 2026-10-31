@@ -12,5 +12,5 @@ test("the homepage lead uses the curated full-resolution Kendall Pond photo", ()
 
 test("hot tub and deck remain distinct supporting scenes", () => {
   assert.match(home, /lodgePhoto\(4\)/);
-  assert.match(home, /kendall-pond-lodge-deck-lounge-autumn\.webp/);
+  assert.match(home, /lodgePhoto\(35\)/);
 });
