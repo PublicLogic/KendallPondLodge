@@ -20,9 +20,12 @@ const venuePhotos: Record<string, string> = {
 
 export function ExploreDirectory() {
   const [selected, setSelected] = useState<FilterId>("all");
+  const [mapPlace, setMapPlace] = useState(explorePicks[0].slug);
   const visible = selected === "all"
     ? explorePicks
     : explorePicks.filter((place) => place.category === selected);
+
+  const focused = explorePicks.find((place) => place.slug === mapPlace) ?? explorePicks[0];
 
   return (
     <>
@@ -47,6 +50,36 @@ export function ExploreDirectory() {
       <p className={styles.count} role="status" aria-live="polite">
         {visible.length} {visible.length === 1 ? "spot" : "spots"} on the list
       </p>
+      <section className={styles.mapSection} aria-label="Interactive local map">
+        <div className={styles.mapHeader}>
+          <div><span className={styles.mapKicker}>Around the Lodge</span><h3>Find your next stop.</h3></div>
+          <span className={styles.mapHelp}>Choose any spot to explore the map.</span>
+        </div>
+        <div className={styles.mapLayout}>
+          <div className={styles.mapList} role="group" aria-label="Choose a destination on the map">
+            {visible.map((place) => (
+              <button key={place.slug} type="button" aria-pressed={focused.slug === place.slug}
+                onClick={() => setMapPlace(place.slug)}>
+                <span><strong>{place.name}</strong><small>{place.location} · {place.bestFor}</small></span>
+                <span aria-hidden="true">↗</span>
+              </button>
+            ))}
+          </div>
+          <div className={styles.mapCanvas}>
+            <iframe
+              key={focused.slug}
+              title={`Map showing ${focused.name}`}
+              src={`https://www.google.com/maps?q=${encodeURIComponent(focused.address ?? focused.name + ", Massachusetts")}&output=embed`}
+              loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+            <div className={styles.mapFooter}>
+              <span><strong>{focused.name}</strong><small>{focused.location}</small></span>
+              <a href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(focused.address ?? focused.name + ", Massachusetts")}`} target="_blank" rel="noopener noreferrer">Directions ↗</a>
+            </div>
+          </div>
+        </div>
+      </section>
       <div className={styles.directory} id="explore-picks">
         {visible.map((place) => (
           <a className={styles.photoPick} key={place.slug} href={place.url}
