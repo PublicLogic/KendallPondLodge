@@ -867,7 +867,7 @@
   box-shadow: none;
 }
 .mapList button strong { font-size: .77rem; }
-.mapList button small, .mapList button > span:last-child { display: none; }
+.mapList button small { display: none; }
 
 /* Consistent, shorter image cards instead of oversized portrait panels. */
 .directory {
