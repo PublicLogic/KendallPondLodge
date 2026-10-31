@@ -110,7 +110,7 @@ export default async function ExplorePage() {
           </div>
           <p>The good stuff, just down the road.</p>
         </header>
-        <ExploreDirectory />
+        <ExploreDirectory places={feed?.places ?? []} />
       </section>
 
       <WachusettRail transit={feed?.transit ?? null} />
