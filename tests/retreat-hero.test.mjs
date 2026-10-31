@@ -22,8 +22,8 @@ test('the header follows the approved split rural-pond composition', () => {
 test('the static collage uses existing property photos and keeps both booking paths', () => {
   const hero = read('app/_components/RetreatHero.tsx');
   const home = read('app/page.tsx');
-  assert.match(home, /lodgePhoto\\(35\\)/);
-  assert.doesNotMatch(home, /kendall-pond-lodge-deck-lounge-autumn\\.webp/);
+  assert.match(home, /lodgePhoto\(35\)/);
+  assert.doesNotMatch(home, /kendall-pond-lodge-deck-lounge-autumn\.webp/);
   assert.match(home, /lodgePhoto\(46\)/);
   assert.match(home, /lodgePhoto\(4\)/);
   assert.match(home, /const house = lodgePhoto\(7\)/);
