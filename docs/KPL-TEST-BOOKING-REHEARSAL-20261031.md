@@ -22,7 +22,7 @@ These overrides do **not** prove the inherited preview scope key belongs to a di
 
 ## Three customer paths
 1. **Question without dates:** use the new Lodge `/ask` form. KPL submits server-side to the PJ inquiry API; it must return a saved inquiry before the website acknowledges receipt. Confirm one CaseSpace and a truthful host-notification state. If the endpoint is unavailable, show a direct contact fallback instead of pretending it worked.
-2. **Dates inquiry without payment:** choose dates and enter contact information, then select `Ask about these dates · no payment`. PJ records a request for owner follow-up. No quote, checkout, inventory hold or confirmed reservation.
+2. **Dates inquiry without payment:** choose dates and enter contact information, then select `Ask about these dates · no payment`. PJ creates a dedicated inquiry CaseSpace for owner follow-up, without creating a booking request, quote, Stripe checkout, inventory hold or confirmed reservation.
 3. **Book:** choose dates, select `See price & book`, review exact amounts and terms, accept them and complete Stripe **test** Checkout. Confirm status only after PJ processes the signed test webhook.
 
 ## Pricing and tax policy
@@ -32,7 +32,7 @@ These overrides do **not** prove the inherited preview scope key belongs to a di
 - **Massachusetts tax:** Mandatory cleaning, even when included in the room price, is generally part of taxable rent. See https://www.mass.gov/info-details/room-occupancy-excise-tax . Do not reduce or omit tax merely because cleaning is bundled.
 
 ## Acceptance checklist
-- No-payment dates inquiry yields exactly one owner-visible request and no Stripe session.
+- No-payment dates inquiry yields exactly one PJ inquiry CaseSpace, with no booking request or Stripe session.
 - General question without dates creates a scoped inquiry and confirms storage; unreachable PJ reports failure and provides a contact alternative.
 - Retry unchanged request idempotently; changed request gets a different identity.
 - Payment path shows the full total, cleaning-inclusive stay price, separate pet fees, taxes, deposit and balance, then returns from test Checkout.
