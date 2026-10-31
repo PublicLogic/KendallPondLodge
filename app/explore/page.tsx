@@ -66,11 +66,8 @@ export default async function ExplorePage() {
         <div className={styles.chamberInner}>
           <div className={styles.chamberIntro}>
             <p className={styles.eyebrow}>Greater Gardner Chamber</p>
-            <h2 id="chamber-title">Don&apos;t stop at our list.</h2>
-            <p>
-              More local places, restaurants and events.
-            </p>
-          </div>
+            <h2 id="chamber-title">There's more around here.</h2>
+           </div>
           <div className={styles.chamberLinks}>
             <a href={localResourceLinks.chamberEvents} target="_blank" rel="noopener noreferrer">
               <span><small>What's on</small><strong>Community &amp; Chamber events</strong></span><span aria-hidden="true">↗</span>
@@ -92,9 +89,9 @@ export default async function ExplorePage() {
         </div>
         <div className={styles.backCopy}>
           <p className={styles.eyebrow}>Or don&apos;t go anywhere</p>
-          <h2 id="back-title">Staying in works too.</h2>
+          <h2 id="back-title">Or bring dinner back.</h2>
           <p>
-            Take dinner to the deck. Stay awhile.
+            The kitchen's ready, the deck is just outside, and you don't need another plan.
           </p>
           <div className={styles.backLinks}>
             <Link href={bookingHref}>Check your dates <span aria-hidden="true">↗</span></Link>
