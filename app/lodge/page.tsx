@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 // All photographs come from the Lodge's curated property collection.
 const photos = {
   arrival: lodgePhoto(5),
-  living: lodgePhoto(5),
+  living: lodgePhoto(11),
   kitchen: lodgePhoto(17),
   dining: lodgePhoto(19),
   downstairs: lodgePhoto(13),
