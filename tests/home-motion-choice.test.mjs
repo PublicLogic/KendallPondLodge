@@ -8,7 +8,7 @@ test("home hero stays still and uses three distinct scenes", () => {
   const hero = read("app/_components/RetreatHero.tsx");
   assert.match(home, /lodgePhoto\(46\)/);
   assert.match(home, /lodgePhoto\(4\)/);
-  assert.match(home, /kendall-pond-lodge-deck-lounge-autumn\.webp/);
+  assert.match(home, /lodgePhoto\(35\)/);
   assert.doesNotMatch(home, /videoSrc:/);
   assert.doesNotMatch(hero, /LivingPhotoVideo|<video/);
 });
