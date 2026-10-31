@@ -145,7 +145,7 @@ export default async function BookPage({
             <h2 id="booking-form-heading">{readyToBook ? "Choose your nights." : "Booking options."}</h2>
             <p>
               {readyToBook
-                ? "Start with check-in and checkout, then tell us who's coming. Your full price and terms come next."
+                ? "Choose your dates to see the complete price. Cleaning is included in the stay price; pets are charged separately."
                 : "Direct booking isn't available here at the moment. You can still check current dates and pricing on Airbnb."}
             </p>
           </div>
