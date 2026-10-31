@@ -5,6 +5,7 @@ import {
   bookingClient,
   directBookingEnabled,
   publicError,
+  hostContactHref,
   type Booking,
 } from '@/lib/booking-db';
 
@@ -134,6 +135,7 @@ export default async function BookPage({
           <p className={styles.hostNote}>
             <strong>Hosted by Nate &amp; Allie.</strong>
             We live nearby. If you have a question about the bedrooms, the waterfront, or your plans, we&apos;re happy to help.
+            {' '}<a href={hostContactHref()}>Ask us a question without choosing dates</a>.
           </p>
         </div>
 
