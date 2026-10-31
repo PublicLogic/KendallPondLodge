@@ -20,7 +20,6 @@ export const metadata: Metadata = {
 
 const pondPhoto = lodgePhoto(49);
 const deckPhoto = lodgePhoto(35);
-const lodgeScenes = [lodgePhoto(35), lodgePhoto(49), lodgePhoto(25)];
 
 export const dynamic = "force-dynamic";
 
@@ -35,10 +34,9 @@ export default async function ExplorePage() {
           <p className={styles.eyebrow}>Gardner &amp; the Wachusett area</p>
           <h1 id="explore-title">Worth leaving the dock for.</h1>
           <p className={styles.openingIntro}>
-            Good food. Mountain air. A few favorite stops.
+            Restaurants, farm shops, trails, and places worth knowing.
           </p>
           <nav className={styles.openingNav} aria-label="Explore this guide">
-            <a href="#days">Day trips</a>
             <a href="#local-picks">Places</a>
             <a href="#train">Train</a>
             <a href="#city-events">Events</a>
@@ -51,64 +49,12 @@ export default async function ExplorePage() {
         </figure>
       </section>
 
-      <div className={styles.sceneStrip} aria-label="Scenes from Kendall Pond Lodge">
-        {lodgeScenes.map((photo, index) => (
-          <figure key={photo.src} className={styles.scene}>
-            <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 600px) 85vw, 33vw" />
-            <figcaption>{["Back at the Lodge", "By the water", "Make yourself at home"][index]}</figcaption>
-          </figure>
-        ))}
-      </div>
-
-      <section className={styles.days} id="days" aria-labelledby="days-title">
-        <header className={styles.sectionHeader}>
-          <div>
-            <p className={styles.eyebrow}>If you want to get out</p>
-            <h2 id="days-title">Make a day of it.</h2>
-          </div>
-          <p>Three easy ways to spend a day.</p>
-        </header>
-        <div className={styles.dayGrid}>
-          <article className={styles.day}>
-            <p className={styles.dayArea}>Gardner</p>
-            <h3>In town all day.</h3>
-            <ol>
-              <li><span>Morning</span><p>Start at <a href="https://business.gardnerma.com/list/member/blue-moon-diner-1363" target="_blank" rel="noopener noreferrer">Blue Moon Diner ↗</a> for breakfast.</p></li>
-              <li><span>Midday</span><p>Get a little furniture-town history at <a href="https://www.gardnermuseuminc.com/home/hours" target="_blank" rel="noopener noreferrer">the Gardner Museum ↗</a>. Check open days.</p></li>
-              <li><span>Evening</span><p>Head downtown for dinner at <a href="https://www.moonhillbrewing.com/" target="_blank" rel="noopener noreferrer">Gardner Ale House ↗</a>.</p></li>
-            </ol>
-          </article>
-          <article className={styles.day}>
-            <p className={styles.dayArea}>Wachusett &amp; Phillipston</p>
-            <h3>A hike and a cider donut.</h3>
-            <ol>
-              <li><span>Morning</span><p>Pick a trail at <a href="https://www.mass.gov/locations/wachusett-mountain-state-reservation" target="_blank" rel="noopener noreferrer">Wachusett Mountain ↗</a>. Check the trail map first.</p></li>
-              <li><span>Afternoon</span><p>Make the donut stop at <a href="https://www.redapplefarm.com/" target="_blank" rel="noopener noreferrer">Red Apple Farm ↗</a>. The farm calendar changes with the season.</p></li>
-              <li><span>Evening</span><p>Back to the Lodge. No schedule for the rest of the night.</p></li>
-            </ol>
-          </article>
-          <article className={styles.day}>
-            <p className={styles.dayArea}>Fitchburg &amp; Gardner</p>
-            <h3>One for a rainy day.</h3>
-            <ol>
-              <li><span>First stop</span><p>See what&apos;s hanging at the <a href="https://fitchburgartmuseum.org/visit/" target="_blank" rel="noopener noreferrer">Fitchburg Art Museum ↗</a>.</p></li>
-              <li><span>Later</span><p>Catch a movie at <a href="https://gardnercinemas.com/" target="_blank" rel="noopener noreferrer">Gardner Cinemas ↗</a> if something good is playing.</p></li>
-              <li><span>Dinner</span><p>Bring <a href="https://www.sawaasiancuisine.com/" target="_blank" rel="noopener noreferrer">Sawa ↗</a> takeout home. No more going out.</p></li>
-            </ol>
-          </article>
-        </div>
-        <p className={styles.planNote}>
-          Check hours and conditions before heading out.
-        </p>
-      </section>
-
       <section className={styles.picks} id="local-picks" aria-labelledby="picks-title">
         <header className={styles.sectionHeader}>
           <div>
-            <p className={styles.eyebrow}>Our corner of North County</p>
-            <h2 id="picks-title">Explore the area.</h2>
+            <p className={styles.eyebrow}>Gardner and North Central Massachusetts</p>
+            <h2 id="picks-title">Local favorites.</h2>
           </div>
-          <p>The good stuff, just down the road.</p>
         </header>
         <ExploreDirectory places={feed?.places ?? []} />
       </section>
