@@ -63,9 +63,9 @@ export function ExploreDirectory({ places: pjPlaces }: { places:PjExplorePlace[]
   return <>
     <div className={styles.filters} role="group" aria-label="Filter local recommendations">{exploreCategories.map(f=><button type="button" key={f.id} aria-pressed={category===f.id} onClick={()=>{setCategory(f.id);setSelected("");}}>{f.label} <span>{f.id==="all"?places.length:places.filter(p=>p.category===f.id).length}</span></button>)}</div>
     <section className={styles.mapSection} aria-label="Map of local recommendations">
-      <div className={styles.mapHeader}><div><span className={styles.mapKicker}>Around the Lodge</span><h3>Find your next stop.</h3></div><span className={styles.mapHelp}>{visiblePoints.length} locations on the map{!lookupDone?" · locating more…":""}</span></div>
+      <div className={styles.mapHeader}><h3>Area map</h3><span className={styles.mapHelp}>{visiblePoints.length} pins{!lookupDone?" · loading":""}</span></div>
       <div className={styles.mapLayout}>
-        <div className={styles.mapList}>{visible.map(p=><button type="button" key={p.slug} aria-pressed={selected===p.slug} onClick={()=>setSelected(p.slug)}><span><strong>{p.name}</strong><small>{p.location} · {p.bestFor}</small></span><span aria-hidden="true">↗</span></button>)}</div>
+        <div className={styles.mapList}>{visible.map(p=><button type="button" key={p.slug} aria-pressed={selected===p.slug} onClick={()=>setSelected(p.slug)}><span><strong>{p.name}</strong><small>{p.location} · {p.bestFor}</small></span></button>)}</div>
         <div className={styles.mapCanvas}><div className={styles.tileFreeMap} role="group" aria-label="Geographic overview of recommended places, select a numbered location">
               <div className={styles.mapTerrain} aria-hidden="true" />
               <div className={styles.mapTown} style={{top:"26%",left:"12%"}}>Winchendon</div>
@@ -73,10 +73,10 @@ export function ExploreDirectory({ places: pjPlaces }: { places:PjExplorePlace[]
               <div className={styles.mapTown} style={{top:"79%",left:"73%"}}>Wachusett</div>
               {visiblePoints.map((p,i)=><button key={p.slug} type="button" className={styles.mapDot} aria-label={"Select "+(visible.find(x=>x.slug===p.slug)?.name??"location")} aria-pressed={selected===p.slug} onClick={()=>setSelected(p.slug)}
                 style={{left:((p.lng-bounds.west)/(bounds.east-bounds.west)*88+6)+"%",top:((bounds.north-p.lat)/(bounds.north-bounds.south)*86+7)+"%"}}>{i+1}</button>)}
-              <div className={styles.mapLegend}>{visiblePoints.length} mapped places · geographic overview</div>
+              <div className={styles.mapLegend}>Geographic overview · not a road map</div>
               {!visiblePoints.length&&<div className={styles.mapPending}>{lookupDone?"Use the list for directions.":"Finding local stops…"}</div>}
             </div>
-          <div className={styles.mapFooter}><span><strong>{chosen?.name??"The neighborhood"}</strong><small>{chosen?.location??"Food, farms, trails & more"}</small></span>{chosen&&<a href={"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(chosen.address)} target="_blank" rel="noopener noreferrer">Directions ↗</a>}</div>
+          <div className={styles.mapFooter}><span><strong>{chosen?.name??"Around Gardner"}</strong><small>{chosen?.location??"Food, farms, trails & more"}</small></span>{chosen&&<a href={"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(chosen.address)} target="_blank" rel="noopener noreferrer">Directions ↗</a>}</div>
         </div>
       </div>
     </section>
