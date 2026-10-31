@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import test from 'node:test';
 const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
 test('homepage refresh preserves booking and review content below the hero', () => {
@@ -22,11 +22,8 @@ test('the header follows the approved split rural-pond composition', () => {
 test('the static collage uses existing property photos and keeps both booking paths', () => {
   const hero = read('app/_components/RetreatHero.tsx');
   const home = read('app/page.tsx');
-  for (const name of ['deck-lounge-autumn']) {
-    const src = '/images/kpl/2026-10-28/kendall-pond-lodge-' + name + '.webp';
-    assert.ok(home.includes(src));
-    assert.ok(existsSync(new URL('../public' + src, import.meta.url)));
-  }
+  assert.match(home, /lodgePhoto\\(35\\)/);
+  assert.doesNotMatch(home, /kendall-pond-lodge-deck-lounge-autumn\\.webp/);
   assert.match(home, /lodgePhoto\(46\)/);
   assert.match(home, /lodgePhoto\(4\)/);
   assert.match(home, /const house = lodgePhoto\(7\)/);
