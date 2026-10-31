@@ -108,12 +108,12 @@ export default function GuidebookPage() {
           </p>
 
           <strong>
-            We're just a message away.
+            We&apos;re just a message away.
           </strong>
 
           <p>
             Send us a message through your reservation if
-            something isn't working or you need a hand.
+            something isn&apos;t working or you need a hand.
           </p>
         </div>
 
