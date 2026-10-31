@@ -287,7 +287,7 @@ export default async function BookingSettings({
         </div>
         <p className="owner-card-lead">
           PJ owns the property pricing policy and applies it automatically to each eligible stay.
-          Owner review is for exceptions, not routine bookings. Cleaning is included in the guest stay price; pets are separate. Check the total against Airbnb for comparable dates before claiming a saving.
+          Owner review is for exceptions, not routine bookings. Guests see cleaning included in the stay price and pet fees separately. If your nightly rate already covers cleaning, keep the separate cleaning component at $0 to avoid counting it twice. Compare equivalent all-in totals with Airbnb before claiming a saving.
         </p>
         <div className="owner-instant-grid">
           <div>
@@ -326,7 +326,7 @@ export default async function BookingSettings({
             <div className="booking-fields">
               <label>Base nightly <input name="base_nightly" type="number" min="0.01" step="0.01" required defaultValue={instantSettings.configured ? ((instantSettings.base_nightly_cents ?? 0) / 100).toFixed(2) : ''} /></label>
               <label>Fri / Sat nightly <input name="weekend_nightly" type="number" min="0.01" step="0.01" required defaultValue={instantSettings.configured ? ((instantSettings.weekend_nightly_cents ?? 0) / 100).toFixed(2) : ''} /></label>
-              <label>Cleaning component · included in stay price <input name="cleaning" type="number" min="0" step="0.01" required defaultValue={instantSettings.configured ? ((instantSettings.cleaning_cents ?? 0) / 100).toFixed(2) : ''} /></label>
+              <label>Cleaning inside stay total · set $0 if nightly already covers it <input name="cleaning" type="number" min="0" step="0.01" required defaultValue={instantSettings.configured ? ((instantSettings.cleaning_cents ?? 0) / 100).toFixed(2) : ''} /></label>
               <label>Pet fee <input name="pet_fee" type="number" min="0" step="0.01" required defaultValue={instantSettings.configured ? ((instantSettings.pet_fee_cents ?? 0) / 100).toFixed(2) : ''} /></label>
               <label>Pet fee applies
                 <select name="pet_fee_mode" defaultValue={instantSettings.pet_fee_mode ?? 'per_stay'}>
