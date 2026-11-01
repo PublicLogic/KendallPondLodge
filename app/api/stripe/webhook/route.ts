@@ -25,9 +25,12 @@ export async function POST(request: NextRequest) {
   const result = await handlePaymentWebhook({
     body, signature: request.headers.get('stripe-signature'), env: process.env,
     // Lazily instantiate: malformed or unrelated events cannot reach the booking store.
-    pj: { confirmPayment: (id: string, session: string, amount: number) => bookingClient().confirmPayment(id, session, amount) },
+    pj: {
+      confirmPayment: (id: string, session: string, amount: number) => bookingClient().confirmPayment(id, session, amount),
+      release: (id: string) => bookingClient().release(id),
+    },
   });
-  if (result.outcome && result.outcome !== 'confirmed') {
+  if (result.outcome && !['confirmed', 'released', 'already_settled'].includes(result.outcome)) {
     // No tokens/PII. PJ has a reconciliation record except for the unmatched-scope outcome.
     console.error('KPL payment requires owner review:', result.outcome);
   }
