@@ -145,3 +145,55 @@ body:has(.gallery-lightbox[open]) { overflow: hidden; }
 /* Verified against the enabled hosted calendar, not just its local fallback. */
 .booking-panel-direct .stay-calendar-weekdays span,
 .booking-panel-direct .stay-calendar-key { color: #405b4e; }
+
+/* Authentic public Airbnb review excerpts, intentionally compact. */
+.guest-review-section { background: #f5f3ea; }
+.guest-review-section .stay-review-evidence {
+  padding-block: 1rem;
+  gap: 1rem;
+}
+.guest-review-section .stay-review-evidence p { line-height: 1.4; }
+.guest-review-section .stay-review-evidence small { line-height: 1.5; }
+.stay-review-five-star { color: #e2eddb; font-size: .82rem; }
+.guest-review-voices {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: clamp(.75rem,2vw,1.7rem);
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 1.25rem max(1.25rem,calc((100vw - 1280px)/2)) 1.35rem;
+}
+.guest-review-voice {
+  margin: 0;
+  min-width: 0;
+  padding-left: 1rem;
+  border-left: 2px solid #b8cbb8;
+}
+.guest-review-voice blockquote {
+  margin: 0;
+  color: #264938;
+  font-family: var(--font-serif),Georgia,serif;
+  font-size: clamp(.92rem,1.2vw,1.08rem);
+  line-height: 1.45;
+}
+.guest-review-voice figcaption {
+  margin-top: .6rem;
+  color: #627263;
+  font-size: .68rem;
+  font-weight: 650;
+  letter-spacing: .015em;
+}
+@media(max-width:760px) {
+  .guest-review-section .stay-review-evidence { gap: .4rem; }
+  .guest-review-voices {
+    display: flex;
+    gap: .7rem;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding: 1rem 1.2rem 1.2rem;
+    scrollbar-width: thin;
+  }
+  .guest-review-voice { flex: 0 0 min(78vw,300px); scroll-snap-align: start; }
+  .guest-review-voice blockquote { font-size: .96rem; }
+  .stay-review-five-star { display: block; }
+}
