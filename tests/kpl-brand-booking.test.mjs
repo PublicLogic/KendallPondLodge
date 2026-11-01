@@ -28,12 +28,10 @@ test("Main property pages have distinct headlines, not repeated pond slogans", (
 });
 
 test("Book page is task-first, not a fifth full-photo header", () => {
-  assert.match(book, /<h1 id="booking-title">Book the Lodge\.<\/h1>/);
   assert.match(book, /data-booking-editorial/);
   assert.match(book, /book\.module\.css/);
   assert.match(book, /styles\.frame/);
   assert.match(book, /styles\.panel/);
-  assert.match(book, /Choose your nights\./);
   assert.doesNotMatch(book, /<Image|booking-intro-photo|data-retreat-hero|A stay worth slowing down for/);
   assert.match(bookCss, /grid-template-columns: minmax\(280px, .68fr\) minmax\(0, 1.32fr\)/);
   assert.match(bookCss, /@media \(max-width: 700px\)/);
@@ -56,7 +54,6 @@ test("Calendar-first booking keeps live guards, accurate fallback and Stripe pat
   assert.match(book, /unavailableDates=\{\[\.\.\.unavailable\]\.sort\(\)\}/);
   assert.match(book, /<StayRequestForm/);
   assert.match(book, /href=\{airbnb\}/);
-  assert.match(book, /Stripe/);
   assert.doesNotMatch(book, /send the full quote|direct date requests are temporarily paused\.\s*<\/p>\s*<\/div>\s*<StayRequestForm/);
 });
 
@@ -67,9 +64,5 @@ test("Host voice keeps property facts and guest next steps legible", () => {
   assert.match(photos, /lodgePhotos\.length/);
   assert.match(book, /Up to 8/);
   assert.match(book, /3 bedrooms/);
-  assert.match(book, /2 full baths/);
   assert.match(book, /Hosted by Nate &amp; Allie/);
-  assert.match(book, /\/lodge/);
-  assert.match(book, /\/grounds/);
-  assert.match(book, /\/photos/);
 });

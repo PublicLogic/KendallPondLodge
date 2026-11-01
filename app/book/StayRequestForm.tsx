@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useMemo, useRef, useState } from 'react';
 import { useFormStatus } from 'react-dom';
-import { BookingBrand } from '@/app/_components/BookingBrand';
 import { clearGuestRequestKey, createGuestRequestKeyManager } from '@/lib/guest-request-key.mjs';
 
 type ServerAction = (formData: FormData) => Promise<{ received: true; instant_path?: string }>;
@@ -48,7 +47,7 @@ function RequestSubmit({ ready, nights, instant }: { ready: boolean; nights: num
       >
         {pending
           ? instant ? 'Checking price…' : 'Sending request…'
-          : instant ? 'See price & book' : 'Request these dates'}
+          : instant ? 'Continue' : 'Request these dates'}
       </button>
 
       <small role="status" aria-live="polite">
@@ -56,7 +55,7 @@ function RequestSubmit({ ready, nights, instant }: { ready: boolean; nights: num
           ? instant ? 'Checking availability and your exact price…' : 'Sending your dates. Please keep this page open.'
           : nights > 0
             ? instant
-              ? `${nights} night${nights === 1 ? '' : 's'} · Exact price and terms next.`
+              ? 'You won’t be charged yet.'
               : `${nights} night${nights === 1 ? '' : 's'} · Full itemized quote before payment.`
             : instant ? 'Choose your dates to see the exact price.' : 'Choose your dates first. No charge now.'}
       </small>
@@ -529,9 +528,6 @@ export function StayRequestForm({
             Unavailable
           </span>
         </div>
-        <div className="stay-calendar-credit" data-calendar-credit>
-          <BookingBrand />
-        </div>
       </div>
 
       <div className="booking-fields booking-guest-fields">
@@ -587,7 +583,7 @@ export function StayRequestForm({
         <textarea
           maxLength={1000}
           name="note"
-          placeholder="Wedding, ski trip, sleeping setup, pet..."
+          placeholder="Arrival time, questions, or special requests"
         />
       </label>
 
@@ -603,20 +599,13 @@ export function StayRequestForm({
         </label>
       </div>
 
-      <label className="booking-check booking-check-direct">
-        <input
-          name="consent"
-          required
-          type="checkbox"
-          value="yes"
-        />
-
-        <span>
-          {instant
-            ? 'The next step shows your exact price and booking terms. Nothing is charged until you continue to Stripe.'
-            : 'This is a request, not a reservation. Nate or Allie may contact me about the stay.'}
-        </span>
-      </label>
+      {instant ? <input type="hidden" name="consent" value="yes" /> : (
+        <label className="booking-check booking-check-direct">
+          <input name="consent" required type="checkbox" value="yes" />
+          <span>Nate or Allie may contact me about this request.</span>
+        </label>
+      )}
+      <p className="booking-fine">Two guests included. Each additional guest is $128.70 per night.</p>
 
       <RequestSubmit ready={availabilityReady && !!checkIn && !!checkOut} nights={nights} instant={instant} />
     </form>

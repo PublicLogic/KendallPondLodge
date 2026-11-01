@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { extraGuestNightly } from "@/lib/direct-pricing.mjs";
 
 type Pricing = {
   base_nightly_cents: number;
@@ -19,12 +20,14 @@ const money = (cents: number) =>
 export function DirectRateCheck({ pricing }: { pricing: Pricing }) {
   const [nightCount, setNightCount] = useState(3);
   const [weekendCount, setWeekendCount] = useState(1);
+  const [guestCount, setGuestCount] = useState(2);
   const [petCount, setPetCount] = useState(0);
   const [airbnbPrice, setAirbnbPrice] = useState("");
   const nights = Math.max(1, Math.min(30, Math.floor(nightCount || 1)));
   const weekends = Math.min(nights, Math.max(0, Math.floor(weekendCount || 0)));
   const pets = Math.max(0, Math.min(2, Math.floor(petCount || 0)));
-  const nightsSubtotal = nights * pricing.base_nightly_cents
+  const guests = Math.max(1, Math.min(8, Math.floor(guestCount || 1)));
+  const nightsSubtotal = nights * (pricing.base_nightly_cents + extraGuestNightly(guests))
     + weekends * (pricing.weekend_nightly_cents - pricing.base_nightly_cents);
   const petFee = pets > 0 ? pricing.pet_fee_cents * (pricing.pet_fee_mode === "per_pet" ? pets : 1) : 0;
   const stay = nightsSubtotal + pricing.cleaning_cents;
@@ -54,6 +57,9 @@ export function DirectRateCheck({ pricing }: { pricing: Pricing }) {
         <label>Fri / Sat nights
           <input type="number" min={0} max={nights} value={weekendCount} onChange={e=>setWeekendCount(Number(e.target.value))}/>
         </label>
+        <label>Guests
+          <input type="number" min={1} max={8} value={guestCount} onChange={e=>setGuestCount(Number(e.target.value))}/>
+        </label>
         <label>Pets
           <input type="number" min={0} max={2} value={petCount} onChange={e=>setPetCount(Number(e.target.value))}/>
         </label>
@@ -73,6 +79,7 @@ export function DirectRateCheck({ pricing }: { pricing: Pricing }) {
             : `The 10% target is not met. Reduce the direct total by ${money(total - (target ?? total))} for this comparison.`}
         </p>}
       </div>
+      <p>Base rates cover two guests. Each additional guest adds $128.70 per night, included in the stay price.</p>
       <p className="owner-card-footnote">Airbnb host fees are deducted from your payout; do not add them again to the guest total or subtract them again from the direct target. Direct guests pay the stay, pets and tax shown above. Stripe processing comes out of the payment received. This check does not fetch Airbnb prices or save rates. Verify the final totals before claiming a saving.</p>
     </aside>
   );
