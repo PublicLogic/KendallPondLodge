@@ -47,6 +47,36 @@ test('inconsistent metadata or invalid amount is not confirmed', async () => { f
     assert.equal(called, 0);
 } });
 function quote() { return { id, quote_token: token, status: 'checkout', deposit_cents: 12345, total_cents: 50000, guest_email: 'guest@example.test', check_in: '2027-01-02', check_out: '2027-01-04', checkout_started_at: new Date().toISOString(), stripe_session_id: null }; }
+for (const existing of [false, true]) {
+    test(`Stripe custom domain works for ${existing ? 'resumed' : 'new'} Checkout`, async () => {
+        const url = 'https://pay.publiclogic.org/c/pay/example';
+        const result = await beginGuestCheckout({
+            token, accepted: true, origin: 'https://kendallpondlodge.com',
+            pj: {
+                beginCheckout: async () => ({ ...quote(), stripe_session_id: existing ? sid : null }),
+                attachCheckout: async () => ({ ok: true }),
+            },
+            stripe: async () => ({ id: sid, url, status: 'open', payment_status: 'unpaid' }),
+        });
+        assert.deepEqual(result, { kind: 'redirect', url });
+    });
+}
+for (const url of [
+    'http://pay.publiclogic.org/c/pay/example',
+    'https://pay.publiclogic.org.evil.example/c/pay/example',
+    'https://evil.example/c/pay/example',
+    'https://pay.publiclogic.org@evil.example/c/pay/example',
+    'https://user:pass@pay.publiclogic.org/c/pay/example',
+    'https://pay.publiclogic.org:444/c/pay/example',
+]) {
+    test(`Checkout rejects untrusted redirect ${url}`, async () => {
+        await assert.rejects(beginGuestCheckout({
+            token, accepted: true, origin: 'https://kendallpondlodge.com',
+            pj: { beginCheckout: async () => ({ ...quote(), stripe_session_id: sid }) },
+            stripe: async () => ({ id: sid, url, status: 'open', payment_status: 'unpaid' }),
+        }), error => error.code === 'invalid_response');
+    });
+}
 test('checkout amount comes from PJ and attachment precedes redirect', async () => { const q = quote(), order = []; let form; const result = await beginGuestCheckout({ token, accepted: true, origin: 'https://lodge.example', pj: { beginCheckout: async () => { order.push('begin'); return q; }, attachCheckout: async () => { order.push('attach'); return { ok: true }; } }, stripe: async (path, f, key) => { order.push('stripe'); form = f; assert.equal(key, `kpl-deposit-${id}`); return { id: sid, url: 'https://checkout.stripe.com/c/pay/example', status: 'open' }; } }); assert.deepEqual(order, ['begin', 'stripe', 'attach']); assert.equal(form.get('line_items[0][price_data][unit_amount]'), '12345'); assert.equal(result.kind, 'redirect'); });
 test('retry reuses an attached session instead of charging twice', async () => { const q = { ...quote(), stripe_session_id: sid }; const paths = []; await beginGuestCheckout({ token, accepted: true, origin: 'https://lodge.example', pj: { beginCheckout: async () => q, attachCheckout: async () => assert.fail() }, stripe: async (p) => { paths.push(p); return { id: sid, url: 'https://checkout.stripe.com/c/pay/existing', status: 'open', payment_status: 'unpaid' }; } }); assert.deepEqual(paths, [`checkout/sessions/${sid}`]); });
 test('complete checkout returns to checking, never declares booked', async () => { const result = await beginGuestCheckout({ token, accepted: true, origin: 'https://lodge.example', pj: { beginCheckout: async () => ({ ...quote(), stripe_session_id: sid }) }, stripe: async () => ({ id: sid, status: 'complete', payment_status: 'paid' }) }); assert.equal(result.kind, 'checking'); });

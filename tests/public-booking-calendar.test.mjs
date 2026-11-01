@@ -35,7 +35,6 @@ test(
     );
 
     for (const status of [
-      'quoted',
       'checkout',
       'confirmed',
     ]) {

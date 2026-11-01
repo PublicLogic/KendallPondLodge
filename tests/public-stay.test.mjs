@@ -24,9 +24,10 @@ test('booking explains terms and payment without invented rates or confirmation'
   assert.ok(existsSync(target), 'public stay facts module is missing');
   const d = load();
   assert.equal(d.bookingSteps.length, 3);
-  assert.match(d.bookingSteps[0].body, /not a reservation/);
-  assert.match(d.bookingSteps[1].body, /fees|tax/);
-  assert.match(d.bookingSteps[2].body, /confirmed/);
+  assert.match(d.bookingSteps[0].body, /availability/i);
+  assert.match(d.bookingSteps[1].body, /full stay total/i);
+  assert.match(d.bookingSteps[1].body, /cancellation terms before you pay/i);
+  assert.match(d.bookingSteps[2].body, /confirmed after payment is verified/i);
   assert.doesNotMatch(JSON.stringify(d), /\$\d|guaranteed|instant booking/i);
 });
 test('guest evidence is attributed and dated, with no fabricated individual quotes', () => {
