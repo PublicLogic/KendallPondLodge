@@ -24,6 +24,10 @@ const legacyRedirects: Record<string, string> = {
 
 export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  // Keep the existing public test domain limited to signed Stripe callbacks.
+  if (request.nextUrl.hostname === "kpl-stripe-test.publiclogic.org" && pathname !== "/api/stripe/webhook") {
+    return new NextResponse("Not found", { status: 404 });
+  }
   const legacyDestination = legacyRedirects[pathname];
 
   if (legacyDestination) {
@@ -90,6 +94,7 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
+    "/:path*",
     "/guidebook/:path*",
     "/owner/:path*",
     "/house-guide",
