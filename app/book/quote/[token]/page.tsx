@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation';
 import { directBookingEnabled, paymentConfigured, findQuote, usd, hostContactHref, publicError } from '@/lib/booking-db';
 import { stayNights, quoteHasPaymentWindow } from '@/lib/booking.mjs';
 import { publicBookingState } from '@/lib/kpl-booking-core.mjs';
-import { BookingBrand } from '@/app/_components/BookingBrand';
 import { payDeposit } from '@/app/book/actions';
 import { guestPriceBreakdown } from '@/lib/guest-price-breakdown.mjs';
 
@@ -30,10 +29,9 @@ export default async function QuotePage({ params, searchParams }: {
   const deposit = quote.deposit_cents ?? 0;
   const price = guestPriceBreakdown(quote, nights);
   return <main id="main-content" className="content-section booking-page booking-quote">
-    <BookingBrand /><p className="eyebrow">Direct booking</p>
-    <h1>Review and book.</h1>
-    <p>{quote.check_in} to {quote.check_out} · {nights} {nights === 1 ? 'night' : 'nights'} · {quote.guests} guests · {quote.pets} pets</p>
-    <p>Review your total and booking terms, then pay securely with Stripe.</p>
+    <p className="eyebrow">The Lodge at Kendall Pond</p>
+    <h1>{state === 'confirmed' ? 'Your stay is booked' : 'Review your stay'}</h1>
+    <p>{new Date(quote.check_in + 'T12:00:00Z').toLocaleDateString('en-US', {month:'short',day:'numeric',timeZone:'UTC'})}–{new Date(quote.check_out + 'T12:00:00Z').toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric',timeZone:'UTC'})} · {nights} {nights === 1 ? 'night' : 'nights'} · {quote.guests} guests{quote.pets > 0 ? ` · ${quote.pets} pets` : ''}</p>
     {state === 'confirmed' && (
       <section
         className="booking-confirmed-panel"
@@ -77,31 +75,31 @@ export default async function QuotePage({ params, searchParams }: {
     {payment && !['return', 'cancel'].includes(payment) && <p className="booking-alert" role="alert">{publicError(payment)}</p>}
     {state === 'expired' && <p className="booking-alert">This payment link has expired. Choose your dates again or contact Nate & Allie.</p>}
     <div className="booking-grid">
-      <section className="booking-panel"><h2>Your complete price</h2>
+      <section className="booking-panel"><h2>Price details</h2>
         <dl className="booking-totals">
           <div><dt>Stay · {nights} {nights === 1 ? 'night' : 'nights'} (cleaning included)</dt><dd>{usd(price.stay_cents)}</dd></div>
           {(quote.pets > 0 || price.pet_cents > 0) && <div><dt>Pets · {quote.pets}</dt><dd>{usd(price.pet_cents)}</dd></div>}
           {price.other_cents > 0 && <div><dt>{price.other_label}</dt><dd>{usd(price.other_cents)}</dd></div>}
           <div><dt>Taxes</dt><dd>{usd(price.tax_cents)}</dd></div>
-          <div className="booking-total"><dt>Full stay total</dt><dd>{usd(total)}</dd></div>
-          <div><dt>Deposit due now</dt><dd>{usd(deposit)}</dd></div>
-          <div><dt>Balance after deposit</dt><dd>{usd(total - deposit)}</dd></div>
+          <div className="booking-total"><dt>Total</dt><dd>{usd(total)}</dd></div>
+          <div><dt>Pay now</dt><dd>{usd(deposit)}</dd></div>
+          <div><dt>Pay later</dt><dd>{usd(total - deposit)}</dd></div>
         </dl>
-        <p className="booking-fine">Housekeeping is included in the stay price. Pets are priced separately if you bring them. The deposit is charged in USD by Stripe; the remaining balance is not collected here.</p>
+        <p className="booking-fine">The stay price covers all {quote.guests} guests. You’re paying a deposit today; the balance is due under the terms shown.</p>
         {!price.matches_total && <p className="booking-alert" role="alert">The price breakdown needs host review. Please do not pay until the total is corrected.</p>}
       </section>
-      <section className="booking-panel"><h2>Terms before payment</h2>
+      <section className="booking-panel"><h2>Booking details</h2>
         <h3>Cancellation and refunds</h3><p className="booking-terms">{quote.cancellation_terms}</p>
         <h3>Remaining balance</h3><p className="booking-terms">{quote.balance_terms}</p>
         <h3>Stay rules</h3><p>Check-in after 3 PM; checkout before 11 AM. Self check-in uses a lockbox. Quiet hours are 10 PM–7 AM. No smoking. Up to two pets are welcome. The exterior Ring doorbell camera faces the entrance.</p>
-        <p>Payment link valid until {quote.quote_expires ? new Date(quote.quote_expires).toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'medium', timeStyle: 'short' }) : '—'} ET. Availability is rechecked when you continue to payment.</p>
+        <p>Reserve by {quote.quote_expires ? new Date(quote.quote_expires).toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'medium', timeStyle: 'short' }) : '—'} ET.</p>
         {price.matches_total && open && directBookingEnabled() && paymentConfigured() && state === 'quote' && <form action={payDeposit} className="booking-form">
           <input type="hidden" name="token" value={token} />
-          <label className="booking-check"><input type="checkbox" name="accepted" value="yes" required /> I agree to the quoted price, balance due, cancellation and refund terms, and stay rules above.</label>
-          <button className="button button-primary" type="submit">{resume ? 'Resume secure payment' : `Continue to Stripe · ${usd(deposit)} deposit`}</button>
+          <label className="booking-check"><input type="checkbox" name="accepted" value="yes" required /> I agree to the price, payment terms, cancellation policy, and house rules.</label>
+          <button className="button button-primary" type="submit">{resume ? 'Resume payment' : `Reserve · ${usd(deposit)} deposit`}</button>
         </form>}
       </section>
     </div>
-    <p><Link href="/book">← Direct booking information</Link> · <a href={hostContactHref()}>Contact your hosts</a></p>
+    <p><Link href="/book">← Change dates</Link> · <a href={hostContactHref()}>Contact Nate &amp; Allie</a></p>
   </main>;
 }

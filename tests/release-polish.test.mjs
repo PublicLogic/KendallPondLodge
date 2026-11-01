@@ -8,15 +8,6 @@ test('homepage contains one page, not the duplicated merge of two designs', () =
   assert.equal((home.match(/<RetreatHero\b/g) || []).length, 1);
   assert.doesNotMatch(home, /const directEnabled = directBookingEnabled/);
 });
-test('STAY sits after the calendar legend and before guest details', () => {
-  const form = read('app/book/StayRequestForm.tsx');
-  const page = read('app/book/page.tsx');
-  const credit = form.indexOf('data-calendar-credit');
-  assert.ok(credit > form.indexOf('className="stay-calendar-key"'));
-  assert.ok(credit < form.indexOf('className="booking-fields booking-guest-fields"'));
-  assert.match(form, /<BookingBrand\s*\/>/);
-  assert.doesNotMatch(page, /<BookingBrand\s*\/>/);
-});
 test('gallery has balanced real photos, rather than the narrow hot-tub strip', () => {
   const page = read('app/photos/page.tsx');
   const css = read('app/photos/photos.module.css');

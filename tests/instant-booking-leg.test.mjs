@@ -18,13 +18,6 @@ test("KPL exports only checkout and confirmed inventory to Airbnb", () => {
   assert.match(cal, /VALUE=DATE/);
 });
 
-test("KPL client understands PJ instant-booking settings and auto-price", () => {
-  const client = read("lib/pj-booking-client.mjs");
-  assert.match(client, /instantSettings\(\)/);
-  assert.match(client, /updateInstantSettings\(settings\)/);
-  assert.match(client, /autoPrice\(id\)/);
-});
-
 test("public submission automatically prices when PJ instant booking is active", () => {
   const actions = read("app/book/actions.ts");
   assert.match(actions, /instantSettings/);

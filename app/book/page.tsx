@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 
 import {
   bookingClient,
@@ -19,7 +18,6 @@ import {
 } from '@/lib/booking.mjs';
 
 import { requestStay } from './actions';
-import { BookingSteps } from '@/app/_components/StayInformation';
 import { StayRequestForm } from './StayRequestForm';
 import styles from './book.module.css';
 
@@ -107,10 +105,10 @@ export default async function BookPage({
       <section className={styles.frame} aria-labelledby="booking-title">
         <div className={styles.intro}>
           <p className={styles.eyebrow}>The Lodge at Kendall Pond · Direct booking</p>
-          <h1 id="booking-title">Book the Lodge.</h1>
+          <h1 id="booking-title">Book your stay</h1>
           <p className={styles.lede}>
             {readyToBook
-              ? "Choose your dates, see the full price, and review the terms before you pay."
+              ? "Choose your dates and guests. You’ll see the total before paying."
               : !enabled
                 ? "We're not taking direct bookings right now. Airbnb has the available nights and checkout."
                 : !instant
@@ -118,32 +116,16 @@ export default async function BookPage({
                   : "We can't verify the direct calendar right now. You can still check dates on Airbnb."}
           </p>
 
-          <dl className={styles.facts} aria-label="The Lodge at a glance">
-            <div><dt>Overnight guests</dt><dd>Up to 8</dd></div>
-            <div><dt>Bedrooms</dt><dd>3 bedrooms</dd></div>
-            <div><dt>Bathrooms</dt><dd>2 full baths</dd></div>
-            <div><dt>Waterfront</dt><dd>Private shoreline</dd></div>
-          </dl>
-
-          <nav className={styles.related} aria-label="More about the Lodge">
-            <Link href="/lodge">Inside the house ↗</Link>
-            <Link href="/grounds">Dock &amp; waterfront ↗</Link>
-            <Link href="/photos">Photos ↗</Link>
-          </nav>
-
-          <p className={styles.hostNote}>
-            <strong>Hosted by Nate &amp; Allie.</strong>
-            We live nearby. If you have a question about the bedrooms, the waterfront, or your plans, we&apos;re happy to help.
-          </p>
+          <p className={styles.hostNote}>The Lodge at Kendall Pond<br />3 bedrooms · 2 baths · Up to 8 guests<br />Hosted by Nate &amp; Allie</p>
         </div>
 
         <section className={"booking-panel booking-panel-direct " + styles.panel} aria-labelledby="booking-form-heading">
           <div className={styles.panelHeading}>
             <p className={styles.panelEyebrow}>{readyToBook ? "Check availability" : "Reservations"}</p>
-            <h2 id="booking-form-heading">{readyToBook ? "Choose your nights." : "Booking options."}</h2>
+            <h2 id="booking-form-heading">{readyToBook ? "Dates and guests" : "Booking options."}</h2>
             <p>
               {readyToBook
-                ? "Start with check-in and checkout, then tell us who's coming. Your full price and terms come next."
+                ? "Select your arrival and departure dates."
                 : "Direct booking isn't available here at the moment. You can still check current dates and pricing on Airbnb."}
             </p>
           </div>
@@ -187,14 +169,6 @@ export default async function BookPage({
         </section>
       </section>
 
-      <section className={styles.foot} aria-label="Booking information">
-        <p>
-          {readyToBook
-            ? "Eligible stays are checked against the live calendar. Review your total and the terms before you pay securely through Stripe."
-            : "Direct booking is not available right now. The Airbnb listing has its own availability, prices, and checkout terms."}
-        </p>
-      </section>
-      {readyToBook && <BookingSteps instant />}
     </main>
   );
 }
