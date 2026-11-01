@@ -102,7 +102,7 @@
     {
       "id": "price",
       "question": "What will our stay cost?",
-      "answer": "Check your dates and guest count to see the itemized total: nightly charges, cleaning, any pet fees, taxes and payment terms. Choosing dates is not a reservation, and checking a price doesn't charge you. Airbnb prices and policies are shown on Airbnb."
+      "answer": "Check your dates and guest count to see the full stay price with cleaning included, any separate pet fees, taxes and payment terms. Choosing dates is not a reservation, and checking a price doesn't charge you. Airbnb prices and policies are shown on Airbnb."
     },
     {
       "id": "cancellation",
