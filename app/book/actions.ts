@@ -7,6 +7,7 @@ import {
   bookingClient,
   directBookingEnabled,
   paymentConfigured,
+  findQuote,
   BookingServiceError,
   type Booking,
 } from '@/lib/booking-db';
@@ -16,9 +17,11 @@ import {
   fetchAirbnbIcs,
 } from '@/lib/airbnb-ical.mjs';
 
-import { nightsBetween } from '@/lib/booking.mjs';
+import { nightsBetween, stayNights } from '@/lib/booking.mjs';
+import { guestPriceBreakdown } from '@/lib/guest-price-breakdown.mjs';
 
 import { stripeRequest } from '@/lib/booking-stripe';
+import { submitGuestQuestion } from '@/app/ask/actions';
 
 import {
   validateGuestRequest,
@@ -83,6 +86,25 @@ export async function requestStay(form: FormData) {
     const input = validateGuestRequest(
       Object.fromEntries(form.entries()),
     );
+
+    if (form.get('intent') === 'inquiry') {
+      // A date question is an inquiry Case, NOT a booking request. It never
+      // triggers instant-booking price/payment messaging or holds inventory.
+      const question = new FormData();
+      question.set('guest_name', input.guest_name);
+      question.set('guest_email', input.guest_email);
+      question.set('check_in', input.check_in);
+      question.set('check_out', input.check_out);
+      question.set('client_request_id', input.request_key ?? crypto.randomUUID());
+      question.set('message', [
+        'I have a question about these dates: ' + input.check_in + ' to ' + input.check_out + '.',
+        'Guests: ' + input.guests + '. Pets: ' + input.pets + '.',
+        input.note ? 'Message: ' + input.note : 'Please contact me about this stay.',
+      ].join(' '));
+      const result = await submitGuestQuestion(question);
+      if (!result.received) throw new BookingServiceError(503, 'message_unavailable');
+      return { received: true as const, inquiry: true as const };
+    }
 
     const wantedNights = nightsBetween(
       input.check_in,
@@ -194,6 +216,13 @@ export async function payDeposit(form: FormData) {
   let destination: string;
 
   try {
+    // Price presentation must reconcile with PJ's authoritative total before
+    // any new Stripe session is opened, even on a directly submitted action.
+    const quote = await findQuote(token);
+    if (!quote || !guestPriceBreakdown(quote, stayNights(quote.check_in, quote.check_out)).matches_total) {
+      throw new BookingServiceError(503, 'invalid_response');
+    }
+
     const result = await beginGuestCheckout({
       token,
       accepted:

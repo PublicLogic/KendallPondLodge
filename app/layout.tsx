@@ -96,6 +96,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${plexSans.variable} ${plexSerif.variable} ${plexMono.variable}`}>
+        {process.env.KPL_TEST_REHEARSAL === "true" && (
+          <div role="status" className="kpl-test-banner">
+            TEST COPY · For rehearsal only · Do not use real payment details or make a real reservation
+          </div>
+        )}
         <ExperienceShell bookEnabled={directBookingEnabled()}>
           {children}
         </ExperienceShell>
