@@ -8,8 +8,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        // Owner tools, API routes, private calendar links and checkout stay out of search.
-        disallow: ["/owner", "/api/", "/calendar/", "/checkout"],
+        // API routes, private calendar links and checkout stay out of search.
+        // /owner is left crawlable so Google can see its noindex tag.
+        disallow: ["/api/", "/calendar/", "/checkout"],
       },
     ],
     sitemap: `${SITE}/sitemap.xml`,
