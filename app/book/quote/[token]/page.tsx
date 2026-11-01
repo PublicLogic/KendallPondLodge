@@ -25,15 +25,15 @@ export default async function QuotePage({ params, searchParams }: {
   const nights = stayNights(quote.check_in, quote.check_out);
   const open = ['quoted', 'checkout'].includes(quote.status) && quoteHasPaymentWindow(quote.quote_expires);
   const state = publicBookingState(quote, payment ?? '');
-  const resume = quote.status === 'checkout' && payment === 'cancel' && !quote.refund_reason;
+  const resume = state === 'quote' && quote.status === 'checkout' && payment === 'cancel';
   const total = quote.total_cents ?? 0;
   const deposit = quote.deposit_cents ?? 0;
   const price = guestPriceBreakdown(quote, nights);
   return <main id="main-content" className="content-section booking-page booking-quote">
     <BookingBrand /><p className="eyebrow">Direct booking</p>
-    <h1>Complete your Kendall Pond booking.</h1>
+    <h1>Review and book.</h1>
     <p>{quote.check_in} to {quote.check_out} · {nights} {nights === 1 ? 'night' : 'nights'} · {quote.guests} guests · {quote.pets} pets</p>
-    <p>Review the complete price and terms, then continue to secure Stripe checkout. We recheck availability when you continue. Keep this link private.</p>
+    <p>Review your total and booking terms, then pay securely with Stripe.</p>
     {state === 'confirmed' && (
       <section
         className="booking-confirmed-panel"
@@ -70,7 +70,8 @@ export default async function QuotePage({ params, searchParams }: {
         </div>
       </section>
     )}
-    {state === 'checking' && <p className="booking-alert" role="status">We’re checking the payment and booking record. A return from Stripe is not proof of a completed booking. Please don’t start another payment. Refresh this page or contact your hosts.</p>}
+    {resume && state === 'quote' && <p className="booking-alert" role="status">Checkout paused. Your stay is not confirmed yet. You can resume secure payment below.</p>}
+    {state === 'checking' && <p className="booking-alert" role="status">We’re confirming your payment. Please refresh in a moment to see your booking. Don’t pay again while we check.</p>}
     {state === 'refund_review' && <p className="booking-alert" role="alert">Your payment needs refund review. These dates are not confirmed. Do not pay again; contact your hosts for the next step.</p>}
     {state === 'needs_attention' && <p className="booking-alert" role="alert">Your payment is recorded, but the stay needs host attention before we can confirm it. Please contact your hosts; do not pay again.</p>}
     {payment && !['return', 'cancel'].includes(payment) && <p className="booking-alert" role="alert">{publicError(payment)}</p>}
@@ -94,7 +95,7 @@ export default async function QuotePage({ params, searchParams }: {
         <h3>Remaining balance</h3><p className="booking-terms">{quote.balance_terms}</p>
         <h3>Stay rules</h3><p>Check-in after 3 PM; checkout before 11 AM. Self check-in uses a lockbox. Quiet hours are 10 PM–7 AM. No smoking. Up to two pets are welcome. The exterior Ring doorbell camera faces the entrance.</p>
         <p>Payment link valid until {quote.quote_expires ? new Date(quote.quote_expires).toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'medium', timeStyle: 'short' }) : '—'} ET. Availability is rechecked when you continue to payment.</p>
-        {price.matches_total && open && directBookingEnabled() && paymentConfigured() && (state === 'quote' || resume) && <form action={payDeposit} className="booking-form">
+        {price.matches_total && open && directBookingEnabled() && paymentConfigured() && state === 'quote' && <form action={payDeposit} className="booking-form">
           <input type="hidden" name="token" value={token} />
           <label className="booking-check"><input type="checkbox" name="accepted" value="yes" required /> I agree to the quoted price, balance due, cancellation and refund terms, and stay rules above.</label>
           <button className="button button-primary" type="submit">{resume ? 'Resume secure payment' : `Continue to Stripe · ${usd(deposit)} deposit`}</button>
