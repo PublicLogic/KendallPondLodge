@@ -87,3 +87,16 @@ test('explicit attachment rejection expires new session; ambiguous failure does 
     assert.equal(paths.some(p => p.endsWith('/expire')), !ambiguous);
 } });
 test('guest state does not turn redirect, refund, or missing reservation into success', () => { assert.equal(publicBookingState({ ...quote(), status: 'quoted', quote_expires: '2099-01-01T00:00:00Z' }, 'return'), 'checking'); assert.equal(publicBookingState({ ...quote(), status: 'confirmed', paid_at: '2026-01-01', reservation_sync_error: 'conflict' }), 'needs_attention'); assert.equal(publicBookingState({ ...quote(), status: 'confirmed', paid_at: '2026-01-01', refund_reason: 'paid_conflict' }), 'refund_review'); assert.equal(publicBookingState({ ...quote(), status: 'confirmed', paid_at: '2026-01-01', reservation_sync_error: null }), 'confirmed'); });
+
+test('cancelled unpaid checkout can resume without a false payment-checking state', () => {
+    const q = { ...quote(), stripe_session_id: sid, paid_at: null, quote_expires: '2099-01-01T00:00:00Z' };
+    assert.equal(publicBookingState(q, 'cancel'), 'quote');
+    assert.equal(publicBookingState(q, 'return'), 'checking');
+    assert.equal(publicBookingState({ ...q, paid_at: '2026-11-01' }, 'cancel'), 'checking');
+    assert.equal(publicBookingState({ ...q, status: 'confirmed', paid_at: '2026-11-01' }, 'cancel'), 'confirmed');
+    assert.equal(publicBookingState({ ...q, refund_reason: 'paid_conflict' }, 'cancel'), 'refund_review');
+});
+
+test('expired checkout stops showing payment-checking even with a Stripe session', () => {
+    assert.equal(publicBookingState({ ...quote(), stripe_session_id: sid, quote_expires: '2020-01-01T00:00:00Z', status: 'expired' }, 'cancel'), 'expired');
+});
