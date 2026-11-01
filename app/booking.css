@@ -807,3 +807,11 @@
   .owner-rate-check-head { flex-direction:column; gap:.3rem; }
   .owner-rate-check-fields { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
+
+/* Keep booking review compact so the price and next step are easy to reach. */
+.booking-quote { padding-block:clamp(1.5rem,4vw,3rem); }
+.booking-quote > h1 { font-size:clamp(1.9rem,4vw,2.8rem); max-width:none; margin:.4rem 0 .75rem; letter-spacing:-.025em; }
+.booking-quote > .booking-brand { display:flex; align-items:center; gap:.75rem; margin:0 0 1rem; }
+.booking-quote > .booking-brand img { width:42px !important; height:auto !important; }
+.booking-quote .booking-grid { gap:clamp(1rem,3vw,2rem); }
+.booking-quote .booking-panel h2 { font-size:1.45rem; }
