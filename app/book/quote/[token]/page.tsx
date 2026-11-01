@@ -31,7 +31,7 @@ export default async function QuotePage({ params, searchParams }: {
   return <main id="main-content" className="content-section booking-page booking-quote">
     <p className="eyebrow">The Lodge at Kendall Pond</p>
     <h1>{state === 'confirmed' ? 'Your stay is booked' : 'Review your stay'}</h1>
-    <p>{new Date(quote.check_in + 'T12:00:00Z').toLocaleDateString('en-US', {month:'short',day:'numeric',timeZone:'UTC'})}–{new Date(quote.check_out + 'T12:00:00Z').toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric',timeZone:'UTC'})} · {nights} {nights === 1 ? 'night' : 'nights'} · {quote.guests} guests{quote.pets > 0 ? ` · ${quote.pets} pets` : ''}</p>
+    <p>{new Date(quote.check_in + 'T12:00:00Z').toLocaleDateString('en-US', {month:'short',day:'numeric',timeZone:'UTC'})}–{new Date(quote.check_out + 'T12:00:00Z').toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric',timeZone:'UTC'})} · {nights} {nights === 1 ? 'night' : 'nights'} · {quote.guests} {quote.guests === 1 ? 'guest' : 'guests'}{quote.pets > 0 ? ` · ${quote.pets} ${quote.pets === 1 ? 'pet' : 'pets'}` : ''}</p>
     {state === 'confirmed' && (
       <section
         className="booking-confirmed-panel"
