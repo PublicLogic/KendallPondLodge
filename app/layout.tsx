@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { ExperienceShell } from "./_components/ExperienceShell";
+import { LodgeJsonLd } from "./_components/LodgeJsonLd";
 import { directBookingEnabled } from "@/lib/booking-db";
 import "./globals.css";
 import "./experience.css";
@@ -96,6 +97,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${plexSans.variable} ${plexSerif.variable} ${plexMono.variable}`}>
+        <LodgeJsonLd />
         <ExperienceShell bookEnabled={directBookingEnabled()}>
           {children}
         </ExperienceShell>
