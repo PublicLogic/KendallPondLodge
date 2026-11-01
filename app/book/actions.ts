@@ -7,6 +7,7 @@ import {
   bookingClient,
   directBookingEnabled,
   paymentConfigured,
+  findQuote,
   BookingServiceError,
   type Booking,
 } from '@/lib/booking-db';
@@ -16,7 +17,8 @@ import {
   fetchAirbnbIcs,
 } from '@/lib/airbnb-ical.mjs';
 
-import { nightsBetween } from '@/lib/booking.mjs';
+import { nightsBetween, stayNights } from '@/lib/booking.mjs';
+import { guestPriceBreakdown } from '@/lib/guest-price-breakdown.mjs';
 
 import { stripeRequest } from '@/lib/booking-stripe';
 
@@ -194,6 +196,11 @@ export async function payDeposit(form: FormData) {
   let destination: string;
 
   try {
+    const quote = await findQuote(token);
+    if (!quote || !guestPriceBreakdown(quote, stayNights(quote.check_in, quote.check_out)).matches_total) {
+      throw new BookingServiceError(503, 'invalid_response');
+    }
+
     const result = await beginGuestCheckout({
       token,
       accepted:
