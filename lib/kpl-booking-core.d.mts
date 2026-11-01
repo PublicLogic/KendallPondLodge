@@ -14,5 +14,8 @@ export function beginGuestCheckout(options: {
 export function verifyPaymentSignature(body: string, signature: string|null, secret: string, now?: number): boolean;
 export function handlePaymentWebhook(options: {
  body: string; signature: string|null; env: Record<string,string|undefined>;
- pj: {confirmPayment(id: string, session: string, amount: number): Promise<any>};
+ pj: {
+  confirmPayment(id: string, session: string, amount: number): Promise<any>;
+  release(id: string): Promise<{ok: boolean}>;
+ };
 }): Promise<{status: number; body: Record<string,unknown>; outcome?: string}>;
