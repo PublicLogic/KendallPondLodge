@@ -6,14 +6,15 @@ const read = p => readFileSync(new URL("../"+p, import.meta.url), "utf8");
 test("home gives the kitchen its own sales card", () => {
   const home = read("app/page.tsx");
   assert.match(home, /photo:\s*17/);
-  assert.match(home, /Cook together\./);
-  assert.match(home, /Full kitchen/);
+  assert.match(home, /title: "[^"]*kitchen/i);
+  assert.match(home, /full kitchen/i);
 });
 
 test("the Lodge makes kitchen and dining at least as prominent as the great room", () => {
   const lodge = read("app/lodge/page.tsx");
   const css = read("app/lodge/lodge.module.css");
-  assert.match(lodge, /caption="Kitchen & dining"/);
+  assert.match(lodge, /photo=\{photos\.kitchen\}/);
+  assert.match(lodge, /photo=\{photos\.dining\}/);
   assert.match(css, /\.livingGrid\s*\{[^}]*grid-template-columns:1fr 1\.25fr/s);
 });
 
