@@ -73,7 +73,7 @@ export function GuestReviewEvidence() {
     <section className="guest-review-section" aria-label="Verified guest review highlights">
       <div className="stay-review-evidence">
         <div>
-          <p><strong>{review.rating}<span aria-hidden="true"> / 5</span></strong> <span>average from {review.count} public Airbnb reviews</span> <span className="stay-review-five-star">· {review.fiveStarCount} five-star stays</span></p>
+          <p><strong>{review.rating}<span aria-hidden="true"> / 5</span></strong> <span>average from {review.count} public Airbnb reviews</span> <span className="stay-review-five-star">· {review.fiveStarCount} five-star reviews</span></p>
           <small>Based on a guest-review export dated <time dateTime={review.checkedOn}>{review.checkedLabel}</time>. Most recent published review: <time dateTime={review.latestReviewOn}>October 27</time>. Airbnb&apos;s displayed rating may differ.</small>
         </div>
         <a href={review.url} target="_blank" rel="noopener noreferrer">Read all reviews on Airbnb <span aria-hidden="true">↗</span></a>
