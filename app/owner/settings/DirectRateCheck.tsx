@@ -45,7 +45,7 @@ export function DirectRateCheck({ pricing }: { pricing: Pricing }) {
           <p className="eyebrow">Pricing check</p>
           <h3>Keep direct 10% below Airbnb.</h3>
         </div>
-        <p>Enter the Airbnb guest total for the <strong>same nights, guests, and pets</strong>. This is a comparison, not a change to rates.</p>
+        <p>Use the final Airbnb checkout total for the <strong>same nights, guests, and pets</strong>, including guest service fees and taxes. Do not use the host payout. This check does not change booking rates.</p>
       </div>
       <div className="owner-rate-check-fields">
         <label>Nights
@@ -73,7 +73,7 @@ export function DirectRateCheck({ pricing }: { pricing: Pricing }) {
             : `The 10% target is not met. Reduce the direct total by ${money(total - (target ?? total))} for this comparison.`}
         </p>}
       </div>
-      <p className="owner-card-footnote">Enter Airbnb's actual all-in guest price for an identical stay. Rates and availability can change. This calculator does not fetch Airbnb prices or save PJ settings. Verify the final displayed total before publishing a savings claim.</p>
+      <p className="owner-card-footnote">Airbnb host fees are deducted from your payout; do not add them again to the guest total or subtract them again from the direct target. Direct guests pay the stay, pets and tax shown above. Stripe processing comes out of the payment received. This check does not fetch Airbnb prices or save rates. Verify the final totals before claiming a saving.</p>
     </aside>
   );
 }
