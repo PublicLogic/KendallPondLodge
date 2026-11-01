@@ -31,11 +31,33 @@
   ],
   "sleepingNote": "Eight overnight guests maximum. The sleeper sofa is additional sleeping space, not a fourth bedroom. Choose the bed arrangement that works for your group; the guest limit stays at eight.",
   "reviewSnapshot": {
-    "rating": "4.83",
-    "count": 30,
-    "checkedOn": "2026-10-27",
-    "checkedLabel": "October 27, 2026",
-    "url": "https://www.airbnb.com/rooms/1667597913565948713#reviews"
+    "rating": "4.84",
+    "count": 32,
+    "fiveStarCount": 27,
+    "checkedOn": "2026-11-01",
+    "checkedLabel": "November 1, 2026",
+    "latestReviewOn": "2026-10-27",
+    "url": "https://www.airbnb.com/rooms/1667597913565948713#reviews",
+    "excerpts": [
+      {
+        "quote": "The house is gorgeous, impeccably clean, and kept in fantastic shape.",
+        "publishedOn": "2026-10-23",
+        "publishedLabel": "October 2026",
+        "rating": 5
+      },
+      {
+        "quote": "Nate was super responsive and helpful! The pond is so gorgeous, you really can’t beat the views.",
+        "publishedOn": "2026-09-13",
+        "publishedLabel": "September 2026",
+        "rating": 5
+      },
+      {
+        "quote": "Beautiful location! My family had a great time on the water, enjoying the paddle board and kayak particularly!",
+        "publishedOn": "2026-08-05",
+        "publishedLabel": "August 2026",
+        "rating": 5
+      }
+    ]
   },
   "bookingSteps": [
     {

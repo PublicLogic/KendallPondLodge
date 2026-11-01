@@ -32,9 +32,13 @@ test('booking explains terms and payment without invented rates or confirmation'
 test('guest evidence is attributed and dated, with no fabricated individual quotes', () => {
   assert.ok(existsSync(target), 'public stay facts module is missing');
   const d = load();
-  assert.equal(d.reviewSnapshot.rating, '4.83');
-  assert.equal(d.reviewSnapshot.count, 30);
-  assert.equal(d.reviewSnapshot.checkedOn, '2026-10-27');
+  assert.equal(d.reviewSnapshot.rating, '4.84');
+  assert.equal(d.reviewSnapshot.count, 32);
+  assert.equal(d.reviewSnapshot.fiveStarCount, 27);
+  assert.equal(d.reviewSnapshot.checkedOn, '2026-11-01');
+  assert.equal(d.reviewSnapshot.latestReviewOn, '2026-10-27');
+  assert.equal(d.reviewSnapshot.excerpts.length, 3);
+  assert.ok(d.reviewSnapshot.excerpts.every(x => x.rating === 5 && x.publishedOn && x.quote));
   assert.match(d.reviewSnapshot.url, /^https:\/\/www\.airbnb\.com\/rooms\/1667597913565948713/);
   assert.equal(d.testimonials, undefined);
   assert.equal(new Set(d.faq.map(x=>x.id)).size, d.faq.length);
