@@ -42,3 +42,9 @@ One minimal mobile guest storefront and one owner surface one navigation level b
 
 ## Not a launch claim
 GitHub/Vercel `READY` means a build deployed; it does not establish successful payment, correct authorization, durable stock, recovery, live tax or correct pickup. Keep both PRs in draft until all release checks are evidenced.
+
+## Preview connectivity handoff — November 5, 2026
+- The dedicated Fly KPL Machine was updated to PJ commit `66168537594b6b20c36614a1ff8addf8cc52930b`; runtime `/ready` and `/health` passed. Existing booking records are not yet independently reconciled after migration.
+- Branch-scoped Preview `KPL_STORE_URL`, `KPL_STORE_KEY`, and disabled commerce flag have been configured. The owner replaced the key with the existing credential accepted by Fly. Vercel stores the secret write-only; this record contains no secret or hash.
+- Push a new Preview build after the key update, then test a scoped owner catalog read; do not treat Preview `READY` as proof of authentication.
+- Preview uses live KPL property credentials: catalog writes would affect live inventory. Do not perform destructive or payment tests without the separate gated test environment.
