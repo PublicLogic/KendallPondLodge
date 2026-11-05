@@ -1,38 +1,49 @@
-import type {Metadata} from "next";
-import Link from "next/link";
-import {requireKplOwner} from "@/lib/require-kpl-owner";
-import StockWorksheet from "./StockWorksheet";
-export const metadata:Metadata={title:"Mercantile · Owner",robots:{index:false,follow:false}};
-export const dynamic="force-dynamic";
-const upcoming=[["Local honey & maple","Supplier and food-retail review"],["Coffee & cocoa","Supplier and food-retail review"],["Homegoods & gifts","Source and pricing pending"]];
+import type {Metadata} from 'next';
+import Link from 'next/link';
+import {requireKplOwner} from '@/lib/require-kpl-owner';
+import {catalog,type CatalogItem} from '@/lib/mercantile-runtime';
+import {addStoreItem,updateStoreItem} from './actions';
+export const metadata:Metadata={title:'Mercantile · Owner',robots:{index:false,follow:false}};
+export const dynamic='force-dynamic';
+const panel={background:'#fff',border:'1px solid #e0e4dd',borderRadius:14,padding:24} as const;
+const input={width:'100%',border:'1px solid #cbd5cb',borderRadius:8,padding:'12px 14px',background:'#fff'} as const;
 export default async function OwnerStore(){
- await requireKplOwner("/owner/store");
- return <main id="main-content" style={{background:"#f5f0e8",minHeight:"100vh",padding:"clamp(24px,5vw,60px) 18px"}}>
- <div style={{maxWidth:1080,margin:"auto"}}>
- <Link href="/owner" style={{fontSize:14,fontWeight:700}}>← Owner dashboard</Link>
- <p className="eyebrow" style={{marginTop:28}}>Lodge at Kendall Pond · Owner</p>
- <h1 style={{fontSize:"clamp(3rem,6vw,5rem)",margin:"12px 0"}}>The Mercantile.</h1>
- <p style={{color:"var(--muted)",maxWidth:660,lineHeight:1.65}}>A small store to run alongside direct booking. Review firewood, check sales and keep track of what’s on the shelf.</p>
- <div style={{display:"flex",flexWrap:"wrap",gap:12,margin:"25px 0 30px"}}>
-  <Link href="/owner/bookings" className="button button-secondary">Direct bookings</Link>
-  <Link href="/store" className="button button-primary">View guest storefront</Link>
-  <a className="button button-secondary" href="https://dashboard.stripe.com/payments" target="_blank" rel="noopener noreferrer">Stripe sales ↗</a>
+ await requireKplOwner('/owner/store');
+ let items:CatalogItem[]=[];let connected=false;
+ try{items=await catalog('GET','/items');connected=true;}catch{}
+ return <main id="main-content" style={{background:'#f7f6f2',minHeight:'100vh',padding:'clamp(24px,5vw,65px) 18px'}}>
+ <div style={{maxWidth:980,margin:'auto'}}>
+ <Link href="/owner" style={{fontSize:14,fontWeight:650}}>← Lodge dashboard</Link>
+ <div style={{display:'flex',justifyContent:'space-between',alignItems:'end',gap:20,flexWrap:'wrap',margin:'36px 0 26px'}}>
+ <div><p className="eyebrow">Kendall Pond · Owner</p><h1 style={{fontSize:'clamp(3rem,6vw,5rem)',margin:'12px 0'}}>Mercantile.</h1><p style={{color:'#657369'}}>Products, quantities and the shelf. Nothing more than you need.</p></div>
+ <Link href="/store" className="button button-secondary">View storefront ↗</Link>
  </div>
- <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))",gap:20,alignItems:"start"}}>
- <StockWorksheet/>
- <div style={{display:"grid",gap:18}}>
-  <section style={{background:"#fff",border:"1px solid var(--line)",borderRadius:14,padding:25}}>
-   <p className="eyebrow">Available product</p><h2 style={{fontSize:"2rem",margin:"10px 0"}}>🪵 Firewood bundle</h2>
-   <p style={{fontSize:30,fontWeight:750}}>$10 <span style={{fontSize:13,fontWeight:400}}>per bundle</span></p>
-   <p style={{color:"var(--muted)",marginTop:12}}>SKU KPL-WOOD-001 · Stripe-hosted checkout · 1–10 bundles · Guest pickup</p>
-   <a href="https://dashboard.stripe.com/payment_links" target="_blank" rel="noopener noreferrer" style={{display:"inline-block",marginTop:18,fontWeight:700}}>Manage Stripe checkout ↗</a>
-  </section>
-  <section style={{background:"#fff",border:"1px solid var(--line)",borderRadius:14,padding:25}}>
-   <p className="eyebrow">Catalog pipeline</p><h2 style={{fontSize:"1.9rem",margin:"10px 0 16px"}}>Coming soon</h2>
-   {upcoming.map(([name,detail])=><div key={name} style={{padding:"12px 0",borderTop:"1px solid var(--line)"}}><strong>{name}</strong><p style={{fontSize:13,color:"var(--muted)",marginTop:4}}>{detail}</p></div>)}
-   <p style={{fontSize:12,color:"var(--muted)",marginTop:14}}>These products are not for sale yet. Publishing and supplier editing will require the shared store backend.</p>
-  </section>
- </div></div>
- <p style={{fontSize:13,lineHeight:1.65,color:"#657568",marginTop:24}}>Payments are real in Stripe. The stock worksheet is saved only in this browser and does not change availability or prevent overselling. Confirm tax treatment and pickup location before distributing the QR code.</p>
+ {!connected&&<section role="status" style={{...panel,marginBottom:20,background:'#fff5e9',borderColor:'#e4c99d'}}><strong>Store runtime not connected</strong><p style={{marginTop:6}}>The governed catalog is not deployed to the PuddleJumper service yet. Changes are disabled rather than saved only on this device. Firewood checkout remains available through Stripe.</p></section>}
+ <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(290px,1fr))',gap:18,alignItems:'start'}}>
+ <section style={panel}><p className="eyebrow">Catalog</p><h2 style={{fontSize:'2rem',margin:'10px 0 22px'}}>On the shelf</h2>
+ {connected&&items.length===0&&<p style={{color:'#647367'}}>No products yet. Add your first item alongside.</p>}
+ {items.map(item=><form key={item.id} action={updateStoreItem} style={{borderTop:'1px solid #e3e8e2',padding:'19px 0',display:'grid',gap:12}}>
+ <input type="hidden" name="id" value={item.id}/>
+ <div style={{display:'flex',justifyContent:'space-between',gap:12}}><strong>{item.name}</strong><span>${(item.price_cents/100).toFixed(2)}</span></div>
+ <p style={{color:'#6d796d',fontSize:13}}>{item.description||'No description'}</p>
+ <label style={{display:'grid',gap:7,fontSize:13,fontWeight:650}}>Quantity on hand<input style={input} type="number" name="on_hand" min="0" max="1000000" defaultValue={item.on_hand} required/></label>
+ <label style={{display:'flex',gap:10,alignItems:'center',fontSize:13}}><input type="checkbox" name="published" defaultChecked={Boolean(item.published)}/> Show in public catalog</label>
+ <button className="button button-secondary" type="submit">Save changes</button>
+ </form>)}
+ </section>
+ <section style={panel}><p className="eyebrow">Add an item</p><h2 style={{fontSize:'2rem',margin:'10px 0 20px'}}>Something new.</h2>
+ <form action={addStoreItem} style={{display:'grid',gap:15}}>
+ <label style={{display:'grid',gap:7,fontSize:13,fontWeight:650}}>Name<input style={input} name="name" placeholder="Firewood bundle" maxLength={100} minLength={2} required disabled={!connected}/></label>
+ <label style={{display:'grid',gap:7,fontSize:13,fontWeight:650}}>Description<input style={input} name="description" placeholder="Ready for the firepit" maxLength={500} disabled={!connected}/></label>
+ <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+ <label style={{display:'grid',gap:7,fontSize:13,fontWeight:650}}>Price ($)<input style={input} type="number" name="price_cents" min="0" max="10000000" placeholder="1000" required disabled={!connected}/><small style={{fontWeight:400,color:'#647367'}}>Enter cents: 1000 = $10</small></label>
+ <label style={{display:'grid',gap:7,fontSize:13,fontWeight:650}}>Quantity<input style={input} type="number" name="on_hand" min="0" max="1000000" defaultValue="0" required disabled={!connected}/></label>
+ </div>
+ <button className="button button-primary" type="submit" disabled={!connected}>Add to catalog</button>
+ </form>
+ <p style={{fontSize:12,color:'#6d796d',marginTop:17}}>New items begin unpublished. Every edit is recorded in the PuddleJumper runtime.</p>
+ </section>
+ </div>
+ <p style={{marginTop:25,fontSize:13,color:'#647367'}}>Firewood payments: <a href="https://dashboard.stripe.com/payments" target="_blank" rel="noopener noreferrer">Stripe sales ↗</a>. Inventory edits are audited, but Stripe payment links do not yet deduct stock automatically.</p>
  </div></main>;
 }
