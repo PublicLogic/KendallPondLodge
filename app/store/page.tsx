@@ -1,36 +1,63 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import {catalog,type CatalogItem} from "@/lib/mercantile-runtime";
-export const metadata:Metadata={title:"The Mercantile · Kendall Pond Lodge",description:"Firewood for your stay and a few local favorites coming soon."};
-const checkout="https://pay.publiclogic.org/b/fZudRa4hU6Bv31f9SRgYU03";
-const coming=[{name:"Local honey & maple",icon:"🍯",description:"Something sweet from our neighbors."},{name:"Coffee & cocoa",icon:"☕",description:"A warm cup for a quiet morning."},{name:"Homegoods & gifts",icon:"🧶",description:"A little something to take home."}];
-export const dynamic="force-dynamic";
-export default async function StorePage(){
- let catalogItems:CatalogItem[]=[];
- try{catalogItems=(await catalog("GET","/items")).filter((item:CatalogItem)=>Boolean(item.published));}catch{}
- return <main id="main-content" style={{background:"#f5f0e8",padding:"clamp(24px,5vw,70px) 18px 80px",minHeight:"80vh"}}>
- <div style={{maxWidth:1060,margin:"auto"}}>
- <p style={{fontSize:12,letterSpacing:".16em",fontWeight:750,color:"#526c55",textTransform:"uppercase"}}>The Lodge at Kendall Pond · Guest shop</p>
- <h1 style={{fontSize:"clamp(3.2rem,7vw,6rem)",margin:"15px 0 24px",color:"#243b2e",maxWidth:840}}>The little shop at the Lodge.</h1>
- <p style={{fontSize:"clamp(1rem,2vw,1.25rem)",lineHeight:1.65,maxWidth:620,color:"#56665a"}}>A few useful things for your stay, and a few good things from around here. We’re starting with firewood. More is on its way.</p>
- <div style={{marginTop:38,display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",background:"#fff",border:"1px solid #dedfd5",borderRadius:16,overflow:"hidden"}}>
- <div style={{background:"linear-gradient(140deg,#d3dfd0,#e6d7be)",minHeight:320,display:"grid",placeItems:"center"}} aria-hidden="true"><span style={{fontSize:110}}>🪵</span></div>
- <div style={{padding:"clamp(24px,4vw,48px)",display:"flex",flexDirection:"column",justifyContent:"center"}}>
- <p style={{color:"#54745c",fontSize:12,letterSpacing:".12em",textTransform:"uppercase",fontWeight:800}}>Available to order</p>
- <h2 style={{fontSize:"clamp(2.3rem,4vw,3.4rem)",margin:"14px 0"}}>Firewood bundles</h2>
- <p style={{lineHeight:1.65,color:"#5c6c61"}}>One bundle for the firepit. Choose how many you need at secure checkout and pick them up here at the Lodge.</p>
- <p style={{margin:"22px 0",fontSize:30,fontWeight:750,color:"#233c2d"}}>$10 <span style={{fontSize:14,fontWeight:400}}>per bundle</span></p>
- <a href={checkout} style={{display:"block",background:"#2d4c3a",color:"white",padding:"17px 22px",textAlign:"center",borderRadius:9,fontWeight:750,textDecoration:"none"}}>Buy firewood securely ↗</a>
- <p style={{marginTop:13,fontSize:12,color:"#677469"}}>Stripe checkout · 1–10 bundles · Pickup only</p>
- </div></div>
- {catalogItems.filter(item=>item.name.toLowerCase()!=="firewood bundle").length>0&&<section style={{marginTop:40}}><h2 style={{fontSize:"2rem",marginBottom:18}}>On the shelf</h2><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:16}}>{catalogItems.filter(item=>item.name.toLowerCase()!=="firewood bundle").map(item=><article key={item.id} style={{background:"#fff",padding:24,borderRadius:12,border:"1px solid #e0e1d8"}}><h3>{item.name}</h3><p style={{color:"#637063",marginTop:8}}>{item.description}</p><strong style={{display:"block",marginTop:14}}>${(item.price_cents/100).toFixed(2)}</strong><p style={{fontSize:13,marginTop:8,color:"#637063"}}>{item.on_hand>0?"Available at the Lodge — ask your host":"Currently out of stock"}</p></article>)}</div></section>}
- <div style={{display:"flex",justifyContent:"space-between",alignItems:"end",gap:15,flexWrap:"wrap",margin:"66px 0 22px"}}><div><p style={{fontSize:12,fontWeight:750,color:"#54745c",letterSpacing:".12em",textTransform:"uppercase"}}>Coming soon</p><h2 style={{fontSize:"clamp(2.2rem,4vw,3.5rem)",marginTop:10}}>More good things.</h2></div><span style={{color:"#667568",fontSize:14}}>Not available to purchase yet</span></div>
- <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:16}}>
- {coming.map(item=><article key={item.name} style={{background:"#fff",border:"1px solid #e0e1d8",borderRadius:12,overflow:"hidden"}}>
- <div style={{background:"#e5e9de",height:135,display:"grid",placeItems:"center",fontSize:62}} aria-hidden="true">{item.icon}</div>
- <div style={{padding:22}}><p style={{fontSize:11,letterSpacing:".1em",fontWeight:750,color:"#73806e"}}>COMING SOON</p><h3 style={{fontSize:"1.4rem",margin:"10px 0"}}>{item.name}</h3><p style={{fontSize:14,lineHeight:1.6,color:"#5b6b60"}}>{item.description}</p></div></article>)}
- </div>
- <section style={{background:"#e7e9df",borderRadius:12,marginTop:42,padding:"clamp(24px,4vw,38px)"}}><h2 style={{fontSize:"clamp(1.8rem,3vw,2.5rem)"}}>How it works</h2><p style={{marginTop:12,maxWidth:750,lineHeight:1.75,color:"#516353"}}>Pick what you need, pay securely on your phone, and keep your confirmation. Ask us where to collect your bundles before taking them. We’ll add more items as they become available.</p></section>
- <p style={{marginTop:30,fontSize:14,color:"#627264"}}>Need anything else? Message us through your reservation. <Link href="/guidebook">Back to the guest guidebook</Link>.</p>
+import type {Metadata} from 'next';
+import {randomUUID} from 'node:crypto';
+import Link from 'next/link';
+import {listProducts,type StoreProduct} from '@/lib/mercantile-runtime';
+import {liveStoreCheckoutEnabled,startStoreCheckout} from './actions';
+
+export const dynamic='force-dynamic';
+export const metadata:Metadata={title:'The Mercantile',description:'Firewood and a few good things for your stay at Kendall Pond.'};
+const oldFirewoodLink='https://pay.publiclogic.org/b/fZudRa4hU6Bv31f9SRgYU03';
+const upcoming=['Local honey & maple','Coffee & cocoa','Homegoods & gifts'];
+const money=(n:number)=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n/100);
+const productBox={padding:'clamp(20px,4vw,35px)',border:'1px solid #e1e5dd',borderRadius:13,background:'#fff'} as const;
+export default async function StorePage({searchParams}:{searchParams:Promise<{error?:string;canceled?:string}>}){
+ const {error,canceled}=await searchParams;
+ const enabled=liveStoreCheckoutEnabled();
+ let items:StoreProduct[]=[];let connected=false;
+ try{items=await listProducts('guest');connected=true;}catch{}
+ const available=enabled&&connected?items:[];
+ const fallback=!enabled;
+ return <main id="main-content" style={{minHeight:'80vh',background:'#f7f6f2',padding:'clamp(30px,6vw,78px) 18px 90px'}}>
+ <div style={{maxWidth:990,margin:'auto'}}>
+  <p style={{fontSize:12,fontWeight:700,letterSpacing:'.12em',textTransform:'uppercase',color:'#63766a'}}>The Lodge at Kendall Pond</p>
+  <h1 style={{fontSize:'clamp(3.2rem,7vw,5.8rem)',margin:'16px 0 22px'}}>A little shop for your stay.</h1>
+  <p style={{maxWidth:640,color:'#596c60',lineHeight:1.7,fontSize:'1.04rem'}}>Some extra firewood for tonight, and a few good things from around here. We’re starting small.</p>
+  {error&&<p role="alert" style={{marginTop:22,color:'#934335'}}>Checkout could not be started. No payment was confirmed. Please try again or contact us through your reservation.</p>}
+  {canceled&&<p role="status" style={{marginTop:22}}>Checkout was canceled. Nothing has been confirmed.</p>}
+  <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:17,marginTop:38}}>
+    {fallback&&<article style={productBox}>
+      <div aria-hidden="true" style={{fontSize:60}}>🪵</div>
+      <p style={{color:'#597460',fontSize:12,fontWeight:700,letterSpacing:'.1em',marginTop:16}}>CURRENTLY AVAILABLE TO ORDER</p>
+      <h2 style={{fontSize:'2.2rem',margin:'9px 0 14px'}}>Firewood bundle</h2>
+      <p style={{color:'#657368'}}>One bundle for the firepit. Pay securely on your phone; arrange pickup at the Lodge.</p>
+      <p style={{fontSize:25,fontWeight:750,margin:'21px 0'}}>$10.00</p>
+      <a href={oldFirewoodLink} style={{display:'inline-block',background:'#2b4b37',color:'white',padding:'13px 22px',borderRadius:8,textDecoration:'none',fontWeight:700}}>Buy with Stripe ↗</a>
+      <p style={{fontSize:12,color:'#637368',marginTop:13}}>Current Stripe checkout; physical inventory is managed by the host.</p>
+    </article>}
+    {available.map(item=><article key={item.id} style={productBox}>
+      <p style={{fontSize:12,letterSpacing:'.1em',color:'#5d7562',fontWeight:700}}>LODGE MERCANTILE</p>
+      <h2 style={{fontSize:'2.1rem',margin:'14px 0'}}>{item.name}</h2>
+      <p style={{color:'#657368',lineHeight:1.65}}>{item.description}</p>
+      <p style={{fontSize:25,fontWeight:750,margin:'21px 0'}}>{money(item.price_cents)}</p>
+      {item.on_hand>0?<form action={startStoreCheckout}>
+        <input type="hidden" name="product_id" value={item.id}/>
+        <input type="hidden" name="request_key" value={randomUUID()}/>
+        <label style={{display:'block',fontSize:13,fontWeight:700,marginBottom:8}}>Quantity
+          <input name="quantity" type="number" min={1} max={Math.min(item.on_hand,10)} defaultValue={1} required
+            style={{display:'block',width:95,border:'1px solid #c8d2c8',padding:11,borderRadius:7,marginTop:7}}/>
+        </label>
+        <button type="submit" style={{background:'#2b4b37',color:'white',padding:'13px 22px',borderRadius:8,fontWeight:700}}>Pay securely ↗</button>
+      </form>:<p style={{fontSize:14,fontWeight:700,color:'#64766a'}}>Currently out of stock</p>}
+    </article>)}
+  </div>
+  {enabled&&!connected&&<p role="status" style={{marginTop:25}}>The shop is temporarily unavailable. No orders can be placed until the store reconnects.</p>}
+  <div style={{marginTop:64}}>
+    <p style={{fontSize:12,letterSpacing:'.12em',fontWeight:700,color:'#63776b'}}>MORE COMING SOON</p>
+    <h2 style={{fontSize:'clamp(2rem,4vw,3.1rem)',margin:'12px 0 20px'}}>Good things on the way.</h2>
+    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))',gap:12}}>
+     {upcoming.map(name=><div key={name} style={{...productBox,background:'#f0f2ec',color:'#4d6052'}}><strong>{name}</strong><p style={{marginTop:9,fontSize:13}}>Coming soon</p></div>)}
+    </div>
+  </div>
+  <p style={{fontSize:14,color:'#637368',marginTop:40}}>Pickup is at the Lodge. Keep your payment confirmation and check with us before collecting your items. <Link href="/guidebook">Guest guidebook</Link></p>
  </div></main>;
 }
