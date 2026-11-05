@@ -39,7 +39,6 @@ if (client) {
     catch (e) {
         check('PJ booking/reconciliation connection', false, e.code ?? 'unavailable');
     }
-}
     // Read-only co-existence check: the same property key must reach the
     // governed store API. Never print products, bookings, guest data or keys.
     try {
@@ -55,5 +54,6 @@ if (client) {
                 : typeof e?.code === 'string' ? e.code : 'unavailable';
         check('PJ governed store connection', false, code);
     }
+}
 console.log('Not checked: live property row, actual calendar read, Stripe account/webhook pairing, complete payment/fulfillment E2E, emails, cancellations or refunds.');
 process.exitCode = checks.every(c => c.ok) ? 0 : 1;
