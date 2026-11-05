@@ -16,7 +16,12 @@ export default async function OwnerStore(){
    const status=error instanceof StoreRuntimeError||error instanceof BookingServiceError?error.status:0;
    const code=error instanceof StoreRuntimeError||error instanceof BookingServiceError?error.code:'unavailable';
    console.warn('Mercantile connection failed', {status,code});
-   connectionHint=code==='not_configured'?'This preview has no usable PJ connection configuration.':
+   const configuredUrl=process.env.KPL_STORE_URL||'';
+   const configuredKey=process.env.KPL_STORE_KEY||'';
+   const validKey=configuredKey.length>=32&&configuredKey.length<=4096&&!/\s/.test(configuredKey);
+   let validUrl=false;
+   try{const u=new URL(configuredUrl);validUrl=u.protocol==='https:'&&!u.username&&!u.password&&!u.search&&!u.hash&&u.pathname.replace(/\/+$/,'')==='/api/stayos/booking';}catch{}
+   connectionHint=code==='not_configured'?(validUrl?(validKey?'The PJ connection could not initialize.':'The Preview PJ key is missing or has an invalid format (minimum 32 characters; no whitespace).'):'The Preview PJ URL is missing or invalid; it must end in /api/stayos/booking.'):
      status===401?'This preview\'s PJ property credential was rejected.':
      status===404?'The configured PJ backend does not expose the Mercantile route.':
      status===403?'The configured PJ backend denied store access.':
