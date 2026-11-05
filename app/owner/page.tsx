@@ -8,8 +8,8 @@ export const dynamic = 'force-dynamic';
 export default async function OwnerPage() {
   await requireKplOwner();
   return <main id="main-content" className="content-section booking-page">
-    <BookingBrand owner /><p className="eyebrow">Lodge at Kendall Pond</p><h1>Your booking desk.</h1>
-    <p>Track direct bookings from price through checkout and confirmation.</p>
+    <BookingBrand owner /><p className="eyebrow">Lodge at Kendall Pond</p><h1>Your Lodge desk.</h1>
+    <p>Manage stays and the little shop from one place.</p>
     <div className="booking-grid">
       <section className="booking-panel"><h2>Direct bookings</h2><p>See who is ready to pay, who is in checkout, and anything that actually needs your attention.</p><Link className="button button-primary" href="/owner/bookings">Open bookings</Link></section>
       <section className="booking-panel"><h2>Mercantile</h2><p>Firewood bundles, payments and the pickup process.</p><Link className="button button-secondary" href="/owner/store">Open the store</Link></section>
