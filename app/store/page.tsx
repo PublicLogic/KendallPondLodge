@@ -2,7 +2,8 @@ import type {Metadata} from 'next';
 import {randomUUID} from 'node:crypto';
 import Link from 'next/link';
 import {listProducts,type StoreProduct} from '@/lib/mercantile-runtime';
-import {liveStoreCheckoutEnabled,startStoreCheckout} from './actions';
+import {startStoreCheckout} from './actions';
+import {liveStoreCheckoutEnabled} from '@/lib/mercantile-runtime';
 
 export const dynamic='force-dynamic';
 export const metadata:Metadata={title:'The Mercantile',description:'Firewood and a few good things for your stay at Kendall Pond.'};
