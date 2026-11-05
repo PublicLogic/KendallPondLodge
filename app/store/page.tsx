@@ -18,6 +18,7 @@ export default async function StorePage({searchParams}:{searchParams:Promise<{er
  try{items=await listProducts('guest');connected=true;}catch{}
  const available=enabled&&connected?items:[];
  const fallback=!enabled;
+ const allowLiveFallback=process.env.VERCEL_ENV==='production';
  return <main id="main-content" style={{minHeight:'80vh',background:'#f7f6f2',padding:'clamp(30px,6vw,78px) 18px 90px'}}>
  <div style={{maxWidth:990,margin:'auto'}}>
   <p style={{fontSize:12,fontWeight:700,letterSpacing:'.12em',textTransform:'uppercase',color:'#63766a'}}>The Lodge at Kendall Pond</p>
@@ -32,8 +33,8 @@ export default async function StorePage({searchParams}:{searchParams:Promise<{er
       <h2 style={{fontSize:'2.2rem',margin:'9px 0 14px'}}>Firewood bundle</h2>
       <p style={{color:'#657368'}}>One bundle for the firepit. Pay securely on your phone; arrange pickup at the Lodge.</p>
       <p style={{fontSize:25,fontWeight:750,margin:'21px 0'}}>$10.00</p>
-      <a href={oldFirewoodLink} style={{display:'inline-block',background:'#2b4b37',color:'white',padding:'13px 22px',borderRadius:8,textDecoration:'none',fontWeight:700}}>Buy with Stripe ↗</a>
-      <p style={{fontSize:12,color:'#637368',marginTop:13}}>Current Stripe checkout; physical inventory is managed by the host.</p>
+      {allowLiveFallback?<a href={oldFirewoodLink} style={{display:'inline-block',background:'#2b4b37',color:'white',padding:'13px 22px',borderRadius:8,textDecoration:'none',fontWeight:700}}>Buy with Stripe ↗</a>:<span role="status" style={{display:'inline-block',background:'#e5eae3',color:'#4b5f50',padding:'13px 22px',borderRadius:8,fontWeight:700}}>Preview only · Payment disabled</span>}
+      <p style={{fontSize:12,color:'#637368',marginTop:13}}>{allowLiveFallback?'Current Stripe checkout; physical inventory is managed by the host.':'Preview is read-only. Test checkout requires isolated Stripe test keys and a staging PJ runtime.'}</p>
     </article>}
     {available.map(item=><article key={item.id} style={productBox}>
       <p style={{fontSize:12,letterSpacing:'.1em',color:'#5d7562',fontWeight:700}}>LODGE MERCANTILE</p>
