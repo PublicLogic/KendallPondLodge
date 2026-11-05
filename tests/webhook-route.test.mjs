@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { createHmac } from 'node:crypto';
 import ts from 'typescript';
 import { handlePaymentWebhook } from '../lib/kpl-booking-core.mjs';
+import { handleMercantileWebhook } from '../lib/mercantile-webhook.mjs';
 
 test('signed expired Checkout reaches the booking release through the deployed route', async () => {
   // Run the production route with only its external store/HTTP boundaries supplied.
@@ -16,10 +17,12 @@ test('signed expired Checkout reaches the booking release through the deployed r
   process.env.STRIPE_WEBHOOK_SECRET = 'whsec_route_test_only';
   process.env.STRIPE_SECRET_KEY = 'sk_test_route_test_only';
   let released;
-  const POST = new Function('NextResponse', 'bookingClient', 'handlePaymentWebhook', `${compiled}\nreturn POST;`)(
+  const POST = new Function('NextResponse', 'bookingClient', 'handlePaymentWebhook', 'handleMercantileWebhook', 'catalog', `${compiled}\nreturn POST;`)(
     { json: (body, init) => Response.json(body, init) },
     () => ({ release: async bookingId => { released = bookingId; return { ok: true }; } }),
     handlePaymentWebhook,
+    handleMercantileWebhook,
+    async () => { throw new Error('Booking event must not touch the Mercantile ledger'); },
   );
   try {
     const body = JSON.stringify({ type: 'checkout.session.expired', livemode: false, data: { object: {
