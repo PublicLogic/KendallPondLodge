@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { bookingClient } from '@/lib/booking-db';
 import { handlePaymentWebhook } from '@/lib/kpl-booking-core.mjs';
+import { handleMercantileWebhook } from '@/lib/mercantile-webhook.mjs';
+import { catalog, type StoreOrder } from '@/lib/mercantile-runtime';
 
 export const runtime = 'nodejs';
 /** Bounded raw text: signature verification must precede JSON use. */
@@ -22,6 +24,17 @@ export async function POST(request: NextRequest) {
   let body: string;
   try { body = await rawBody(request); }
   catch { return new NextResponse('Payload too large', { status: 413 }); }
+  const mercantile = await handleMercantileWebhook({
+    body, signature: request.headers.get('stripe-signature'), env: process.env,
+    settle: (id: string, session: string, amount: number) =>
+      catalog<StoreOrder>('POST', '/orders/' + id + '/payment', 'webhook',
+        { stripe_session_id: session, amount_cents: amount }),
+    expire: (id: string) => catalog<StoreOrder>('POST', '/orders/' + id + '/expire', 'webhook', {}),
+  });
+  if (mercantile) {
+    if ('outcome' in mercantile && mercantile.outcome === 'needs_review') console.error('Mercantile payment needs owner review');
+    return NextResponse.json(mercantile.body, { status: mercantile.status, headers: { 'Cache-Control': 'no-store' } });
+  }
   const result = await handlePaymentWebhook({
     body, signature: request.headers.get('stripe-signature'), env: process.env,
     // Lazily instantiate: malformed or unrelated events cannot reach the booking store.

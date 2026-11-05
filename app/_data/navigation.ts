@@ -21,4 +21,5 @@ export const publicNavigation = [
   { href: "/grounds", label: "Waterfront" },
   { href: "/photos", label: "Photos" },
   { href: "/explore", label: "Explore" },
+  { href: "/store", label: "Shop" },
 ];

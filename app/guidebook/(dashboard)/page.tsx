@@ -48,6 +48,13 @@ const quickActions = [
     detail: "House audio and device controls.",
   },
   {
+    icon: "house",
+    kicker: "The little shop",
+    title: "Buy firewood",
+    href: "/store",
+    detail: "Extra bundles for the firepit, paid securely on your phone.",
+  },
+  {
     icon: "checkout",
     kicker: "Heading home",
     title: "I’m checking out",

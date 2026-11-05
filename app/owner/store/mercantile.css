@@ -1,0 +1,35 @@
+.merc-page{min-height:80vh;background:#f7f6f2;padding:clamp(25px,5vw,65px) 18px 90px;color:#26372f}
+.merc-container{max-width:1050px;margin:auto}.merc-back{font-size:.86rem;text-decoration:none;font-weight:650}
+.merc-kicker{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#64756c;font-weight:700}
+.merc-title{font-family:var(--font-serif),Georgia,serif;font-weight:500;font-size:clamp(3rem,6vw,5rem);margin:20px 0 9px}
+.merc-intro{max-width:650px;line-height:1.65;color:#647269;font-size:1rem;margin-bottom:30px}
+.merc-headline{display:flex;align-items:end;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-top:28px}
+.merc-headline a,.merc-link{font-size:.85rem;text-decoration:none;font-weight:700;color:#28503a}
+.merc-columns{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:17px;align-items:start}
+.merc-panel{border:1px solid #e1e6df;background:#fff;border-radius:12px;padding:clamp(18px,3vw,28px)}
+.merc-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}
+.merc-heading h2{font-size:1.65rem;font-family:var(--font-serif),Georgia,serif;letter-spacing:-.02em}
+.merc-heading span,.merc-note{font-size:.76rem;color:#65776c;line-height:1.55}
+.merc-item{border-top:1px solid #edf0ea}.merc-item-head{display:flex;gap:15px;align-items:center;padding:19px 0;cursor:pointer;list-style:none}
+.merc-item-head::-webkit-details-marker{display:none}.merc-item-head>span:first-child{flex:1;min-width:0}
+.merc-item-head strong,.merc-order strong{display:block;font-size:.98rem;color:#283b2f}
+.merc-item-head small,.merc-order small,.merc-qty small{display:block;margin-top:4px;font-size:.77rem;color:#64756b}
+.merc-qty{text-align:center;min-width:52px}.merc-qty strong{font-size:1.35rem}
+.merc-item[open] .merc-item-head>span:last-child{transform:rotate(180deg)}
+.merc-detail{padding:0 0 20px}.merc-form{display:grid;gap:12px;padding:16px;background:#f8f9f6;border-radius:10px}
+.merc-form label{display:grid;gap:5px;font-size:.8rem;font-weight:650;color:#485d50}
+.merc-form input:not([type=checkbox]),.merc-form select{width:100%;padding:11px 12px;border:1px solid #cdd7cf;border-radius:7px;background:#fff;color:#283b2f;font-size:1rem}
+.merc-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.merc-subhead{font-size:.82rem;font-weight:700;color:#3e5847}
+.merc-edit{margin-top:12px}.merc-form .merc-check{display:flex;align-items:center;gap:10px}
+.merc-form input[type=checkbox]{width:19px;height:19px}
+.merc-btn{justify-self:start;background:#2e4b3a;color:white;border-radius:8px;padding:11px 15px;font-size:.8rem;font-weight:700}
+.merc-btn:disabled{opacity:.5}.merc-ok,.merc-error{font-size:.79rem;font-weight:650}.merc-ok{color:#2a6345}.merc-error{color:#a54034}
+.merc-add{margin-top:18px;border:1px dashed #c6d1c8;border-radius:9px}.merc-add>summary{cursor:pointer;padding:14px;font-weight:700;font-size:.89rem}
+.merc-add[open]>summary{border-bottom:1px solid #dce2d9}.merc-add .merc-form{background:transparent}
+.merc-empty{padding:22px 0;color:#748174;font-size:.86rem}
+.merc-order{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #edf0ea;padding:17px 0}
+.merc-order .merc-btn{padding:9px 10px;font-size:.73rem}
+.merc-link{display:inline-block;margin:21px 0 15px}
+.merc-notice{padding:18px 20px;background:#fff4e7;border:1px solid #e7cdab;border-radius:10px;margin-bottom:20px;line-height:1.55}
+@media(max-width:760px){.merc-columns{grid-template-columns:1fr}.merc-fields{grid-template-columns:1fr}.merc-panel{padding:18px}}
