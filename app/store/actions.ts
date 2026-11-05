@@ -3,7 +3,7 @@ import {redirect} from 'next/navigation';
 import {catalog,type StoreOrder} from '@/lib/mercantile-runtime';
 import {stripeRequest} from '@/lib/booking-stripe';
 
-const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const SESS=/^cs_(test|live)_[A-Za-z0-9]{8,200}$/;
 function liveStoreCheckoutEnabled(){
   return process.env.KPL_STAY_COMMERCE_ENABLED==='true';
