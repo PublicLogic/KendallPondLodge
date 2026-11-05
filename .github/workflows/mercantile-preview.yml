@@ -1,0 +1,42 @@
+name: Mercantile preview checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [feat/mercantile-firewood-live-link]
+
+permissions:
+  contents: read
+
+jobs:
+  lodge-test:
+    name: Lodge core, build, and guarded HTTP smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Core regression suite (including Mercantile Stripe signature checks)
+        run: npm run test:core
+      - name: Production build
+        run: npm run build
+      - name: HTTP smoke — public store and owner auth gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run start -- -p 3000 > /tmp/kpl-http.log 2>&1 &
+          pid=$!
+          trap 'kill $pid || true' EXIT
+          for attempt in $(seq 1 40); do
+            if curl -fsS http://127.0.0.1:3000/store > /tmp/store.html; then break; fi
+            sleep 1
+          done
+          grep -q "A little shop for your stay" /tmp/store.html
+          status=$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:3000/owner/store)
+          test "$status" = "307" || test "$status" = "308"
+          echo "PASS: guest shop renders and protected owner area redirects."
