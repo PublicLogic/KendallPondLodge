@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
     expire: (id: string) => catalog<StoreOrder>('POST', '/orders/' + id + '/expire', 'webhook', {}),
   });
   if (mercantile) {
-    if (mercantile.outcome === 'needs_review') console.error('Mercantile payment needs owner review');
+    if ('outcome' in mercantile && mercantile.outcome === 'needs_review') console.error('Mercantile payment needs owner review');
     return NextResponse.json(mercantile.body, { status: mercantile.status, headers: { 'Cache-Control': 'no-store' } });
   }
   const result = await handlePaymentWebhook({
