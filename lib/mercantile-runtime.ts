@@ -13,6 +13,7 @@ export type StoreOrder={
   paid_at:string|null;fulfilled_at:string|null;review_reason:string|null;
 };
 export type StoreRole='owner'|'guest'|'webhook';
+export const liveStoreCheckoutEnabled=()=>process.env.KPL_STAY_COMMERCE_ENABLED==='true';
 export class StoreRuntimeError extends Error{
   constructor(public status:number,public code:string){super('The store could not complete this request.');}
 }
