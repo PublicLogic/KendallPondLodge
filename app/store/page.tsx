@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {catalog,type CatalogItem} from "@/lib/mercantile-runtime";
 export const metadata:Metadata={title:"The Mercantile · Kendall Pond Lodge",description:"Firewood for your stay and a few local favorites coming soon."};
 const checkout="https://pay.publiclogic.org/b/fZudRa4hU6Bv31f9SRgYU03";
 const coming=[{name:"Local honey & maple",icon:"🍯",description:"Something sweet from our neighbors."},{name:"Coffee & cocoa",icon:"☕",description:"A warm cup for a quiet morning."},{name:"Homegoods & gifts",icon:"🧶",description:"A little something to take home."}];
-export default function StorePage(){
+export const dynamic="force-dynamic";
+export default async function StorePage(){
+ let catalogItems:CatalogItem[]=[];
+ try{catalogItems=(await catalog("GET","/items")).filter((item:CatalogItem)=>Boolean(item.published));}catch{}
  return <main id="main-content" style={{background:"#f5f0e8",padding:"clamp(24px,5vw,70px) 18px 80px",minHeight:"80vh"}}>
  <div style={{maxWidth:1060,margin:"auto"}}>
  <p style={{fontSize:12,letterSpacing:".16em",fontWeight:750,color:"#526c55",textTransform:"uppercase"}}>The Lodge at Kendall Pond · Guest shop</p>
@@ -19,6 +23,7 @@ export default function StorePage(){
  <a href={checkout} style={{display:"block",background:"#2d4c3a",color:"white",padding:"17px 22px",textAlign:"center",borderRadius:9,fontWeight:750,textDecoration:"none"}}>Buy firewood securely ↗</a>
  <p style={{marginTop:13,fontSize:12,color:"#677469"}}>Stripe checkout · 1–10 bundles · Pickup only</p>
  </div></div>
+ {catalogItems.filter(item=>item.name.toLowerCase()!=="firewood bundle").length>0&&<section style={{marginTop:40}}><h2 style={{fontSize:"2rem",marginBottom:18}}>On the shelf</h2><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:16}}>{catalogItems.filter(item=>item.name.toLowerCase()!=="firewood bundle").map(item=><article key={item.id} style={{background:"#fff",padding:24,borderRadius:12,border:"1px solid #e0e1d8"}}><h3>{item.name}</h3><p style={{color:"#637063",marginTop:8}}>{item.description}</p><strong style={{display:"block",marginTop:14}}>${(item.price_cents/100).toFixed(2)}</strong><p style={{fontSize:13,marginTop:8,color:"#637063"}}>{item.on_hand>0?"Available at the Lodge — ask your host":"Currently out of stock"}</p></article>)}</div></section>}
  <div style={{display:"flex",justifyContent:"space-between",alignItems:"end",gap:15,flexWrap:"wrap",margin:"66px 0 22px"}}><div><p style={{fontSize:12,fontWeight:750,color:"#54745c",letterSpacing:".12em",textTransform:"uppercase"}}>Coming soon</p><h2 style={{fontSize:"clamp(2.2rem,4vw,3.5rem)",marginTop:10}}>More good things.</h2></div><span style={{color:"#667568",fontSize:14}}>Not available to purchase yet</span></div>
  <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:16}}>
  {coming.map(item=><article key={item.name} style={{background:"#fff",border:"1px solid #e0e1d8",borderRadius:12,overflow:"hidden"}}>
