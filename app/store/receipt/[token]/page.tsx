@@ -12,6 +12,7 @@ export default async function ReceiptPage({params}:{params:Promise<{token:string
  }
  const paid=receipt?.status==='paid'||receipt?.status==='fulfilled';
  const review=receipt?.status==='needs_review';
+ const count=receipt?.quantity??0;
  return <main id="main-content" style={{minHeight:'70vh',background:'#f7f6f2',padding:'clamp(50px,8vw,105px) 20px'}}>
   <section style={{maxWidth:610,margin:'auto'}}>
    <p style={{fontSize:12,letterSpacing:'.12em',fontWeight:700,color:'#658070'}}>THE LODGE · MERCANTILE</p>
@@ -19,7 +20,7 @@ export default async function ReceiptPage({params}:{params:Promise<{token:string
      {paid?'Payment received.':review?'We need to check your payment.':'Checking your payment.'}
    </h1>
    <p style={{fontSize:'1.05rem',lineHeight:1.75,color:'#576a5c'}}>
-    {paid?('Your order for '+receipt?.quantity ?? 0+' item'+(receipt?.quantity ?? 0===1?'':'s')+' is confirmed. Keep your Stripe receipt and contact us for pickup.'):
+    {paid?('Your order for '+count+' item'+(count===1?'':'s')+' is confirmed. Keep your Stripe receipt and contact us for pickup.'):
       review?'Please do not collect items yet. Contact us through your reservation so we can reconcile the payment.':
       'A checkout return alone does not confirm payment. Keep your Stripe confirmation and refresh this page to check the verified order status.'}
    </p>
