@@ -5,8 +5,8 @@ import type { guestHome } from '@/lib/guest-home.mjs';
 type Home = Awaited<ReturnType<ReturnType<typeof guestHome>['snapshot']>>;
 const guides = [
   ['arrival', 'Arrival', '↗'], ['house?control=guide', 'House guide', '⌂'],
-  ['waterfront', 'The pond', '≈'], ['outside', 'Hot tub & outside', '☼'],
-  ['checkout', 'Checkout', '✓'], ['help', 'Find something', '?'],
+  ['waterfront', 'The pond', '≈'], ['outside', 'Outside', '☼'],
+  ['checkout', 'Checkout', '✓'], ['help', 'Search', '?'],
 ];
 
 export function ControlDashboard({ home, network }: { home: Home; network: string }) {

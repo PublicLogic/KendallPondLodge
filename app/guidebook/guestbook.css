@@ -156,6 +156,7 @@ html:has(.gb-dashboard-app), body:has(.gb-dashboard-app) { height: 100%; overflo
 .gb-dashboard-app .gb-brand { font-size: 25px; }
 .gb-mast-actions { display: flex; gap: 24px; align-items: center; font-size: 12px; }
 .gb-mast-actions > a { text-decoration: none; }
+.gb-dashboard-app .gb-signout { max-width: none; white-space: nowrap; line-height: 1.2; font-size: 11px !important; }
 .gb-dashboard-main { min-height: 0; padding: 22px 28px 18px; width: 100%; max-width: 1600px; margin: auto; height: 100%; }
 .gb-dashboard { display: grid; grid-template-rows: auto minmax(0,1fr) 60px; gap: 18px; height: 100%; min-height: 0; }
 .gb-dashboard-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
@@ -192,8 +193,8 @@ html:has(.gb-dashboard-app), body:has(.gb-dashboard-app) { height: 100%; overflo
 .gb-tile-action { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 8px; font-size: 11px; font-weight: 600; }
 .gb-tile-action b { font-size: 16px; font-weight: 400; }
 .gb-experience-nav { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 10px; min-height: 0; }
-.gb-experience-nav a { display: flex; align-items: center; justify-content: center; gap: 9px; text-decoration: none; border: 1px solid #d8dfcf; border-radius: 10px; background: #fdfbf5; padding: 8px; min-width: 0; }
-.gb-experience-nav span { font-size: 22px; color: #4b6952; }
+.gb-experience-nav a { display: flex; align-items: center; justify-content: center; gap: 9px; text-decoration: none; border: 1px solid #d8dfcf; border-radius: 10px; background: #fdfbf5; padding: 8px; min-width: 0; min-height: 0; line-height: 1.2; }
+.gb-experience-nav span { font-size: 22px; line-height: 1; color: #4b6952; }
 .gb-experience-nav strong { font-size: 11px; font-weight: 600; }
 .gb-control-dialog { width: min(780px,calc(100% - 40px)); max-width: none; max-height: calc(100dvh - 40px); padding: 0; border: 1px solid #b8c5ad; border-radius: 18px; background: var(--gb-paper); color: var(--gb-ink); box-shadow: 0 20px 90px #06180e55; overflow: hidden; }
 .gb-control-dialog[open] { display: flex; flex-direction: column; }
@@ -242,7 +243,7 @@ html:has(.gb-dashboard-app), body:has(.gb-dashboard-app) { height: 100%; overflo
 @media (max-height: 700px) {
   .gb-dashboard-app { grid-template-rows: 54px minmax(0,1fr); }
   .gb-dashboard-main { padding-block: 12px; }
-  .gb-dashboard { gap: 10px; grid-template-rows: auto minmax(0,1fr) 48px; }
+  .gb-dashboard { gap: 10px; grid-template-rows: auto minmax(0,1fr) 58px; }
   .gb-dashboard-controls { grid-template-rows: 90px minmax(0,1fr); gap: 10px; }
   .gb-control-tiles { gap: 10px; }
   .gb-dashboard-app .gb-dashboard-heading h1 { font-size: 27px; }
