@@ -1029,3 +1029,90 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* KPL public navigation — Lodge identity, not a payment-company logo.
+   Reuse the site's authentic pine/roof/pond seal with editorial typography. */
+.hospitality-header .experience-header-inner {
+  min-height: 74px;
+  gap: clamp(1rem, 2.4vw, 2rem);
+}
+.hospitality-header .kpl-header-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .72rem;
+  width: auto;
+  max-width: none;
+  min-width: 0;
+  flex: none;
+  color: #103f30;
+  text-decoration: none;
+}
+.hospitality-header .kpl-header-brand-mark {
+  display: block;
+  flex: none;
+  width: 57px;
+  height: 57px;
+  object-fit: contain;
+}
+.hospitality-header .kpl-header-brand-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  min-width: 0;
+  white-space: nowrap;
+  line-height: 1.02;
+}
+.hospitality-header .kpl-header-brand-copy strong {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 600;
+  font-size: 1.6rem;
+  letter-spacing: -.055em;
+  color: #104733;
+}
+.hospitality-header .kpl-header-brand-copy > span {
+  margin-top: .14rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 500;
+  font-size: .85rem;
+  letter-spacing: -.01em;
+  color: #1b513c;
+}
+.hospitality-header .kpl-header-brand-copy small {
+  margin-top: .3rem;
+  font-family: var(--font-sans), sans-serif;
+  font-size: .55rem;
+  font-weight: 650;
+  letter-spacing: .045em;
+  color: #587061;
+}
+.hospitality-header .kpl-header-brand:hover .kpl-header-brand-copy strong {
+  color: #00724f;
+}
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .kpl-header-brand-mark {
+  filter: brightness(0) invert(1);
+}
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .kpl-header-brand-copy strong,
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .kpl-header-brand-copy > span,
+.hospitality-header.hospitality-header-immersive:not(.hospitality-header-scrolled) .kpl-header-brand-copy small {
+  color: #fffaf0;
+}
+@media (max-width: 1000px) {
+  .hospitality-header .kpl-header-brand-mark { width: 50px; height: 50px; }
+  .hospitality-header .kpl-header-brand-copy strong { font-size: 1.43rem; }
+  .hospitality-header .kpl-header-brand-copy > span { font-size: .77rem; }
+}
+@media (max-width: 760px) {
+  .hospitality-header .experience-header-inner { min-height: 66px; gap: .45rem; }
+  .hospitality-header .kpl-header-brand { width: auto; gap: .42rem; }
+  .hospitality-header .kpl-header-brand-mark { width: 43px; height: 43px; }
+  .hospitality-header .kpl-header-brand-copy strong { font-size: 1.19rem; }
+  .hospitality-header .kpl-header-brand-copy > span { font-size: .68rem; }
+  .hospitality-header .kpl-header-brand-copy small { font-size: .49rem; margin-top: .2rem; }
+}
+@media (max-width: 370px) {
+  .hospitality-header .kpl-header-brand-mark { width: 37px; height: 37px; }
+  .hospitality-header .kpl-header-brand-copy strong { font-size: 1.08rem; }
+  .hospitality-header .kpl-header-brand-copy > span { font-size: .6rem; }
+  .hospitality-header .kpl-header-brand-copy small { display: none; }
+}
