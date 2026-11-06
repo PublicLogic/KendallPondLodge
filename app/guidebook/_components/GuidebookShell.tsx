@@ -29,6 +29,7 @@ export function GuidebookShell({ children }: { children: ReactNode }) {
             <h1>Make yourself<br /><em>at home.</em></h1>
             <p>Put on your music, head down to the pond, or find the one thing you need right now.</p>
             <a href="#guest-music" className="gb-button">♫ Play your music ↗</a>
+            <a href="#house-controls" className="gb-button gb-hero-secondary">Wi-Fi & house controls ↗</a>
           </div>
         </section>}
         <div className="gb-frame gb-content">
