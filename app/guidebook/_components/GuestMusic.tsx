@@ -16,6 +16,7 @@ export function GuestMusic() {
   const [source, setSource] = useState('app');
   const [player, setPlayer] = useState('Spotify');
   const [connection, setConnection] = useState('Spotify Connect');
+  const [speaker, setSpeaker] = useState('Kendall Pond Echo');
   const players: Record<string, string> = { Spotify: 'https://open.spotify.com/', 'Apple Music': 'https://music.apple.com/', 'YouTube Music': 'https://music.youtube.com/', 'Amazon Music': 'https://music.amazon.com/', Other: '' };
   const [url, setUrl] = useState('');
   const [embed, setEmbed] = useState<ReturnType<typeof spotifyEmbed>>(null);
@@ -79,7 +80,7 @@ export function GuestMusic() {
           <p className="gb-eyebrow">01 / The soundtrack</p>
           <h2>Your stay.<br /><em>Your music.</em></h2>
           <p>Your playlists. Your podcasts. Whatever’s already playing on your phone.</p>
-          <Link className="gb-button" href="/guidebook/house#guest-wifi">Get the Wi-Fi details ↗</Link>
+          <Link className="gb-button" href="/guidebook/house?control=wifi">Get the Wi-Fi details ↗</Link>
         </div>}
         <div id="guest-music-panel" className={`gb-music-panel ${docked ? 'gb-player-floating' : ''}`}
           hidden={!inline && !docked} onKeyDown={event => {
@@ -93,24 +94,31 @@ export function GuestMusic() {
             ))}
           </div>
           <div hidden={source !== 'app'}>
-            <p>Keep listening in your own app. Choose a compatible speaker or TV as its output.</p>
+            <p>Bring your playlists to the Lodge speakers. Keep using your own music account.</p>
             <label htmlFor="music-app">Your player</label>
             <div className="gb-control-row">
-              <select id="music-app" value={player} onChange={event => { setPlayer(event.target.value); setConnection(event.target.value === 'Spotify' ? 'Spotify Connect' : 'AirPlay'); }}>
+              <select id="music-app" value={player} onChange={event => { setPlayer(event.target.value); setConnection(event.target.value === 'Spotify' ? 'Spotify Connect' : 'Bluetooth'); }}>
                 {Object.keys(players).map(name => <option key={name}>{name}</option>)}
               </select>
               {players[player] ? <a className="gb-button" href={players[player]} target="_blank" rel="noopener noreferrer">Open {player} ↗</a> : <span>Open your favorite audio app.</span>}
             </div>
+            <label htmlFor="lodge-speaker">Your speaker</label>
+            <div className="gb-control-row">
+              <select id="lodge-speaker" value={speaker} onChange={event => setSpeaker(event.target.value)}>
+                <option>Kendall Pond Echo</option>
+                <option>Kendall Pond Deck Speakers</option>
+              </select>
+            </div>
             <div className="gb-tabs" aria-label="Connect your audio">
-              {['Spotify Connect', 'AirPlay', 'Cast', 'Bluetooth'].map(method => <button key={method} type="button" aria-pressed={connection === method} onClick={() => setConnection(method)}>{method}</button>)}
+              {(player === 'Spotify' ? ['Spotify Connect', 'Bluetooth'] : ['Bluetooth']).map(method => <button key={method} type="button" aria-pressed={connection === method} onClick={() => setConnection(method)}>{method}</button>)}
             </div>
             <ol className="gb-speaker-steps">
-              <li>{connection === 'Bluetooth' ? 'Put the speaker in pairing mode. Your host can help identify it.' : <><Link href="/guidebook/house#guest-wifi">Join the Lodge Wi-Fi</Link> on your phone.</>}</li>
-              <li>{connection === 'Spotify Connect' ? 'Play something in Spotify. Tap the device icon in Now Playing.' : connection === 'AirPlay' ? 'Play audio, then open Control Center on your iPhone or iPad and tap AirPlay.' : connection === 'Cast' ? 'Open an app that supports Cast and tap its Cast icon.' : 'Open your phone’s Bluetooth settings and pair with the speaker.'}</li>
-              <li>{connection === 'Bluetooth' ? 'Play in any audio app. Your phone sends the sound to the paired speaker.' : 'Choose the Lodge speaker or TV if it appears. Keep using your app to choose songs.'}</li>
+              <li>{connection === 'Bluetooth' ? <>Go to <strong>{speaker}</strong> and say “Alexa, pair.”</> : <><Link href="/guidebook/house?control=wifi">Join the Lodge Wi-Fi</Link> on your phone.</>}</li>
+              <li>{connection === 'Spotify Connect' ? 'Play something in the Spotify app. Tap the device icon in Now Playing.' : 'Open your phone’s Bluetooth settings. Select the nearby Echo; its Bluetooth name may differ.'}</li>
+              <li>{connection === 'Bluetooth' ? 'Play from your music app. Disconnect Bluetooth when you’re done.' : <>Choose <strong>{speaker}</strong> if it appears. If it isn’t listed, try the Bluetooth steps above.</>}</li>
             </ol>
-            <p className="gb-note">Available outputs depend on the house equipment. This page doesn’t see what’s playing in another app or pair your phone automatically.</p>
-            <Link href="/guidebook/house#house-controls">Speaker, TV & temperature controls ↗</Link>
+            <p className="gb-note">Your account stays in your app. This page cannot pair your phone or confirm playback.</p>
+            <Link href="/guidebook/house?control=speaker">Speaker connection help ↗</Link>
           </div>
           <div hidden={source !== 'spotify'}>
             <p>Paste your own song, album, or playlist link to play it here.</p>
