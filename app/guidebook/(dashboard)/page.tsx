@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AskKendall } from '@/app/_components/AskKendall';
-import { GuestScenes } from '../_components/GuestScenes';
+import { GuestHouse } from '../_components/GuestHouse';
 
 export const metadata: Metadata = { title: 'Guestbook' };
 
@@ -15,6 +15,7 @@ const places = [
 export default function GuidebookPage() {
   return (
     <>
+      <GuestHouse />
       <section className="gb-section">
         <p className="gb-eyebrow">02 / The basics</p>
         <h2>Right when you need it.</h2>
@@ -35,7 +36,6 @@ export default function GuidebookPage() {
           </Link>)}
         </div>
       </section>
-      <GuestScenes />
       <aside className="gb-help">
         <div><h2>Need a hand?</h2><p>Message us through your reservation if you need help with the house or your stay.</p></div>
         <div><strong>Immediate emergency</strong><p>Call 911 for fire, medical, or water emergencies.</p></div>

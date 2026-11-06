@@ -10,6 +10,30 @@
 }
 .gb-app *, .gb-app *::before, .gb-app *::after { box-sizing: border-box; }
 .gb-app button, .gb-app input { font: inherit; }
+.gb-app select { font: inherit; max-width: 100%; padding: 10px; border: 1px solid #aab6a9; border-radius: 8px; background: white; color: var(--gb-ink); }
+.gb-hero-secondary { margin-left: 10px; }
+.gb-music-story .gb-button { border: 1px solid #8da38c; margin-top: 10px; }
+.gb-house-controls { scroll-margin-top: 80px; }
+.gb-home-intro { color: #536258; margin-bottom: 24px; }
+.gb-home-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.gb-home-card { background: #fffdf7; border: 1px solid var(--gb-line); border-radius: 14px; padding: 24px; min-width: 0; scroll-margin-top: 80px; }
+.gb-app .gb-home-card h3 { font: 29px/1.15 var(--font-serif),Georgia,serif; letter-spacing: -.03em; margin: 0; }
+.gb-control-heading { display: flex; justify-content: space-between; gap: 12px; align-items: start; flex-wrap: wrap; margin-bottom: 20px; }
+.gb-device-status { font-size: 11px; background: #eeeee5; color: #536258; padding: 5px 8px; border-radius: 16px; }
+.gb-device-status.is-ready { color: #1d4c31; background: #dce7c2; }
+.gb-home-card p { line-height: 1.65; }
+.gb-home-card fieldset { padding: 0; border: 0; margin: 14px 0; }
+.gb-home-card fieldset label { display: block; font-size: 13px; margin-bottom: 8px; }
+.gb-control-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+.gb-home-card input[type=number] { width: 88px; border: 1px solid #aab6a9; border-radius: 8px; padding: 10px; background: white; color: var(--gb-ink); }
+.gb-home-card button:disabled { opacity: .6; cursor: wait; }
+.gb-device-reading { text-transform: capitalize; font-size: 32px; margin: 18px 0; }
+.gb-device-reading small { display: block; text-transform: none; font-size: 13px; color: #536258; }
+.gb-wifi { background: #eaf0db; border-color: #c7d4b1; }
+.gb-wifi dl { margin: 22px 0; }
+.gb-wifi dt { text-transform: uppercase; letter-spacing: .1em; font-size: 10px; color: #536258; margin: 12px 0 4px; }
+.gb-wifi dd { font-size: 24px; margin: 0; overflow-wrap: anywhere; }
+.gb-wifi .gb-wifi-password { font-family: monospace; font-size: 20px; }
 .gb-app button { cursor: pointer; }
 .gb-app a { color: inherit; }
 .gb-app [hidden] { display: none !important; }
@@ -103,6 +127,8 @@
 .gb-checkout input, .gb-checkout progress { accent-color: #3e6a4d; }
 .gb-text-button { border: 0; background: none; color: #285641; text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 700px) {
+  .gb-home-grid { grid-template-columns: 1fr; }
+  .gb-hero-secondary { margin: 10px 0 0; }
   .gb-frame { width: calc(100% - 32px); }
   .gb-nav .gb-frame { gap: 20px; }
   .gb-mast .gb-frame { min-height: 66px; }

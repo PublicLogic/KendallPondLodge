@@ -7,7 +7,7 @@ const sections = [
   { href: '/guidebook', label: 'Overview' },
   { href: '/guidebook/audio', label: 'Music' },
   { href: '/guidebook/arrival', label: 'Arrival' },
-  { href: '/guidebook/house', label: 'House' },
+  { href: '/guidebook/house', label: 'House controls' },
   { href: '/guidebook/waterfront', label: 'Waterfront' },
   { href: '/guidebook/outside', label: 'Outside' },
   { href: '/guidebook/checkout', label: 'Checkout' },

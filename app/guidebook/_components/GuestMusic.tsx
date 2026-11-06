@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { spotifyEmbed } from '@/lib/spotify-embed.mjs';
 
 export function GuestMusic() {
@@ -12,7 +13,10 @@ export function GuestMusic() {
   const objectUrl = useRef<string | null>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const close = useRef<HTMLButtonElement>(null);
-  const [source, setSource] = useState('spotify');
+  const [source, setSource] = useState('app');
+  const [player, setPlayer] = useState('Spotify');
+  const [connection, setConnection] = useState('Spotify Connect');
+  const players: Record<string, string> = { Spotify: 'https://open.spotify.com/', 'Apple Music': 'https://music.apple.com/', 'YouTube Music': 'https://music.youtube.com/', 'Amazon Music': 'https://music.amazon.com/', Other: '' };
   const [url, setUrl] = useState('');
   const [embed, setEmbed] = useState<ReturnType<typeof spotifyEmbed>>(null);
   const [fileName, setFileName] = useState('');
@@ -74,7 +78,8 @@ export function GuestMusic() {
           <div className="gb-disc" aria-hidden="true" />
           <p className="gb-eyebrow">01 / The soundtrack</p>
           <h2>Your stay.<br /><em>Your music.</em></h2>
-          <p>Bring the songs you already love. Choose your music and pair your phone with the Lodge speaker.</p>
+          <p>Your playlists. Your podcasts. Whatever’s already playing on your phone.</p>
+          <Link className="gb-button" href="/guidebook/house#guest-wifi">Get the Wi-Fi details ↗</Link>
         </div>}
         <div id="guest-music-panel" className={`gb-music-panel ${docked ? 'gb-player-floating' : ''}`}
           hidden={!inline && !docked} onKeyDown={event => {
@@ -83,9 +88,29 @@ export function GuestMusic() {
           {docked && <button ref={close} className="gb-player-close" onClick={closePlayer} aria-label="Close music controls">×</button>}
           <p className="gb-eyebrow">Listen your way</p>
           <div className="gb-tabs" aria-label="Music source">
-            {[['spotify', 'Spotify'], ['file', 'My audio file'], ['speaker', 'Lodge speaker']].map(([value, label]) => (
-              <button key={value} type="button" aria-pressed={source === value} onClick={() => { setSource(value); setMessage(''); }}>{label}</button>
+            {[['app', 'Use my music app'], ['spotify', 'Spotify link'], ['file', 'Audio file']].map(([value, label]) => (
+              <button key={value} type="button" aria-pressed={source === value} onClick={() => { setSource(value); setMessage(''); if (value === 'app') { audio.current?.pause(); setEmbed(null); } }}>{label}</button>
             ))}
+          </div>
+          <div hidden={source !== 'app'}>
+            <p>Keep listening in your own app. Choose a compatible speaker or TV as its output.</p>
+            <label htmlFor="music-app">Your player</label>
+            <div className="gb-control-row">
+              <select id="music-app" value={player} onChange={event => { setPlayer(event.target.value); setConnection(event.target.value === 'Spotify' ? 'Spotify Connect' : 'AirPlay'); }}>
+                {Object.keys(players).map(name => <option key={name}>{name}</option>)}
+              </select>
+              {players[player] ? <a className="gb-button" href={players[player]} target="_blank" rel="noopener noreferrer">Open {player} ↗</a> : <span>Open your favorite audio app.</span>}
+            </div>
+            <div className="gb-tabs" aria-label="Connect your audio">
+              {['Spotify Connect', 'AirPlay', 'Cast', 'Bluetooth'].map(method => <button key={method} type="button" aria-pressed={connection === method} onClick={() => setConnection(method)}>{method}</button>)}
+            </div>
+            <ol className="gb-speaker-steps">
+              <li>{connection === 'Bluetooth' ? 'Put the speaker in pairing mode. Your host can help identify it.' : <><Link href="/guidebook/house#guest-wifi">Join the Lodge Wi-Fi</Link> on your phone.</>}</li>
+              <li>{connection === 'Spotify Connect' ? 'Play something in Spotify. Tap the device icon in Now Playing.' : connection === 'AirPlay' ? 'Play audio, then open Control Center on your iPhone or iPad and tap AirPlay.' : connection === 'Cast' ? 'Open an app that supports Cast and tap its Cast icon.' : 'Open your phone’s Bluetooth settings and pair with the speaker.'}</li>
+              <li>{connection === 'Bluetooth' ? 'Play in any audio app. Your phone sends the sound to the paired speaker.' : 'Choose the Lodge speaker or TV if it appears. Keep using your app to choose songs.'}</li>
+            </ol>
+            <p className="gb-note">Available outputs depend on the house equipment. This page doesn’t see what’s playing in another app or pair your phone automatically.</p>
+            <Link href="/guidebook/house#house-controls">Speaker, TV & temperature controls ↗</Link>
           </div>
           <div hidden={source !== 'spotify'}>
             <p>Paste your own song, album, or playlist link to play it here.</p>
@@ -109,14 +134,6 @@ export function GuestMusic() {
             <audio ref={audio} controls preload="metadata" hidden={!fileName}
               onPlay={() => { setEmbed(null); setMessage('Playing from this device.'); }}
               onError={() => setMessage('This file could not play. Try an MP3 or another format your browser supports.')} />
-          </div>
-          <div hidden={source !== 'speaker'}>
-            <ol className="gb-speaker-steps">
-              <li>Open Bluetooth settings on your phone or laptop.</li>
-              <li>Pair with the Lodge speaker. Ask your host if you need help putting it in pairing mode.</li>
-              <li>Choose it as your device’s output, then play music here or in your own app.</li>
-            </ol>
-            <p className="gb-note">The player uses the audio output selected on your device.</p>
           </div>
           <p className="gb-music-status" role="status">{message}</p>
         </div>
