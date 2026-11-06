@@ -45,7 +45,7 @@ const quickActions = [
     kicker: "Around the Lodge",
     title: "Play some music",
     href: "/guidebook/audio",
-    detail: "House audio and device controls.",
+    detail: "Play the Lodge mix or connect your own music.",
   },
   {
     icon: "checkout",
