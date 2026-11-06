@@ -1,12 +1,13 @@
 'use client';
 
 import { useActionState } from 'react';
+import Link from 'next/link';
 import { controlGuestHome } from '../(dashboard)/house/actions';
 import type { guestHome } from '@/lib/guest-home.mjs';
 
 type Device = Awaited<ReturnType<ReturnType<typeof guestHome>['snapshot']>>['devices'][number];
 const labels = { speaker: 'Lodge speakers', tv: 'TV', climate: 'Room temperature' };
-const fallback = { speaker: 'Choose a speaker from your music app, or use Bluetooth pairing on your phone.', tv: 'Use the TV remote. For casting, connect your phone to the Lodge Wi-Fi and look for a compatible TV in your app.', climate: 'Use the wall thermostat, or message your host for help getting comfortable.' };
+const fallback = { speaker: 'Use Kendall Pond Echo or Kendall Pond Deck Speakers. Choose your music app below for Spotify and Bluetooth connection steps.', tv: 'Use the Roku remote, or try the Roku mobile app on your phone.', climate: 'Use the wall thermostat, or message your host for help getting comfortable.' };
 
 export function GuestDevice({ device, active }: { device: Device; active: boolean }) {
   const [message, action, pending] = useActionState(controlGuestHome, '');
@@ -35,7 +36,17 @@ export function GuestDevice({ device, active }: { device: Device; active: boolea
         <fieldset disabled={pending}><label htmlFor="tv-source">TV input</label><div className="gb-control-row"><select id="tv-source" name="value" defaultValue={device.source}>{device.sources.map(source => <option key={source}>{source}</option>)}</select><button className="gb-button">Switch input</button></div></fieldset>
       </form>}
       {!device.actions.length && <p className="gb-note">This device isn’t reporting supported guest controls. Use its physical controls.</p>}
-    </> : <p>{fallback[device.key]}</p>}
+    </> : <>
+      <p>{fallback[device.key]}</p>
+      {device.key === 'tv' && <>
+        <ol className="gb-speaker-steps">
+          <li><Link href="/guidebook/house?control=wifi">Join the Lodge Wi-Fi</Link> on your phone.</li>
+          <li><a href="https://www.roku.com/mobile-app" target="_blank" rel="noopener noreferrer">Get the Roku mobile app ↗</a> and allow local network access if prompted.</li>
+          <li>In the app, select the Lodge’s Roku from Devices, then tap Remote.</li>
+        </ol>
+        <p className="gb-note">If it isn’t listed, use the physical remote. Phone power and volume controls depend on the Roku model.</p>
+      </>}
+    </>}
     <form action={action}><input type="hidden" name="device" value={device.key} /><button className="gb-text-button" name="command" value="refresh" disabled={pending}>Refresh status</button></form>
     <p role="status" className="gb-note">{pending ? 'Checking with the house…' : message}</p>
   </article>;
