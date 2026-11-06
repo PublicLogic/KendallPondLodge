@@ -1,128 +1,45 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { AskKendall } from '@/app/_components/AskKendall';
+import { GuestScenes } from '../_components/GuestScenes';
 
-import { AskKendall } from "@/app/_components/AskKendall";
-import { Icon } from "@/app/_components/Icons";
+export const metadata: Metadata = { title: 'Guestbook' };
 
-export const metadata: Metadata = {
-  title: "Guidebook",
-  description:
-    "The private Lodge at Kendall Pond Guidebook for a confirmed guest stay.",
-  robots: { index: false, follow: false },
-};
-
-const quickActions = [
-  {
-    icon: "arrival",
-    kicker: "Getting here",
-    title: "I’m arriving",
-    href: "/guidebook/arrival",
-    detail: "Entry, parking, codes and first steps.",
-  },
-  {
-    icon: "house",
-    kicker: "Inside",
-    title: "Settle in",
-    href: "/guidebook/house",
-    detail: "Wi-Fi, TV, kitchen and comfort.",
-  },
-  {
-    icon: "outside",
-    kicker: "Relax",
-    title: "Use the hot tub",
-    href: "/guidebook/outside",
-    detail: "Hot tub, firepit, patio, and outdoor care.",
-  },
-  {
-    icon: "water",
-    kicker: "Kendall Pond",
-    title: "Head to the water",
-    href: "/guidebook/waterfront",
-    detail: "Dock, kayaks, paddle boat and safety.",
-  },
-  {
-    icon: "audio",
-    kicker: "Around the Lodge",
-    title: "Play some music",
-    href: "/guidebook/audio",
-    detail: "Play the Lodge mix or connect your own music.",
-  },
-  {
-    icon: "checkout",
-    kicker: "Heading home",
-    title: "I’m checking out",
-    href: "/guidebook/checkout",
-    detail: "A simple final walkthrough.",
-  },
-] as const;
+const places = [
+  { href: '/guidebook/waterfront', image: 'waterfront-dock.jpg', eyebrow: '01 / The waterfront', title: 'Down to the dock' },
+  { href: '/guidebook/outside', image: 'hot-tub.jpg', eyebrow: '02 / Unwind', title: 'Hot tub time' },
+  { href: '/guidebook/outside', image: 'fall-firepit.webp', eyebrow: '03 / After dark', title: 'By the fire' },
+];
 
 export default function GuidebookPage() {
   return (
-    <section
-      className="guide-command-center"
-      aria-label="Guest Guidebook dashboard"
-    >
-      <article className="guide-command-hero">
-        <div className="guide-command-copy">
-          <p className="guide-dashboard-label">
-            Your Lodge guide
-          </p>
-
-          <h2>Make yourself at home.</h2>
-
-          <p>
-            Need the Wi-Fi, hot tub instructions, or checkout details?
-            Everything is here when you need it.
-          </p>
+    <>
+      <section className="gb-section">
+        <p className="gb-eyebrow">02 / The basics</p>
+        <h2>Right when you need it.</h2>
+        <div className="gb-essentials">
+          <Link href="/guidebook/arrival"><strong>Arrival & parking ↗</strong><span>Find your way in</span></Link>
+          <Link href="/guidebook/house"><strong>Get online ↗</strong><span>Wi-Fi, TV, and house essentials</span></Link>
+          <Link href="/guidebook/checkout"><strong>Heading home ↗</strong><span>Your checkout checklist</span></Link>
         </div>
-
-        <AskKendall embedded />
-      </article>
-
-      <div className="guide-command-actions">
-        {quickActions.map((action) => (
-          <Link
-            key={action.href}
-            className="guide-command-action"
-            href={action.href}
-          >
-            <span className="guide-command-action-icon">
-              <Icon name={action.icon} size={22} />
-            </span>
-
-            <span className="guide-command-action-copy">
-              <small>{action.kicker}</small>
-              <strong>{action.title}</strong>
-              <span>{action.detail}</span>
-            </span>
-
-            <Icon name="arrow" size={18} />
-          </Link>
-        ))}
-      </div>
-
-      <aside className="guide-command-help">
-        <div>
-          <p className="guide-dashboard-label">
-            Need us?
-          </p>
-
-          <strong>
-            We&apos;re just a message away.
-          </strong>
-
-          <p>
-            Send us a message through your reservation if
-            something isn&apos;t working or you need a hand.
-          </p>
+      </section>
+      <section className="gb-section gb-search" aria-label="Search the guidebook"><AskKendall embedded /></section>
+      <section className="gb-section">
+        <p className="gb-eyebrow">03 / Make a day of it</p>
+        <h2>A little closer to the pond.</h2>
+        <div className="gb-places">
+          {places.map(place => <Link key={place.title} href={place.href}>
+            <Image src={'/images/kpl/' + place.image} alt="" width={600} height={400} sizes="(max-width: 700px) 90vw, 33vw" />
+            <span><small>{place.eyebrow}</small><strong>{place.title} ↗</strong></span>
+          </Link>)}
         </div>
-
-        <div className="guide-command-emergency">
-          <small>Immediate safety</small>
-          <strong>Call 911</strong>
-          <span>Fire · medical · water emergency</span>
-        </div>
+      </section>
+      <GuestScenes />
+      <aside className="gb-help">
+        <div><h2>Need a hand?</h2><p>Message us through your reservation if you need help with the house or your stay.</p></div>
+        <div><strong>Immediate emergency</strong><p>Call 911 for fire, medical, or water emergencies.</p></div>
       </aside>
-    </section>
+    </>
   );
 }

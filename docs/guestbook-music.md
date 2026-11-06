@@ -23,3 +23,13 @@ Commands target only the configured speaker. Guests can start the configured mix
 The automated HTTP fixture exercises speaker status, preset playback, pause, resume, volume, credential failure, and a command that succeeds without changing player state. Run `node --test tests/home-assistant-music.test.mjs`.
 
 [Home Assistant REST API](https://developers.home-assistant.io/docs/api/rest/) · [Media player integration](https://www.home-assistant.io/integrations/media_player/)
+
+## Guest music and guidebook interface
+
+The Guidebook shell mounts one React music player for the guest session. Guests can paste their own Spotify track, album, or playlist URL, or choose an audio file from their device. Only validated HTTPS URLs on Spotify's exact host become embeds. Local files use browser object URLs and stay on the guest's device.
+
+The player remains mounted during client navigation between Guidebook sections. A floating control opens it on other pages or after scrolling past the music section. Leaving the Guidebook or closing its session unmounts the player. Bluetooth output follows the guest device's operating-system selection. Spotify determines playback availability and may serve previews.
+
+The overview includes the existing guide search and links to the full arrival, house, waterfront, outside, and checkout content. The interactive checkout list stores progress in session storage for the current tab. The lighting scene illustration is explicitly labeled as a simulation and sends no device commands.
+
+Run `npm run test:core` and `npm run build`. Browser acceptance covers sign-in, loading a Spotify playlist, navigating to Checkout with the same iframe, opening the floating player, the demo lamp, and mobile layout.

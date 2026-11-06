@@ -1,63 +1,36 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Icon } from "@/app/_components/Icons";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-type GuideSection = {
-  href: string;
-  label: string;
-  icon: string;
-  match?: readonly string[];
-};
+const sections = [
+  { href: '/guidebook', label: 'Overview' },
+  { href: '/guidebook/audio', label: 'Music' },
+  { href: '/guidebook/arrival', label: 'Arrival' },
+  { href: '/guidebook/house', label: 'House' },
+  { href: '/guidebook/waterfront', label: 'Waterfront' },
+  { href: '/guidebook/outside', label: 'Outside' },
+  { href: '/guidebook/checkout', label: 'Checkout' },
+];
 
-const sections: readonly GuideSection[] = [
-  { href: "/guidebook", label: "Overview", icon: "home", match: ["/guidebook"] },
-  { href: "/guidebook/arrival", label: "Arrival", icon: "arrival" },
-  { href: "/guidebook/house", label: "House", icon: "house" },
-  { href: "/guidebook/waterfront", label: "Waterfront", icon: "water" },
-  { href: "/guidebook/outside", label: "Outside", icon: "outside" },
-  { href: "/guidebook/audio", label: "Audio", icon: "audio" },
-  { href: "/guidebook/checkout", label: "Checkout", icon: "checkout" },
-] as const;
+function matches(pathname: string, href: string) {
+  return pathname === href || (href !== '/guidebook' && pathname.startsWith(href + '/'));
+}
 
-export function guidebookSectionTitle(pathname: string): string {
-  const current = sections.find((section) =>
-    (section.match ?? [section.href]).some((candidate) => pathname === candidate || pathname.startsWith(`${candidate}/`)),
-  );
-
-  return current?.label ?? "Guidebook";
+export function guidebookSectionTitle(pathname: string) {
+  return sections.find(section => matches(pathname, section.href))?.label ?? 'Guidebook';
 }
 
 export function GuidebookNav() {
   const pathname = usePathname();
-
   return (
-    <nav className="guide-shell-nav" aria-label="Guidebook sections">
-      <div className="guide-shell-nav-head">
-        <p className="guide-dashboard-label">Sections</p>
-        <strong>{guidebookSectionTitle(pathname)}</strong>
-      </div>
-      <div className="guide-shell-nav-links">
-        {sections.map((section) => {
-          const isActive = (section.match ?? [section.href]).some(
-            (candidate) => pathname === candidate || pathname.startsWith(`${candidate}/`),
-          );
-
-          return (
-            <Link
-              key={section.href}
-              className={`guide-shell-nav-link${isActive ? " is-active" : ""}`}
-              href={section.href}
-              aria-current={isActive ? "page" : undefined}
-            >
-              <span className="icon-chip">
-                <Icon name={section.icon} size={18} />
-              </span>
-              <span>{section.label}</span>
-            </Link>
-          );
-        })}
+    <nav className="gb-nav" aria-label="Guidebook sections">
+      <div className="gb-frame">
+        {sections.map(section => (
+          <Link key={section.href} href={section.href} aria-current={matches(pathname, section.href) ? 'page' : undefined}>
+            {section.label}
+          </Link>
+        ))}
       </div>
     </nav>
   );

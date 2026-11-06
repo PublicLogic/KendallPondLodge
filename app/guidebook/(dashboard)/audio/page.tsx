@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { AudioGuide } from '@/app/_components/AudioGuide';
 import { homeAssistantMusic } from '@/lib/home-assistant-music.mjs';
 import { requireMusicGuest } from './access';
 import { MusicControls } from './MusicControls';
@@ -26,22 +25,22 @@ export default async function GuestbookAudioPage() {
   }
 
   return (
-    <AudioGuide>
-      <article className="audio-control" aria-labelledby="lodge-speaker-title">
-        <p className="guide-dashboard-eyebrow">Play from the guidebook</p>
-        <h2 id="lodge-speaker-title">Lodge speaker</h2>
-        <p>Start the Lodge mix on the house speaker, pause it, or set a comfortable volume.</p>
-        <div className="audio-output">
-          <div>
-            <small>Speaker status</small>
-            <strong>{speaker ? speakerStatus[speaker.state] ?? 'Unavailable' : 'Unavailable'}</strong>
+    <div className="gb-section">
+      {speaker && (
+        <article className="audio-control" aria-labelledby="lodge-speaker-title">
+          <p className="guide-dashboard-eyebrow">Play from the guidebook</p>
+          <h2 id="lodge-speaker-title">Lodge speaker</h2>
+          <p>Start the Lodge mix on the house speaker, pause it, or set a comfortable volume.</p>
+          <div className="audio-output">
+            <div>
+              <small>Speaker status</small>
+              <strong>{speakerStatus[speaker.state] ?? 'Unavailable'}</strong>
+            </div>
+            {speaker.volume != null && <div><small>Volume</small><strong>{speaker.volume}%</strong></div>}
           </div>
-          {speaker?.volume != null && <div><small>Volume</small><strong>{speaker.volume}%</strong></div>}
-        </div>
-        {speaker
-          ? <MusicControls state={speaker.state} volume={speaker.volume} />
-          : <p>Use the Bluetooth instructions below to play from your phone.</p>}
-      </article>
-    </AudioGuide>
+          <MusicControls state={speaker.state} volume={speaker.volume} />
+        </article>
+      )}
+    </div>
   );
 }

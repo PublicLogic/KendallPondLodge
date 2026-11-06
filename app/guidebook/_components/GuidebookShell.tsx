@@ -1,56 +1,46 @@
-import type { ReactNode } from "react";
+'use client';
 
-import { lockGuidebook } from "@/app/guidebook/access/actions";
-import { Icon } from "@/app/_components/Icons";
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import type { ReactNode } from 'react';
+import { lockGuidebook } from '@/app/guidebook/access/actions';
+import { GuestMusic } from './GuestMusic';
+import { GuidebookNav } from './GuidebookNav';
 
-import { GuidebookNav } from "./GuidebookNav";
-import { GuidebookTopbar } from "./GuidebookTopbar";
-
-export function GuidebookShell({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export function GuidebookShell({ children }: { children: ReactNode }) {
+  const home = usePathname() === '/guidebook';
   return (
-    <>
-      <a
-        className="skip-link"
-        href="#main-content"
-      >
-        Skip to Guidebook
-      </a>
-
-      <main
-        id="main-content"
-        className="guide-dashboard guide-shell-app"
-      >
-        <div className="guide-dashboard-shell guide-shell-frame">
-          <GuidebookTopbar />
-
-          <div className="guide-shell-body">
-            <GuidebookNav />
-
-            <section className="guide-shell-content">
-              <div className="guide-shell-content-inner">
-                <div className="guide-shell-content-actions">
-                  <form action={lockGuidebook}>
-                    <button
-                      className="guide-dashboard-close-button"
-                      type="submit"
-                      aria-label="Close Guidebook session"
-                    >
-                      <Icon name="shield" size={16} />
-                      <span>Close</span>
-                    </button>
-                  </form>
-                </div>
-
-                {children}
-              </div>
-            </section>
+    <div className="gb-app">
+      <a className="skip-link" href="#main-content">Skip to Guidebook</a>
+      <header className="gb-mast"><div className="gb-frame">
+        <Link href="/guidebook" className="gb-brand">
+          <Image src="/images/kpl/lodge-seal.png" width={48} height={48} alt="" />
+          <span>The Lodge<small>AT KENDALL POND</small></span>
+        </Link>
+        <form action={lockGuidebook}><button type="submit" className="gb-signout">Close guidebook</button></form>
+      </div></header>
+      <GuidebookNav />
+      <main id="main-content">
+        {home && <section className="gb-hero">
+          <Image src="/images/kpl/fall-pond.webp" alt="Fall colors along Kendall Pond" fill priority sizes="100vw" />
+          <div className="gb-frame">
+            <p className="gb-eyebrow">The guestbook · Gardner, Massachusetts</p>
+            <h1>Make yourself<br /><em>at home.</em></h1>
+            <p>Put on your music, head down to the pond, or find the one thing you need right now.</p>
+            <a href="#guest-music" className="gb-button">♫ Play your music ↗</a>
           </div>
+        </section>}
+        <div className="gb-frame gb-content">
+          <GuestMusic />
+          {children}
         </div>
       </main>
-    </>
+      <footer className="gb-footer"><div className="gb-frame">
+        <Link href="/">The Lodge at Kendall Pond</Link>
+        <span>Your private guestbook</span>
+        <a href="#main-content">Back to top ↑</a>
+      </div></footer>
+    </div>
   );
 }

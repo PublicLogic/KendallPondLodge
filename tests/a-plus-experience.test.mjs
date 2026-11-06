@@ -27,26 +27,21 @@ test("public home is hospitality-first, not dashboard-first", () => {
 test("authenticated Guidebook owns the viewport", () => {
   const shell = read("app/_components/ExperienceShell.tsx");
   const guide = read("app/guidebook/(dashboard)/page.tsx");
-  const css = read("app/a-plus.css");
+  const css = read("app/guidebook/guestbook.css");
+  const guideShell = read("app/guidebook/_components/GuidebookShell.tsx");
 
   assert.match(
     shell,
     /if \(isGuidebookAccess \|\| isGuidebook\)[\s\S]*return <>\{children\}<\/>/,
   );
 
-  assert.match(guide, /Your Lodge guide/);
-  assert.match(guide, /Make yourself at home\./);
+  assert.match(guideShell, /The guestbook/);
+  assert.match(guideShell, /Make yourself/);
+  assert.match(guideShell, /GuestMusic/);
   assert.match(guide, /AskKendall embedded/);
+  assert.match(css, /min-height: 100dvh/);
+  assert.match(css, /\.gb-music-panel\.gb-player-floating/);
 
-  assert.match(
-    css,
-    /\.guide-dashboard\{[\s\S]*height:100dvh;[\s\S]*overflow:hidden/,
-  );
-
-  assert.match(
-    css,
-    /\.guide-shell-content-inner\{[\s\S]*overflow-y:auto/,
-  );
 });
 
 test("owner bookings expose the governed six-step workflow", () => {
