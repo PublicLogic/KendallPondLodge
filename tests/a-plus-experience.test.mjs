@@ -26,7 +26,8 @@ test("public home is hospitality-first, not dashboard-first", () => {
 
 test("authenticated Guidebook owns the viewport", () => {
   const shell = read("app/_components/ExperienceShell.tsx");
-  const guide = read("app/guidebook/(dashboard)/page.tsx");
+  const guide = read("app/guidebook/(dashboard)/help/page.tsx");
+  const dashboard = read("app/guidebook/_components/ControlDashboard.tsx");
   const css = read("app/guidebook/guestbook.css");
   const guideShell = read("app/guidebook/_components/GuidebookShell.tsx");
 
@@ -35,8 +36,8 @@ test("authenticated Guidebook owns the viewport", () => {
     /if \(isGuidebookAccess \|\| isGuidebook\)[\s\S]*return <>\{children\}<\/>/,
   );
 
-  assert.match(guideShell, /The guestbook/);
-  assert.match(guideShell, /Make yourself/);
+  assert.match(dashboard, /The guestbook/);
+  assert.match(dashboard, /Make yourself/);
   assert.match(guideShell, /GuestMusic/);
   assert.match(guide, /AskKendall embedded/);
   assert.match(css, /min-height: 100dvh/);
