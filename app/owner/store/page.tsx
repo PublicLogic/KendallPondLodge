@@ -2,7 +2,8 @@ import type {Metadata} from "next";
 import Link from "next/link";
 import {BookingBrand} from "@/app/_components/BookingBrand";
 import {requireKplOwner} from "@/lib/require-kpl-owner";
-import {mercantilePaymentLinks} from "@/lib/mercantile-payment-links.mjs";
+import {mercantilePaymentLinks,mercantileCategories} from "@/lib/mercantile-payment-links.mjs";
+import styles from "@/app/store/mercantile.module.css";
 
 export const metadata: Metadata = {
   title: "Mercantile · Lodge owner",
@@ -15,52 +16,59 @@ const money = (cents: number) =>
 
 export default async function OwnerMercantile() {
   await requireKplOwner("/owner/store");
-  const live = process.env.VERCEL_ENV === "production";
+  // Owner tools in preview are read-only. No live transaction starts here.
+  const production = process.env.VERCEL_ENV === "production";
   return (
-    <main id="main-content" className="content-section booking-page">
-      <BookingBrand owner />
-      <p className="eyebrow">The Lodge at Kendall Pond</p>
-      <h1>Mercantile.</h1>
-      <p>Eleven hosted Stripe checkout links. The in-person shelf is intentionally small.</p>
-      <p className="booking-alert" style={{margin:"22px 0"}}>
-        These are individual Stripe Payment Links. They do not create booking orders,
-        change PuddleJumper stock or verify a physical pickup. Check successful payment
-        in Stripe before handing over merchandise, and record physical stock separately.
-        Never treat a checkout redirect as proof of payment.
-      </p>
-      <div className="booking-grid">
-        {mercantilePaymentLinks.map((item) => (
-          <section className="booking-panel" key={item.sku}>
-            <h2 style={{fontSize:"1.5rem"}}>{item.name}</h2>
-            <p style={{fontSize:13,color:"var(--muted)",margin:"8px 0 12px"}}>
-              {item.sku} · {item.category}
-            </p>
-            <p style={{fontSize:"1.45rem",fontWeight:750,marginBottom:14}}>
-              {money(item.priceCents)}
-            </p>
-            {live ? (
-              <a className="button button-secondary" href={item.stripeUrl}
-                target="_blank" rel="noopener noreferrer">
-                Open checkout ↗
-              </a>
-            ) : (
-              <p role="status" style={{fontSize:12,color:"var(--muted)"}}>
-                Checkout link disabled in Preview.
-              </p>
-            )}
+    <main id="main-content" className={styles.page} style={{minHeight:"80vh"}}>
+      <div className={styles.sectionInner} style={{paddingTop:55,paddingBottom:75}}>
+        <BookingBrand owner />
+        <p style={{marginTop:35}}><Link href="/owner">← Lodge desk</Link></p>
+        <div style={{maxWidth:870,marginTop:28}}>
+          <p className={styles.eyebrow}>Your Mercantile</p>
+          <h1 style={{fontSize:"clamp(3rem,6vw,5.5rem)"}}>The little shop.</h1>
+          <p style={{marginTop:19,color:"var(--merc-muted)",maxWidth:"62ch"}}>
+            Eleven Stripe products, one shelf. Keep the baskets stocked and prices
+            labeled, then check Stripe payments as items are picked up.
+          </p>
+        </div>
+        <aside style={{marginTop:35,padding:"20px 24px",background:"#e9eee4",borderLeft:"3px solid #b89c6e"}}>
+          <strong style={{fontSize:14}}>Manual checkout, not PJ inventory</strong>
+          <p style={{maxWidth:"86ch",marginTop:8,fontSize:13}}>
+            These Payment Links do not create PuddleJumper orders, decrement stock,
+            or confirm a pickup. Verify completed payments directly in Stripe and
+            reconcile the shelf count separately. The governed STAY Commerce
+            inventory and ordering workflow is still in its draft release.
+          </p>
+        </aside>
+        {mercantileCategories.map((category) => (
+          <section key={category.key} style={{marginTop:53}} aria-label={category.label}>
+            <p className={styles.eyebrow}>{category.label}</p>
+            <ul className={styles.rows}>
+              {mercantilePaymentLinks.filter((item) => item.category === category.key).map((item) => (
+                <li key={item.sku} className={styles.productRow}>
+                  <div className={styles.productCopy}>
+                    <h3>{item.name}</h3>
+                    <p>{item.sku}</p>
+                  </div>
+                  <strong className={styles.productPrice}>{money(item.priceCents)}</strong>
+                  {production ? (
+                    <a className={styles.checkout} href={item.stripeUrl} target="_blank"
+                      rel="noopener noreferrer" aria-label={"Open Stripe checkout for " + item.name}>
+                      Checkout <span aria-hidden="true">↗</span>
+                    </a>
+                  ) : (
+                    <span className={styles.checkoutDisabled}>Preview only</span>
+                  )}
+                </li>
+              ))}
+            </ul>
           </section>
         ))}
+        <p style={{marginTop:33,display:"flex",gap:22,flexWrap:"wrap"}}>
+          <a href="https://dashboard.stripe.com/payments" target="_blank" rel="noopener noreferrer">Review actual payments in Stripe ↗</a>
+          <Link href="/store">View the guest Mercantile →</Link>
+        </p>
       </div>
-      <p style={{marginTop:25}}>
-        <a className="button button-primary" href="https://dashboard.stripe.com/payments"
-          target="_blank" rel="noopener noreferrer">Review Stripe payments ↗</a>
-      </p>
-      <p style={{marginTop:15,fontSize:13,color:"var(--muted)"}}>
-        Reconcile Stripe transactions against physical pickups before adjusting inventory.
-        This page does not include PJ-backed inventory management; that remains in the
-        separate gated STAY Commerce rollout.
-      </p>
-      <p style={{marginTop:22}}><Link href="/owner">← Lodge dashboard</Link> · <Link href="/store">Guest store</Link></p>
     </main>
   );
 }
