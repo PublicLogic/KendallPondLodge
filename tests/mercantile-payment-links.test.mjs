@@ -42,13 +42,13 @@ test('Every public payment link is an approved Stripe Payment Link host and a va
 test('Guest manual links are never live in Preview, and PJ checkout stays gated',()=>{
   const guest=source('app/store/page.tsx');
   const owner=source('app/owner/store/page.tsx');
-  assert.match(guest,/const checkoutEnabled = !commerce && process\\.env\\.VERCEL_ENV === "production"/);
-  assert.match(guest,/const commerce=liveStoreCheckoutEnabled\\(\\)/);
+  assert.match(guest,/const checkoutEnabled = !commerce && process\.env\.VERCEL_ENV === "production"/);
+  assert.match(guest,/const commerce=liveStoreCheckoutEnabled\(\)/);
   assert.match(guest,/!commerce && <>/);
-  assert.match(guest,/if \\(!enabled\\)/);
-  assert.match(guest,/href=\\{item\\.stripeUrl\\}/);
-  assert.match(guest,/form action=\\{startStoreCheckout\\}/);
-  assert.match(owner,/process\\.env\\.VERCEL_ENV==='production'/);
+  assert.match(guest,/if \(!enabled\)/);
+  assert.match(guest,/href=\{item\.stripeUrl\}/);
+  assert.match(guest,/form action=\{startStoreCheckout\}/);
+  assert.match(owner,/process\.env\.VERCEL_ENV==='production'/);
   assert.match(owner,/Live link disabled in Preview/);
 });
 
