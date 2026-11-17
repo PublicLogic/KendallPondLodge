@@ -109,7 +109,14 @@ export default function Shopfront({ checkoutEnabled }: { checkoutEnabled: boolea
           <h2 id="catalog-heading">On the shelf.</h2>
           <p>A few handmade things and snacks worth having around. What you see at the Lodge is what’s available to take home.</p>
         </div>
-        <p className={styles.catalogAside}>Browse the categories. Every item has its own secure Stripe checkout—no account or new app required.</p>
+        <figure className={styles.shelfPreview}>
+          <Image src="/images/kpl/mercantile/shelf-overview.avif"
+            alt="Actual Lodge Mercantile shelves with woven baskets of handmade crafts, snacks and bottled water"
+            width={240} height={320} unoptimized />
+          <figcaption><span>ON THE SHELF</span>
+            <p>A look at our actual Mercantile. The baskets change as we restock.</p>
+          </figcaption>
+        </figure>
       </div>
       <div className={styles.toolbar}>
         <div className={styles.filters} role="group" aria-label="Filter products by category">
