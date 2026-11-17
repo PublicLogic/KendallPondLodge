@@ -1,8 +1,6 @@
 import type {Metadata} from "next";
 import {randomUUID} from "node:crypto";
-import Image from "next/image";
 import Link from "next/link";
-import {lodgePhoto} from "@/app/_data/lodge-photos";
 import {listProducts,liveStoreCheckoutEnabled,type StoreProduct} from "@/lib/mercantile-runtime";
 import {startStoreCheckout} from "./actions";
 import Shopfront from "./Shopfront";
@@ -15,7 +13,6 @@ export const metadata:Metadata={
 };
 export const dynamic="force-dynamic";
 
-const welcomePhoto=lodgePhoto(22);
 const money=(cents:number)=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(cents/100);
 
 export default async function StorePage({searchParams}:{searchParams:Promise<{error?:string;canceled?:string}>}){
@@ -29,22 +26,13 @@ export default async function StorePage({searchParams}:{searchParams:Promise<{er
  const checkoutEnabled = !commerce && process.env.VERCEL_ENV === "production";
 
  return <main id="main-content" className={styles.page} data-mercantile-editorial data-guest-shop>
-   <header className={styles.shopHero}>
-     <div className={styles.heroText}>
-       <span className={styles.kicker}>LODGE AT KENDALL POND / GARDNER, MA</span>
-       <h1>The Lodge <em>Shop.</em></h1>
-       <p>Extra firewood, handmade hats and slippers, and a few snacks. Right here at the Lodge.</p>
-       <div className={styles.heroActions}>
-         <a href="#shop" className={styles.primaryLink}>Shop the shelf <span aria-hidden="true">↗</span></a>
-         <a href="#firewood" className={styles.secondaryLink}>Need firewood? <span aria-hidden="true">↗</span></a>
-       </div>
-       <div className={styles.heroUtility}><span>FOR LODGE GUESTS</span><span>ON-SITE PICKUP</span><span>SECURE STRIPE CHECKOUT</span></div>
+   <header className={styles.shopIntro}>
+     <div>
+       <p className={styles.kicker}>LODGE AT KENDALL POND</p>
+       <h1>The Lodge Shop</h1>
+       <p>Firewood, handmade goods, and snacks. Pick what you need, pay on your phone, and collect it here at the Lodge.</p>
      </div>
-     <figure className={styles.heroImage}>
-       <Image src={welcomePhoto.src} alt={welcomePhoto.alt} fill priority
-         sizes="(max-width: 850px) 100vw, 45vw"/>
-       <figcaption>Small extras. No extra errands.</figcaption>
-     </figure>
+     <span className={styles.introNote}>Guest self-serve · On-site pickup</span>
    </header>
 
    {commerce ? <section className={styles.pjCatalog} aria-labelledby="governed-store-title">
