@@ -43,3 +43,18 @@ Physical count and availability are **not** verified by this list. Keep customer
 - [ ] Run the KPL core suite and production build on the target code revision, and check Vercel preview with checkout disabled.
 - [ ] Review the existing PR #57 dependencies and merge readiness; **do not** treat a successful Preview build as production payment/inventory validation.
 - [ ] If merchant links are deployed, record exact Vercel deployment and verify live checkout links from a production domain without creating an unintended charge.
+
+
+## Digital vending-machine prototype — November 17, 2026
+
+The guest preview's manual-link mode now renders **The Little Machine / KPL 001** instead of a static product list. It has 11 labeled virtual slots (A1, B1–B5, C1–C5), category selectors, a large currently selected product display, a no-purchase "Surprise me" selector, a pickup hatch instruction area, and a free-water bonus slot D0. The illustrations are intentionally illustrative — **not actual SKU product photography or a stock guarantee**. The feature is a virtual kiosk for physical Lodge shelves; nothing is mechanically dispensed.
+
+Guest payments remain exactly one verified Stripe Payment Link *per SKU*. Changing quantity happens at hosted Stripe Checkout. The client module never creates a cart, charges a card, invokes a fake dispenser, or updates PJ stock. Live Stripe anchors are absent from the preview-rendered UI. PuddleJumper STAY Commerce checkout and signed settlement are still feature gated in a separate path and not replaced.
+
+Design basis, reviewed on November 17, 2026:
+- Baymard Product List UX 2025: clear product categories, easy scanning, and obvious selection state. https://baymard.com/research-articles/current-state-product-list-and-filtering
+- Baymard Product Page UX 2026: do not bury options or prices, keep buying actions readily identifiable. https://baymard.com/research-articles/current-state-ecommerce-product-page-ux
+- W3C WCAG 2.2 target size: minimum 24×24 CSS px, with larger 44–49 px kiosk controls chosen here for comfortable touch. https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum
+- W3C C39 reduced motion: selection effects are removable with prefers-reduced-motion and no looping or audio animation. https://www.w3.org/WAI/WCAG22/Techniques/css/C39.html
+
+Acceptance: static source tests must check 11 unique verified links, preview gating, slot selection, category/selection communication, accessible labels, touch targets, and reduced motion. GitHub Actions must pass the full Lodge regression suite, build, and owner-route smoke before treating a preview as verified. None of those checks establishes tax sourcing for out-of-state billing addresses used at a MA pickup: that remains a separate production gate.
