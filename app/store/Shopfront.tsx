@@ -43,31 +43,20 @@ function Checkout({ item, enabled, featured = false }: {
   </a>;
 }
 
-function ProductCard({ item, enabled, index }: {
+function ProductCard({ item, enabled }: {
   item: Product;
   enabled: boolean;
-  index: number;
 }) {
-  const handmade = item.category === "Handmade";
-  return <article className={styles.product} id={"item-" + item.sku.toLowerCase()} aria-label={item.name}>
-    <div className={handmade ? styles.productMediaMade : styles.productMediaSnack}>
-      <div className={styles.mediaTop}>
-        <span>{handmade ? "HANDMADE" : "THE PANTRY"}</span>
-        <span>{String(index + 1).padStart(2, "0")}</span>
-      </div>
-      <div className={styles.mediaCenter}>
-        <span>{item.name}</span>
-      </div>
-      <span className={styles.mediaFoot}>{handmade ? "FROM THE HANDMADE BASKET" : "A LITTLE SOMETHING EXTRA"}</span>
-    </div>
+  return <article className={styles.product} id={"item-" + item.sku.toLowerCase()}>
     <div className={styles.productDetails}>
+      <span className={styles.productCategory}>{item.category === "Handmade" ? "Handmade" : "Snacks"}</span>
       <div className={styles.productTitleLine}>
         <h3>{item.name}</h3>
         <strong>{money(item.priceCents)}</strong>
       </div>
       <p>{item.description}</p>
       <div className={styles.cardFoot}>
-        <span>Pickup at the Lodge</span>
+        <span>Pick up at the Lodge</span>
         <Checkout item={item} enabled={enabled} />
       </div>
     </div>
@@ -84,30 +73,28 @@ export default function Shopfront({ checkoutEnabled }: { checkoutEnabled: boolea
     {firewood && <section className={styles.featured} id="firewood" aria-labelledby="firewood-heading">
       <div className={styles.featuredPhoto}>
         <Image src={firepit.src} alt={firepit.alt} fill
-          sizes="(max-width: 760px) 100vw, 55vw" />
-        <span>AT THE FIREPIT</span>
+          sizes="(max-width: 760px) 100vw, 240px" />
       </div>
       <div className={styles.featuredInfo}>
-        <span className={styles.kicker}>EXTRA FIREWOOD</span>
-        <h2 id="firewood-heading">One more night by the fire.</h2>
-        <p>Extra firewood for the firepit. No trip into town, and no delivery to coordinate.</p>
-        <div className={styles.featuredPurchase}>
-          <div className={styles.featuredPrice}>
-            <strong>{money(firewood.priceCents)}</strong>
-            <span>per bundle</span>
-          </div>
-          <Checkout item={firewood} enabled={checkoutEnabled} featured />
+        <span className={styles.kicker}>FIREWOOD</span>
+        <h2 id="firewood-heading">Extra firewood for the firepit</h2>
+        <p>Bundles are available at the Lodge. Choose your quantity at checkout.</p>
+      </div>
+      <div className={styles.featuredPurchase}>
+        <div className={styles.featuredPrice}>
+          <strong>{money(firewood.priceCents)}</strong>
+          <span>per bundle</span>
         </div>
-        <p className={styles.featuredFine}>Choose your quantity at Stripe checkout. Collect from the Lodge.</p>
+        <Checkout item={firewood} enabled={checkoutEnabled} featured />
       </div>
     </section>}
 
     <section id="shop" className={styles.catalog} aria-labelledby="catalog-heading">
       <div className={styles.catalogIntro}>
         <div>
-          <span className={styles.kicker}>THE LODGE SHOP</span>
+          <span className={styles.kicker}>SHOP THE SHELVES</span>
           <h2 id="catalog-heading">On the shelf.</h2>
-          <p>A few handmade things and snacks worth having around. What you see at the Lodge is what’s available to take home.</p>
+          <p>Handmade items and a few snacks. Check the shelf before purchasing.</p>
         </div>
         <figure className={styles.shelfPreview}>
           <Image src="/images/kpl/mercantile/shelf-overview.avif"
@@ -130,8 +117,8 @@ export default function Shopfront({ checkoutEnabled }: { checkoutEnabled: boolea
         <span className={styles.productCount}>{items.length} {items.length === 1 ? "item" : "items"}</span>
       </div>
       <div className={styles.productGrid}>
-        {items.map((item, index) => <ProductCard key={item.sku}
-          item={item} index={index} enabled={checkoutEnabled} />)}
+        {items.map((item) => <ProductCard key={item.sku}
+          item={item} enabled={checkoutEnabled} />)}
       </div>
       <p className={styles.catalogCaveat}>Individual colors, patterns, brands and quantities vary by what’s on the shelves. Please check the basket before purchasing.</p>
     </section>
