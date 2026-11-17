@@ -58,7 +58,7 @@ function ProductCard({ item, enabled, index }: {
       <div className={styles.mediaCenter}>
         <span>{item.name}</span>
       </div>
-      <span className={styles.mediaFoot}>{handmade ? "MADE IN SMALL BATCHES" : "A LITTLE SOMETHING EXTRA"}</span>
+      <span className={styles.mediaFoot}>{handmade ? "FROM THE HANDMADE BASKET" : "A LITTLE SOMETHING EXTRA"}</span>
     </div>
     <div className={styles.productDetails}>
       <div className={styles.productTitleLine}>
