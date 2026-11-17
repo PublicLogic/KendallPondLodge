@@ -88,7 +88,7 @@ export default function Shopfront({ checkoutEnabled }: { checkoutEnabled: boolea
         <span>AT THE FIREPIT</span>
       </div>
       <div className={styles.featuredInfo}>
-        <span className={styles.kicker}>THE GUEST FAVORITE</span>
+        <span className={styles.kicker}>EXTRA FIREWOOD</span>
         <h2 id="firewood-heading">One more night by the fire.</h2>
         <p>Extra firewood for the firepit. No trip into town, and no delivery to coordinate.</p>
         <div className={styles.featuredPurchase}>
