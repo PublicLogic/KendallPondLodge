@@ -24,9 +24,9 @@
 - Leave the feature flag absent/false on Production until verified end-to-end.
 - Current Fly app `publiclogic-kpl-store` and volume `kpl_stay_data` are deployed and attached. At inspection, automatic snapshots were enabled, five snapshots existed. **Restore rehearsal not confirmed**; do not mistake snapshots for proof of recovery.
 - Record exact PJ image digest, source SHA, Fly machine/volume identity, KPL deployment SHA, rollback image and operator. Never overwrite the general PJ runtime.
-- Confirm firewood tax treatment with competent local tax guidance and enable the appropriate Stripe tax collection policy before live sales. Existing manual Stripe Payment Link has automatic tax disabled.
+- Stripe Tax now has a recorded active Massachusetts registration and the existing firewood plus ten additional merchandise Payment Links have automatic tax enabled (2026-11-17). Verify Massachusetts pickup tax sourcing for out-of-state guest billing addresses before claiming live compliance. See MERCANTILE-STRIPE-CATALOG.md.
 - Confirm physical pickup instructions, inventory count, refund handling, sender identity and owner notifications before placing public QR cards.
-- The Live Payment Link exists and is active independently; it is not PJ inventory reconciliation.
+- Eleven live manual Stripe Payment Links exist independently; they are not PJ inventory or payment reconciliation. They appear only in production when the PJ-commerce flag is OFF. Preview checkout stays disabled.
 
 ## E2E release checklist
 
