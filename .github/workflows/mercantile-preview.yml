@@ -36,7 +36,9 @@ jobs:
             if curl -fsS http://127.0.0.1:3000/store > /tmp/store.html; then break; fi
             sleep 1
           done
-          grep -q "A little shop for your stay" /tmp/store.html
+          # Editorial storefront is present, even when Preview disables live checkout.
+          grep -q "data-mercantile-editorial" /tmp/store.html
+          grep -q "Store preview" /tmp/store.html
           status=$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:3000/owner/store)
           test "$status" = "307" || test "$status" = "308"
           echo "PASS: guest shop renders and protected owner area redirects."
