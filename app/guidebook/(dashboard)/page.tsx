@@ -50,9 +50,9 @@ const quickActions = [
   {
     icon: "house",
     kicker: "The little shop",
-    title: "Buy firewood",
+    title: "Shop the Mercantile",
     href: "/store",
-    detail: "Extra bundles for the firepit, paid securely on your phone.",
+    detail: "Firewood, handmade gifts and little snacks. Secure checkout and on-site pickup.",
   },
   {
     icon: "checkout",
