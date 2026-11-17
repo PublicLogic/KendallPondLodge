@@ -2,7 +2,7 @@
 **STAY Commerce v1 · 2026-11-05 · Feature branches only**
 
 ## Release target
-One minimal mobile guest storefront and one owner surface one navigation level below Direct Bookings. PuddleJumper controls tenant/property scope, governed products, stock adjustments, order state, immutable audit, and fulfillment. Stripe owns payment confirmation. The first offer is $10 firewood bundles, picked up at Kendall Pond. Other products remain drafts or coming soon.
+One minimal mobile guest storefront and one owner surface one navigation level below Direct Bookings. PuddleJumper controls tenant/property scope, governed products, stock adjustments, order state, immutable audit, and fulfillment. Stripe owns payment confirmation. The governed PJ store remains unreleased. The separate, production-only manual Stripe Payment Link fallback now lists 11 confirmed products, with physical pickup at Kendall Pond. These manual purchases do not create PJ orders or decrement PJ stock.
 
 ## Source and ordering
 1. Runtime PR: https://github.com/PublicLogic/PuddleJumper/pull/18
@@ -17,7 +17,7 @@ One minimal mobile guest storefront and one owner surface one navigation level b
 - Existing PJ canon `audit_events` records product, stock, payment and fulfillment transitions.
 - Stripe hosted checkout with server-sourced amounts; signed webhook, livemode check, idempotent settlement, no confirmation by redirect alone.
 - Existing lodging booking webhook handler remains separate.
-- Firewood fallback payment link is available only in production when PJ checkout is OFF; branch Preview does not route to the live payment link.
+- Eleven verified Stripe Payment Links (firewood, handmade goods and snacks) are available only in production when PJ checkout is OFF; branch Preview displays merchandise but does not route guests to live payment links. These are manually fulfilled; no PJ inventory or sales reconciliation is claimed.
 - Draft products do not become payable merely by adding them.
 
 ## Must pass before merge / production
@@ -27,7 +27,7 @@ One minimal mobile guest storefront and one owner surface one navigation level b
 - [ ] Preview and production workspace/property keys isolated. Confirm effective Fly volume/config, deploy image digest, rollback image and data migration.
 - [ ] Human phone/browser test: guest catalog, quantity, test Stripe hosted Checkout, signed webhook, receipt, owner view, and marked pickup.
 - [ ] Retry same Stripe webhook, payment mismatch, duplicate checkout, concurrent orders and stock adjustment, failed/expired checkout and late payment; ensure exactly-once stock movement.
-- [ ] Confirm live sales-tax treatment, product scope, refund/returns instructions, pickup location and fulfillment policy with responsible operator.
+- [ ] Confirm live sales-tax *sourcing* for purchases picked up in MA when the guest's billing address is elsewhere, product scope, refund/returns instructions, pickup location and fulfillment policy with responsible operator. Stripe Tax and MA registration are active, but that does not settle this pickup-sourcing question.
 - [ ] Confirm alerting and owner handling for `needs_review`, failed webhook, refunds and inventory discrepancies.
 - [ ] Confirm owner identity limitation: existing shared owner code gives shared-credential assurance, not unique person identity. Upgrade to individual grants when needed.
 - [ ] Verify no regression to direct-booking, availability and existing deposit settlement.
