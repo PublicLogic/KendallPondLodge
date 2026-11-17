@@ -39,24 +39,47 @@ test('Every public payment link is an approved Stripe Payment Link host and a va
   }
 });
 
-test('Guest manual links are never live in Preview, and PJ checkout stays gated',()=>{
-  const guest=source('app/store/page.tsx');
-  const owner=source('app/owner/store/page.tsx');
-  assert.match(guest,/const checkoutEnabled = !commerce && process\.env\.VERCEL_ENV === "production"/);
-  assert.match(guest,/const commerce=liveStoreCheckoutEnabled\(\)/);
-  assert.match(guest,/!commerce && <>/);
-  assert.match(guest,/if \(!enabled\)/);
-  assert.match(guest,/href=\{item\.stripeUrl\}/);
-  assert.match(guest,/form action=\{startStoreCheckout\}/);
-  assert.match(owner,/process\.env\.VERCEL_ENV==='production'/);
-  assert.match(owner,/Live link disabled in Preview/);
+
+test('Preview is an actual interactive machine, not a fake live checkout',()=>{
+ const page=source('app/store/page.tsx');
+ const machine=source('app/store/VendingMachine.tsx');
+ const art=source('app/store/ProductArt.tsx');
+ assert.match(page,/const checkoutEnabled = !commerce && process\.env\.VERCEL_ENV === "production"/);
+ assert.match(page,/const commerce=liveStoreCheckoutEnabled\(\)/);
+ assert.match(page,/<VendingMachine checkoutEnabled=\{checkoutEnabled\}\/>/);
+ assert.match(page,/form action=\{startStoreCheckout\}/); // Existing PJ checkout is preserved.
+ assert.match(page,/data-mercantile-editorial data-vending-experience/);
+ assert.match(machine,/if\(!checkoutEnabled\)/); // No live Stripe anchor when Preview.
+ assert.match(machine,/href=\{item\.stripeUrl\}/); // Same verified payment links when live.
+ assert.match(machine,/aria-pressed=\{selectedSku===item\.sku\}/);
+ assert.match(machine,/aria-live="polite"/);
+ assert.match(machine,/onClick=\{luckyPick\}/);
+ assert.match(machine,/ProductArt sku=\{item\.sku\}/);
+ assert.match(art,/Decorative category illustrations/);
+ assert.doesNotMatch(machine,/Add to cart|Checkout basket|in stock now/i);
 });
 
-test('Manual link payments do not claim PuddleJumper inventory reconciliation',()=>{
-  const guest=source('app/store/page.tsx');
-  const owner=source('app/owner/store/page.tsx');
-  assert.match(guest,/mercantilePaymentLinks\.filter/);
-  assert.match(owner,/mercantilePaymentLinks\.map/);
-  assert.match(owner,/does not automatically decrement PuddleJumper stock/);
-  assert.match(owner,/requireKplOwner\('\/owner\/store'\)/);
+test('Machine checkout respects touch sizing, visible categories and reduced motion',()=>{
+ const machine=source('app/store/VendingMachine.tsx');
+ const css=source('app/store/mercantile.module.css');
+ assert.match(machine,/aria-label="Choose a shelf category"/);
+ assert.match(machine,/aria-pressed=\{group===choice\.key\}/);
+ assert.match(machine,/aria-label="Selected item and checkout"/);
+ assert.match(machine,/Quantity can be changed|Choose the quantity/);
+ assert.match(css,/min-height:48px/);
+ assert.match(css,/min-height:49px/);
+ assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
+ assert.match(css,/\.mobileCheckout/);
+ assert.match(css,/\.slotSelected/);
+});
+
+test('Stripe Payment Links do not invent PJ inventory or fulfillment',()=>{
+ const machine=source('app/store/VendingMachine.tsx');
+ const page=source('app/store/page.tsx');
+ const owner=source('app/owner/store/page.tsx');
+ assert.match(machine,/There is no automatic dispenser or live stock count yet/);
+ assert.match(machine,/Each checkout is for one product type/);
+ assert.match(page,/only feature gated|separately feature gated/);
+ assert.match(owner,/does not automatically decrement PuddleJumper stock/);
+ assert.match(owner,/requireKplOwner\('\/owner\/store'\)/);
 });
