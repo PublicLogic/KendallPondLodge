@@ -33,7 +33,7 @@ export default async function StorePage({searchParams}:{searchParams:Promise<{er
      <div className={styles.heroText}>
        <span className={styles.kicker}>LODGE AT KENDALL POND / GARDNER, MA</span>
        <h1>The Lodge <em>Shop.</em></h1>
-       <p>Good things for a good stay. Extra firewood, handmade finds and a few treats—right here when you need them.</p>
+       <p>Extra firewood, handmade hats and slippers, and a few snacks. Right here at the Lodge.</p>
        <div className={styles.heroActions}>
          <a href="#shop" className={styles.primaryLink}>Shop the shelf <span aria-hidden="true">↗</span></a>
          <a href="#firewood" className={styles.secondaryLink}>Need firewood? <span aria-hidden="true">↗</span></a>
