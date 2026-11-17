@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {mercantilePaymentLinks,mercantileCategories} from '../lib/mercantile-payment-links.mjs';
 
-const source=(path)=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
+const read = (path) => readFileSync(new URL('../'+path,import.meta.url),'utf8');
 
-test('Mercantile offers 11 verified Stripe Payment Links at the approved prices',()=>{
+test('verified Mercantile catalog has eleven unique SKUs, prices, and links',()=>{
   assert.equal(mercantilePaymentLinks.length,11);
   assert.deepEqual(Object.fromEntries(mercantilePaymentLinks.map(p=>[p.sku,p.priceCents])),{
     'KPL-WOOD-001':1000,
@@ -25,61 +25,55 @@ test('Mercantile offers 11 verified Stripe Payment Links at the approved prices'
   assert.equal(new Set(mercantilePaymentLinks.map(p=>p.stripeUrl)).size,11);
 });
 
-test('Every public payment link is an approved Stripe Payment Link host and a valid item',()=>{
-  for(const product of mercantilePaymentLinks){
-    const url=new URL(product.stripeUrl);
+test('Every item has a real Stripe Payment Link and a stable product identity',()=>{
+  for(const item of mercantilePaymentLinks){
+    const url=new URL(item.stripeUrl);
     assert.equal(url.origin,'https://pay.publiclogic.org');
-    assert.match(url.pathname,/^\/b\/[a-zA-Z0-9]+$/);
+    assert.match(url.pathname,/^\/b\/[A-Za-z0-9]+$/);
     assert.equal(url.search,'');
     assert.equal(url.hash,'');
-    assert.match(product.sku,/^KPL-[A-Z0-9]+-\d{3}$/);
-    assert.ok(product.name.length>2&&product.description.length>10);
-    assert.ok(Number.isSafeInteger(product.priceCents)&&product.priceCents>=100);
-    assert.ok(mercantileCategories.some(category=>category.key===product.category));
+    assert.match(item.sku,/^KPL-[A-Z0-9]+-\d{3}$/);
+    assert.ok(item.name.length>2 && item.description.length>10);
+    assert.ok(Number.isSafeInteger(item.priceCents) && item.priceCents>=100);
+    assert.ok(mercantileCategories.some(group=>group.key===item.category));
   }
 });
 
-
-test('Preview is an actual interactive machine, not a fake live checkout',()=>{
- const page=source('app/store/page.tsx');
- const machine=source('app/store/VendingMachine.tsx');
- const art=source('app/store/ProductArt.tsx');
- assert.match(page,/const checkoutEnabled = !commerce && process\.env\.VERCEL_ENV === "production"/);
- assert.match(page,/const commerce=liveStoreCheckoutEnabled\(\)/);
- assert.match(page,/<VendingMachine checkoutEnabled=\{checkoutEnabled\}\/>/);
- assert.match(page,/form action=\{startStoreCheckout\}/); // Existing PJ checkout is preserved.
- assert.match(page,/data-mercantile-editorial data-vending-experience/);
- assert.match(machine,/if\(!checkoutEnabled\)/); // No live Stripe anchor when Preview.
- assert.match(machine,/href=\{item\.stripeUrl\}/); // Same verified payment links when live.
- assert.match(machine,/aria-pressed=\{selectedSku===item\.sku\}/);
- assert.match(machine,/aria-live="polite"/);
- assert.match(machine,/onClick=\{luckyPick\}/);
- assert.match(machine,/ProductArt sku=\{item\.sku\}/);
- assert.match(art,/Decorative category illustrations/);
- assert.doesNotMatch(machine,/Add to cart|Checkout basket|in stock now/i);
+test('The shop shows product-first buying information, not decorative vending controls',()=>{
+  const page=read('app/store/page.tsx');
+  const shop=read('app/store/Shopfront.tsx');
+  assert.match(page,/data-mercantile-editorial data-guest-shop/);
+  assert.match(page,/Shopfront checkoutEnabled=\{checkoutEnabled\}/);
+  assert.match(shop,/id="firewood"/);
+  assert.match(shop,/id="shop"/);
+  assert.match(shop,/aria-pressed=\{choice === category\}/);
+  assert.match(shop,/item\.priceCents/);
+  assert.match(shop,/href=\{item\.stripeUrl\}/);
+  assert.match(shop,/target="_blank" rel="noopener noreferrer"/);
+  assert.match(shop,/Preview only/);
+  assert.doesNotMatch(shop,/slotCode|Surprise me|vending machine|dispense|fake cart/i);
 });
 
-test('Machine checkout respects touch sizing, visible categories and reduced motion',()=>{
- const machine=source('app/store/VendingMachine.tsx');
- const css=source('app/store/mercantile.module.css');
- assert.match(machine,/aria-label="Choose a shelf category"/);
- assert.match(machine,/aria-pressed=\{group===choice\.key\}/);
- assert.match(machine,/aria-label="Selected item and checkout"/);
- assert.match(machine,/Quantity can be changed|Choose the quantity/);
- assert.match(css,/min-height:48px/);
- assert.match(css,/min-height:49px/);
- assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
- assert.match(css,/\.mobileCheckout/);
- assert.match(css,/\.slotSelected/);
+test('Manual Stripe links are restricted to production, not shown with PJ checkout',()=>{
+  const page=read('app/store/page.tsx');
+  const shop=read('app/store/Shopfront.tsx');
+  const owner=read('app/owner/store/page.tsx');
+  assert.match(page,/const checkoutEnabled = !commerce && process\.env\.VERCEL_ENV === "production"/);
+  assert.match(page,/const commerce=liveStoreCheckoutEnabled\(\)/);
+  assert.match(page,/form action=\{startStoreCheckout\}/);
+  assert.match(shop,/if \(!enabled\)/);
+  assert.match(owner,/requireKplOwner\('\/owner\/store'\)/);
+  assert.match(owner,/does not automatically decrement PuddleJumper stock/);
 });
 
-test('Stripe Payment Links do not invent PJ inventory or fulfillment',()=>{
- const machine=source('app/store/VendingMachine.tsx');
- const page=source('app/store/page.tsx');
- const owner=source('app/owner/store/page.tsx');
- assert.match(machine,/There is no automatic dispenser or live stock count yet/);
- assert.match(machine,/Each checkout is for one product type/);
- assert.match(page,/only feature gated|separately feature gated/);
- assert.match(owner,/does not automatically decrement PuddleJumper stock/);
- assert.match(owner,/requireKplOwner\('\/owner\/store'\)/);
+test('Product browsing and physical pickup stay honest and accessible',()=>{
+  const shop=read('app/store/Shopfront.tsx');
+  const css=read('app/store/mercantile.module.css');
+  assert.match(shop,/role="group" aria-label="Filter products by category"/);
+  assert.match(shop,/what’s on the shelves/);
+  assert.match(shop,/Each checkout covers one product type/);
+  assert.match(shop,/Bottled water is complimentary/);
+  assert.match(css,/min-height:45px/);
+  assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
+  assert.doesNotMatch(shop,/in stock right now|only two left|free shipping/i);
 });
