@@ -24,7 +24,7 @@ test('verified Mercantile catalog has thirteen unique SKUs, prices, and links',(
   });
   assert.deepEqual(mercantileCategories.map(g=>g.key),['Firewood','Keepsakes','Handmade','Snacks']);
   assert.equal(new Set(mercantilePaymentLinks.map(p=>p.sku)).size,13);
-  assert.equal(new Set(mercantilePaymentLinks.map(p=>p.stripeUrl)).size,11);
+  assert.equal(new Set(mercantilePaymentLinks.map(p=>p.stripeUrl)).size,13);
 });
 
 test('Every item has a real Stripe Payment Link and a stable product identity',()=>{
