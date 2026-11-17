@@ -41,15 +41,28 @@ test("preview checkout is disabled and the owner screen requires authentication"
   const guest = read("app/store/page.tsx");
   const owner = read("app/owner/store/page.tsx");
   assert.match(guest, /process\.env\.VERCEL_ENV === "production"/);
-  assert.match(guest, /checkoutEnabled \? \(/);
+  assert.match(guest, /if \(!enabled\)/);
   assert.match(guest, /href=\{item\.stripeUrl\}/);
   assert.match(owner, /await requireKplOwner\("\/owner\/store"\)/);
   assert.match(owner, /process\.env\.VERCEL_ENV === "production"/);
 });
 
-test("payment links never pretend to update stock and are discoverable from navigation", () => {
-  assert.match(read("app/store/page.tsx"), /Stock and pickup are handled by your hosts/);
-  assert.match(read("app/owner/store/page.tsx"), /do not create booking orders/);
+test("Mercantile mirrors the Lodge's actual editorial and photographic rhythm", () => {
+  const guest = read("app/store/page.tsx");
+  const css = read("app/store/mercantile.module.css");
+  assert.match(guest, /data-mercantile-editorial/);
+  assert.match(guest, /lodgePhoto\(5\)/);
+  assert.match(guest, /lodgePhoto\(40\)/);
+  assert.match(guest, /id="firewood"/);
+  assert.match(guest, /id="handmade"/);
+  assert.match(guest, /id="snacks"/);
+  assert.match(css, /var\(--font-serif\)/);
+  assert.doesNotMatch(guest, /kpl-store-emoji|item\.emoji/);
+});
+
+test("link checkout never claims inventory tracking and both desks link to the store", () => {
+  assert.match(read("app/store/page.tsx"), /If you don&apos;t see it/);
+  assert.match(read("app/owner/store/page.tsx"), /do not create PuddleJumper orders/);
   assert.match(read("app/_data/navigation.ts"), /href: "\/store"/);
   assert.match(read("app/owner/page.tsx"), /href="\/owner\/store"/);
 });
