@@ -7,7 +7,7 @@ import { mercantilePaymentLinks } from "@/lib/mercantile-payment-links.mjs";
 import styles from "./mercantile.module.css";
 
 type Product = (typeof mercantilePaymentLinks)[number];
-type Category = "All" | "Handmade" | "Snacks";
+type Category = "All" | "Keepsakes" | "Handmade" | "Snacks";
 
 const firewood = mercantilePaymentLinks.find((item) => item.sku === "KPL-WOOD-001");
 const merchandise = mercantilePaymentLinks.filter((item) => item.sku !== "KPL-WOOD-001");
@@ -16,9 +16,10 @@ const firepit = lodgePhoto(40);
 const money = (amount: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount / 100);
 
-const categories: readonly Category[] = ["All", "Handmade", "Snacks"];
+const categories: readonly Category[] = ["All", "Keepsakes", "Handmade", "Snacks"];
 const categoryText: Record<Category, string> = {
   All: "Everything",
+  Keepsakes: "Puddles & stuffies",
   Handmade: "Handmade",
   Snacks: "Snacks & treats",
 };
@@ -43,20 +44,53 @@ function Checkout({ item, enabled, featured = false }: {
   </a>;
 }
 
+// The cover is the original Puddles book art. All other photographs show
+// actual Lodge baskets, cropped as category references—not individual stock claims.
+function ProductPhoto({item}:{item:Product}) {
+  const book = item.sku === "KPL-PUDDLES-001";
+  const pair = item.sku === "KPL-PUDDLES-SET-001";
+  if (book) {
+    return <div className={styles.productThumbBook}>
+      <Image src="/images/kpl/mercantile/puddles-council-of-the-pond-cover.png"
+        alt="Puddles and the Council of the Pond coloring book cover"
+        fill sizes="(max-width: 700px) 110px, 145px" />
+    </div>;
+  }
+  if (pair) {
+    return <div className={styles.productThumbBundle} aria-label="Puddles coloring book and a basket of Kendall Pond stuffies">
+      <span className={styles.bundleBook}><Image
+        src="/images/kpl/mercantile/puddles-council-of-the-pond-cover.png"
+        alt="Puddles coloring book cover" fill sizes="95px"/></span>
+      <span className={styles.bundleStuffies} aria-label="Kendall Pond stuffies from the real Lodge shelf"/>
+    </div>;
+  }
+  const focus = item.sku === "KPL-CRAFT-001" ? styles.photoStuffies
+    : item.sku === "KPL-HAT-001" || item.sku === "KPL-MITT-001" || item.sku === "KPL-SET-001" ? styles.photoHats
+    : item.sku === "KPL-SLIP-001" ? styles.photoSlippers
+    : item.sku === "KPL-CANDY-001" || item.sku === "KPL-CANDY-002" ? styles.photoCandy
+    : item.sku === "KPL-CHIP-001" || item.sku === "KPL-COOKIE-001" ? styles.photoChips
+    : styles.photoSnacks;
+  return <div className={styles.productThumbShelf + " " + focus}
+    role="img" aria-label={"Representative " + item.category.toLowerCase() + " basket on the real Lodge Mercantile shelf"}/>;
+}
+
 function ProductCard({ item, enabled }: {
   item: Product;
   enabled: boolean;
 }) {
+  const kind = item.category === "Keepsakes" ? "Puddles & friends"
+    : item.category === "Handmade" ? "Handmade" : "Snacks";
   return <article className={styles.product} id={"item-" + item.sku.toLowerCase()}>
+    <ProductPhoto item={item}/>
     <div className={styles.productDetails}>
-      <span className={styles.productCategory}>{item.category === "Handmade" ? "Handmade" : "Snacks"}</span>
+      <span className={styles.productCategory}>{kind}</span>
       <div className={styles.productTitleLine}>
         <h3>{item.name}</h3>
         <strong>{money(item.priceCents)}</strong>
       </div>
       <p>{item.description}</p>
       <div className={styles.cardFoot}>
-        <span>Pick up at the Lodge</span>
+        <span>{item.sku === "KPL-PUDDLES-SET-001" ? "Save $5" : "Pick up at the Lodge"}</span>
         <Checkout item={item} enabled={enabled} />
       </div>
     </div>
@@ -94,7 +128,7 @@ export default function Shopfront({ checkoutEnabled }: { checkoutEnabled: boolea
         <div>
           <span className={styles.kicker}>SHOP THE SHELVES</span>
           <h2 id="catalog-heading">On the shelf.</h2>
-          <p>Handmade items and a few snacks. Check the shelf before purchasing.</p>
+          <p>Puddles coloring books, Kendall Pond stuffies, handmade goods, and a few snacks.</p>
         </div>
         <figure className={styles.shelfPreview}>
           <Image src="/images/kpl/mercantile/shelf-overview.avif"
@@ -120,7 +154,7 @@ export default function Shopfront({ checkoutEnabled }: { checkoutEnabled: boolea
         {items.map((item) => <ProductCard key={item.sku}
           item={item} enabled={checkoutEnabled} />)}
       </div>
-      <p className={styles.catalogCaveat}>Individual colors, patterns, brands and quantities vary by what’s on the shelves. Please check the basket before purchasing.</p>
+      <p className={styles.catalogCaveat}>Photos show the actual Lodge shelves or the original coloring-book cover. Colors, brands and quantities change; check the baskets before purchasing.</p>
     </section>
 
     <section className={styles.waterStrip} aria-label="Complimentary drinking water">
