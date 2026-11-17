@@ -1,0 +1,30 @@
+.kpl-store{background:var(--paper);color:var(--ink);padding:clamp(40px,7vw,96px) 18px 85px;min-height:80vh}
+.kpl-store-wrap{width:min(1100px,100%);margin:auto}
+.kpl-store-head{max-width:790px}
+.kpl-store-eyebrow,.kpl-store-category{color:var(--forest);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:750}
+.kpl-store-head h1{font-size:clamp(3.2rem,7vw,6rem);margin:15px 0 24px;line-height:.98}
+.kpl-store-intro{font-size:clamp(1.02rem,2vw,1.2rem);line-height:1.65;color:var(--muted);max-width:680px}
+.kpl-store-how{font-size:.93rem;line-height:1.7;margin-top:23px;padding:17px 20px;border-left:3px solid var(--gold);background:#fffaf1;border-radius:0 9px 9px 0;color:var(--deep)}
+.kpl-store-preview{margin-top:23px;padding:14px 17px;background:var(--forest-soft);border:1px solid var(--line);border-radius:10px;color:var(--forest-dark);font-weight:650}
+.kpl-store-section{margin-top:clamp(43px,6vw,72px)}
+.kpl-store-section-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:20px}
+.kpl-store-section-heading h2{font-size:clamp(2.1rem,4vw,3.15rem)}
+.kpl-store-section-heading span{font-size:.78rem;color:var(--muted);text-align:right}
+.kpl-store-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:17px}
+.kpl-store-item{display:flex;flex-direction:column;align-items:start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:clamp(20px,3vw,29px);box-shadow:var(--shadow-xs)}
+.kpl-store-emoji{display:flex;align-items:center;justify-content:center;font-size:2.35rem;width:65px;height:65px;border-radius:50%;background:var(--paper)}
+.kpl-store-category{margin-top:18px;font-size:.65rem}
+.kpl-store-item h3{font-family:var(--font-serif),Georgia,serif;font-size:1.65rem;font-weight:600;line-height:1.15;letter-spacing:-.02em;margin:11px 0 12px;color:var(--deep)}
+.kpl-store-description{font-size:.93rem;line-height:1.5;color:var(--muted);min-height:46px}
+.kpl-store-price{font-size:1.68rem;font-weight:760;color:var(--forest-dark);margin:20px 0 18px}
+.kpl-store-buy,.kpl-store-buy-disabled{display:inline-flex;align-items:center;justify-content:center;gap:12px;background:var(--forest-dark);border-radius:9px;color:#fff;font-weight:750;padding:13px 18px;text-decoration:none;min-height:49px}
+.kpl-store-buy:hover{color:#fff;background:var(--forest);transform:translateY(-1px)}
+.kpl-store-buy-disabled{background:var(--forest-soft);color:var(--forest);cursor:not-allowed}
+.kpl-store-footnote{margin-top:13px;color:var(--muted);font-size:.74rem;line-height:1.45}
+.kpl-store-water{display:flex;align-items:center;gap:20px;margin-top:55px;padding:23px 27px;border-radius:14px;background:var(--mist);border:1px solid var(--line)}
+.kpl-store-water-icon{font-size:2.2rem}
+.kpl-store-water strong{font-family:var(--font-serif),Georgia,serif;font-size:1.35rem;color:var(--deep)}
+.kpl-store-water p{color:var(--forest);font-size:.9rem;margin-top:4px}
+.kpl-store-footer{margin-top:36px;color:var(--muted);font-size:.84rem;line-height:1.65;max-width:850px}
+.kpl-store-footer a{display:inline-block;margin-top:15px;font-weight:700}
+@media(max-width:650px){.kpl-store-section-heading{align-items:start;flex-direction:column;gap:4px}.kpl-store-section-heading span{text-align:left}.kpl-store-item{padding:21px}.kpl-store-buy,.kpl-store-buy-disabled{width:100%}.kpl-store-how{padding:14px 16px}}
