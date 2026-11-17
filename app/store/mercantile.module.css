@@ -41,7 +41,11 @@
 .catalogIntro{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,.52fr);align-items:end;gap:2.5rem 5rem;margin-bottom:2rem}
 .page .catalogIntro h2{margin:.8rem 0 1rem;font-size:clamp(3rem,5.8vw,5.6rem)}
 .catalogIntro p{color:#53695b;font-size:.98rem;line-height:1.65;max-width:54ch}
-.catalogAside{align-self:end;max-width:40ch;color:#758176!important;font-size:.85rem!important}
+.shelfPreview{display:grid;grid-template-columns:118px minmax(0,1fr);align-items:center;gap:1.25rem;max-width:410px;margin:0 0 .2rem;justify-self:end}
+.shelfPreview img{display:block;width:118px;height:157px;object-fit:cover;border-radius:3px;border:1px solid #d7d9cb}
+.shelfPreview figcaption{display:grid;gap:.55rem;color:#617362}
+.shelfPreview figcaption span{color:#51745d;font-size:.63rem;letter-spacing:.12em;font-weight:800}
+.shelfPreview figcaption p{max-width:22ch;font-size:.79rem;line-height:1.54}
 .toolbar{position:sticky;top:72px;z-index:12;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.85rem 0;border-top:1px solid #cbd5c8;border-bottom:1px solid #cbd5c8;background:rgba(246,243,237,.96);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .filters{display:flex;align-items:center;gap:.35rem;max-width:100%;overflow-x:auto;padding:.1rem 0;scrollbar-width:thin}
 .filter,.filterSelected{display:inline-flex;justify-content:center;align-items:center;flex:none;min-height:45px;padding:.7rem 1.05rem;border-radius:5px;border:1px solid transparent;background:transparent;color:#4b6955;white-space:nowrap;font-size:.82rem;font-weight:710;cursor:pointer}
@@ -123,7 +127,9 @@
  .featuredPhoto{min-height:clamp(260px,49vw,440px)}
  .featuredInfo{padding:2.4rem}
  .catalogIntro{grid-template-columns:1fr;gap:.6rem}
- .catalogAside{display:none}
+ .shelfPreview{justify-self:start;margin:1rem 0 0}
+ .shelfPreview img{width:98px;height:130px}
+ .shelfPreview{grid-template-columns:98px 1fr}
  .howSteps{grid-template-columns:repeat(3,minmax(0,1fr))}
  .shopFooter{align-items:flex-start;flex-direction:column}
 }
