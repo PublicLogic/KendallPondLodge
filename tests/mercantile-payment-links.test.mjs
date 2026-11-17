@@ -70,7 +70,7 @@ test('Product browsing and physical pickup stay honest and accessible',()=>{
   const shop=read('app/store/Shopfront.tsx');
   const css=read('app/store/mercantile.module.css');
   assert.match(shop,/role="group" aria-label="Filter products by category"/);
-  assert.match(shop,/what’s on the shelves/);
+  assert.match(shop,/what’s available to take home/);
   assert.match(shop,/Each checkout covers one product type/);
   assert.match(shop,/Bottled water is complimentary/);
   assert.match(css,/min-height:45px/);
