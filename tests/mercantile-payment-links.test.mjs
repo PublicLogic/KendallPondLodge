@@ -70,10 +70,23 @@ test('Product browsing and physical pickup stay honest and accessible',()=>{
   const shop=read('app/store/Shopfront.tsx');
   const css=read('app/store/mercantile.module.css');
   assert.match(shop,/role="group" aria-label="Filter products by category"/);
-  assert.match(shop,/what’s available to take home/);
+  assert.match(shop,/Check the shelf before purchasing/);
   assert.match(shop,/Each checkout covers one product type/);
   assert.match(shop,/Bottled water is complimentary/);
   assert.match(css,/min-height:45px/);
   assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
   assert.doesNotMatch(shop,/in stock right now|only two left|free shipping/i);
+});
+
+
+test('Shop opens directly to a compact heading and products without a cinematic entrance',()=>{
+  const page=read('app/store/page.tsx');
+  const css=read('app/store/mercantile.module.css');
+  assert.match(page,/className={styles.shopIntro}/);
+  assert.match(page,/<h1>The Lodge Shop<\/h1>/);
+  assert.match(page,/<Shopfront checkoutEnabled={checkoutEnabled}\/>/);
+  assert.doesNotMatch(page,/styles.shopHero|styles.heroImage|welcomePhoto|<figure/);
+  assert.match(css,/\.shopIntro\{[^}]*padding:35px 0 28px/);
+  assert.match(css,/\.featured\{[^}]*min-height:158px/);
+  assert.doesNotMatch(css,/min-height:clamp\(450px,58svh,640px\)/);
 });
