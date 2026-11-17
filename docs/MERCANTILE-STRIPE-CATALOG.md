@@ -3,12 +3,14 @@
 
 ## Checked live Stripe payment links
 
-These URLs are the *existing* live Payment Links confirmed in PublicLogic LLC's Stripe account, not newly generated application checkouts. Every link has `automatic_tax.enabled=true`. The guest website renders the links **only when** `VERCEL_ENV=production` and `KPL_STAY_COMMERCE_ENABLED` is OFF. Preview shows the same merchandise but disables the payment actions.
+These URLs are live Payment Links confirmed in PublicLogic LLC's Stripe account, including two new Puddles offers added November 17, 2026. Every link has `automatic_tax.enabled=true`. The guest website renders the links **only when** `VERCEL_ENV=production` and `KPL_STAY_COMMERCE_ENABLED` is OFF. Preview shows the same merchandise but disables the payment actions.
 
 | SKU | Item | Price | Stripe checkout |
 | --- | --- | ---: | --- |
 | KPL-WOOD-001 | Firewood bundle | $10.00 | https://pay.publiclogic.org/b/fZudRa4hU6Bv31f9SRgYU03 |
-| KPL-CRAFT-001 | Handmade pond friend | $20.00 | https://pay.publiclogic.org/b/7sY14o7u6gc59pD3utgYU0d |
+| KPL-PUDDLES-SET-001 | Puddles Coloring Book No. 1 + Kendall Pond Stuffie | $25.00 | https://pay.publiclogic.org/b/3cI3cw8ya6BveJX8ONgYU0f |
+| KPL-PUDDLES-001 | Puddles Coloring Book No. 1 | $10.00 | https://pay.publiclogic.org/b/7sY00kaGi1hbbxLe97gYU0e |
+| KPL-CRAFT-001 | Kendall Pond Stuffie | $20.00 | https://pay.publiclogic.org/b/7sY14o7u6gc59pD3utgYU0d |
 | KPL-HAT-001 | Handmade hat | $12.00 | https://pay.publiclogic.org/b/dRm8wQ29M3pj9pDaWVgYU04 |
 | KPL-MITT-001 | Handmade mittens | $12.00 | https://pay.publiclogic.org/b/8x2aEY5lY2lf7hvghfgYU05 |
 | KPL-SET-001 | Hat + mittens set | $20.00 | https://pay.publiclogic.org/b/aFafZiaGie3X0T7aWVgYU06 |
@@ -31,7 +33,7 @@ Physical count and availability are **not** verified by this list. Keep customer
 ## Tax and pickup controls
 
 - Live Stripe Tax settings have a PublicLogic LLC head office at **110 Kendall Pond Rd W, Gardner, MA 01440** and an active Massachusetts state-sales-tax registration recorded in Stripe.
-- A live Stripe *invoice preview*, not a guest charge, confirmed $1.25 tax on one taxable $20 handmade friend at a Massachusetts customer address (`taxability_reason=standard_rated`); a $1 snack and $12 hat produced zero Massachusetts tax under their specific product codes.
+- Live Stripe *invoice previews*, not guest charges, returned $1.25 tax on a $20 Kendall Pond Stuffie, $0.63 on a $10 printed Puddles children's coloring book (`txcd_35010001`), and $1.56 on the $25 book-plus-stuffie package (`txcd_99999999`) for a Massachusetts customer address. Both bundle components are taxable physical goods in Massachusetts; the package saves $5 before tax. A $1 snack and $12 hat produced zero Massachusetts tax under their product codes.
 - **Open tax verification:** an invoice preview using an out-of-state customer address returned `taxability_reason=not_collecting` on taxable goods. Payment Links may source tax from customer billing address even though every Mercantile item is collected in Gardner. This needs an explicit Massachusetts pickup-tax determination and an accepted checkout implementation before declaring live tax collection correct for out-of-state guests.
 - Firewood has been marked nontaxable in the existing Stripe product for personal-use firewood. Verify scope if firewood use or local tax treatment changes.
 - No shipping. Products are picked up at the Lodge. No more than 10 units per link checkout. Keep the payment confirmation; any refund/dispute is handled in Stripe, not the PJ order tool.
@@ -45,20 +47,12 @@ Physical count and availability are **not** verified by this list. Keep customer
 - [ ] If merchant links are deployed, record exact Vercel deployment and verify live checkout links from a production domain without creating an unintended charge.
 
 
-## Product-first shop redesign — November 17, 2026
+## Shop imagery and Puddles offer — November 17, 2026
 
-The former illustrated vending-machine prototype has been replaced with a compact, commerce-first **Lodge Shop**. The manual-link path shows a real Lodge welcome-basket photograph, a firewood feature with a real firepit photograph, category tabs for Handmade and Snacks, accurate product names and unit prices, a direct Stripe action on every product, complimentary water, and clearly explained on-site pickup. The shop intentionally does **not** simulate a cart, a vending machine, live stock, product ratings, or checkout confirmation.
+The Shop stays compact: no oversized entrance, single firewood row, and merchandise cards with useful prices and checkout buttons. Product photos come from actual Lodge sources: the original Puddles coloring book cover in `public/images/kpl/mercantile/puddles-council-of-the-pond-cover.png` and basket crops of the Lodge's own `shelf-overview.avif` for stuffies, hats, slippers, packaged candy and snacks. **Basket photos are representative of the category, not exact SKU photos or stock guarantees.** User-owned images take precedence over external third-party photos that might depict products not carried at the Lodge.
 
-The category product surfaces are typographic rather than fabricated SKU photographs. **Outstanding photo requirement:** take and upload actual item photos (especially handmade goods) to complete a best-in-class product catalog; the original shelf overview photo is not a substitute for individual product closeups. Until actual SKU photos exist, don't insert stock photos or AI-generated imitations.
+New category: **Puddles & stuffies**. One Puddles and the Council of the Pond Coloring Book No. 1: $10. One Kendall Pond Stuffie: $20 (existing product and link renamed, no duplicate). Book + stuffie: $25, saving $5. New live Stripe Payment Links use automatic Stripe Tax, with a printed children's book code and a tangible-goods bundle code. They are not linked to PJ stock or live purchase events.
 
-Research and reference audit (Nov. 17, 2026):
-- Aesop's live shop: considered hierarchy and restrained visual language, https://www.aesop.com/ .
-- Huckberry gifts assortment: curated, fast-to-shop retail products, https://huckberry.com/gifts .
-- Graza's live collection: immediate product price/action pairing, https://www.graza.co/collections/olive-oil .
-- Baymard, Product Listing Page UX (Aug. 20, 2026): fast comparison, clear filters and scannable attributes, https://baymard.com/blog/product-listing-page-plp-ux .
-- Baymard, Product Page UX (Mar. 18, 2026): clear options, accurate imagery and easily located buying action, https://baymard.com/research-articles/current-state-ecommerce-product-page-ux .
-- Baymard, Checkout UX (Nov. 3, 2026): low-friction guest checkout and predictable payment steps, https://baymard.com/research-articles/current-state-of-checkout-ux .
+The **13** verified links remain behind production-only manual checkout, while governed PuddleJumper commerce remains separately feature-gated. The on-site pickup/guest billing address tax sourcing remains an unresolved release gate; a successful MA-address invoice preview is not proof for other addresses.
 
-The 11 Stripe Payment Links, SKU amounts, tax settings, PJ feature gating, signed settlement, and separate owner dashboard are unchanged. Live Stripe actions remain unavailable in Vercel Preview. The same MA pickup tax-sourcing question remains a production release gate.
-
-Acceptance: code must have clear prices, category filtering, touch-friendly product actions, a visible preview safeguard, honest stock/pickup language, and no simulated dispenser or cart. Core tests, production build and HTTP/owner auth smoke must pass before representing a preview as ready.
+The earlier vending-machine prototype, artificial illustrative product images, and generic text-only product panels are retired. Do not simulate a combined cart, ratings, shipping, order confirmation or inventory. Core tests, production build and owner auth smoke must pass on the release revision.
