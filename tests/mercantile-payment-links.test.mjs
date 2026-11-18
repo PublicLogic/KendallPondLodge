@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync,existsSync} from 'node:fs';
 import {mercantilePaymentLinks,mercantileCategories} from '../lib/mercantile-payment-links.mjs';
 
 const read = (path) => readFileSync(new URL('../'+path,import.meta.url),'utf8');
@@ -105,30 +105,26 @@ test('Puddles book and Kendall Pond stuffie bundle stay at approved prices',()=>
     bySku['KPL-PUDDLES-SET-001'].priceCents,500);
 });
 
-test('Each stocked merchandise category shows a distinct representative photograph', async()=>{
-  const {mercantileRepresentativePhotos: photos}=await import('../lib/mercantile-representative-photos.mjs');
-  const items=mercantilePaymentLinks.filter(p=>p.category==="Handmade"||p.category==="Snacks"||p.sku==="KPL-CRAFT-001");
-  assert.equal(items.length,10);
-  assert.equal(Object.keys(photos).length,10);
-  assert.equal(new Set(Object.values(photos).map(p=>p.src)).size,10);
-  for(const item of items){
-    const photo=photos[item.sku];
-    assert.ok(photo,"Missing representative photo for "+item.sku);
-    const src=new URL(photo.src);
-    assert.equal(src.protocol,'https:');
-    assert.equal(src.hostname,'images.pexels.com');
-    assert.match(src.pathname,/^\/photos\/\d+\/pexels-photo-\d+\.jpeg$/);
-    assert.match(photo.source,/^https:\/\/www\.pexels\.com\/photo\//);
-    assert.ok(photo.alt.includes('Representative'));
-  }
-  const shop=read('app/store/Shopfront.tsx');
-  const css=read('app/store/mercantile.module.css');
-  assert.match(shop,/mercantileRepresentativePhotos/);
-  assert.match(shop,/puddles-council-of-the-pond-cover\.png/);
-  assert.match(shop,/Representative stuffed animal/);
-  assert.match(shop,/Puddles book cover is original/i);
-  assert.match(shop,/ProductPhoto item=\{item\}/);
-  assert.match(css,/\.productThumbShelf img/);
-  assert.doesNotMatch(css,/photoStuffies|photoHats|photoCandy/);
-  assert.match(shop,/Product photos are representative examples/);
+test('Shop uses exact real Lodge packshots on clean backgrounds, with only three stock fallbacks', async()=>{
+ const {mercantileStudioPhotos:studio}=await import('../lib/mercantile-studio-photos.mjs');
+ const {mercantileRepresentativePhotos:examples}=await import('../lib/mercantile-representative-photos.mjs');
+ assert.equal(Object.keys(studio).length,10);
+ const rest=mercantilePaymentLinks.filter(p=>!studio[p.sku]).map(p=>p.sku).sort();
+ assert.deepEqual(rest,['KPL-CANDY-001','KPL-CANDY-002','KPL-COOKIE-001']);
+ for (const [sku,photo] of Object.entries(studio)){
+   assert.match(sku,/^KPL-/);
+   assert.match(photo.src,/^\/images\/kpl\/mercantile\/studio\/[a-z-]+\.jpg$/);
+   assert.ok(existsSync(new URL('../public'+photo.src,import.meta.url)),'Missing photo asset: '+photo.src);
+   assert.ok(photo.alt.length>20);
+ }
+ for(const sku of rest) assert.ok(examples[sku]?.src.startsWith('https://images.pexels.com/'));
+ const shop=read('app/store/Shopfront.tsx');
+ const css=read('app/store/mercantile.module.css');
+ assert.match(shop,/mercantileStudioPhotos/);
+ assert.match(shop,/\/images\/kpl\/mercantile\/studio\/firewood\.jpg/);
+ assert.match(shop,/Most photos show real Lodge items/);
+ assert.match(shop,/studioImage/);
+ assert.match(css,/\.studioImage\{object-fit:contain/);
+ assert.doesNotMatch(shop,/shelf-overview\.avif|handlePhotoError|lodgePhoto\(/);
+ assert.doesNotMatch(css,/shelfPreview|bundleStuffies|photoCandy/);
 });
