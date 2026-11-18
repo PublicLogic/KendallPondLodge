@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { lodgePhoto } from "@/app/_data/lodge-photos";
 import { mercantilePaymentLinks } from "@/lib/mercantile-payment-links.mjs";
+import { mercantileRepresentativePhotos } from "@/lib/mercantile-representative-photos.mjs";
 import styles from "./mercantile.module.css";
 
 type Product = (typeof mercantilePaymentLinks)[number];
@@ -44,34 +45,48 @@ function Checkout({ item, enabled, featured = false }: {
   </a>;
 }
 
-// The cover is the original Puddles book art. All other photographs show
-// actual Lodge baskets, cropped as category references—not individual stock claims.
+// Product photographs are visual examples, not pictures of the exact stock.
+// Puddles Book 1 is the original Lodge artwork. Photo credits: docs/MERCANTILE-IMAGERY.md.
+const photos = mercantileRepresentativePhotos as Record<string,{
+  src:string; alt:string; source:string
+}>;
+const lodgeShelf = "/images/kpl/mercantile/shelf-overview.avif";
+function handlePhotoError(event:React.SyntheticEvent<HTMLImageElement>){
+  const image=event.currentTarget;
+  if(!image.src.includes("shelf-overview.avif"))image.src=lodgeShelf;
+}
 function ProductPhoto({item}:{item:Product}) {
   const book = item.sku === "KPL-PUDDLES-001";
   const pair = item.sku === "KPL-PUDDLES-SET-001";
+  const cover="/images/kpl/mercantile/puddles-council-of-the-pond-cover.png";
   if (book) {
     return <div className={styles.productThumbBook}>
-      <Image src="/images/kpl/mercantile/puddles-council-of-the-pond-cover.png"
-        alt="Puddles and the Council of the Pond coloring book cover"
+      <Image src={cover} alt="Cover of Puddles and the Council of the Pond, Book 1"
         fill sizes="(max-width: 700px) 110px, 145px" />
     </div>;
   }
   if (pair) {
-    return <div className={styles.productThumbBundle} aria-label="Puddles coloring book and a basket of Kendall Pond stuffies">
-      <span className={styles.bundleBook}><Image
-        src="/images/kpl/mercantile/puddles-council-of-the-pond-cover.png"
-        alt="Puddles coloring book cover" fill sizes="95px"/></span>
-      <span className={styles.bundleStuffies} aria-label="Kendall Pond stuffies from the real Lodge shelf"/>
+    const stuffie=photos["KPL-CRAFT-001"];
+    return <div className={styles.productThumbBundle}
+      aria-label="Puddles book cover and representative stuffie photo">
+      <span className={styles.bundleBook}>
+        <Image src={cover} alt="Original Puddles book cover" fill sizes="95px" />
+      </span>
+      <span className={styles.bundleStuffies}>
+        <Image src={stuffie.src} alt="Representative stuffed animal, style may vary"
+          fill unoptimized sizes="95px" onError={handlePhotoError} />
+      </span>
     </div>;
   }
-  const focus = item.sku === "KPL-CRAFT-001" ? styles.photoStuffies
-    : item.sku === "KPL-HAT-001" || item.sku === "KPL-MITT-001" || item.sku === "KPL-SET-001" ? styles.photoHats
-    : item.sku === "KPL-SLIP-001" ? styles.photoSlippers
-    : item.sku === "KPL-CANDY-001" || item.sku === "KPL-CANDY-002" ? styles.photoCandy
-    : item.sku === "KPL-CHIP-001" || item.sku === "KPL-COOKIE-001" ? styles.photoChips
-    : styles.photoSnacks;
-  return <div className={styles.productThumbShelf + " " + focus}
-    role="img" aria-label={"Representative " + item.category.toLowerCase() + " basket on the real Lodge Mercantile shelf"}/>;
+  const photo=photos[item.sku];
+  if(!photo)return <div className={styles.productThumbShelf}>
+    <Image src={lodgeShelf} alt="Lodge Mercantile merchandise shelf" fill sizes="150px"/>
+  </div>;
+  return <div className={styles.productThumbShelf}>
+    <Image src={photo.src} alt={photo.alt+" (representative photo)"}
+      fill unoptimized sizes="(max-width: 700px) 110px, 145px"
+      onError={handlePhotoError}/>
+  </div>;
 }
 
 function ProductCard({ item, enabled }: {
@@ -154,7 +169,7 @@ export default function Shopfront({ checkoutEnabled }: { checkoutEnabled: boolea
         {items.map((item) => <ProductCard key={item.sku}
           item={item} enabled={checkoutEnabled} />)}
       </div>
-      <p className={styles.catalogCaveat}>Photos show the actual Lodge shelves or the original coloring-book cover. Colors, brands and quantities change; check the baskets before purchasing.</p>
+      <p className={styles.catalogCaveat}>Product photos are representative examples, not exact Lodge inventory. The Puddles book cover is original. Brands, colors and availability vary; check the baskets before purchasing.</p>
     </section>
 
     <section className={styles.waterStrip} aria-label="Complimentary drinking water">
