@@ -47,12 +47,14 @@ Physical count and availability are **not** verified by this list. Keep customer
 - [ ] If merchant links are deployed, record exact Vercel deployment and verify live checkout links from a production domain without creating an unintended charge.
 
 
-## Shop imagery and Puddles offer — November 17, 2026
+## Shop imagery, Puddles and studio treatment — November 18, 2026
 
-The Shop stays compact: no oversized entrance, single firewood row, and merchandise cards with useful prices and checkout buttons. Product photos come from actual Lodge sources: the original Puddles coloring book cover in `public/images/kpl/mercantile/puddles-council-of-the-pond-cover.png` and basket crops of the Lodge's own `shelf-overview.avif` for stuffies, hats, slippers, packaged candy and snacks. **Basket photos are representative of the category, not exact SKU photos or stock guarantees.** User-owned images take precedence over external third-party photos that might depict products not carried at the Lodge.
+The storefront is a **compact Lodge convenience shop**, not a vending machine or a full-screen marketing experience. It retains 13 SKUs and the $25 Puddles Book 1 + Kendall Pond Stuffie bundle, while all merchandise checkout still uses the existing verified Stripe Payment Links.
 
-New category: **Puddles & stuffies**. One Puddles and the Council of the Pond Coloring Book No. 1: $10. One Kendall Pond Stuffie: $20 (existing product and link renamed, no duplicate). Book + stuffie: $25, saving $5. New live Stripe Payment Links use automatic Stripe Tax, with a printed children's book code and a tangible-goods bundle code. They are not linked to PJ stock or live purchase events.
+Guest merchandise photos now use **real, owner-supplied product imagery**, isolated from the original shed setting and placed on uniform warm off-white backgrounds with soft shadows. The actual physical color book cover is perspective-corrected from the new photograph. The on-site firewood bundle, crocheted stuffies, beanie, knitwear basket, slippers and packaged snack basket are all sourced from the user's November 18 photos and committed locally under `public/images/kpl/mercantile/studio/`. See `MERCANTILE-IMAGERY.md` for the exact SKU-to-photo mapping and remaining illustrative snack images.
 
-The **13** verified links remain behind production-only manual checkout, while governed PuddleJumper commerce remains separately feature-gated. The on-site pickup/guest billing address tax sourcing remains an unresolved release gate; a successful MA-address invoice preview is not proof for other addresses.
+Unlike the previous storefront drafts, the guest page does not show a photo of the shed shelves, repeat confusing zoomed shelf crops, or depend on Pexels images for craft goods. Three snack categories for which an exact image was not provided still use separately labeled illustrative Pexels photography. **No image implies in-stock status or a guaranteed brand/color**; guests must confirm the shelf and retain their receipt.
 
-The earlier vending-machine prototype, artificial illustrative product images, and generic text-only product panels are retired. Do not simulate a combined cart, ratings, shipping, order confirmation or inventory. Core tests, production build and owner auth smoke must pass on the release revision.
+Automatic tax is enabled on all manual links, but Massachusetts physical-pickup sourcing for customers with out-of-state billing addresses is a **production release blocker**. Manual link payments are not reconciled into PuddleJumper inventory automatically, and governed PJ checkout remains separately gated. The preview remains **non-purchasing** and production has not changed.
+
+Core tests, production build, and guarded HTTP owner-access smoke must pass on the revision submitted for review before this is described as a ready preview.
