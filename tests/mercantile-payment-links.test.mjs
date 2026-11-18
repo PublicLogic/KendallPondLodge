@@ -105,16 +105,30 @@ test('Puddles book and Kendall Pond stuffie bundle stay at approved prices',()=>
     bySku['KPL-PUDDLES-SET-001'].priceCents,500);
 });
 
-test('Shop uses original Puddles cover and the actual Lodge basket as representative product photography',()=>{
+test('Each stocked merchandise category shows a distinct representative photograph', async()=>{
+  const {mercantileRepresentativePhotos: photos}=await import('../lib/mercantile-representative-photos.mjs');
+  const items=mercantilePaymentLinks.filter(p=>p.category==="Handmade"||p.category==="Snacks"||p.sku==="KPL-CRAFT-001");
+  assert.equal(items.length,10);
+  assert.equal(Object.keys(photos).length,10);
+  assert.equal(new Set(Object.values(photos).map(p=>p.src)).size,10);
+  for(const item of items){
+    const photo=photos[item.sku];
+    assert.ok(photo,"Missing representative photo for "+item.sku);
+    const src=new URL(photo.src);
+    assert.equal(src.protocol,'https:');
+    assert.equal(src.hostname,'images.pexels.com');
+    assert.match(src.pathname,/^\/photos\/\d+\/pexels-photo-\d+\.jpeg$/);
+    assert.match(photo.source,/^https:\/\/www\.pexels\.com\/photo\//);
+    assert.ok(photo.alt.includes('Representative'));
+  }
   const shop=read('app/store/Shopfront.tsx');
   const css=read('app/store/mercantile.module.css');
+  assert.match(shop,/mercantileRepresentativePhotos/);
   assert.match(shop,/puddles-council-of-the-pond-cover\.png/);
-  assert.match(shop,/shelf-overview\.avif/);
-  assert.match(shop,/Puddles & stuffies/);
+  assert.match(shop,/Representative stuffed animal/);
+  assert.match(shop,/original coloring-book cover/i);
   assert.match(shop,/ProductPhoto item=\{item\}/);
-  assert.match(css,/\.photoStuffies\{/);
-  assert.match(css,/\.photoCandy\{/);
-  assert.match(css,/\.photoHats\{/);
-  assert.match(css,/\.productThumbBook/);
-  assert.match(shop,/Photos show the actual Lodge shelves/);
+  assert.match(css,/\.productThumbShelf img/);
+  assert.doesNotMatch(css,/photoStuffies|photoHats|photoCandy/);
+  assert.match(shop,/Product photos are representative examples/);
 });
