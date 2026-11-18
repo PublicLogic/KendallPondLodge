@@ -1,23 +1,42 @@
-# Lodge Mercantile — representative product photo sources
+# KPL Mercantile — product photography
 Updated 2026-11-18
 
-These are **representative category images**, not actual inventory photographs or photographs of branded items currently on sale. Each live product keeps its existing SKU and price; replacing these images cannot change a checkout or inventory count. The original *Puddles and the Council of the Pond* book cover is an in-house asset and is used unaltered. All third-party photos are from Pexels, listed as Free on their individual photo pages and subject to the [Pexels License](https://www.pexels.com/license/). This is not a claim that Pexels photographers endorse the Lodge or that their pictured products are the products sold.
+## Photography standard
 
-| SKU | Visual subject | Photographer | Original source |
-| --- | --- | --- | --- |
-| KPL-CRAFT-001 | Stuffed animals | Melike B | https://www.pexels.com/photo/plush-toy-display-with-teddy-bears-and-stuffed-elephant-29279957/ |
-| KPL-HAT-001 | Handmade knit hat | Miriam Alonso | https://www.pexels.com/photo/skeins-of-yarn-knitting-needles-and-light-orange-knitted-hat-7585807/ |
-| KPL-MITT-001 | Wool mittens | Darya Grey_Owl | https://www.pexels.com/photo/wool-gloves-on-a-wooden-bench-19522473/ |
-| KPL-SET-001 | Knit hat & mittens | Alyona Pastukhova | https://www.pexels.com/photo/woman-covering-her-face-with-mittens-14694278/ |
-| KPL-SLIP-001 | Handmade slippers | Valentin Ivantsov | https://www.pexels.com/photo/bright-red-handmade-slippers-on-white-background-38816983/ |
-| KPL-CANDY-001 | Assorted small candies | Polina Tankilevitch | https://www.pexels.com/photo/colorful-candy-5469042/ |
-| KPL-COOKIE-001 | Cookies & biscuits | James Collington | https://www.pexels.com/photo/golden-crunchy-biscuits-on-a-plate-30403208/ |
-| KPL-CHIP-001 | Potato chips in a bag | Srattha Nualsate | https://www.pexels.com/photo/delicious-potato-chips-13060681/ |
-| KPL-CANDY-002 | Chocolate candy treats | Alena Shekhovtcova | https://www.pexels.com/photo/various-yummy-chocolate-candies-scattered-on-table-with-glitters-6940979/ |
-| KPL-SNACK-002 | Larger chips | Srattha Nualsate | https://www.pexels.com/photo/close-up-shot-of-potato-chips-13060695/ |
+Product cards use a consistent, restrained product-photography treatment: **warm off-white seamless background (#F8F6F0), soft shadow, centered merchandise, and no visible shed environment.** The 480×520 studio packshots are derived from the Lodge owner's actual 2026-11-18 photographs. Images are crops and cutouts of real merchandise, not newly invented products. Minor cutout imperfections may remain around complex handmade basket edges.
 
-Puddles Book 1 and the bundle use the original book cover at `public/images/kpl/mercantile/puddles-council-of-the-pond-cover.png`. The bundle pairs the cover with the representative stuffed-animal photo. The existing photo of the actual physical shelf remains visible only in the storefront intro, and is also a fallback if an external representative photo fails.
+### Actual Lodge images (served locally)
 
-Implementation: `lib/mercantile-representative-photos.mjs`. The URLs are fixed, licensed photos rather than random image lookups. **Current limitation:** image assets are served from Pexels CDN, so image availability depends on the external service. If unreliable, replace them with verified local files under this same SKU mapping.
+| SKU / product | Asset | Source photo |
+|---|---|---|
+| KPL-WOOD-001 — firewood bundle | `studio/firewood.jpg` | `IMG_0144.jpeg` |
+| KPL-PUDDLES-001 — Puddles coloring book | `studio/book.jpg` | Physical book cover in `IMG_0140.jpeg`, perspective-corrected |
+| KPL-PUDDLES-SET-001 — book + stuffie | `studio/book-stuffie-bundle.jpg` | Composite of the above book and actual stuffie photograph |
+| KPL-CRAFT-001 — Kendall Pond Stuffie | `studio/stuffies.jpg` | `IMG_0138.jpeg` |
+| KPL-HAT-001 — hat | `studio/hat.jpg` | `IMG_0136.jpeg` |
+| KPL-MITT-001 — mittens | `studio/knits.jpg` | `IMG_0135.jpeg`; handmade knitwear basket, not an exact color/size guarantee |
+| KPL-SET-001 — hat and mittens | `studio/hat-mittens-set.jpg` | Composite of `IMG_0136.jpeg` and `IMG_0135.jpeg` |
+| KPL-SLIP-001 — slippers | `studio/slippers.jpg` | `IMG_0133.jpeg` |
+| KPL-CHIP-001 — standard chips | `studio/chips.jpg` | `IMG_0141.jpeg` |
+| KPL-SNACK-002 — larger snack | `studio/chips.jpg` | Same real assorted-snack basket; brand/size varies |
 
-Production gate remains unchanged: Massachusetts in-person pickup tax sourcing for guests using out-of-state billing addresses needs confirmation. No code changes here reconcile manual Stripe Payment Link purchases into PuddleJumper inventory.
+These assets are committed at `public/images/kpl/mercantile/studio/`. The unused `studio/essentials.jpg` is also staged for a possible later toiletries offer, but **no price or checkout for that category is authorized**. No product photos depend on user authentication or temporary CDN URLs.
+
+### Representative stock images, only where no matching Lodge item shot is available
+
+The three remaining listing categories retain curated Pexels images, all explicitly illustrative and **not exact inventory promises**:
+
+- Small candy / fruit snacks: Polina Tankilevitch, https://www.pexels.com/photo/colorful-candy-5469042/
+- Cookies / crackers: James Collington, https://www.pexels.com/photo/golden-crunchy-biscuits-on-a-plate-30403208/
+- Full-size candy / sweet snack: Alena Shekhovtcova, https://www.pexels.com/photo/various-yummy-chocolate-candies-scattered-on-table-with-glitters-6940979/
+
+These are used subject to https://www.pexels.com/license/ and no endorsement is implied. They should be replaced with actual product photographs once packages are individually photographed. Other unused Pexels mappings can remain in source for reference but are not rendered.
+
+## Integrity and shipping boundaries
+
+- Photos do not represent stock counts, guarantee a specific color or brand, or change physical item availability.
+- Hosted Stripe products, prices, and 13 payment links are unchanged.
+- Preview must not expose working live payment links. Governed PJ checkout remains a separately feature-gated release.
+- Photo processing here is strictly for presentation: the original Puddles cover text/illustration and craft products are not reillustrated or replaced.
+- Massachusetts physical-pickup tax sourcing for guests with non-MA billing addresses is still a production release gate.
+
