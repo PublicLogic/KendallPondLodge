@@ -126,7 +126,7 @@ test('Each stocked merchandise category shows a distinct representative photogra
   assert.match(shop,/mercantileRepresentativePhotos/);
   assert.match(shop,/puddles-council-of-the-pond-cover\.png/);
   assert.match(shop,/Representative stuffed animal/);
-  assert.match(shop,/original coloring-book cover/i);
+  assert.match(shop,/Puddles book cover is original/i);
   assert.match(shop,/ProductPhoto item=\{item\}/);
   assert.match(css,/\.productThumbShelf img/);
   assert.doesNotMatch(css,/photoStuffies|photoHats|photoCandy/);
