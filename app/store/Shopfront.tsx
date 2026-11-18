@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, type SyntheticEvent } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { lodgePhoto } from "@/app/_data/lodge-photos";
 import { mercantilePaymentLinks } from "@/lib/mercantile-payment-links.mjs";
 import { mercantileRepresentativePhotos } from "@/lib/mercantile-representative-photos.mjs";
+import { mercantileStudioPhotos } from "@/lib/mercantile-studio-photos.mjs";
 import styles from "./mercantile.module.css";
 
 type Product = (typeof mercantilePaymentLinks)[number];
@@ -12,7 +12,6 @@ type Category = "All" | "Keepsakes" | "Handmade" | "Snacks";
 
 const firewood = mercantilePaymentLinks.find((item) => item.sku === "KPL-WOOD-001");
 const merchandise = mercantilePaymentLinks.filter((item) => item.sku !== "KPL-WOOD-001");
-const firepit = lodgePhoto(40);
 
 const money = (amount: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount / 100);
@@ -45,47 +44,19 @@ function Checkout({ item, enabled, featured = false }: {
   </a>;
 }
 
-// Product photographs are visual examples, not pictures of the exact stock.
-// Puddles Book 1 is the original Lodge artwork. Photo credits: docs/MERCANTILE-IMAGERY.md.
-const photos = mercantileRepresentativePhotos as Record<string,{
-  src:string; alt:string; source:string
-}>;
-const lodgeShelf = "/images/kpl/mercantile/shelf-overview.avif";
-function handlePhotoError(event:SyntheticEvent<HTMLImageElement>){
-  const image=event.currentTarget;
-  if(!image.src.includes("shelf-overview.avif"))image.src=lodgeShelf;
-}
+// Original Lodge merchandise on one neutral studio background wherever possible.
+// Snacks without an owner-supplied item shot still use a representative image.
+const studioPhotos = mercantileStudioPhotos as Record<string,{src:string;alt:string}>;
+const examplePhotos = mercantileRepresentativePhotos as Record<string,{src:string;alt:string}>;
 function ProductPhoto({item}:{item:Product}) {
-  const book = item.sku === "KPL-PUDDLES-001";
-  const pair = item.sku === "KPL-PUDDLES-SET-001";
-  const cover="/images/kpl/mercantile/puddles-council-of-the-pond-cover.png";
-  if (book) {
-    return <div className={styles.productThumbBook}>
-      <Image src={cover} alt="Cover of Puddles and the Council of the Pond, Book 1"
-        fill sizes="(max-width: 700px) 110px, 145px" />
-    </div>;
-  }
-  if (pair) {
-    const stuffie=photos["KPL-CRAFT-001"];
-    return <div className={styles.productThumbBundle}
-      aria-label="Puddles book cover and representative stuffie photo">
-      <span className={styles.bundleBook}>
-        <Image src={cover} alt="Original Puddles book cover" fill sizes="95px" />
-      </span>
-      <span className={styles.bundleStuffies}>
-        <Image src={stuffie.src} alt="Representative stuffed animal, style may vary"
-          fill unoptimized sizes="95px" onError={handlePhotoError} />
-      </span>
-    </div>;
-  }
-  const photo=photos[item.sku];
-  if(!photo)return <div className={styles.productThumbShelf}>
-    <Image src={lodgeShelf} alt="Lodge Mercantile merchandise shelf" fill sizes="150px"/>
-  </div>;
+  const local=studioPhotos[item.sku];
+  const example=examplePhotos[item.sku];
+  const photo=local??example;
+  if(!photo)return <div className={styles.productThumbShelf} aria-label={item.name}/>;
   return <div className={styles.productThumbShelf}>
-    <Image src={photo.src} alt={photo.alt+" (representative photo)"}
-      fill unoptimized sizes="(max-width: 700px) 110px, 145px"
-      onError={handlePhotoError}/>
+    <Image src={photo.src} alt={local?photo.alt:photo.alt+" (representative item)"}
+      fill unoptimized sizes="(max-width: 700px) 115px, 145px"
+      className={local?styles.studioImage:styles.referenceImage}/>
   </div>;
 }
 
@@ -121,8 +92,9 @@ export default function Shopfront({ checkoutEnabled }: { checkoutEnabled: boolea
   return <>
     {firewood && <section className={styles.featured} id="firewood" aria-labelledby="firewood-heading">
       <div className={styles.featuredPhoto}>
-        <Image src={firepit.src} alt={firepit.alt} fill
-          sizes="(max-width: 760px) 100vw, 240px" />
+        <Image src="/images/kpl/mercantile/studio/firewood.jpg"
+          alt="The actual Lodge firewood bundle on a neutral studio backdrop"
+          fill sizes="(max-width: 760px) 100vw, 240px" />
       </div>
       <div className={styles.featuredInfo}>
         <span className={styles.kicker}>FIREWOOD</span>
@@ -145,14 +117,7 @@ export default function Shopfront({ checkoutEnabled }: { checkoutEnabled: boolea
           <h2 id="catalog-heading">On the shelf.</h2>
           <p>Puddles coloring books, Kendall Pond stuffies, handmade goods, and a few snacks.</p>
         </div>
-        <figure className={styles.shelfPreview}>
-          <Image src="/images/kpl/mercantile/shelf-overview.avif"
-            alt="Actual Lodge Mercantile shelves with woven baskets of handmade crafts, snacks and bottled water"
-            width={240} height={320} unoptimized />
-          <figcaption><span>ON THE SHELF</span>
-            <p>A look at our actual Mercantile. The baskets change as we restock.</p>
-          </figcaption>
-        </figure>
+
       </div>
       <div className={styles.toolbar}>
         <div className={styles.filters} role="group" aria-label="Filter products by category">
@@ -169,7 +134,7 @@ export default function Shopfront({ checkoutEnabled }: { checkoutEnabled: boolea
         {items.map((item) => <ProductCard key={item.sku}
           item={item} enabled={checkoutEnabled} />)}
       </div>
-      <p className={styles.catalogCaveat}>Product photos are representative examples, not exact Lodge inventory. The Puddles book cover is original. Brands, colors and availability vary; check the baskets before purchasing.</p>
+      <p className={styles.catalogCaveat}>Most photos show real Lodge items photographed against a clean background. Candy and cookie images are representative; colors and brands may vary. Check the baskets before purchasing.</p>
     </section>
 
     <section className={styles.waterStrip} aria-label="Complimentary drinking water">
