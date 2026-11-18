@@ -49,13 +49,10 @@
 .bundleBook,.bundleStuffies{position:relative;display:block;overflow:hidden}
 .bundleBook{background:#f6efe2}
 .bundleBook img{object-fit:contain;padding:6px}
-.bundleStuffies,.productThumbShelf{background-image:url('/images/kpl/mercantile/shelf-overview.avif');background-repeat:no-repeat;background-size:250% auto;background-color:#c5b6a1}
-.bundleStuffies,.photoStuffies{background-position:0% 21%}
-.photoHats{background-position:0% 59%}
-.photoSlippers{background-position:0% 82%}
-.photoCandy{background-position:100% 22%}
-.photoChips{background-position:100% 48%}
-.photoSnacks{background-position:100% 79%}
+.productThumbShelf,.bundleStuffies{background:#ecece6}
+.productThumbShelf img,.bundleStuffies img{object-fit:cover;object-position:center}
+.bundleStuffies img{object-position:center 40%}
+.productThumbBook img,.bundleBook img{object-fit:contain}
 .productCategory{color:#748676;letter-spacing:.08em;font-size:.66rem;font-weight:700;text-transform:uppercase}
 .productTitleLine{display:flex;align-items:start;justify-content:space-between;gap:12px}
 .page .productTitleLine h3{font-size:1.24rem;line-height:1.18;letter-spacing:-.02em}
