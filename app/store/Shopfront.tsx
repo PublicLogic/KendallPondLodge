@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type SyntheticEvent } from "react";
 import Image from "next/image";
 import { lodgePhoto } from "@/app/_data/lodge-photos";
 import { mercantilePaymentLinks } from "@/lib/mercantile-payment-links.mjs";
@@ -51,7 +51,7 @@ const photos = mercantileRepresentativePhotos as Record<string,{
   src:string; alt:string; source:string
 }>;
 const lodgeShelf = "/images/kpl/mercantile/shelf-overview.avif";
-function handlePhotoError(event:React.SyntheticEvent<HTMLImageElement>){
+function handlePhotoError(event:SyntheticEvent<HTMLImageElement>){
   const image=event.currentTarget;
   if(!image.src.includes("shelf-overview.avif"))image.src=lodgeShelf;
 }
