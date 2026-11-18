@@ -2,9 +2,9 @@
 import {redirect} from 'next/navigation';
 import {catalog,type StoreOrder} from '@/lib/mercantile-runtime';
 import {stripeRequest} from '@/lib/booking-stripe';
+import {prepareMercantileCheckout} from '@/lib/mercantile-checkout.mjs';
 
 const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const SESS=/^cs_(test|live)_[A-Za-z0-9]{8,200}$/;
 function liveStoreCheckoutEnabled(){
   return process.env.KPL_STAY_COMMERCE_ENABLED==='true';
 }
@@ -30,26 +30,10 @@ export async function startStoreCheckout(form:FormData):Promise<never>{
  let location:string;
  try{
    const order=await catalog<StoreOrder>('POST','/orders','guest',{product_id:id,quantity,request_key:key});
-   const origin=returnOrigin();
-   const expiry=Math.floor(Date.now()/1000)+3600;
-   const fields=new URLSearchParams({
-     mode:'payment','payment_method_types[0]':'card',
-     'line_items[0][price_data][currency]':'usd',
-     'line_items[0][price_data][unit_amount]':String(order.price_cents),
-     'line_items[0][price_data][product_data][name]':'Lodge Mercantile item',
-     'line_items[0][quantity]':String(order.quantity),
-     'metadata[stay_store_order_id]':order.id,
-     'payment_intent_data[metadata][stay_store_order_id]':order.id,
-     success_url:origin+'/store/receipt/'+order.receipt_token,
-     cancel_url:origin+'/store?canceled=1',
-     expires_at:String(expiry)
+   location=await prepareMercantileCheckout({
+     order,origin:returnOrigin(),live,stripe:stripeRequest,
+     attach:(orderId:string,sessionId:string)=>catalog<StoreOrder>('POST','/orders/'+orderId+'/checkout','guest',{stripe_session_id:sessionId})
    });
-   const session=await stripeRequest<{id:string;url:string}>('checkout/sessions',fields,'stay-mercantile-'+order.id);
-   if(!SESS.test(session.id)||session.id.startsWith('cs_live_')!==live)throw new Error('Checkout mode mismatch');
-   const u=new URL(session.url);
-   if(u.protocol!=='https:'||!['checkout.stripe.com','pay.publiclogic.org'].includes(u.hostname)||u.username||u.password||u.port)throw new Error('Invalid checkout URL');
-   await catalog<StoreOrder>('POST','/orders/'+order.id+'/checkout','guest',{stripe_session_id:session.id});
-   location=u.href;
  }catch{
    // No false success; a held order is released by Stripe expiry or PJ's lazy expiration.
    redirect('/store?error=unavailable');

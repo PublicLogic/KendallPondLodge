@@ -9,7 +9,7 @@ export type StoreOrder={
   id:string;product_id:string;request_key:string;receipt_token:string;
   quantity:number;price_cents:number;total_cents:number;
   status:'reserved'|'checkout'|'paid'|'fulfilled'|'expired'|'needs_review';
-  reserved_until:string;stripe_session_id:string|null;
+  created_at:string;reserved_until:string;stripe_session_id:string|null;
   paid_at:string|null;fulfilled_at:string|null;review_reason:string|null;
 };
 export type StoreRole='owner'|'guest'|'webhook';

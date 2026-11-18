@@ -2,7 +2,7 @@ name: Mercantile preview checks
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, feat/mercantile-firewood-live-link]
   push:
     branches: [feat/mercantile-firewood-live-link]
 
@@ -23,6 +23,8 @@ jobs:
       - run: npm ci
       - name: Core regression suite (including Mercantile Stripe signature checks)
         run: npm run test:core
+      - name: Checkout retry and signed webhook regressions
+        run: node --test tests/mercantile-checkout.test.mjs tests/mercantile-webhook.test.mjs
       - name: Production build
         run: npm run build
       - name: HTTP smoke — public store and owner auth gate
