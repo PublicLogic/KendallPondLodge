@@ -58,6 +58,7 @@ export default function HomePage() {
           <Link className="showcase-inline-link" href="/lodge">See inside the Lodge <span aria-hidden="true">→</span></Link>
           <p>Bring something from town back to the table. Our <Link href="/explore#farm-shop-supper">farm-shop supper guide</Link> pairs cheese from Winchendon with a chocolate stop in downtown Gardner.</p>
           <p className="guest-host-note"><strong>Hosted by Nate &amp; Allie.</strong> We own the Lodge and live nearby. If you want to know which bedroom works best for your group or what&apos;s available on the water during your dates, just ask.</p>
+          <address><a href="https://www.google.com/maps/search/?api=1&amp;query=42.562942%2C-72.019831">110 Kendall Pond West, Gardner, MA 01440</a></address>
           <a className="showcase-inline-link" href={hostContactHref()}>Ask us a question <span aria-hidden="true">↗</span></a>
         </div>
       </section>
