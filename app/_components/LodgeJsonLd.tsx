@@ -1,9 +1,15 @@
 // Structured data for the Lodge, rendered once in app/layout.tsx.
-// Street address and exact coordinates are left out on purpose.
+// Owner-approved street address and rooftop point matched to the Gardner listing.
 
-import { lodgePhotos } from "../_data/lodge-photos";
+import { lodgePhoto, lodgePhotos } from "../_data/lodge-photos";
 
 const SITE = "https://kendallpondlodge.com";
+
+const featuredOrders = [3, 1, 4, 5, 25, 17, 29, 2];
+const listingPhotos = [
+  ...featuredOrders.map(lodgePhoto),
+  ...lodgePhotos.filter(photo => !featuredOrders.includes(photo.order)),
+];
 
 const data = {
   "@context": "https://schema.org",
@@ -15,9 +21,12 @@ const data = {
   url: SITE,
   description:
     "The Lodge at Kendall Pond in Gardner, Massachusetts. Three bedrooms, private shoreline, dock, hot tub, and room for eight.",
-  image: lodgePhotos.map(photo => new URL(photo.src, SITE).href),
+  latitude: 42.562942,
+  longitude: -72.019831,
+  image: listingPhotos.map(photo => new URL(photo.src, SITE).href),
   address: {
     "@type": "PostalAddress",
+    streetAddress: "110 Kendall Pond West",
     addressLocality: "Gardner",
     addressRegion: "MA",
     postalCode: "01440",
