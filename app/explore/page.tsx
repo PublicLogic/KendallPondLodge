@@ -36,7 +36,7 @@ export default async function ExplorePage() {
           <p className={styles.eyebrow}>Gardner &amp; the Wachusett area</p>
           <h1 id="explore-title">A weekend in Gardner and at Wachusett Mountain.</h1>
           <p className={styles.openingIntro}>
-            Stay on Kendall Pond in Gardner for a weekend of local food, pond walks, and time on Wachusett Mountain in Princeton. Here are two ways to plan your days.
+            Stay on Kendall Pond in Gardner for a weekend of local food, pond walks, and time on Wachusett Mountain in Princeton. Choose a pond walk, a mountain day, or a farm-shop supper.
           </p>
           <nav className={styles.openingNav} aria-label="Explore this guide">
             <a href="#local-picks">Places</a>
@@ -59,8 +59,11 @@ export default async function ExplorePage() {
         <h3>A mountain morning, a pond evening</h3>
         <p>For a ski day, head to the ski area at 499 Mountain Road in Princeton. For a hike, use the state reservation’s trail map and check its seasonal road notices before leaving Gardner. Spend the evening back at the house, with a full kitchen and hot tub.</p>
         <p><a href="https://www.mass.gov/locations/wachusett-mountain-state-reservation">Wachusett hiking maps and road notices</a></p>
+        <h3 id="farm-shop-supper">A farm-shop supper on Kendall Pond</h3>
+        <p>Leave room in the cooler for a stop at <a href="https://smithscountrycheese.com/visit-the-farm/">Smith’s Country Cheese in Winchendon</a>. Pick a farmstead cheese for supper. If the cheesemakers are working, you can watch through the shop windows. For dessert, stop at <a href="https://www.priscillacandy.com/">Priscilla Candy Shop on Main Street in Gardner</a> and let everyone choose a chocolate for the box.</p>
+        <p>Back at the lodge, put the cheese on the kitchen counter while you cook. Take dessert down to the dock if the weather holds. Check each shop’s hours before setting out, especially for a midweek stay.</p>
         {rainyDay && (
-          <p>Rain in the forecast? Keep <a href={rainyDay.url}>{rainyDay.name}</a>{rainyDay.location ? ` in ${rainyDay.location}` : ""} in mind for the afternoon.</p>
+          <p>Rain in the forecast? Explore <a href={rainyDay.url}>{rainyDay.name}</a> for an indoor afternoon.</p>
         )}
         <Link href={bookingHref}>{bookingHref === "/book" ? "Check lodge availability for your weekend" : "See lodge rates"}</Link>
       </section>
