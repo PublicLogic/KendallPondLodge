@@ -1,17 +1,21 @@
 // Structured data for the Lodge, rendered once in app/layout.tsx.
 // Street address and exact coordinates are left out on purpose.
 
+import { lodgePhotos } from "../_data/lodge-photos";
+
 const SITE = "https://kendallpondlodge.com";
 
 const data = {
   "@context": "https://schema.org",
   "@type": "VacationRental",
   "@id": `${SITE}/#lodge`,
+  identifier: "kpl-gardner-001",
+  alternateName: "Kendall Pond Lodge",
   name: "The Lodge at Kendall Pond",
   url: SITE,
   description:
     "The Lodge at Kendall Pond in Gardner, Massachusetts. Three bedrooms, private shoreline, dock, hot tub, and room for eight.",
-  image: [`${SITE}/opengraph-image.png`],
+  image: lodgePhotos.map(photo => new URL(photo.src, SITE).href),
   address: {
     "@type": "PostalAddress",
     addressLocality: "Gardner",
@@ -39,7 +43,7 @@ export function LodgeJsonLd() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
     />
   );
 }
