@@ -27,14 +27,16 @@ export default async function ExplorePage() {
   const feed = await loadPjExplore();
   const bookingHref = directBookingEnabled() ? "/book" : "/rates";
 
+  const rainyDay = feed?.places.find(place => place.category === "rain");
+
   return (
     <main id="main-content" className={styles.page} data-curated-explore>
       <section className={styles.opening} aria-labelledby="explore-title">
         <div className={styles.openingCopy}>
           <p className={styles.eyebrow}>Gardner &amp; the Wachusett area</p>
-          <h1 id="explore-title">Worth leaving the dock for.</h1>
+          <h1 id="explore-title">A weekend in Gardner and at Wachusett Mountain.</h1>
           <p className={styles.openingIntro}>
-            Restaurants, farm shops, trails, and places worth knowing.
+            Stay on Kendall Pond in Gardner for a weekend of local food, pond walks, and time on Wachusett Mountain in Princeton. Here are two ways to plan your days.
           </p>
           <nav className={styles.openingNav} aria-label="Explore this guide">
             <a href="#local-picks">Places</a>
@@ -47,6 +49,20 @@ export default async function ExplorePage() {
             sizes="(max-width: 840px) 100vw, 46vw" />
           <figcaption>The Lodge waterfront in autumn.</figcaption>
         </figure>
+      </section>
+
+      <section className={styles.picks} aria-labelledby="weekend-plans">
+        <h2 id="weekend-plans">Plan your stay on Kendall Pond</h2>
+        <h3>Two ponds in one Gardner day</h3>
+        <p>Have breakfast overlooking Kendall Pond, then pack a picnic for Dunn State Park on Pearl Street. Walk beside Dunn Pond or bring a rod for the fishing piers. Save the last stop for home. From the lodge’s private dock, see how the light on Kendall Pond compares with the water you walked beside that morning.</p>
+        <a href="https://www.mass.gov/locations/dunn-state-park">Dunn State Park trails and visitor information</a>
+        <h3>A mountain morning, a pond evening</h3>
+        <p>For a ski day, head to the ski area at 499 Mountain Road in Princeton. For a hike, use the state reservation’s trail map and check its seasonal road notices before leaving Gardner. Spend the evening back at the house, with a full kitchen and hot tub.</p>
+        <p><a href="https://www.mass.gov/locations/wachusett-mountain-state-reservation">Wachusett hiking maps and road notices</a></p>
+        {rainyDay && (
+          <p>Rain in the forecast? Keep <a href={rainyDay.url}>{rainyDay.name}</a>{rainyDay.location ? ` in ${rainyDay.location}` : ""} in mind for the afternoon.</p>
+        )}
+        <Link href={bookingHref}>{bookingHref === "/book" ? "Check lodge availability for your weekend" : "See lodge rates"}</Link>
       </section>
 
       <section className={styles.picks} id="local-picks" aria-labelledby="picks-title">
