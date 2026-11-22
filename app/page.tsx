@@ -56,6 +56,7 @@ export default function HomePage() {
           <p className="showcase-eyebrow">The whole place</p><h2 id="house-story-title">From the kitchen to the shoreline.</h2>
           <p>There&apos;s room to be together without doing everything together: two living areas, a full kitchen, the upper deck, and the waterfront just beyond the lawn.</p>
           <Link className="showcase-inline-link" href="/lodge">See inside the Lodge <span aria-hidden="true">→</span></Link>
+          <p>Bring something from town back to the table. Our <Link href="/explore#farm-shop-supper">farm-shop supper guide</Link> pairs cheese from Winchendon with a chocolate stop in downtown Gardner.</p>
           <p className="guest-host-note"><strong>Hosted by Nate &amp; Allie.</strong> We own the Lodge and live nearby. If you want to know which bedroom works best for your group or what&apos;s available on the water during your dates, just ask.</p>
           <a className="showcase-inline-link" href={hostContactHref()}>Ask us a question <span aria-hidden="true">↗</span></a>
         </div>
@@ -67,7 +68,7 @@ export default function HomePage() {
         <div><p className="showcase-eyebrow">Hosted by Nate &amp; Allie</p><h2 id="showcase-close-title">We&apos;d love to host you.</h2>
           <p>{enabled ? "Check your dates and review the full price and terms before you pay." : "Find available nights and the full price on Airbnb."}</p></div>
         <div className="showcase-close-actions"><BookingAction enabled={enabled} className="showcase-button showcase-button-dark">{enabled ? "Check dates & price" : "View dates on Airbnb"}<span aria-hidden="true">↗</span></BookingAction>
-          <Link className="showcase-inline-link" href="/explore">Around Gardner &amp; Wachusett <span aria-hidden="true">→</span></Link></div>
+          <Link className="showcase-inline-link" href="/explore">Plan a Gardner or Wachusett weekend <span aria-hidden="true">→</span></Link></div>
       </section>
     </main>
   );
