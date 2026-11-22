@@ -27,7 +27,7 @@ const data = {
     "@type": "Accommodation",
     additionalType: "EntirePlace",
     numberOfBedrooms: 3,
-    occupancy: { "@type": "QuantitativeValue", maxValue: 8 },
+    occupancy: { "@type": "QuantitativeValue", value: 8 },
   },
   amenityFeature: [
     { "@type": "LocationFeatureSpecification", name: "Waterfront", value: true },
