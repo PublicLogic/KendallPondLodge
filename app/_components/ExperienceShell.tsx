@@ -127,7 +127,7 @@ function PublicFooter({ bookEnabled }: { bookEnabled: boolean }) {
       <div className="site-footer-brand">
         <Brand />
         <p>Private waterfront on Kendall Pond · Gardner, Massachusetts</p>
-        <p>Hosted by Nate &amp; Allie</p>
+        <p>Hosted by Nate &amp; Allie, founders of <a href="https://www.publiclogic.org/">PublicLogic</a>.</p>
       </div>
 
       <div className="hospitality-footer-right">
