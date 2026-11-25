@@ -36,7 +36,7 @@ export default async function ExplorePage() {
           <p className={styles.eyebrow}>Gardner &amp; the Wachusett area</p>
           <h1 id="explore-title">Worth leaving the dock for.</h1>
           <p className={styles.openingIntro}>
-            Pack a picnic for Dunn State Park, spend the morning on Wachusett Mountain, or bring farmstead cheese back to the lodge for supper. Here are our favorite stops around Gardner.
+            Pack a picnic for Dunn State Park, spend the morning on Wachusett Mountain, or bring farmstead cheese back to the lodge for supper. If you’re asking us where to start, those are our three picks. — Nate &amp; Allie
           </p>
           <nav className={styles.openingNav} aria-label="Explore this guide">
             <a href="#weekend-plans">Day trips</a>
@@ -55,7 +55,7 @@ export default async function ExplorePage() {
       <section className={styles.picks} aria-labelledby="weekend-plans">
         <h2 id="weekend-plans">Plan your stay on Kendall Pond</h2>
         <h3>Two ponds in one Gardner day</h3>
-        <p>Have breakfast overlooking Kendall Pond, then pack a picnic for Dunn State Park on Pearl Street. Walk beside Dunn Pond or bring a rod for the fishing piers. Save the last stop for home. From the lodge’s private dock, see how the light on Kendall Pond compares with the water you walked beside that morning.</p>
+        <p>Have breakfast overlooking Kendall Pond, then pack a picnic for Dunn State Park on Pearl Street. Walk beside Dunn Pond or bring a rod for the fishing piers. Save the last stop for home. Come back to Kendall Pond for the last part of the afternoon. The dock is a good spot to finish whatever’s left in the picnic basket.</p>
         <a href="https://www.mass.gov/locations/dunn-state-park">Dunn State Park trails and visitor information</a>
         <h3>A mountain morning, a pond evening</h3>
         <p>For a ski day, head to the ski area at 499 Mountain Road in Princeton. For a hike, use the state reservation’s trail map and check its seasonal road notices before leaving Gardner. Spend the evening back at the house, with a full kitchen and hot tub.</p>

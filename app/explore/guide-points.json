@@ -1,0 +1,70 @@
+{
+  "smiths-cheese": {
+    "lat": 42.61838,
+    "lng": -72.054737
+  },
+  "priscilla-candy": {
+    "lat": 42.575758,
+    "lng": -71.994876
+  },
+  "gardner-ale-house": {
+    "lat": 42.575776,
+    "lng": -71.997146
+  },
+  "red-apple-farm": {
+    "lat": 42.58161,
+    "lng": -72.145971
+  },
+  "wachusett-reservation": {
+    "lat": 42.492448,
+    "lng": -71.880059
+  },
+  "fitness-concepts": {
+    "lat": 42.563849,
+    "lng": -72.009781
+  },
+  "gardner-pacc": {
+    "lat": 42.56126,
+    "lng": -72.020518
+  },
+  "gardner-outlet-furniture": {
+    "lat": 42.558949,
+    "lng": -71.989122
+  },
+  "dunn-state-park": {
+    "lat": 42.579592,
+    "lng": -71.970487
+  },
+  "blue-moon-diner": {
+    "lat": 42.574153,
+    "lng": -71.994446
+  },
+  "cafe-edesia": {
+    "lat": 42.568133,
+    "lng": -71.983653
+  },
+  "sawa": {
+    "lat": 42.558888,
+    "lng": -71.989393
+  },
+  "fitchburg-art-museum": {
+    "lat": 42.586517,
+    "lng": -71.803616
+  },
+  "gardner-museum": {
+    "lat": 42.579596,
+    "lng": -71.985144
+  },
+  "gardner-cinemas": {
+    "lat": 42.559499,
+    "lng": -71.988676
+  },
+  "wachusett-ski": {
+    "lat": 42.502488,
+    "lng": -71.884681
+  },
+  "monument-park": {
+    "lat": 42.578559,
+    "lng": -71.99277
+  }
+}

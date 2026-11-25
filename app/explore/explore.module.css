@@ -913,3 +913,18 @@
   .photoPick h3 { font-size: clamp(1.05rem, 3.7vw, 1.3rem); }
   .photoPickArrow { right: 0; bottom: .8rem; font-size: .9rem; }
 }
+
+.atlas { display:grid; grid-template-columns:minmax(0, 2.6fr) minmax(190px, 1fr); background:#183f35; }
+.chart { position:relative; aspect-ratio: 5 / 3; background-size:100% 100%; }
+.chart .mapDot { min-width:32px; min-height:32px; box-shadow:0 1px 5px #142c2577; }
+.chart .mapDot[aria-pressed=true] { background:#863f1e; outline:2px solid white; }
+.stop { padding:clamp(1rem,3vw,3rem); align-self:center; color:#fff9ea; }
+.stop h3 { color:inherit; font: 1.8rem/1.05 Georgia,serif; margin:.55rem 0; }
+.stop p { color:#e3ebe2; margin:.6rem 0 1rem; line-height:1.5; }
+.stop a { color:white; text-underline-offset:.25em; }
+.mapModes { display:flex; flex-wrap:wrap; gap:.3rem; }
+.mapModes button { padding:.55rem .75rem; border:1px solid #597567; border-radius:20px; background:#fffdf4; color:#214435; cursor:pointer; }
+.mapModes button[aria-pressed=true] { background:#214435; color:white; }
+.mapHeader { flex-wrap:wrap; gap:.65rem; }
+.photoPickDetails p { margin:.5rem 0 0; color:#425747; font-size:.9rem; line-height:1.5; }
+@media(max-width:700px){ .atlas{grid-template-columns:1fr;} .stop{padding:1rem;} .stop h3{font-size:1.45rem;} .chart{min-height:220px;} }
