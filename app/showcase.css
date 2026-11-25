@@ -1029,3 +1029,18 @@
     scroll-behavior: auto !important;
   }
 }
+
+.hospitality-footer .footer-shelf-shop {
+  display: grid;
+  gap: .35rem;
+  justify-self: stretch;
+  margin-bottom: .9rem;
+  padding: .9rem 1rem;
+  border: 1px solid #90aa99;
+  border-radius: .5rem;
+  color: #fff;
+  text-decoration: none;
+}
+.footer-shelf-shop strong { display: flex; justify-content: space-between; gap: 1rem; }
+.footer-shelf-shop > span { color: #d0e0d7; font-size: .84rem; }
+.footer-shelf-shop:hover, .footer-shelf-shop:focus-visible { background: #345345; }
