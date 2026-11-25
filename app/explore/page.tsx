@@ -34,11 +34,12 @@ export default async function ExplorePage() {
       <section className={styles.opening} aria-labelledby="explore-title">
         <div className={styles.openingCopy}>
           <p className={styles.eyebrow}>Gardner &amp; the Wachusett area</p>
-          <h1 id="explore-title">A weekend in Gardner and at Wachusett Mountain.</h1>
+          <h1 id="explore-title">Worth leaving the dock for.</h1>
           <p className={styles.openingIntro}>
-            Stay on Kendall Pond in Gardner for a weekend of local food, pond walks, and time on Wachusett Mountain in Princeton. Choose a pond walk, a mountain day, or a farm-shop supper.
+            Pack a picnic for Dunn State Park, spend the morning on Wachusett Mountain, or bring farmstead cheese back to the lodge for supper. Here are our favorite stops around Gardner.
           </p>
           <nav className={styles.openingNav} aria-label="Explore this guide">
+            <a href="#weekend-plans">Day trips</a>
             <a href="#local-picks">Places</a>
             <a href="#train">Train</a>
             <a href="#city-events">Events</a>
@@ -110,10 +111,11 @@ export default async function ExplorePage() {
           <p className={styles.eyebrow}>Or don&apos;t go anywhere</p>
           <h2 id="back-title">Or bring dinner back.</h2>
           <p>
-            The kitchen&apos;s ready, the deck is just outside, and you don&apos;t need another plan.
+            Cook at the lodge, then take dessert out to the deck. If you’re settling in by the firepit, you can pick up a bundle of wood at the house.
           </p>
           <div className={styles.backLinks}>
             <Link href={bookingHref}>Check your dates <span aria-hidden="true">↗</span></Link>
+            <Link href="/store#firewood">Shelf Shop firewood <span aria-hidden="true">→</span></Link>
             <Link href="/lodge">See the house <span aria-hidden="true">→</span></Link>
             <Link href="/area">Getting here <span aria-hidden="true">→</span></Link>
           </div>
