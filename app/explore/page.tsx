@@ -36,11 +36,11 @@ export default async function ExplorePage() {
           <p className={styles.eyebrow}>Gardner &amp; the Wachusett area</p>
           <h1 id="explore-title">Worth leaving the dock for.</h1>
           <p className={styles.openingIntro}>
-            Pack a picnic for Dunn State Park, spend the morning on Wachusett Mountain, or bring farmstead cheese back to the lodge for supper. If you’re asking us where to start, those are our three picks. — Nate &amp; Allie
+            For a short walk, we’d head to Dunn Pond. If you’ve got the morning, take the trails at Wachusett. On the way back, pick up something for supper.
           </p>
           <nav className={styles.openingNav} aria-label="Explore this guide">
+            <a href="#local-picks">Map &amp; places</a>
             <a href="#weekend-plans">Day trips</a>
-            <a href="#local-picks">Places</a>
             <a href="#train">Train</a>
             <a href="#city-events">Events</a>
           </nav>
@@ -52,10 +52,20 @@ export default async function ExplorePage() {
         </figure>
       </section>
 
+      <section className={styles.picks} id="local-picks" aria-labelledby="picks-title">
+        <header className={styles.sectionHeader}>
+          <div>
+            <p className={styles.eyebrow}>Gardner and North Central Massachusetts</p>
+            <h2 id="picks-title">Local favorites.</h2>
+          </div>
+        </header>
+        <ExploreDirectory places={feed?.places ?? []} />
+      </section>
+
       <section className={styles.picks} aria-labelledby="weekend-plans">
         <h2 id="weekend-plans">Plan your stay on Kendall Pond</h2>
         <h3>Two ponds in one Gardner day</h3>
-        <p>Have breakfast overlooking Kendall Pond, then pack a picnic for Dunn State Park on Pearl Street. Walk beside Dunn Pond or bring a rod for the fishing piers. Save the last stop for home. Come back to Kendall Pond for the last part of the afternoon. The dock is a good spot to finish whatever’s left in the picnic basket.</p>
+        <p>Have breakfast overlooking Kendall Pond, then pack a picnic for Dunn State Park on Pearl Street. Walk beside Dunn Pond or bring a rod for the fishing piers. Back at the house, take the rest of your picnic down to the dock.</p>
         <a href="https://www.mass.gov/locations/dunn-state-park">Dunn State Park trails and visitor information</a>
         <h3>A mountain morning, a pond evening</h3>
         <p>For a ski day, head to the ski area at 499 Mountain Road in Princeton. For a hike, use the state reservation’s trail map and check its seasonal road notices before leaving Gardner. Spend the evening back at the house, with a full kitchen and hot tub.</p>
@@ -67,16 +77,6 @@ export default async function ExplorePage() {
           <p>Rain in the forecast? Explore <a href={rainyDay.url}>{rainyDay.name}</a> for an indoor afternoon.</p>
         )}
         <Link href={bookingHref}>{bookingHref === "/book" ? "Check lodge availability for your weekend" : "See lodge rates"}</Link>
-      </section>
-
-      <section className={styles.picks} id="local-picks" aria-labelledby="picks-title">
-        <header className={styles.sectionHeader}>
-          <div>
-            <p className={styles.eyebrow}>Gardner and North Central Massachusetts</p>
-            <h2 id="picks-title">Local favorites.</h2>
-          </div>
-        </header>
-        <ExploreDirectory places={feed?.places ?? []} />
       </section>
 
       <WachusettRail transit={feed?.transit ?? null} />
@@ -108,8 +108,8 @@ export default async function ExplorePage() {
           <Image src={deckPhoto.src} alt={deckPhoto.alt} fill sizes="(max-width: 840px) 100vw, 47vw" />
         </div>
         <div className={styles.backCopy}>
-          <p className={styles.eyebrow}>Or don&apos;t go anywhere</p>
-          <h2 id="back-title">Or bring dinner back.</h2>
+          <p className={styles.eyebrow}>Back at the lodge</p>
+          <h2 id="back-title">Dinner on the deck.</h2>
           <p>
             Cook at the lodge, then take dessert out to the deck. If you’re settling in by the firepit, you can pick up a bundle of wood at the house.
           </p>

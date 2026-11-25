@@ -928,3 +928,27 @@
 .mapHeader { flex-wrap:wrap; gap:.65rem; }
 .photoPickDetails p { margin:.5rem 0 0; color:#425747; font-size:.9rem; line-height:1.5; }
 @media(max-width:700px){ .atlas{grid-template-columns:1fr;} .stop{padding:1rem;} .stop h3{font-size:1.45rem;} .chart{min-height:220px;} }
+
+.housePin {
+  position:absolute; z-index:4; transform:translate(-50%,calc(-100% - 6px));
+  width:66px; padding:3px; border:0; border-radius:4px; background:#fffaf0;
+  color:#193f32; box-shadow:0 2px 7px #22332a66; cursor:pointer;
+}
+.housePin::after {
+  content:""; position:absolute; left:50%; bottom:-6px; transform:translateX(-50%);
+  border:7px solid transparent; border-top-color:#fffaf0; border-bottom:0;
+}
+.housePin img { display:block; width:100%; height:38px; object-fit:cover; border-radius:2px; }
+.housePin span { display:block; padding:2px 0 0; font:600 11px/1.2 Georgia,serif; }
+.housePin:focus-visible,.chart .mapDot:focus-visible { outline:3px solid #823e14; outline-offset:3px; z-index:5; }
+.atlas { background:#f6f2e9; border:1px solid #c4c9bc; }
+.stop { color:#213f34; padding:1rem 1.15rem 1.3rem; align-self:stretch; }
+.stopPhoto { width:100%; aspect-ratio:1.85; background-position:center; background-size:cover; margin-bottom:1rem; }
+.stop p { color:#405348; }
+.stop a { color:#214435; }
+@media(max-width:700px){
+  .stop { display:flow-root; }
+  .stopPhoto { float:right; width:27%; aspect-ratio:1; margin:0 0 .3rem .8rem; }
+  .housePin { width:52px; }
+  .housePin img { height:30px; }
+}
