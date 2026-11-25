@@ -36,11 +36,12 @@ export default async function ExplorePage() {
           <p className={styles.eyebrow}>Gardner &amp; the Wachusett area</p>
           <h1 id="explore-title">Worth leaving the dock for.</h1>
           <p className={styles.openingIntro}>
-            For a short walk, we’d head to Dunn Pond. If you’ve got the morning, take the trails at Wachusett. On the way back, pick up something for supper.
+            The cheese is made in Winchendon. The chocolates come from Main Street in Gardner. On Parker Street, there’s a brewery worth making dinner plans around. These are a few of the places we’d like you to know during your stay.
           </p>
           <nav className={styles.openingNav} aria-label="Explore this guide">
             <a href="#local-picks">Map &amp; places</a>
-            <a href="#weekend-plans">Day trips</a>
+            <a href="#weekend-plans">Local makers</a>
+            <a href="#gatherings">Plan a gathering</a>
             <a href="#train">Train</a>
             <a href="#city-events">Events</a>
           </nav>
@@ -63,18 +64,15 @@ export default async function ExplorePage() {
       </section>
 
       <section className={styles.picks} aria-labelledby="weekend-plans">
-        <h2 id="weekend-plans">Plan your stay on Kendall Pond</h2>
-        <h3>Two ponds in one Gardner day</h3>
-        <p>Have breakfast overlooking Kendall Pond, then pack a picnic for Dunn State Park on Pearl Street. Walk beside Dunn Pond or bring a rod for the fishing piers. Back at the house, take the rest of your picnic down to the dock.</p>
-        <a href="https://www.mass.gov/locations/dunn-state-park">Dunn State Park trails and visitor information</a>
-        <h3>A mountain morning, a pond evening</h3>
-        <p>For a ski day, head to the ski area at 499 Mountain Road in Princeton. For a hike, use the state reservation’s trail map and check its seasonal road notices before leaving Gardner. Spend the evening back at the house, with a full kitchen and hot tub.</p>
-        <p><a href="https://www.mass.gov/locations/wachusett-mountain-state-reservation">Wachusett hiking maps and road notices</a></p>
-        <h3 id="farm-shop-supper">A farm-shop supper on Kendall Pond</h3>
-        <p>Leave room in the cooler for a stop at <a href="https://smithscountrycheese.com/visit-the-farm/">Smith’s Country Cheese in Winchendon</a>. Pick a farmstead cheese for supper. If the cheesemakers are working, you can watch through the shop windows. For dessert, stop at <a href="https://www.priscillacandy.com/">Priscilla Candy Shop on Main Street in Gardner</a> and let everyone choose a chocolate for the box.</p>
-        <p>Back at the lodge, put the cheese on the kitchen counter while you cook. Take dessert down to the dock if the weather holds. Check each shop’s hours before setting out, especially for a midweek stay.</p>
+        <h2 id="weekend-plans">Made here</h2>
+        <h3 id="farm-shop-supper">Smith’s Country Cheese, Winchendon</h3>
+        <p>The shop at Smith’s has a window into the cheesemaking room. If you catch the crew at work, you can see how the cheese on the counter is made. It’s a stop we recommend to anyone interested in the farms of North Central Massachusetts.</p>
+        <a href="https://smithscountrycheese.com/visit-the-farm/">Visit the farm and country shop</a>
+        <h3>Priscilla Candy Shop, Gardner</h3>
+        <p>Charlie Stephano founded Priscilla Candy Shop in Gardner in 1936. His French Roll is still on the counter at 4 Main Street. It has a soft chocolate center dipped in milk chocolate and rolled in roasted cashews. If you’re bringing a gift to someone in town, this is where we’d start.</p>
+        <a href="https://www.priscillacandy.com/">Explore Priscilla’s chocolates</a>
         {rainyDay && (
-          <p>Rain in the forecast? Explore <a href={rainyDay.url}>{rainyDay.name}</a> for an indoor afternoon.</p>
+          <p>Also on the local arts and indoor guide: <a href={rainyDay.url}>{rainyDay.name}</a>.</p>
         )}
         <Link href={bookingHref}>{bookingHref === "/book" ? "Check lodge availability for your weekend" : "See lodge rates"}</Link>
       </section>
@@ -103,21 +101,21 @@ export default async function ExplorePage() {
         </div>
       </section>
 
-      <section className={styles.back} aria-labelledby="back-title">
+      <section id="gatherings" className={styles.back} aria-labelledby="back-title">
         <div className={styles.backPhoto}>
           <Image src={deckPhoto.src} alt={deckPhoto.alt} fill sizes="(max-width: 840px) 100vw, 47vw" />
         </div>
         <div className={styles.backCopy}>
-          <p className={styles.eyebrow}>Back at the lodge</p>
-          <h2 id="back-title">Dinner on the deck.</h2>
-          <p>
-            Cook at the lodge, then take dessert out to the deck. If you’re settling in by the firepit, you can pick up a bundle of wood at the house.
-          </p>
+          <p className={styles.eyebrow}>Gatherings in North Central Massachusetts</p>
+          <h2 id="back-title">Bring your people to Gardner.</h2>
+          <p>If you’re coming for a birthday, reunion, wedding weekend or team retreat, we can help with the pieces you need. Stay at <Link href="/lodge">the lodge</Link> and ask us for an introduction to a local restaurant, business or function hall for the gathering itself.</p>
+          <p>One place we’d show you is the <a href="https://www.gardnerpacc.com/">Gardner PACC</a>, right on Kendall Pond. Its banquet hall hosts receptions and reunions, and its pavilion is an option for a seasonal outing.</p>
+          <p>For a larger event, we can also work with you through PublicLogic on venue outreach, a schedule and day-of coordination. Send us your dates, approximate headcount and what you have in mind. We’ll help you figure out whom to call first.</p>
           <div className={styles.backLinks}>
-            <Link href={bookingHref}>Check your dates <span aria-hidden="true">↗</span></Link>
-            <Link href="/store#firewood">Shelf Shop firewood <span aria-hidden="true">→</span></Link>
-            <Link href="/lodge">See the house <span aria-hidden="true">→</span></Link>
-            <Link href="/area">Getting here <span aria-hidden="true">→</span></Link>
+            <a href="mailto:info@publiclogic.org?subject=Kendall%20Pond%20event%20inquiry">Ask Nate &amp; Allie about your gathering →</a>
+            <a href="https://www.visitnorthcentral.com/meetings-events/">Browse the regional venue guide ↗</a>
+            <Link href={bookingHref}>Check your dates →</Link>
+            <Link href="/area">Getting to Gardner →</Link>
           </div>
         </div>
       </section>
