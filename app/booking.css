@@ -653,6 +653,16 @@
   color:#435854;
 }
 
+.stay-guest-pricing{
+  grid-column:1 / -1;
+}
+
+.stay-guest-pricing output{
+  display:block;
+  color:#23483f;
+  font-weight:600;
+}
+
 .stay-submit-row{
   padding-top:.15rem;
 }
