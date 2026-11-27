@@ -404,6 +404,7 @@
 .backLinks { display: flex; flex-wrap: wrap; gap: .35rem 1.4rem; margin-top: 1.6rem; }
 .backLinks a { display: inline-flex; gap: .65rem; align-items: center; justify-content: space-between; min-height: 44px; border-bottom: 1px solid #99b0a0; color: #fff9ee; text-decoration: none; font-size: .79rem; font-weight: 675; }
 .backLinks a:first-child { min-height: 49px; padding: .7rem 1.05rem; border: 1px solid #f5ecd9; border-radius: 6px; background: #f5ecd9; color: #213f32; }
+.backCopy p a { color: inherit; text-decoration: underline; }
 .backLinks a:first-child:hover { background: #e9d9b5; }
 .backLinks a:not(:first-child):hover { border-color: #fff9ee; }
 

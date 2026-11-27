@@ -2,7 +2,7 @@
 
 This repository contains the KPL Next.js website and its direct-booking interface. The public site is hosted by Vercel project `kpl` at `https://kendallpondlodge.com`.
 
-The booking flow is **guest request → owner’s itemized quote → verified Airbnb block → owner sends quote → Stripe deposit → verified confirmation**. Guests need no account. A request does not reserve dates, and Checkout collects the quoted deposit only.
+Guests can book directly without an account. On `/book` they choose dates and party size. KPL checks availability and the property's instant-booking settings with PuddleJumper, then shows the itemized price, deposit and terms on a private quote page. Stripe collects the quoted deposit. PJ records the reservation after payment is verified. If direct booking is unavailable, the guest can continue to the lodge's Airbnb listing.
 
 ## Working on the site
 
@@ -14,6 +14,8 @@ npm run test:core
 npm run build
 npm run dev
 ```
+
+With Playwright installed in the QA environment, run `BASE_URL=<rehearsal-origin> CHECK_IN=<YYYY-MM-DD> node scripts/verify-guest-pricing.mjs` against two available nights in the displayed month. It checks the visible guest fees at four screen widths without submitting the form.
 
 Read [the public copy and brand standard](docs/PUBLIC-SITE-VOICE.md) before changing guest pages. Keep real property photographs and approved brand placement. Cloudflare/Sites scripts are retained for their existing purpose; Vercel is the public deployment target.
 
@@ -27,7 +29,9 @@ Every quote has exact amounts for the nightly rate, fees, taxes and deposit, plu
 
 Initial request retries carry a stable `request_key`. The matching backend implementation must be deployed to make duplicate creation and message suppression durable. A pending button alone is not that guarantee; see the [adapter contract](docs/PJ-ADAPTER.md) and [release verification](docs/NOV1-RELEASE-VERIFICATION.md).
 
-## Owner workflow
+## Owner-issued quotes
+
+Owners can also manage existing requests and manually issued quotes. The following steps apply when the owner prepares and sends a quote.
 
 1. Review the request while its dates are still free.
 2. Enter and issue the exact itemized quote and terms.

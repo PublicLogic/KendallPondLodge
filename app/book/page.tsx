@@ -16,6 +16,7 @@ import {
   nightsBetween,
   propertyToday,
 } from '@/lib/booking.mjs';
+import { instantBookingAvailable } from '@/lib/direct-pricing.mjs';
 
 import { requestStay } from './actions';
 import { StayRequestForm } from './StayRequestForm';
@@ -49,18 +50,19 @@ export default async function BookPage({
   let instant = false;
   if (enabled) {
     try {
-      instant = (await bookingClient().instantSettings())?.enabled === true;
+      instant = instantBookingAvailable(await bookingClient().instantSettings());
     } catch {
       instant = false;
     }
   }
-  const bookable = enabled && instant;
+  const unavailableAtSubmit = status === 'unavailable';
+  const bookable = enabled && instant && !unavailableAtSubmit;
   const today = propertyToday();
 
   const unavailable = new Set<string>();
-  let availabilityReady = enabled;
+  let availabilityReady = bookable;
 
-  if (enabled) {
+  if (bookable) {
     try {
       const ics = await fetchAirbnbIcs({ fresh: true });
 
@@ -109,11 +111,7 @@ export default async function BookPage({
           <p className={styles.lede}>
             {readyToBook
               ? "Choose your dates and guests. You’ll see the total before paying."
-              : !enabled
-                ? "We're not taking direct bookings right now. Airbnb has the available nights and checkout."
-                : !instant
-                  ? "We're finishing our direct booking setup. For now, Airbnb has the current calendar and checkout."
-                  : "We can't verify the direct calendar right now. You can still check dates on Airbnb."}
+              : "Airbnb has the Lodge’s calendar, prices and checkout."}
           </p>
 
           <p className={styles.hostNote}>The Lodge at Kendall Pond<br />3 bedrooms · 2 baths · Up to 8 guests<br />Hosted by Nate &amp; Allie</p>
@@ -122,15 +120,11 @@ export default async function BookPage({
         <section className={"booking-panel booking-panel-direct " + styles.panel} aria-labelledby="booking-form-heading">
           <div className={styles.panelHeading}>
             <p className={styles.panelEyebrow}>{readyToBook ? "Check availability" : "Reservations"}</p>
-            <h2 id="booking-form-heading">{readyToBook ? "Dates and guests" : "Booking options."}</h2>
-            <p>
-              {readyToBook
-                ? "Select your arrival and departure dates."
-                : "Direct booking isn't available here at the moment. You can still check current dates and pricing on Airbnb."}
-            </p>
+            <h2 id="booking-form-heading">{readyToBook ? "Dates and guests" : "Booking options"}</h2>
+            {readyToBook && <p>Select your arrival and departure dates.</p>}
           </div>
 
-          {status && status !== 'received' && (!enabled || !availabilityReady) && (
+          {status && status !== 'received' && !unavailableAtSubmit && !readyToBook && (
             <p className="booking-alert" role="alert">
               {publicError(status)}
             </p>
@@ -139,9 +133,9 @@ export default async function BookPage({
           {!bookable ? (
             <div className={styles.fallback}>
               <p className="booking-alert" role="status">
-                {enabled
-                  ? 'Direct reservations aren’t open here yet. You can book through Airbnb for now.'
-                  : 'Direct reservations are paused. You can book through Airbnb for now.'}
+                {unavailableAtSubmit
+                  ? 'We couldn’t confirm a direct price for this stay.'
+                  : 'Direct booking is unavailable right now.'}
               </p>
               <a className={styles.fallbackButton} href={airbnb} target="_blank" rel="noopener noreferrer">
                 Check dates on Airbnb <span aria-hidden="true">↗</span>

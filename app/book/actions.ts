@@ -18,7 +18,9 @@ import {
 } from '@/lib/airbnb-ical.mjs';
 
 import { nightsBetween, stayNights } from '@/lib/booking.mjs';
+import { instantBookingAvailable } from '@/lib/direct-pricing.mjs';
 import { guestPriceBreakdown } from '@/lib/guest-price-breakdown.mjs';
+import { UUID } from '@/lib/pj-booking-client.mjs';
 
 import { stripeRequest } from '@/lib/booking-stripe';
 
@@ -31,6 +33,27 @@ const BLOCKING_DIRECT_STATUSES = new Set([
   'checkout',
   'confirmed',
 ]);
+
+const REQUEST_ERRORS_WITH_GUEST_GUIDANCE = new Set([
+  'calendar_conflict',
+  'overlaps_reservation',
+  'overlapping_active_stay',
+  'invalid_request',
+  'idempotency_conflict',
+  'rate_limited',
+]);
+
+function responseUuid(value: unknown): string {
+  if (typeof value !== 'string' || !UUID.test(value)) {
+    throw new BookingServiceError(503, 'invalid_response');
+  }
+  return value;
+}
+
+function logQuoteEmailFailure(error: unknown) {
+  const code = error instanceof BookingServiceError ? error.code : 'message_unavailable';
+  console.error('Booking link email deferred:', code);
+}
 
 function directStayOverlap(
   wanted: string[],
@@ -122,38 +145,22 @@ export async function requestStay(form: FormData) {
       );
     }
 
-    const created = await client.createRequest(input);
-
-    try {
-      const instant = await client.instantSettings();
-      if (instant?.enabled === true) {
-        const priced = await client.autoPrice(created.id);
-        if (priced?.quote_token) {
-          // The browser moves to the price/payment page immediately. Email is
-          // a recovery copy of the same private payment link, never a gate.
-          after(async () => {
-            try {
-              await client.sendQuote(created.id);
-            } catch (emailError) {
-              const emailCode =
-                emailError instanceof BookingServiceError
-                  ? emailError.code
-                  : 'message_unavailable';
-              console.error('Booking link email deferred:', emailCode);
-            }
-          });
-
-          return {
-            received: true as const,
-            instant_path: `/book/quote/${priced.quote_token}`,
-          };
-        }
-      }
-    } catch (error) {
-      if (!(error instanceof BookingServiceError && error.status === 404)) {
-        throw error;
-      }
+    if (!instantBookingAvailable(await client.instantSettings())) {
+      throw new BookingServiceError(503, 'unavailable');
     }
+
+    const created = await client.createRequest(input);
+    const id = responseUuid(created?.id);
+    const priced = await client.autoPrice(id);
+    const token = responseUuid(priced?.quote_token);
+
+    // The email is a recovery copy of the private link returned to the guest.
+    try {
+      after(() => client.sendQuote(id).catch(logQuoteEmailFailure));
+    } catch (error) {
+      logQuoteEmailFailure(error);
+    }
+    return { received: true as const, instant_path: `/book/quote/${token}` };
   } catch (error) {
     const code =
       error instanceof BookingServiceError
@@ -163,14 +170,9 @@ export async function requestStay(form: FormData) {
     // Never guest fields, calendar URL, token, key or provider body.
     console.error('Booking request failed:', code);
 
-    redirect(
-      `/book?status=${encodeURIComponent(code)}`,
-    );
+    const status = REQUEST_ERRORS_WITH_GUEST_GUIDANCE.has(code) ? code : 'unavailable';
+    redirect(`/book?status=${encodeURIComponent(status)}`);
   }
-
-  // This acknowledgement is tied to the awaited submission. A stale receipt
-  // URL must never clear a newer, ambiguous request's browser retry identity.
-  return { received: true as const };
 }
 
 export async function payDeposit(form: FormData) {

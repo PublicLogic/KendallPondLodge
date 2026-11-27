@@ -476,6 +476,7 @@
 }
 .hospitality-footer .site-footer-brand { display: grid; gap: .25rem; justify-items: start; }
 .hospitality-footer .site-footer-brand p { color: #d0e0d7; font-size: .82rem; }
+.hospitality-footer .site-footer-brand p a { color: inherit; text-decoration: underline; }
 .hospitality-footer .kpl-brand-lockup { filter: brightness(0) invert(1); }
 .hospitality-footer-right { justify-items: end; align-content: center; }
 .hospitality-footer .footer-links { justify-content: end; gap: .9rem 1.4rem; }

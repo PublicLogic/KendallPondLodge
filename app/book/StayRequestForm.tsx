@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useMemo, useRef, useState } from 'react';
 import { useFormStatus } from 'react-dom';
+import { EXTRA_GUEST_NIGHTLY_CENTS, INCLUDED_GUESTS, extraGuestNightly } from '@/lib/direct-pricing.mjs';
 import { clearGuestRequestKey, createGuestRequestKeyManager } from '@/lib/guest-request-key.mjs';
 
 type ServerAction = (formData: FormData) => Promise<{ received: true; instant_path?: string }>;
@@ -22,6 +23,7 @@ type Month = {
 };
 
 const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const dollars = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
 
 export function StayRequestReceipt({ onNewRequest }: { onNewRequest?: () => void }) {
   return (
@@ -305,6 +307,7 @@ export function StayRequestForm({
 
   const [checkIn, setCheckIn] = useState<string | null>(null);
   const [checkOut, setCheckOut] = useState<string | null>(null);
+  const [guests, setGuests] = useState<number | null>(INCLUDED_GUESTS);
   const [hover, setHover] = useState<string | null>(null);
   const [received, setReceived] = useState(false);
   const [viewMonth, setViewMonth] = useState<Month>(
@@ -399,6 +402,7 @@ export function StayRequestForm({
   if (received) {
     return <StayRequestReceipt onNewRequest={() => {
       clearDates();
+      setGuests(INCLUDED_GUESTS);
       setReceived(false);
     }} />;
   }
@@ -534,10 +538,12 @@ export function StayRequestForm({
         <label>
           Guests
           <input
-            defaultValue="2"
+            aria-describedby="guest-pricing"
+            defaultValue={INCLUDED_GUESTS}
             max="8"
             min="1"
             name="guests"
+            onChange={({ currentTarget }) => setGuests(currentTarget.validity.valid ? currentTarget.valueAsNumber : null)}
             required
             type="number"
           />
@@ -554,6 +560,14 @@ export function StayRequestForm({
             type="number"
           />
         </label>
+
+        <div className="booking-fine stay-guest-pricing" id="guest-pricing">
+          The rate includes {INCLUDED_GUESTS} guests. Each additional guest is {dollars.format(EXTRA_GUEST_NIGHTLY_CENTS / 100)} per night.
+          <output aria-live="polite" aria-atomic="true">
+            {availabilityReady && nights > 0 && guests !== null &&
+              `Your lodging price includes ${dollars.format(extraGuestNightly(guests) * nights / 100)} for additional guests over ${nights} ${nights === 1 ? 'night' : 'nights'}, before tax.`}
+          </output>
+        </div>
 
         <label>
           Name
@@ -605,8 +619,6 @@ export function StayRequestForm({
           <span>Nate or Allie may contact me about this request.</span>
         </label>
       )}
-      <p className="booking-fine">Two guests included. Each additional guest is $128.70 per night.</p>
-
       <RequestSubmit ready={availabilityReady && !!checkIn && !!checkOut} nights={nights} instant={instant} />
     </form>
   );
