@@ -7,7 +7,7 @@ const base = process.env.BASE_URL || 'http://127.0.0.1:3000';
 const output = process.env.QA_OUTPUT || '/tmp/kpl-pond-header';
 (async () => {
   fs.mkdirSync(output, { recursive: true });
-  const browser = await chromium.launch({ args: ['--no-sandbox'] });
+  const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH, args: ['--no-sandbox'] });
   const report = [];
   try {
     for (const width of [320, 390, 768, 1024, 1440, 1920]) {
@@ -26,13 +26,13 @@ const output = process.env.QA_OUTPUT || '/tmp/kpl-pond-header';
         const copy = document.querySelector('[data-pond-copy]').getBoundingClientRect();
         const photos = document.querySelector('[data-pond-photos]').getBoundingClientRect();
         const lead = document.querySelector('[data-pond-photo="0"]').getBoundingClientRect();
-        const detail = document.querySelector('[data-pond-photo="1"]').getBoundingClientRect();
-        return { overflow: document.documentElement.scrollWidth > innerWidth, sideBySide: copy.right <= photos.left + 1, stacked: copy.bottom <= photos.top + 1, leadWidth: lead.width, detailWidth: detail.width, imageCount: document.querySelectorAll('[data-pond-photos] img').length, h1Count: document.querySelectorAll('h1').length };
+        return { headerClear: copy.top >= document.querySelector('header.hospitality-header').getBoundingClientRect().bottom, overflow: document.documentElement.scrollWidth > innerWidth, sideBySide: copy.right <= photos.left + 1, stacked: copy.bottom <= photos.top + 1, leadWidth: lead.width, imageCount: document.querySelectorAll('[data-pond-photos] img').length, h1Count: document.querySelectorAll('h1').length };
       });
       assert.equal(geometry.overflow, false);
-      assert.equal(geometry.imageCount, 3);
+      assert.ok(geometry.headerClear, JSON.stringify({ width, ...geometry }));
+      assert.equal(geometry.imageCount, 4);
       assert.equal(geometry.h1Count, 1);
-      assert.ok(geometry.leadWidth > geometry.detailWidth * 1.8);
+      assert.ok(geometry.leadWidth > 200);
       assert.ok(width > 800 ? geometry.sideBySide : geometry.stacked);
       const primary = page.locator('[data-pond-copy] a').first();
       const target = await primary.getAttribute('href');
@@ -56,7 +56,11 @@ const output = process.env.QA_OUTPUT || '/tmp/kpl-pond-header';
     const page = await noJs.newPage();
     await page.goto(base, { waitUntil: 'load' });
     assert.equal(await page.locator('[data-pond-header] h1').textContent(), 'Down by the pond.');
-    assert.equal(await page.locator('[data-pond-photos] a').count(), 3);
+    for (const index of [0, 1, 2, 3]) {
+      await page.locator('[name="kpl-hero-photo"]').nth(index).locator('..').click();
+      assert.equal(await page.locator('[data-pond-photo]:visible').count(), 1);
+      assert.ok(await page.locator('[data-pond-photo]').nth(index).isVisible());
+    }
     await noJs.close();
     fs.writeFileSync(`${output}/audit.json`, JSON.stringify({ report, noJavaScriptPassed: true }, null, 2));
     console.log(JSON.stringify({ headerWidths: report.length, noJavaScriptPassed: true, failures: report.filter(row => row.overflow || row.violations.length || row.errors.length) }));

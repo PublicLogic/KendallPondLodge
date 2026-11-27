@@ -28,7 +28,8 @@ test('the static collage uses existing property photos and keeps both booking pa
   assert.match(home, /lodgePhoto\(4\)/);
   assert.match(home, /const house = lodgePhoto\(7\)/);
   assert.doesNotMatch(home + hero, /<iframe/);
-  for (const n of [0, 1, 2]) assert.ok(hero.includes('scenes[' + n + ']'));
+  assert.match(hero, /scenes\.map/);
+  assert.match(home, /const heroScenes = \[\s*\{ \.\.\.lodgePhoto\(1\)/);
   assert.match(hero, /priority=\{index === 0\}/);
   assert.match(hero, /alt=\{scene.alt\}/);
   assert.match(hero, /href="\/book"/);

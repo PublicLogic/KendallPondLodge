@@ -67,6 +67,7 @@ function PublicHeader({
       <header className={[
         "experience-header experience-header-booking hospitality-header",
         hasPhotoOpening ? "hospitality-header-immersive" : "",
+        onHome ? "lodge-home-header" : "",
         hasPhotoOpening && pastHero ? "hospitality-header-scrolled" : "",
       ].filter(Boolean).join(" ")}>
         <div className="experience-header-inner">

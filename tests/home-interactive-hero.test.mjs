@@ -18,7 +18,7 @@ test("hero uses one selected real-property image, not an automatic slideshow", (
   assert.match(hero, /priority=\{index === 0\}/);
   assert.match(css, /\.hero:has\(\.sceneInput\[value="1"\]:checked\)/);
   assert.match(css, /\.hero:has\(\.sceneInput\[value="2"\]:checked\)/);
-  assert.match(css, /prefers-reduced-motion: reduce/);
+  assert.doesNotMatch(css, /animation:|transition:/);
   assert.match(home, /lodgePhoto\(46\)/);
   assert.match(home, /lodgePhoto\(4\)/);
   assert.match(home, /lodgePhoto\(35\)/);

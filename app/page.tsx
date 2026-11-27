@@ -26,9 +26,10 @@ function BookingAction({ enabled, className, children }: { enabled: boolean; cla
 export default function HomePage() {
   const enabled = directBookingEnabled();
   const heroScenes = [
-    { ...lodgePhoto(46), label: "Kendall Pond", position: "center 56%" },
-    { ...lodgePhoto(4), label: "In the hot tub", position: "center 55%" },
-    { ...lodgePhoto(35), label: "On the deck", position: "center 52%" },
+    { ...lodgePhoto(1), label: "The lodge", position: "center 44%" },
+    { ...lodgePhoto(46), label: "The pond", position: "center 56%" },
+    { ...lodgePhoto(4), label: "Hot tub", position: "center 55%" },
+    { ...lodgePhoto(35), label: "Upper deck", position: "center 52%" },
   ] as const;
   const house = lodgePhoto(7);
   return (

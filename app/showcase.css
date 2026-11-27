@@ -905,6 +905,7 @@
   background: linear-gradient(180deg, rgba(8,28,21,.57), rgba(8,28,21,.13));
   opacity: 1;
 }
+.hospitality-header.lodge-home-header::before { background: #193c30; }
 .hospitality-header.hospitality-header-immersive::after {
   background: rgba(250, 249, 245, .96);
   -webkit-backdrop-filter: blur(16px) saturate(120%);

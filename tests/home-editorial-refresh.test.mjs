@@ -10,7 +10,7 @@ test("homepage is a sampler of sleep, yard and living space while keeping the po
   assert.match(home, /href: "\/lodge#sleeping"/);
   assert.match(home, /href: "\/grounds"/);
   assert.match(home, /href: "\/lodge#living"/);
-  assert.match(hero, /Kendall Pond in fall/);
+  assert.match(home, /lodgePhoto\(1\), label: "The lodge"/);
   assert.match(home, /lodgePhoto\(46\)/);
   assert.doesNotMatch(home + hero, /<iframe/);
 });
