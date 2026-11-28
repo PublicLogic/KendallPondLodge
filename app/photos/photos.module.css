@@ -310,7 +310,7 @@
 }
 .collection :global(.gallery-filter-count) {
   padding-left: .32rem;
-  color: #668071;
+  color: var(--gallery-muted);
   font-size: .64rem;
   font-weight: 550;
   font-variant-numeric: tabular-nums;

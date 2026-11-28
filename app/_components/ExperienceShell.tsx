@@ -127,10 +127,14 @@ function PublicFooter({ bookEnabled }: { bookEnabled: boolean }) {
       <div className="site-footer-brand">
         <Brand />
         <p>Private waterfront on Kendall Pond · Gardner, Massachusetts</p>
-        <p>Hosted by Nate &amp; Allie</p>
+        <p>Hosted by Nate &amp; Allie, founders of <a href="https://www.publiclogic.org/">PublicLogic</a>.</p>
       </div>
 
       <div className="hospitality-footer-right">
+        <Link className="footer-shelf-shop" href="/store">
+          <strong>KPL Shelf Shop <span aria-hidden="true">→</span></strong>
+          <span>Firewood, snacks &amp; handmade keepsakes for pickup at the lodge.</span>
+        </Link>
         <nav className="footer-links" aria-label="Property footer navigation">
           <Link href="/">Home</Link>
           {publicNavigation.map((item) => (

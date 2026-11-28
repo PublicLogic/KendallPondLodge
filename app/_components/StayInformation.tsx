@@ -78,7 +78,7 @@ export function GuestReviewEvidence() {
         </div>
         <a href={review.url} target="_blank" rel="noopener noreferrer">Read all reviews on Airbnb <span aria-hidden="true">↗</span></a>
       </div>
-      <div className="guest-review-voices" aria-label="Excerpts from real public guest reviews">
+      <div className="guest-review-voices" role="region" aria-label="Excerpts from public guest reviews" tabIndex={0}>
         {review.excerpts.map((item) => (
           <figure className="guest-review-voice" key={item.publishedOn}>
             <blockquote>“{item.quote}”</blockquote>

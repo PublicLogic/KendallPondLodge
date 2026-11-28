@@ -11,14 +11,11 @@ const PAGES: Array<{ path: string; priority: number; changeFrequency: MetadataRo
   { path: "/photos", priority: 0.7, changeFrequency: "monthly" },
   { path: "/grounds", priority: 0.7, changeFrequency: "monthly" },
   { path: "/explore", priority: 0.6, changeFrequency: "monthly" },
-  { path: "/guidebook", priority: 0.5, changeFrequency: "monthly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
   return PAGES.map(({ path, priority, changeFrequency }) => ({
     url: `${SITE}${path}`,
-    lastModified,
     changeFrequency,
     priority,
   }));
