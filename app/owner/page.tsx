@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { BookingBrand } from '@/app/_components/BookingBrand';
 import { requireKplOwner } from '@/lib/require-kpl-owner';
 import { lockOwner } from './access/actions';
+import { mercantileOwnerPreviewEnabled } from '@/lib/mercantile-owner-orders.mjs';
 export const metadata: Metadata = { title: 'Lodge owner controls', robots: { index: false, follow: false } };
 export const dynamic = 'force-dynamic';
 export default async function OwnerPage() {
@@ -14,6 +15,7 @@ export default async function OwnerPage() {
       <section className="booking-panel"><h2>Direct bookings</h2><p>See who is ready to pay, who is in checkout, and anything that actually needs your attention.</p><Link className="button button-primary" href="/owner/bookings">Open bookings</Link></section>
       <section className="booking-panel"><h2>Booking setup</h2><p>See connection status, pricing policy, payment settings, and calendar safeguards.</p><Link className="button button-secondary" href="/owner/settings">Open booking setup</Link></section>
     </div>
+    {mercantileOwnerPreviewEnabled() && <p><Link className="button button-secondary" href="/owner/store">Review Mercantile orders (read-only preview)</Link></p>}
     <form action={lockOwner}><button className="button button-secondary" type="submit">Sign out</button></form>
   </main>;
 }
