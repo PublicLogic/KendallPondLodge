@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { bookingClient } from "@/lib/booking-db";
 import { fetchAirbnbIcs, parseIcsEvents } from "@/lib/airbnb-ical.mjs";
 import { OWNER_COOKIE_NAME, verifyOwnerSessionToken } from "@/lib/owner-auth.mjs";
+import { PAYMENT_WINDOW_MIN_MINUTES, PAYMENT_WINDOW_MAX_MINUTES } from "@/lib/payment-window.mjs";
 
 export async function syncAirbnbCalendar(): Promise<void> {
   const session = (await cookies()).get(OWNER_COOKIE_NAME)?.value;
@@ -73,7 +74,7 @@ export async function saveInstantBookingPolicy(form: FormData): Promise<void> {
       deposit_percent: wholeNumber(form, "deposit_percent", 1, 100),
       min_nights: wholeNumber(form, "min_nights", 1, 30),
       booking_window_days: wholeNumber(form, "booking_window_days", 1, 730),
-      hold_minutes: wholeNumber(form, "hold_minutes", 60, 10_080),
+      hold_minutes: wholeNumber(form, "hold_minutes", PAYMENT_WINDOW_MIN_MINUTES, PAYMENT_WINDOW_MAX_MINUTES),
       cancellation_terms: String(form.get("cancellation_terms") ?? "").trim(),
       balance_terms: String(form.get("balance_terms") ?? "").trim(),
     });
