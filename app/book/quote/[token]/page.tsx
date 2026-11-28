@@ -20,7 +20,7 @@ export default async function QuotePage({ params, searchParams }: {
   let quote;
   try { quote = await findQuote(token); }
   catch { return <main id="main-content" className="content-section booking-page"><h1>Your quote is temporarily unavailable.</h1><p>We cannot check its status right now. Do not start a second payment.</p><a className="button button-secondary" href={hostContactHref()}>Contact your hosts</a></main>; }
-  if (!quote || quote.status === 'requested' || quote.status === 'declined') notFound();
+  if (!quote || quote.status === 'requested') notFound();
   const nights = stayNights(quote.check_in, quote.check_out);
   const open = ['quoted', 'checkout'].includes(quote.status) && quoteHasPaymentWindow(quote.quote_expires);
   const state = publicBookingState(quote, payment ?? '');
@@ -74,6 +74,7 @@ export default async function QuotePage({ params, searchParams }: {
     {state === 'needs_attention' && <p className="booking-alert" role="alert">Your payment is recorded, but the stay needs host attention before we can confirm it. Please contact your hosts; do not pay again.</p>}
     {payment && !['return', 'cancel'].includes(payment) && <p className="booking-alert" role="alert">{publicError(payment)}</p>}
     {state === 'expired' && <p className="booking-alert">This payment link has expired. Choose your dates again or contact Nate & Allie.</p>}
+    {state === 'cancelled' && <p className="booking-alert">This booking request was cancelled. Contact Nate & Allie before making new plans.</p>}
     <div className="booking-grid">
       <section className="booking-panel"><h2>Price details</h2>
         <dl className="booking-totals">
@@ -100,6 +101,6 @@ export default async function QuotePage({ params, searchParams }: {
         </form>}
       </section>
     </div>
-    <p><Link href="/book">← Change dates</Link> · <a href={hostContactHref()}>Contact Nate &amp; Allie</a></p>
+    <p>{['quote', 'expired'].includes(state) && <><Link href="/book">← Change dates</Link> · </>}<a href={hostContactHref()}>Contact Nate &amp; Allie</a></p>
   </main>;
 }

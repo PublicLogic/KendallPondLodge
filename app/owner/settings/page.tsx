@@ -10,6 +10,7 @@ import { airbnbCalendarConfigured } from '@/lib/airbnb-ical.mjs';
 import { CalendarSyncControl } from './CalendarSyncControl';
 import { DirectRateCheck } from './DirectRateCheck';
 import { saveInstantBookingPolicy, syncAirbnbCalendar } from './actions';
+import { PAYMENT_WINDOW_MIN_MINUTES, PAYMENT_WINDOW_MAX_MINUTES } from '@/lib/payment-window.mjs';
 
 export const metadata: Metadata = {
   title: 'Booking setup',
@@ -338,7 +339,7 @@ export default async function BookingSettings({
               <label>Deposit % <input name="deposit_percent" type="number" min="1" max="100" step="1" required defaultValue={instantSettings.deposit_percent ?? ''} /></label>
               <label>Minimum nights <input name="min_nights" type="number" min="1" max="30" step="1" required defaultValue={instantSettings.min_nights ?? ''} /></label>
               <label>Booking window · days <input name="booking_window_days" type="number" min="1" max="730" step="1" required defaultValue={instantSettings.booking_window_days ?? ''} /></label>
-              <label>Payment link · minutes <input name="hold_minutes" type="number" min="60" max="10080" step="1" required defaultValue={instantSettings.hold_minutes ?? ''} /></label>
+              <label>Payment link · minutes <input name="hold_minutes" type="number" min={PAYMENT_WINDOW_MIN_MINUTES} max={PAYMENT_WINDOW_MAX_MINUTES} step="1" required defaultValue={instantSettings.hold_minutes ?? ''} /></label>
             </div>
             <label className="booking-check"><input type="checkbox" name="taxable_fees" value="yes" defaultChecked={instantSettings.taxable_fees === true} /> Include applicable cleaning and pet fees in the taxable amount</label>
             <p className="owner-card-footnote">Massachusetts generally taxes cleaning as rent even when bundled into a stay price. Confirm the full applicable occupancy tax and fee treatment before saving. <a href="https://www.mass.gov/info-details/room-occupancy-excise-tax" target="_blank" rel="noopener noreferrer">Massachusetts DOR guidance</a>.</p>

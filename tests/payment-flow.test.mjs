@@ -100,3 +100,43 @@ test('cancelled unpaid checkout can resume without a false payment-checking stat
 test('expired checkout stops showing payment-checking even with a Stripe session', () => {
     assert.equal(publicBookingState({ ...quote(), stripe_session_id: sid, quote_expires: '2020-01-01T00:00:00Z', status: 'expired' }, 'cancel'), 'expired');
 });
+
+test('delayed payment confirmation remains checking after the quote deadline', async () => {
+    const pending = { ...quote(), stripe_session_id: sid, quote_expires: '2020-01-01T00:00:00Z' };
+    for (const payment of ['', 'return', 'cancel'])
+        assert.equal(publicBookingState(pending, payment), 'checking');
+    assert.equal(publicBookingState({ ...pending, status: 'quoted' }, 'return'), 'checking');
+    assert.equal(publicBookingState({ ...pending, stripe_session_id: null }, 'return'), 'checking');
+    const result = await handlePaymentWebhook({ ...signed(event()), pj: {
+        confirmPayment: async () => { throw new Error('Reservation service temporarily unavailable'); },
+    } });
+    assert.equal(result.status, 503);
+    assert.equal(publicBookingState(pending, 'return'), 'checking');
+    assert.equal(publicBookingState({ ...pending, paid_at: '2026-11-27' }), 'checking');
+    assert.equal(publicBookingState({ ...pending, status: 'confirmed', paid_at: '2026-11-27' }), 'confirmed');
+});
+
+test('terminal records are distinct from an unresolved checkout or an unpaid quote deadline', () => {
+    const q = { ...quote(), quote_expires: '2020-01-01T00:00:00Z', stripe_session_id: sid };
+    for (const payment of ['', 'return', 'cancel']) {
+        assert.equal(publicBookingState({ ...q, status: 'expired' }, payment), 'expired');
+        assert.equal(publicBookingState({ ...q, status: 'declined' }, payment), 'cancelled');
+        assert.equal(publicBookingState({ ...q, refund_reason: 'paid_conflict' }, payment), 'refund_review');
+        assert.equal(publicBookingState({ ...q, status: 'confirmed', paid_at: '2026-11-27', reservation_sync_error: 'pending' }, payment), 'needs_attention');
+    }
+    for (const quote_expires of ['2020-01-01T00:00:00Z', null, 'invalid'])
+        assert.equal(publicBookingState({ ...q, status: 'quoted', stripe_session_id: null, quote_expires }), 'expired');
+});
+
+test('the quote deadline closes only unpaid quotes, not an unresolved payment', t => {
+    const now = Date.parse('2026-11-27T12:00:00Z');
+    t.mock.method(Date, 'now', () => now);
+    for (const delta of [-1, 0, 1]) {
+        const quote_expires = new Date(now + delta).toISOString();
+        const unpaid = { ...quote(), status: 'quoted', stripe_session_id: null, quote_expires };
+        assert.equal(publicBookingState(unpaid), delta > 0 ? 'quote' : 'expired');
+        const pending = { ...unpaid, status: 'checkout', stripe_session_id: sid };
+        assert.equal(publicBookingState(pending, 'return'), 'checking');
+        assert.equal(publicBookingState(pending, 'cancel'), delta > 0 ? 'quote' : 'checking');
+    }
+});

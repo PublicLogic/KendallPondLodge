@@ -55,6 +55,22 @@ test('extra guests apply to all nights, weekend adjustment and pets are counted 
   assert.equal(writes[0].total_cents,151653);
   assert.equal(writes[0].deposit_cents,37914);
 });
+for (const hold_minutes of [60, 90, 360, 480, 10_080]) {
+  test(`saved ${hold_minutes}-minute payment window produces an automatic quote without migration`, async () => {
+    const {client,writes} = harness(3, {}, {hold_minutes});
+    await client.autoPrice(id, now);
+    assert.equal(writes.length, 1);
+    assert.equal(writes[0].quote_expires, new Date(now.getTime() + hold_minutes * 60_000).toISOString());
+    assert.equal(writes[0].deposit_cents, 14175);
+  });
+}
+for (const hold_minutes of [59, 10_081, 60.5, null, '480']) {
+  test(`invalid ${JSON.stringify(hold_minutes)}-minute payment window cannot issue a quote`, async () => {
+    const {client,writes} = harness(3, {}, {hold_minutes});
+    await assert.rejects(() => client.autoPrice(id, now));
+    assert.equal(writes.length, 0);
+  });
+}
 for (const [label,booking,policy] of [
   ['disabled',{}, {enabled:false}], ['unguarded',{}, {airbnb_channel_guarded:false}],
   ['short stay',{check_out:'2026-12-16'},{}], ['outside window',{check_in:'2027-02-01',check_out:'2027-02-03'},{}],

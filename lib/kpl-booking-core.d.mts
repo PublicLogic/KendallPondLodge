@@ -5,7 +5,7 @@ export function validateGuestRequest(raw: Record<string, unknown>, now?: Date): 
  check_in: string; check_out: string; guest_name: string; guest_email: string;
  guests: number; pets: number; note: string; request_key?: string;
 };
-export function publicBookingState(booking: Booking, payment?: string): 'refund_review'|'confirmed'|'needs_attention'|'checking'|'expired'|'quote';
+export function publicBookingState(booking: Booking, payment?: string): 'refund_review'|'confirmed'|'needs_attention'|'checking'|'expired'|'cancelled'|'quote';
 export function beginGuestCheckout(options: {
  token: string; accepted: boolean; origin: string;
  pj: {beginCheckout(token: string): Promise<any>; attachCheckout(id: string, session: string): Promise<any>};
